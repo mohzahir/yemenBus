@@ -1,0 +1,244 @@
+.bus-slider{
+    margin-top: -40px;
+}
+.hero__caption h1{
+    font-size: 50px !important;
+    font-weight: 700 !important;
+    padding-top: 50px;
+}
+.hero__caption{
+    padding: 40px;
+}
+.main-header .main-menu ul li a {
+	padding: 30px 19px;
+
+}
+.from-trip, .to-trip{
+  /*  width: 40% !important;*/
+}
+form.search-box .input-form input {
+	height: 48px;
+	
+}
+form.search-box {
+	background: rgba(242, 242, 241, 0.53);
+	color: #110e21;
+}
+.logo-font{
+    color: #0e1c35;
+    font-weight: bold;
+    font-size: 25px;
+    padding-right: 20px;
+}
+.nice-select .option {
+	text-align: right;
+}
+.nice-select {
+	text-align: left !important; 
+}
+.trip-btn{
+    padding: 20px 30px;
+}
+.trip-dep{
+    background: #f9f9ff;
+}
+    .trip-show {
+        width: 100%;
+        height: 55px;
+        background: #fde02f;
+        font-size: 20px;
+        line-height: 1;
+        text-align: center;
+        color: #000;
+        display: block;
+        padding: 15px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-family: "Barlow Condensed";
+        letter-spacing: 0.1em;
+        line-height: 1.2;
+        line-height: 24px;
+        font-size: 16px;
+        border: none;
+}
+.ticket-add, .ticket-minus{
+    background-color: #fff;
+    color: #41494f;
+    border: 1px solid #eee;
+    font-size: 17px;
+    font-weight: bold;
+}
+.ticket-add{
+    padding: 7px;
+    border-radius: 1px 5px 5px 1px;
+}
+.ticket-minus{
+    padding: 6px 9px;
+    border-radius: 5px 0 0 5px;
+}
+.ticketNo{
+    border-radius: 1px !important;
+    text-align: center;
+    padding: 5px !important;
+}
+.ticket-add:hover , .ticket-minus:hover{
+    color: #41494f;
+    
+}
+form.search-box .select-form .nice-select.open .list {
+    overflow-y: scroll;
+    height: 300px;
+}
+.slider-height2 {
+	min-height: 140px;
+}
+.contact-section {
+	padding: 0;
+}
+.trip-direction {
+	text-align: center;
+	font-weight: bold;
+	font-size: 19px !important;
+	padding-bottom: 20px;
+}
+.payment-method{
+    margin: 20px 0 10px 0 !important;
+}
+.pay-div{
+    border-top: 1px solid #eee;
+}
+.form-check{
+    margin-left: 40px;
+}
+.form-check label{
+    margin: 0 20px;
+}
+.amount-check label{
+    margin: 0 16px;
+}
+.bank-trans{
+    margin-top: 40px;
+}
+.reserve-btn{
+        text-align: left;
+        margin-top: 50px !important;
+}
+.ticket-form {
+	color: #635c5c;
+	border: 1px solid #eee;
+	padding: 15px;
+	border-radius: 5px;
+	background-color: #d8dfe5;
+}
+
+/* For mobile view  
+@media (min-width: 480px) and (max-width: 767px) {*/
+    @media (max-width: 480px) {
+
+    .pass-login {
+      float: left;
+      margin-top: -30px;
+    }
+   /* .header-area .slicknav_btn{
+        top: -40px;
+    }*/
+    .btn-group{
+        float: left;
+        margin-top: -40px;
+    }
+    .btn-group button{
+            padding: 15px !important;
+            font-size: 10px;
+    }
+    .logout-menu {
+        left: 0px !important;
+        right: auto !important;
+    }
+    .bus-slider {
+        margin-top: 0;
+    }
+    form.search-box{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .caption-div{
+        display: none;
+    }
+    .city-arrow{
+        width: 100px;
+    }
+    .section-top-border h3 {
+        font-size: 22px;
+        text-align: center;
+    }
+    .line-form{
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .line-form-trip{
+        width: 100% !important;
+        padding: 15px 0 0 0 !important;
+    }
+    .nice-select span{
+        padding-left: 170px;
+    }
+
+    /* for reservation page */ 
+    .phone-intro{
+        width: 30%;
+    }
+    .phone-intro .nice-select{
+        width: 100%;
+    }
+    .phone-intro .nice-select .list{
+        width: 98px;
+    }
+    #passenger-row{
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    #passenger-row #name, #passenger-row #nid{
+        width: 47%;
+        margin-top: 2px;
+    }
+    #passenger-row .nice-select{
+        width: 47%;
+        margin-top: 2px;
+    }
+    #passenger-row .nice-select span{
+        padding-left: 40px;
+    }
+    #passenger-row .nice-select .list{
+        width: 155px;
+    }
+
+   
+}
+/*
+@media (min-width: 769px) and (max-width: 1024px){ */
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .pass-login {
+        float: right;
+        margin-top: -20px;
+        width: 100px;
+      }
+      .header-area .slicknav_btn{
+          top: -71px;
+      }
+      .btn-group button{
+              padding: 15px !important;
+              font-size: 14px;
+      }
+      .logout-menu {
+          left: 0px !important;
+          right: auto !important;
+      }
+      .bus-slider {
+          margin-top: 0;
+      }
+      form.search-box{
+          margin-top: 10px;
+          margin-bottom: 10px;
+      }
+}
