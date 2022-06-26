@@ -39,7 +39,15 @@
         "sort-packages": true
     },"extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "bennett-treptow/laravel-migration-generator",
+                "facade/ignition",
+                "fakerphp/faker",
+                "laravel/ui",
+                "mockery/mockery",
+                "nunomaduro/collision",
+                "phpunit/phpunit"
+            ]
         }
     },
     "autoload": {
