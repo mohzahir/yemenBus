@@ -842,3 +842,139 @@ Stack trace:
 [stacktrace]
 #0 {main}
 "} 
+[2022-06-26 17:13:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:14:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:15:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:16:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:17:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:18:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:19:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:20:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:21:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:22:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:23:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:24:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:25:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:26:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:27:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:28:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:29:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:30:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:31:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:32:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:33:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:34:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:35:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:36:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:37:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:38:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:39:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:40:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:41:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:42:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:43:34] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:44:37] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:46:00] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-06-26 17:46:37] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
