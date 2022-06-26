@@ -1,0 +1,16 @@
+google
+
+client id:
+522790422463-9alnesjt2klb0oif48387qc13m964ir7.apps.googleusercontent.com
+
+client secret:
+XnxjNi0yGXXCwQoGHNzvrBl-
+
+facebook login
+appid
+3991065397581594
+
+secret
+c7ee687652491cd1b36d28ee715eaf7b
+
+*******************************
