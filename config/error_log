@@ -1,0 +1,60 @@
+[22-May-2021 19:54:01 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[23-May-2021 11:09:55 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[23-May-2021 11:09:58 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[13-Jun-2021 15:08:52 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[20-Aug-2021 15:55:22 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[20-Aug-2021 15:55:31 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[22-Aug-2021 18:08:34 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[22-Aug-2021 18:08:37 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[31-Aug-2021 04:56:35 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[31-Aug-2021 04:56:38 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[03-Dec-2021 15:02:55 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[03-Dec-2021 15:02:59 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[03-Dec-2021 15:03:11 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[08-Dec-2021 19:21:03 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
+[08-Dec-2021 19:21:06 America/New_York] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yemeqjyl/dashboard.yemenbus.com/config/services.php on line 19
