@@ -1,0 +1,63 @@
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Almarai', sans-serif;
+}
+
+.wrapper {
+    overflow-x: hidden;
+}
+
+.nav {
+    padding-right: 0;
+}
+
+.navbar-nav.ml-auto {
+    margin-right: auto;
+    margin-left: 0 !important;
+}
+
+.navbar-expand .navbar-nav {
+    padding-right: 0;
+}
+
+.sidebar-collapse .main-sidebar, .sidebar-collapse .main-sidebar::before {
+    margin-left: 0;
+    margin-right: -250px;
+}
+
+.main-sidebar, .main-sidebar::before {
+    transition: margin-right .3s ease-in-out,width .3s ease-in-out;
+}
+
+.bootstrap-datetimepicker-widget .list-unstyled {
+    padding-right: 0;
+}
+
+.nav-sidebar .nav-link > .right, .nav-sidebar .nav-link > p > .right {
+    right: unset;
+    left: 1rem;
+}
+
+@media (min-width: 768px) {
+
+    body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
+        margin-left: 0;
+        margin-right: 250px;
+    }
+
+    body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
+        transition: margin-right .3s ease-in-out;
+    }
+}
+
+@media (min-width: 992px) {
+    .sidebar-mini.sidebar-collapse .main-sidebar, .sidebar-mini.sidebar-collapse .main-sidebar::before {
+        margin-right: 0;
+    }
+
+    .sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer, .sidebar-mini.sidebar-collapse .main-header {
+        margin-right: 4.6rem !important;
+        margin-left: 0 !important;
+    }
+}

@@ -1,0 +1,43 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Cairo', sans-serif;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.badge-free {
+    @apply bg-blue-600;
+}
+
+.badge-discount {
+    @apply bg-yellow-600;
+}
+
+.alert-success {
+    @apply bg-green-200;
+    @apply text-green-900;
+}
+
+.alert-danger {
+    @apply bg-red-200;
+    @apply text-red-900;
+}
+
+.banner {
+    max-height: 200px;
+}
+
+.accordion-body {
+    height: 0;
+    transition: height .3s;
+}
