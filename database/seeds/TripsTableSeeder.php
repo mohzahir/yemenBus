@@ -26,7 +26,8 @@ class TripsTableSeeder extends Seeder
             'no_ticket' => 200,
             'note' => null,
             'price' => 2000,
-            'status' => 'active'
+            'status' => 'active',
+            'program_details_page_content' => 'نص تجريبي'
         ]);
     }
 }

@@ -14,7 +14,9 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="{{ asset('plugin/ckeditor/ckeditor.js') }}"></script>
+    <!-- <script src="{{ asset('plugin/ckeditor/ckeditor.js') }}"></script> -->
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+
 
 
     <link rel="stylesheet" href="{{ asset('select/dist/css/select2.min.css') }}" />

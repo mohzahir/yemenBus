@@ -20,7 +20,7 @@
 
 
 @php
-   $currency = App\Trip::getCurrency($trip->from); 
+   $currency = App\Trip::getCurrency($trip->takeoff_city_id); 
 
 @endphp
 <section class="contact-section">
@@ -28,7 +28,7 @@
 
         <div class="row mt-5">
             <div class="col-12">
-                <h2 class="contact-title">   معلومات التذكرة رقم #{{$order->id}}</h2>
+                <h2 class="contact-title">   معلومات التذكرة رقم #{{$reservation->id}}</h2>
 
             </div>
                        
@@ -36,7 +36,7 @@
                 <div class="media contact-info">
                     <div class="row media-body">
                         <div class="col-6"> <h3> اتجاه الرحلة</h3></div>
-                        <div class="col-6"><p>  رحلة من  {{  $trip->depCity }} الى  {{  $trip->comCity }} </p></div>
+                        <div class="col-6"><p>  رحلة من  {{  $trip->takeoff_city->name }} الى  {{  $trip->arrival_city->name }} </p></div>
 
                         <div class="col-6"> <h3> الشركة الناقلة</h3></div>
                         <div class="col-6"><p>{{$trip->provider}}</p></div>
@@ -45,13 +45,13 @@
                         <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
 
                         <div class="col-6"> <h3>عدد التذاكر</h3></div>
-                        <div class="col-6"><p>{{$order->ticket_no}}</p></div>
+                        <div class="col-6"><p>{{$reservation->ticket_no}}</p></div>
 
                         <div class="col-6"><h3>السعر الاجمالي</h3></div>
-                        <div class="col-6"><p>{{ $order->total_price}} {{$currency}}</p></div>
+                        <div class="col-6"><p>{{ $reservation->total_price}} {{$currency}}</p></div>
 
                         <div class="col-6"><h3>الدفعة المقدمة </h3></div>
-                        <div class="col-6"><p>{{ $order->paid}} {{$currency}}</p></div>
+                        <div class="col-6"><p>{{ $reservation->paid}} {{$currency}}</p></div>
 
                         <div class="col-6"><h3>تاريخ السفر</h3></div>
                         <div class="col-6"><p>{{ $trip->from_date}}</p></div>
@@ -63,7 +63,7 @@
                         <div class="col-6"><p>استاندرز </p></div>
 
                         <div class="col-6"><h3> حالة الحجز</h3></div>
-                        <div class="col-6"><p>@switch($order->status)
+                        <div class="col-6"><p>@switch($reservation->status)
                             @case('created')
                                 في انتظار الدفع
                                 @break
@@ -71,7 +71,7 @@
                                 تم تأكيد الحجز
                                 @break
                                 @case('payed')
-                                مدفوع @if($order->payment_type == 'deposit_payment') عربون @elseif($order->payment_type == 'total_payment') كامل المبلغ @endif
+                                مدفوع @if($reservation->payment_type == 'deposit_payment') عربون @elseif($reservation->payment_type == 'total_payment') كامل المبلغ @endif
                                 @break
                             @default
                                 

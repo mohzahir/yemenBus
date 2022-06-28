@@ -1,0 +1,1 @@
+[22-May-2021 19:54:18 America/New_York] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/yemeqjyl/dashboard.yemenbus.com/select/docs/plugins/error/backup_error.php on line 3

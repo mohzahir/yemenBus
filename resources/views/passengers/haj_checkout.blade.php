@@ -57,8 +57,8 @@
                                         class="fa fa-truck"> </i>Delivery Method</a> --}}
                                 <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i
                                         class="fa fa-money-bill-alt"></i><br>طرق الدفع</a>
-                                <a href="#" class="nav-link flex-sm-fill text-sm-center disabled">
-                                    <i class="fa fa-eye"> </i><br>معاينة الحجز</a>
+                                <!-- <a href="#" class="nav-link flex-sm-fill text-sm-center disabled">
+                                    <i class="fa fa-eye"> </i><br>معاينة الحجز</a> -->
                             </div>
                             <div class="content py-3">
                                 <div class="row">

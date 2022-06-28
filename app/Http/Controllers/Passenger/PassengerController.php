@@ -308,7 +308,7 @@ class PassengerController extends Controller
         $trip = Trip::getTripDetails($reservation->trip_id);
 
         return view('passengers.ticketDetails', [
-            'order' => $reservation,
+            'reservation' => $reservation,
             'trip' => $trip,
 
         ]);

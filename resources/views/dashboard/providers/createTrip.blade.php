@@ -18,7 +18,10 @@
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="{{ asset('plugin/ckeditor/ckeditor.js') }}"></script>
+    <!-- <script src="{{ asset('plugin/ckeditor/ckeditor.js') }}"></script> -->
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script> -->
+
 
     <script>
         function getServiceProviders(id) {

@@ -408,6 +408,7 @@ class TripCheckoutController extends Controller
         }
     }
 
+
     //end haj section
 
 
@@ -456,7 +457,7 @@ class TripCheckoutController extends Controller
         $reservation->update([
             'payment_time' => date('Y-m-d H:i:s'),
             'paid' => $transaction->amount,
-            'currency' => 'SAR',
+            'currency' => 'rs',
             'status' => 'confirmed',
         ]);
 

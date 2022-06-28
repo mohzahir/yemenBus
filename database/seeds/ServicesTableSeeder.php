@@ -22,19 +22,19 @@ class ServicesTableSeeder extends Seeder
             [
                 'name' => 'نقل الركاب على الماشي',
                 'descr' => "استكشف جميع الرحلات عن طريق سيارة خاصه",
-                'img' => 'passenger-assets/img/hero/car.png',
+                'img' => 'passenger-assets/img/hero/car.jpg',
                 'slug' => 'car',
             ],
             [
                 'name' => 'رحلات الحج والعمرة',
                 'descr' => "استكشف جميع الرحلات الخاصة بالحج والعمرة",
-                'img' => 'passenger-assets/img/hero/haj.png',
+                'img' => 'passenger-assets/img/hero/haj.jpg',
                 'slug' => 'haj',
             ],
             [
                 'name' => 'مرسول اليمن لنقل الرسائل والبضائع',
                 'descr' => "استكشف جميع الرحلات الخاصة بنقل البضائع",
-                'img' => 'passenger-assets/img/hero/bus1-old.png',
+                'img' => 'passenger-assets/img/hero/bus1-old.jpg',
                 'slug' => 'msg',
             ],
         ]);
