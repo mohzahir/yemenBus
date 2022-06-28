@@ -14,7 +14,7 @@ class CreateNomsTable extends Migration
     public function up()
     {
         Schema::create('noms', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->increments('id');
             $table->string('agent_currency', 8);
             $table->bigInteger('provider_id');
             $table->string('name_agent');

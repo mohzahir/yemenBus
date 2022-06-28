@@ -14,7 +14,7 @@ class CreateBanksInfoTable extends Migration
     public function up()
     {
         Schema::create('banks_info', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->increments('id');
             $table->unsignedBigInteger('provider_id');
             $table->string('countery');
             $table->string('bank_account_number');

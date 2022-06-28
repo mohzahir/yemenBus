@@ -14,7 +14,7 @@ class CreateReseervationsTable extends Migration
     public function up()
     {
         Schema::create('reseervations', function (Blueprint $table) {
-            $table->bigInteger('id')->primary()->comment("uuid");
+            $table->increments('id');
             $table->string('trip_id', 250)->nullable();
             $table->integer('marketer_id')->nullable()->index('reservation_marketer_id');
             $table->integer('main_passenger_id');
@@ -23,7 +23,7 @@ class CreateReseervationsTable extends Migration
             $table->timestamp('payment_time')->nullable();
             $table->enum('payment_type', ['total_payment', 'deposit_payment', 'later_payment'])->nullable();
             $table->double('total_price');
-            $table->double('paid')->default(0);
+            $table->double('paid')->nullable()->default(0);
             $table->enum('currency', ['rs', 'ry'])->nullable();
             $table->text('note')->nullable();
             $table->enum('status', ['created', 'confirmed', 'canceled'])->default('created');

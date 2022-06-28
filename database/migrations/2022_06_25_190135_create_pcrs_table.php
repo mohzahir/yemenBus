@@ -14,10 +14,10 @@ class CreatePcrsTable extends Migration
     public function up()
     {
         Schema::create('pcrs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('way_of_travel', 20)->nullable();
             $table->unsignedBigInteger('lab_id')->index('lab_id');
-            $table->unsignedBigInteger('city_id')->index('city_id');
+            $table->unsignedBigInteger('city_id');
             $table->bigInteger('provider_id')->default(0);
             $table->string('name', 600);
             $table->string('surname', 300);

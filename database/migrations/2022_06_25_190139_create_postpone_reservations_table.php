@@ -14,7 +14,7 @@ class CreatePostponeReservationsTable extends Migration
     public function up()
     {
         Schema::create('postpone_reservations', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
+            $table->increments('id');
             $table->string('order_id');
             $table->string('order_url');
             $table->string('passenger_phone');

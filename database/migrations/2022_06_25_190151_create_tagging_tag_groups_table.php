@@ -14,7 +14,7 @@ class CreateTaggingTagGroupsTable extends Migration
     public function up()
     {
         Schema::create('tagging_tag_groups', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->increments('id');
             $table->string('slug', 125);
             $table->string('name', 125);
         });

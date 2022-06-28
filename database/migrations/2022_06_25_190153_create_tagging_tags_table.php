@@ -14,7 +14,7 @@ class CreateTaggingTagsTable extends Migration
     public function up()
     {
         Schema::create('tagging_tags', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->increments('id');
             $table->string('slug', 125);
             $table->string('name', 125);
             $table->boolean('suggest')->default(0);

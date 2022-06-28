@@ -14,7 +14,7 @@ class CreateSubServicesTable extends Migration
     public function up()
     {
         Schema::create('sub_services', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('name', 255);
             $table->string('slug');
             $table->timestamp('created_at')->useCurrent();

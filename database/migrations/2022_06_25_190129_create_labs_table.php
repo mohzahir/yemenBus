@@ -14,7 +14,7 @@ class CreateLabsTable extends Migration
     public function up()
     {
         Schema::create('labs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('name', 300);
             $table->unsignedBigInteger('city_id')->index('city_id');
             $table->integer('priority')->default(0);

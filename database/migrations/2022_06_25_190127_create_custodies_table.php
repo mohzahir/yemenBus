@@ -14,7 +14,7 @@ class CreateCustodiesTable extends Migration
     public function up()
     {
         Schema::create('custodies', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->integer('reservation_id');
             $table->string('content', 255);
             $table->integer('weight')->nullable();
