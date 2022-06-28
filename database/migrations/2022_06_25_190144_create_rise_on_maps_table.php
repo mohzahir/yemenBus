@@ -14,7 +14,7 @@ class CreateRiseOnMapsTable extends Migration
     public function up()
     {
         Schema::create('rise_on_maps', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('provider_id');
             $table->string('countery');
             $table->string('city');

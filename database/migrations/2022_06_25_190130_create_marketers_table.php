@@ -14,7 +14,7 @@ class CreateMarketersTable extends Migration
     public function up()
     {
         Schema::create('marketers', function (Blueprint $table) {
-            $table->increments('id')->unique();
+            $table->increments('id');
             $table->string('name', 255);
             $table->integer('provider_id')->nullable()->comment("null=gloabal_marketer");
             $table->double('balance_rs')->default(0);

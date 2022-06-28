@@ -392,10 +392,10 @@ class TripCheckoutController extends Controller
     public function storeHajPayment(HajPaymentRequest $request, $reservation_id)
     {
         $reservation = Reseervation::findOrFail($reservation_id);
-        dd($request);
         $isOmra = $reservation->sub_service_id == 1 ? true : false;
-        $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first->value;
-        $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first->value;
+        // dd( Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT'));
+        $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
+        $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
         $price = ($request->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
         if ($request->payment_method == 'telr') {
             return  $this->telrPay($reservation->id, $price, $reservation->trip->id);

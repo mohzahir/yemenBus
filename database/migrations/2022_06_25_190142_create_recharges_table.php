@@ -14,7 +14,7 @@ class CreateRechargesTable extends Migration
     public function up()
     {
         Schema::create('recharges', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('code', 7);
             $table->string('amount');
             $table->text('notes')->nullable();

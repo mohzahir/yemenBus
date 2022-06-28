@@ -14,7 +14,7 @@ class CreateServicesSubServicesTable extends Migration
     public function up()
     {
         Schema::create('services_sub_services', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->integer('service_id');
             $table->integer('sub_service_id');
         });

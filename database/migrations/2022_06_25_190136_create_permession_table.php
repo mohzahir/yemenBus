@@ -14,7 +14,7 @@ class CreatePermessionTable extends Migration
     public function up()
     {
         Schema::create('permession', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->timestamps();

@@ -14,7 +14,7 @@ class CreateTripsTable extends Migration
     public function up()
     {
         Schema::create('trips', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('provider_id');
             $table->integer('sub_service_id');
             $table->enum('air_river', ['air', 'river'])->nullable()->comment("omra haj program");

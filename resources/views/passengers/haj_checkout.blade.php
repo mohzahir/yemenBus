@@ -64,7 +64,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="firstname">الاسم الكامل</label>
+                                            <label for="firstname">الاسم الكامل <strong class=" text-danger">*</strong></label>
                                             <input id="firstname" type="text" class="form-control" name="name">
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="phone">رقم الهاتف</label>
+                                            <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
                                             <div class=" d-flex">
                                                 <input class="form-control valid" name="phone" id="phone" type="text"
                                                     value="">

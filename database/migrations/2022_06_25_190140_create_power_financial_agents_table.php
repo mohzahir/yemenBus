@@ -14,7 +14,7 @@ class CreatePowerFinancialAgentsTable extends Migration
     public function up()
     {
         Schema::create('power_financial_agents', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('provider_id');
             $table->string('code', 7);
             $table->string('agent_name');

@@ -14,7 +14,7 @@ class CreateParticipantsTable extends Migration
     public function up()
     {
         Schema::create('participants', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('phone');
             $table->unsignedBigInteger('competition_id')->nullable()->index('participants_competition_id_foreign');
             $table->timestamps();

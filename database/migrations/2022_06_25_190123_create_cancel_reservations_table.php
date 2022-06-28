@@ -14,7 +14,7 @@ class CreateCancelReservationsTable extends Migration
     public function up()
     {
         Schema::create('cancel_reservations', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('order_id');
             $table->string('passenger_phone');
             $table->double('amount', 8, 2);

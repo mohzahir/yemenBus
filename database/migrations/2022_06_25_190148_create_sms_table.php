@@ -14,7 +14,7 @@ class CreateSmsTable extends Migration
     public function up()
     {
         Schema::create('sms', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->bigInteger('user_id');
             $table->string('order_id')->nullable();
             $table->string('passenger_phone')->nullable();

@@ -14,7 +14,7 @@ class CreateTripOrderPassengersTable extends Migration
     public function up()
     {
         Schema::create('trip_order_passengers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->bigInteger('reservation_id')->comment("uuid");
             $table->string('external_ticket_no', 36)->nullable();
             $table->string('p_id')->nullable();

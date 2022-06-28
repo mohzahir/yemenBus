@@ -14,11 +14,11 @@ class CreateCompetitionsTable extends Migration
     public function up()
     {
         Schema::create('competitions', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('day');
             $table->integer('old_ticket_price');
             $table->timestamp('trip_at')->useCurrent()->useCurrentOnUpdate();
-            $table->timestamp('finish_at')->default('0000-00-00 00:00:00');
+            $table->timestamp('finish_at');
             $table->integer('discount_percentage');
             $table->integer('available_tickets');
             $table->unsignedBigInteger('winner_id')->nullable()->index('competitions_winner_id_foreign');

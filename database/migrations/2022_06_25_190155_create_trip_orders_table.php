@@ -14,7 +14,7 @@ class CreateTripOrdersTable extends Migration
     public function up()
     {
         Schema::create('trip_orders', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedBigInteger('passenger_id')->nullable();
             $table->unsignedBigInteger('trip_id');
             $table->string('s_phone')->nullable();

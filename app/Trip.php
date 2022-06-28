@@ -10,8 +10,21 @@ use Illuminate\Support\Facades\DB;
 class Trip extends Model
 {
   protected $fillable = [
-    'direcation', 'provider_id', 'lines_trip', 'from', 'to', 'day', 'coming_time', '
-        leave_time', 'weight', 'no_ticket', 'note', 'price', 'created_at', 'status'
+    'direcation',
+    'provider_id',
+    'sub_service_id',
+    'lines_trip', 
+    'takeoff_city_id', 
+    'arrival_city_id', 
+    'day', 
+    'coming_time', 
+    'leave_time', 
+    'weight', 
+    'no_ticket', 
+    'note', 
+    'price', 
+    'created_at', 
+    'status'
   ];
 
   protected  $dates = ['to_date,from_date'];
