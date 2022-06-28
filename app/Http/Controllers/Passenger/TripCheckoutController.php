@@ -17,6 +17,7 @@ use App\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+use TelrGateway\Transaction;
 
 class TripCheckoutController extends Controller
 {
@@ -397,6 +398,10 @@ class TripCheckoutController extends Controller
         $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
         $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
         $price = ($request->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
+        $reservation->update([
+            'payment_type' => $request->payment_type, // ['total_payment','deposit_payment','later_payment'])->default('later_payment')
+            'payment_method' => $request->payment_method, //['telr','bank','inBus'])->default('inBus')
+        ]);
         if ($request->payment_method == 'telr') {
             return  $this->telrPay($reservation->id, $price, $reservation->trip->id);
         } else {
@@ -420,7 +425,7 @@ class TripCheckoutController extends Controller
         ]);
     }
 
-    public function telrPay($orderId, $price, $tripId)
+    public function telrPay($reservationId, $price, $tripId)
     {
         $telrManager = new \TelrGateway\TelrManager();
 
@@ -433,32 +438,37 @@ class TripCheckoutController extends Controller
             ];*/
 
         //  session()->put('total', $price);
-        session()->put('order_id', $orderId);
+        // session()->put('reservation_id', $reservationId);
         // session()->put('trip_id', $tripId);
 
 
-        return $telrManager->pay($orderId, $price, 'Telr payment ...')->redirect();
+        return $telrManager->pay($reservationId, $price, 'Telr payment ...')->redirect();
     }
 
     public function success(Request $request)
     {
         /* $telrManager = new \TelrGateway\TelrManager();
         return $telrManager->handleTransactionResponse($request);*/
-        $order_id = session()->get('order_id');
+        // $reservation_id = session()->get('reservation_id');
+        $transaction = Transaction::where('cart_id', $request->cart_id)->first();
 
-        $order = TripOrder::where('id', $order_id)->first();
-        $order->update([
-            'status' => 'payed',
+        $reservation = Reseervation::find($transaction->order_id);
+        $reservation->update([
+            'payment_time' => date('Y-m-d H:i:s'),
+            'paid' => $transaction->amount,
+            'currency' => 'SAR',
+            'status' => 'confirmed',
         ]);
 
-        $body = 'حجوزات يمن باص رقم الحجز: ' . $order->id . ' تم تاكيد حجزك للمتابعة
-        :https://www.yemenbus.com/passengers/order/' . $order->id;
 
-        $order->s_phone != null ? $this->sendSASMS($order->s_phone, $body) : $this->sendYESMS($order->y_phone, $body);
+        $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' تم تاكيد حجزك للمتابعة
+        :https://www.yemenbus.com/passengers/order/' . $reservation->id;
+
+        // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
 
 
         return redirect()->route('passengers.orderDetails', [
-            'id' => $order_id,
+            'id' => $transaction->order_id,
         ]);
     }
 
