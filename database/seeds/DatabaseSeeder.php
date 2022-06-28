@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,13 +12,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ServicesTableSeeder::class);
-        $this->call(SubServicesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
-        $this->call(SettingsTableSeeder::class);
-        $this->call(AdminsTableSeeder::class);
-        $this->call(ServicesSubServicesTableSeeder::class);
-        $this->call(ProvidersTableSeeder::class);
-        $this->call(TripsTableSeeder::class);
+        $this->call([
+            ServicesTableSeeder::class,
+            SubServicesTableSeeder::class,
+            CitiesTableSeeder::class,
+            SettingsTableSeeder::class,
+            AdminsTableSeeder::class,
+            ServicesSubServicesTableSeeder::class,
+            ProvidersTableSeeder::class,
+            TripsTableSeeder::class,
+        ]);
     }
 }

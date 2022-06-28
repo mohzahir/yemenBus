@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Provider;
+
 class ProvidersTableSeeder extends Seeder
 {
     /**
