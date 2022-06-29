@@ -116,7 +116,7 @@
                                     href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
                                     الشخصية</a> -->
-                                <button type="submit" class="btn btn-primary">ادفع الان<i
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">ادفع الان<i
                                         class="fa fa-chevron-left"></i></button>
                             </div>
                         </form>
@@ -196,8 +196,27 @@
         </div>
 
 
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">تيلر</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <iframe id= "telr" src= " {{ $url }} " style="width: 100%;min-width: 600px;height: 100%;frameborder: 0;" ></iframe>
+                </div>
+                <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div> -->
+            </div>
+            </div>
+        </div>
 
-        <iframe id= "telr" src= " {{ $url }} " style="width: 50%;min-width: 600px;height: 600px;frameborder: 0;" ></iframe>
 
 
 
