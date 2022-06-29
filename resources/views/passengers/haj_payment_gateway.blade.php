@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="box payment-method">
                                             <div class="form-group">
-                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب وارفاق صورة التحويل</label>
+                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب (122394) وارفاق صورة التحويل</label>
                                                 <input type="file" class="form-control" name="payment_image">
                                             </div>
                                         </div>
@@ -149,8 +149,12 @@
                                             @endif
                                         </tr>
                                         <tr>
-                                            <td>تاريخ السفر</td>
-                                            <th>{{ $reservation->trip->from_date }}</th>
+                                            <td>عدد الايام</td>
+                                            <th>{{ $reservation->trip->days_count }}</th>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>السعر الكلي</td>
+                                            <th> {{ $reservation->trip->price }} SAR</th>
                                         </tr>
                                         <tr>
                                             <td>قيمه العربون</td>
@@ -180,10 +184,7 @@
                                                 </th>
                                             @endif
                                         </tr>
-                                        <tr class="total">
-                                            <td>اجمالي الرسوم</td>
-                                            <th> {{ $reservation->trip->price }} SAR</th>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>

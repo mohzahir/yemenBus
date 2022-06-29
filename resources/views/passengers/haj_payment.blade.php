@@ -141,8 +141,12 @@
                                             @endif
                                         </tr>
                                         <tr>
-                                            <td>تاريخ السفر</td>
-                                            <th>{{ $reservation->trip->from_date }}</th>
+                                            <td>عدد الايام</td>
+                                            <th>{{ $reservation->trip->days_count }}</th>
+                                        </tr>
+                                        <tr class="total">
+                                            <td>السعر الكلي</td>
+                                            <th> {{ $reservation->trip->price }} SAR</th>
                                         </tr>
                                         <tr>
                                             <td>قيمه العربون</td>
@@ -172,10 +176,7 @@
                                                 </th>
                                             @endif
                                         </tr>
-                                        <tr class="total">
-                                            <td>اجمالي الرسوم</td>
-                                            <th> {{ $reservation->trip->price }} SAR</th>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
