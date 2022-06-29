@@ -76,7 +76,7 @@
                                             <h4>تيلر</h4>
                                             <p>حجز مضمون</p>
                                             <div class="box-footer text-center">
-                                                <input @click="showBankPayment = false" type="radio"
+                                                <input @click="showBankPayment = false" type="radio" checked
                                                     name="payment_method" value="telr" placeholder="">
                                             </div>
                                         </div>
@@ -97,8 +97,10 @@
                                 <div x-show="showBankPayment" class="row" x-transition>
                                     <div class="col-md-12">
                                         <div class="box payment-method">
-                                            <input type="file" name="payment_image">
-                                            <span class="mr-3">الرجاء تحويل المبلغ على رقم الحساب وارفاق صورة التحويل</span>
+                                            <div class="form-group">
+                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب وارفاق صورة التحويل</label>
+                                                <input type="file" class="form-control" name="payment_image">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,11 +110,11 @@
                                     href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
                                     الشخصية</a> -->
-                                <template x-if="!showBankPayment">
+                                <template x-if="showBankPayment == false">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">ادفع الان<i
                                             class="fa fa-chevron-left"></i></button>
                                 </template>
-                                <template x-if="!showBankPayment">
+                                <template x-if="showBankPayment == true">
                                     <button type="submit" class="btn btn-primary">ادفع الان<i
                                             class="fa fa-chevron-left"></i></button>
                                 </template>
