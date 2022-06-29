@@ -55,7 +55,7 @@
                 <div id="checkout" class="col-lg-9">
                     <div x-data="{showBankPayment: false}" class="box">
                         <form method="POST"
-                            action="{{ route('passengers.storeHajPayment', ['reservationId' => $reservation->id]) }}">
+                            action="{{ route('passengers.storeHajBankPayment', ['reservationId' => $reservation->id]) }}" enctype="multipart/form-data">
                             @csrf
                             <h1>الحجز - بوابة الدفع</h1>
                             <div class="nav flex-column flex-md-row nav-pills text-center">

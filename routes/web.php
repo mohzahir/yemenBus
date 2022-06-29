@@ -398,6 +398,7 @@ Route::prefix('passengers')->as('passengers.')->namespace('Passenger')->group(fu
     Route::get('/haj/hajPayment/{reservationId}', 'TripCheckoutController@hajPayment')->name('hajPayment');
     Route::post('/haj/storeHajPayment/{reservationId}', 'TripCheckoutController@storeHajPayment')->name('storeHajPayment');
     Route::get('/haj/hajPaymentGateway/{reservationId}', 'TripCheckoutController@hajPaymentGateway')->name('hajPaymentGateway');
+    Route::post('/haj/storeHajBankPayment/{reservationId}', 'TripCheckoutController@storeHajBankPayment')->name('storeHajBankPayment');
     // Route::get('/msg', 'PassengerController@trips_msg')->name('msg');
     // Route::get('/haj', 'PassengerController@trips_haj')->name('haj');
     Route::get('/searchTrips', 'PassengerController@searchTrips')->name('searchTrips');

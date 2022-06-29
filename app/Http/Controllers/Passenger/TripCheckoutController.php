@@ -448,6 +448,26 @@ class TripCheckoutController extends Controller
         return view('passengers.haj_payment_gateway', ['reservation' => $reservation, 'url' => $url]);
     }
 
+    public function storeHajBankPayment(Request $request, $reservation_id)
+    {
+        $request->validate([
+            'payment_method' => 'required|in:telr,bank',
+            'payment_image' => 'required',
+        ]);
+
+        $payment_image = $request->file('payment_image')->store('files');
+        $reservation = Reseervation::findOrFail($reservation_id);
+
+        $reservation->update([
+            'payment_method' => $request->payment_method,
+            'payment_image' => $payment_image,
+        ]);
+
+        return redirect()->route('passengers.orderDetails', [
+            'id' => $reservation_id,
+        ]);
+    }
+
 
     //end haj section
 
