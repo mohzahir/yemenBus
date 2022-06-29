@@ -140,6 +140,9 @@
 
 
                     <div class="row">
+                        @if(count($trips) > 0)
+                        @foreach ($trips as $trip)
+
                         <div class="col-md-6">
                             <div id="order-summary" class="box">
                                 <div class="box-header">
@@ -201,6 +204,8 @@
 
                             
                         </div>
+                        @endforeach
+                        @endif
                     </div>
 
 
