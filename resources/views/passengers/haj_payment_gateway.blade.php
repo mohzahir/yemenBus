@@ -53,7 +53,7 @@
                     </nav>
                 </div> --}}
                 <div id="checkout" class="col-lg-9">
-                    <div class="box">
+                    <div x-data="{showBankPayment: false}" class="box">
                         <form method="POST"
                             action="{{ route('passengers.storeHajPayment', ['reservationId' => $reservation->id]) }}">
                             @csrf
@@ -69,7 +69,7 @@
                                 <a href="#" class="nav-link flex-sm-fill text-sm-center active">
                                     <i class="fa fa-eye"> </i><br>بوابة الدفع</a>
                             </div>
-                            <div class="content py-3" x-data="{showBankPayment: false}">
+                            <div class="content py-3">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="box payment-method">
@@ -97,8 +97,8 @@
                                 <div x-show="showBankPayment" class="row" x-transition>
                                     <div class="col-md-12">
                                         <div class="box payment-method">
-                                            <input type="radio" name="payment_method" value="bank">
-                                            <span class="mr-3">تحويل بنكي</span>
+                                            <input type="file" name="payment_image">
+                                            <span class="mr-3">الرجاء تحويل المبلغ على رقم الحساب وارفاق صورة التحويل</span>
                                         </div>
                                     </div>
                                 </div>
