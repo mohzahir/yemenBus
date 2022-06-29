@@ -200,14 +200,14 @@
         <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <!-- <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">تيلر</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                </div>
+                </div> -->
                 <div class="modal-body">
-                    <iframe id= "telr" src= " {{ $url }} " style="width: 100%;min-width: 600px;height: 100%;frameborder: 0;" ></iframe>
+                    <iframe id= "telr" src= " {{ $url }} " style="width: 100%;height: 100%;frameborder: 0;" ></iframe>
                 </div>
                 <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
