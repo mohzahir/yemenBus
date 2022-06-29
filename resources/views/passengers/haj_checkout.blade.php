@@ -50,7 +50,7 @@
                             @csrf
                             <h1>الحجز - البيانات الشخصيه</h1>
                             <div class="nav flex-column flex-md-row nav-pills text-center">
-                                <a href="checkout1.html" class="nav-link flex-sm-fill text-sm-center active"> <i
+                                <a href="#" class="nav-link flex-sm-fill text-sm-center active"> <i
                                         class="fa fa-user">
                                     </i><br>البيانات الشخصية</a>
                                 {{-- <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i
