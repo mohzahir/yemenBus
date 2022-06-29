@@ -25,6 +25,7 @@ class CreateReseervationsTable extends Migration
             $table->double('total_price');
             $table->double('paid')->nullable()->default(0);
             $table->enum('currency', ['rs', 'ry'])->nullable();
+            $table->string('payment_image', 500)->nullable();
             $table->text('note')->nullable();
             $table->enum('status', ['created', 'confirmed', 'canceled'])->default('created');
             $table->string('code', 7)->nullable()->index('code');
@@ -41,7 +42,6 @@ class CreateReseervationsTable extends Migration
             $table->string('amount_type')->nullable();
             $table->string('from_city', 500)->nullable();
             $table->string('to_city', 500)->nullable();
-            $table->string('image', 500)->nullable();
             $table->timestamps();
         });
     }

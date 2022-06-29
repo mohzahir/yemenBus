@@ -69,14 +69,14 @@
                                 <a href="#" class="nav-link flex-sm-fill text-sm-center active">
                                     <i class="fa fa-eye"> </i><br>بوابة الدفع</a>
                             </div>
-                            <div class="content py-3" >
+                            <div class="content py-3" x-data="{showBankPayment: false}">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>تيلر</h4>
                                             <p>حجز مضمون</p>
                                             <div class="box-footer text-center">
-                                                <input type="radio"
+                                                <input @click="showBankPayment = false" type="radio"
                                                     name="payment_method" value="telr" placeholder="">
                                             </div>
                                         </div>
@@ -86,38 +86,36 @@
                                             <h4>تحويل بنكي</h4>
                                             <p>قيمه دخول الجواز للسفاره للتأشير</p>
                                             <div class="box-footer text-center">
-                                                <input type="radio"
+                                                <input @click="showBankPayment = true" type="radio"
                                                     name="payment_method" value="bank" placeholder="placeholder">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- /.row-->
-                                <!-- <div class="row" x-transition>
-                                    {{-- <div class="col-sm-12">
-                                        <h3>طرق الدفع</h3>
-                                    </div> --}}
-                                    <div class="col-md-6">
-                                        <div class="box payment-method">
-                                            <input type="radio" name="payment_method" value="telr">
-                                            <span class="mr-3">بوابه تيلر</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
+                                <div x-show="showBankPayment" class="row" x-transition>
+                                    <div class="col-md-12">
                                         <div class="box payment-method">
                                             <input type="radio" name="payment_method" value="bank">
                                             <span class="mr-3">تحويل بنكي</span>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="box-footer d-flex justify-content-between">
                                 <!-- <a
                                     href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
                                     الشخصية</a> -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">ادفع الان<i
-                                        class="fa fa-chevron-left"></i></button>
+                                <template x-if="!showBankPayment">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">ادفع الان<i
+                                            class="fa fa-chevron-left"></i></button>
+                                </template>
+                                <template x-if="!showBankPayment">
+                                    <button type="submit" class="btn btn-primary">ادفع الان<i
+                                            class="fa fa-chevron-left"></i></button>
+                                </template>
                             </div>
                         </form>
                     </div>
