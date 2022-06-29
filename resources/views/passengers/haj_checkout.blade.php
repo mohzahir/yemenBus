@@ -2,10 +2,13 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> -->
     <style>
         input::-webkit-calendar-picker-indicator {
             display: none;
+        }
+        #checkout > div > form > div.content.py-3 > div:nth-child(2) > div:nth-child(1) > div > div > div > div > span{
+            padding-left: 0;
         }
 
     </style>
@@ -75,8 +78,7 @@
                                         <div class="form-group">
                                             <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
                                             <div class=" d-flex">
-                                                <input class="form-control valid" name="phone" id="phone" type="text"
-                                                    value="">
+                                                <input class="form-control valid" name="phone" id="phone" type="text">
 
                                                 <div class="phone-intro">
                                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
@@ -181,11 +183,11 @@
                                         </tr>
                                         <tr>
                                             <td>عدد الايام</td>
-                                            <th>{{ $reservation->trip->days_count }}</th>
+                                            <th>{{ $trip->days_count }}</th>
                                         </tr>
                                         <tr class="total">
                                             <td>السعر الكلي</td>
-                                            <th> {{ $reservation->trip->price }} SAR</th>
+                                            <th> {{ $trip->price }} SAR</th>
                                         </tr>
                                         <tr>
                                             <td>قيمه العربون</td>
