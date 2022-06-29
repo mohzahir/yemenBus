@@ -43,7 +43,8 @@
         "files": [
             "app/Helpers/Helper.php",
             "app/Helpers/Form_helper.php",
-            "app/helpers.php"
+            "app/helpers.php",
+            "app/Overrides/laravel_payment/telr/CreateTelrRequest.php"
         ],
         "psr-4": {
             "App\\": "app/"

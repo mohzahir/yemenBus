@@ -58,17 +58,17 @@
                                         class="fa fa-truck"> </i>Delivery Method</a> --}}
                                 <a href="#" class="nav-link flex-sm-fill text-sm-center active"> <i
                                         class="fa fa-money-bill-alt"></i><br>طرق الدفع</a>
-                                <!-- <a href="#" class="nav-link flex-sm-fill text-sm-center disabled">
-                                    <i class="fa fa-eye"> </i><br>معاينة الحجز</a> -->
+                                <a href="#" class="nav-link flex-sm-fill text-sm-center disabled">
+                                    <i class="fa fa-eye"> </i><br>بوابة الدفع</a>
                             </div>
-                            <div class="content py-3" x-data="{ showPaymentMethods: false }">
+                            <div class="content py-3">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>دفع كامل المبلغ</h4>
                                             <p>حجز مضمون</p>
                                             <div class="box-footer text-center">
-                                                <input x-on:click="showPaymentMethods = true" type="radio"
+                                                <input type="radio"
                                                     name="payment_type" value="total_payment" placeholder="">
                                             </div>
                                         </div>
@@ -78,14 +78,14 @@
                                             <h4>دفع عربون</h4>
                                             <p>قيمه دخول الجواز للسفاره للتأشير</p>
                                             <div class="box-footer text-center">
-                                                <input x-on:click="showPaymentMethods = true" type="radio"
+                                                <input type="radio"
                                                     name="payment_type" value="deposit_payment" placeholder="placeholder">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.row-->
-                                <div x-show="showPaymentMethods" class="row" x-transition>
+                                <!-- <div x-show="showPaymentMethods" class="row" x-transition>
                                     {{-- <div class="col-sm-12">
                                         <h3>طرق الدفع</h3>
                                     </div> --}}
@@ -101,14 +101,14 @@
                                             <span class="mr-3">تحويل بنكي</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="box-footer d-flex justify-content-between">
                                 <!-- <a
                                     href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
                                     الشخصية</a> -->
-                                <button type="submit" class="btn btn-primary">ادفع الان<i
+                                <button type="submit" class="btn btn-primary">الانتقال لبوابة الدفع<i
                                         class="fa fa-chevron-left"></i></button>
                             </div>
                         </form>
@@ -186,5 +186,11 @@
             </div>
 
         </div>
+
+
+
+
+
+
     </section>
 @endsection

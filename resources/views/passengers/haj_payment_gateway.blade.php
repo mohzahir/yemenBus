@@ -9,6 +9,15 @@
         }
 
     </style>
+    <style>
+        #telr {
+            width: 100%;
+            min-width: 600px;
+            height: 600px;
+            frameborder: 0;
+        }
+    </style>
+    <script src="//unpkg.com/alpinejs" defer></script>
 @endsection
 @section('content')
     <div class="slider-area ">
@@ -45,109 +54,69 @@
                 </div> --}}
                 <div id="checkout" class="col-lg-9">
                     <div class="box">
-                        <form method="POST" action="{{ route('passengers.storeHajCheckout', ['id' => $trip->id]) }}"
-                            enctype="multipart/form-data">
+                        <form method="POST"
+                            action="{{ route('passengers.storeHajPayment', ['reservationId' => $reservation->id]) }}">
                             @csrf
-                            <h1>الحجز - البيانات الشخصيه</h1>
+                            <h1>الحجز - بوابة الدفع</h1>
                             <div class="nav flex-column flex-md-row nav-pills text-center">
-                                <a href="checkout1.html" class="nav-link flex-sm-fill text-sm-center active"> <i
+                                <a href="checkout1.html" class="nav-link flex-sm-fill text-sm-center disabled"> <i
                                         class="fa fa-user">
                                     </i><br>البيانات الشخصية</a>
-                                {{-- <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i
-                                        class="fa fa-truck"> </i>Delivery Method</a> --}}
+                                <!-- <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i
+                                        class="fa fa-truck"> </i>Delivery Method</a> -->
                                 <a href="#" class="nav-link flex-sm-fill text-sm-center disabled"> <i
                                         class="fa fa-money-bill-alt"></i><br>طرق الدفع</a>
-                                <a href="#" class="nav-link flex-sm-fill text-sm-center disabled:">
+                                <a href="#" class="nav-link flex-sm-fill text-sm-center active">
                                     <i class="fa fa-eye"> </i><br>بوابة الدفع</a>
                             </div>
-                            <div class="content py-3">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="firstname">الاسم الكامل <strong class=" text-danger">*</strong></label>
-                                            <input id="firstname" type="text" class="form-control" name="name">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.row-->
+                            <div class="content py-3" >
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
-                                            <div class=" d-flex">
-                                                <input class="form-control valid" name="phone" id="phone" type="text"
-                                                    value="">
-
-                                                <div class="phone-intro">
-                                                    <select class="form-control" name="phoneCountry" id="phoneCountry">
-                                                        <option value="s">966+</option>
-                                                        <option value="y">967+</option>
-                                                    </select>
-                                                </div>
-
+                                        <div class="box payment-method">
+                                            <h4>تيلر</h4>
+                                            <p>حجز مضمون</p>
+                                            <div class="box-footer text-center">
+                                                <input type="radio"
+                                                    name="payment_method" value="telr" placeholder="">
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="street">البريد الالكتروني</label>
-                                            <input id="street" type="email" class="form-control" name="email">
+                                        <div class="box payment-method">
+                                            <h4>تحويل بنكي</h4>
+                                            <p>قيمه دخول الجواز للسفاره للتأشير</p>
+                                            <div class="box-footer text-center">
+                                                <input type="radio"
+                                                    name="payment_method" value="bank" placeholder="placeholder">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- /.row-->
-                                <div class="row">
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="form-group">
-                                            <label for="street">جنس الراكب</label>
-                                            <select class="form-control w-100" name="gender" id="gender">
-                                                <option value="">--</option>
-                                                <option value="male">ذكر</option>
-                                                <option value="femal">انثى</option>
-                                            </select>
+                                <!-- <div class="row" x-transition>
+                                    {{-- <div class="col-sm-12">
+                                        <h3>طرق الدفع</h3>
+                                    </div> --}}
+                                    <div class="col-md-6">
+                                        <div class="box payment-method">
+                                            <input type="radio" name="payment_method" value="telr">
+                                            <span class="mr-3">بوابه تيلر</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="form-group">
-                                            <label for="zip">الفئة العمرية</label>
-                                            <select class="form-control w-100" name="age" id="age">
-                                                <option value="">--</option>
-                                                <option value="adult">بالغ</option>
-                                                <option value="child">طفل (من سنتين الى 12)</option>
-                                                <option value="baby">رضيع (تحت السنتين)</option>
-                                            </select>
+                                    <div class="col-md-6">
+                                        <div class="box payment-method">
+                                            <input type="radio" name="payment_method" value="bank">
+                                            <span class="mr-3">تحويل بنكي</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="form-group">
-                                            <label for="state">تاريخ الميلاد</label>
-                                            <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
-                                                style="margin-right: 3px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="form-group">
-                                            <label for="country">رقم الهوية</label>
-                                            <input class="form-control" name="nid" id="nid" type="text"
-                                                style="margin-right: 3px">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="passport">صوره الجواز</label>
-                                            <input id="passport" type="file" class="form-control" name="passport_img">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.row-->
+                                </div> -->
                             </div>
                             <div class="box-footer d-flex justify-content-between">
                                 <!-- <a
-                                    href="{{ route('passengers.home', ['slug' => 'haj']) }}"
-                                    class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة لقائمة
-                                    الرحلات</a> -->
-                                <button type="submit" class="btn btn-primary">المتابعه لطرق الدفع<i
+                                    href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
+                                    class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
+                                    الشخصية</a> -->
+                                <button type="submit" class="btn btn-primary">ادفع الان<i
                                         class="fa fa-chevron-left"></i></button>
                             </div>
                         </form>
@@ -171,7 +140,7 @@
                                         </tr>
                                         <tr>
                                             <td>نوع البرنامج</td>
-                                            @if ($trip->sub_service_id == '1')
+                                            @if ($reservation->trip->sub_service_id == '1')
                                                 <th>عمره
                                                 </th>
                                             @else
@@ -181,11 +150,11 @@
                                         </tr>
                                         <tr>
                                             <td>تاريخ السفر</td>
-                                            <th>{{ $trip->from_date }}</th>
+                                            <th>{{ $reservation->trip->from_date }}</th>
                                         </tr>
                                         <tr>
                                             <td>قيمه العربون</td>
-                                            @if ($trip->sub_service_id == '1')
+                                            @if ($reservation->trip->sub_service_id == '1')
                                                 <th>
                                                     {{ \App\Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value }}
                                                     SAR
@@ -199,7 +168,7 @@
                                         </tr>
                                         <tr>
                                             <td>خدمات اداريه</td>
-                                            @if ($trip->sub_service_id == '1')
+                                            @if ($reservation->trip->sub_service_id == '1')
                                                 <th>
                                                     {{ \App\Setting::where('key', 'OMRA_SERVICE_RS_PRICE')->first()->value }}
                                                     SAR
@@ -213,7 +182,7 @@
                                         </tr>
                                         <tr class="total">
                                             <td>اجمالي الرسوم</td>
-                                            <th> {{ $trip->price }} SAR</th>
+                                            <th> {{ $reservation->trip->price }} SAR</th>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -225,5 +194,12 @@
             </div>
 
         </div>
+
+
+
+        <iframe id= "telr" src= " {{ $url }} " style="width: 50%;min-width: 600px;height: 600px;frameborder: 0;" ></iframe>
+
+
+
     </section>
 @endsection

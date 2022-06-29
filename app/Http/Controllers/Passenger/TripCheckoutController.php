@@ -387,27 +387,65 @@ class TripCheckoutController extends Controller
     public function hajPayment($reservationId)
     {
         $reservation = Reseervation::findOrFail($reservationId);
+
+
         return view('passengers.haj_payment', ['reservation' => $reservation]);
     }
 
     public function storeHajPayment(HajPaymentRequest $request, $reservation_id)
     {
         $reservation = Reseervation::findOrFail($reservation_id);
-        $isOmra = $reservation->sub_service_id == 1 ? true : false;
+        $reservation->update([
+            'payment_type' => $request->payment_type
+        ]);
+        return redirect()->route('passengers.hajPaymentGateway', ['reservationId' => $reservation_id]);
+        // $isOmra = $reservation->sub_service_id == 1 ? true : false;
         // dd( Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT'));
+        // $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
+        // $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
+        // $price = ($request->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
+        // $reservation->update([
+        //     'payment_type' => $request->payment_type, // ['total_payment','deposit_payment','later_payment'])->default('later_payment')
+        //     'payment_method' => $request->payment_method, //['telr','bank','inBus'])->default('inBus')
+        // ]);
+        // if ($request->payment_method == 'telr') {
+        // $url = $this->telrPay($reservation->id, $price, $reservation->trip->id);
+
+        //     return  $this->telrPay($reservation->id, $price, $reservation->trip->id);
+        // } else {
+        // }
+    }
+
+    public function hajPaymentGateway($reservationId)
+    {
+        $reservation = Reseervation::findOrFail($reservationId);
+
+
+        //copied code
+        $telrManager = new \TelrGateway\TelrManager();
+
+        $isOmra = $reservation->sub_service_id == 1 ? true : false;
         $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
         $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
-        $price = ($request->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
-        $reservation->update([
-            'payment_type' => $request->payment_type, // ['total_payment','deposit_payment','later_payment'])->default('later_payment')
-            'payment_method' => $request->payment_method, //['telr','bank','inBus'])->default('inBus')
-        ]);
-        if ($request->payment_method == 'telr') {
-            // $url = $this->telrPay($reservation->id, $price, $reservation->trip->id);
 
-            return  $this->telrPay($reservation->id, $price, $reservation->trip->id);
-        } else {
-        }
+        $total = ($reservation->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
+        $billingParams = [
+            'first_name' => 'Abc',
+            'sur_name' => 'Xyz',
+            'address_1' => 'Test Address',
+            'address_2' => 'Test Address 2',
+            'city' => 'Dubai',
+            'zip' => 123456,
+            'country' => 'UAE',
+            // 'country' => 'United Arab Emirates',
+            'email' => 'testTelr@gmail.com',
+        ];
+
+        $url_link = $telrManager->pay($reservationId, $total, 'Telr Test Payment Details', $billingParams)->redirect();
+        $url = $url_link->getTargetUrl();
+        //copied code
+
+        return view('passengers.haj_payment_gateway', ['reservation' => $reservation, 'url' => $url]);
     }
 
 

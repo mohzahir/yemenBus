@@ -25,7 +25,7 @@ class HajPaymentRequest extends FormRequest
     {
         return [
             'payment_type' => 'required|in:total_payment,deposit_payment',
-            'payment_method' => 'required|in:bank,telr',
+            // 'payment_method' => 'required|in:bank,telr',
         ];
     }
 }
