@@ -103,10 +103,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-footer d-flex justify-content-between"><a
+                            <div class="box-footer d-flex justify-content-between">
+                                <!-- <a
                                     href="{{ route('passengers.hajCheckout', ['id' => $reservation->trip->id]) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة للبيانات
-                                    الشخصية</a>
+                                    الشخصية</a> -->
                                 <button type="submit" class="btn btn-primary">ادفع الان<i
                                         class="fa fa-chevron-left"></i></button>
                             </div>

@@ -19,6 +19,7 @@ return [
         'ivp_method' => "create",
         'ivp_store' => env('TELR_STORE_ID', null),
         'ivp_authkey' => env('TELR_STORE_AUTH_KEY', null),
+        'ivp_framed' => 1,
         'return_auth' => '/handle-payment/success',
         'return_can' => '/handle-payment/cancel',
         'return_decl' => '/handle-payment/declined',

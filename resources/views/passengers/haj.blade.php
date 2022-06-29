@@ -41,38 +41,38 @@
                         <div class="card-body">
                             <form method="GET">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-sm-6 form-group">
-                                        <label for="">نوع البرنامج</label>
-                                        <div>
+                                <table class="table">
+                                    <tr>
+                                        <td style="width: 110px;">نوع البرنامج </td>
+                                        <th>
                                             <label class="mx-3">
                                                 <input value="1" @if (request('sub_service_id') == '1') checked @endif
                                                     type="radio" name="sub_service_id" class="radio"> عمرة
                                             </label>
-                                            <br>
+                                            <!-- <br> -->
                                             <label class="mx-3" for="">
                                                 <input value="2" @if (request('sub_service_id') == '2') checked @endif
                                                     type="radio" name="sub_service_id" class="radio">
                                                 حج
                                             </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 form-group">
-                                        <label for="">طريقه القدوم</label>
-                                        <div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 110px;">طريقه القدوم</td>
+                                        <th>
                                             <label class="mx-3">
                                                 <input value="air" @if (request('air_river') == 'air') checked @endif
                                                     type="radio" name="air_river" class="radio"> جوا
                                             </label>
-                                            <br>
+                                            <!-- <br> -->
                                             <label class="mx-3" for="">
                                                 <input value="river" @if (request('air_river') == 'river') checked @endif
                                                     type="radio" name="air_river" class="radio">
                                                 برا
                                             </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </th>
+                                    </tr>
+                                </table>
                                 <div class="form-group">
                                     <label for="">بدايه الرحله</label>
                                     <select class="form-control w-100" name="takeoff_city_id" id="">
@@ -97,7 +97,7 @@
 
                 </div>
                 <div class="col-md-9">
-                    <div class="box">
+                    <!-- <div class="box">
                         <table class="table table-hover table-strip table-responsive">
                             <thead>
                                 <tr class="text-center">
@@ -106,7 +106,7 @@
                                     <th style="width: 5%">مدينة البدايه</th>
                                     <th style="width: 5%">عدد الايام </th>
                                     <th style="width: 5%">سعر البرنامج</th>
-                                    {{-- <th style="width: 5%">قيمه العربون</th> --}}
+                                    <th style="width: 5%">قيمه العربون</th>
                                     <th style="width: 15%">تاريخ المغادره</th>
                                     <th style="width: 15%">تاريخ العوده</th>
                                     <th style="width: 30%">الخيارات</th>
@@ -121,7 +121,7 @@
                                             <td>{{ $trip->takeoff_city }}</td>
                                             <td>{{ $trip->days_count }}</td>
                                             <td>{{ $trip->price }} SAR</td>
-                                            {{-- <td>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }} --}}
+                                            <td>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }}
                                             </td>
                                             <td>{{ $trip->from_date }}</td>
                                             <td>{{ $trip->to_date }}</td>
@@ -136,8 +136,76 @@
                                 @endif
                             </tbody>
                         </table>
-                        <!-- /.text-->
+                    </div> -->
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="order-summary" class="box">
+                                <div class="box-header">
+                                    <h3 class="mb-0">{{ $trip->name_company }}</h3>
+                                </div>
+                                <!-- <p class="text-muted">هنا يمكنك تتبع مختصر تفاصيل البرنامج</p> -->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>نوع الرحله</td>
+                                                <th>{{ $trip->sub_service_id == '1' ? 'عمرة' : 'حج' }}</th>
+                                            </tr>
+                                            <!-- <tr>
+                                                <td>التنظيم</td>
+                                                <th>{{ $trip->name_company }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>جهة القدوم</td>
+                                                <th>{{ $trip->air_river == 'air' ? 'جوا' : 'برا' }}</th>
+                                            </tr> -->
+                                            <tr>
+                                                <td>المدينه</td>
+                                                <th>{{ $trip->takeoff_city }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>عدد الايام </td>
+                                                <th>{{ $trip->days_count }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>السعر </td>
+                                                <th>SAR {{ $trip->price }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td> العربون</td>
+                                                <th>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>من يوم</td>
+                                                <th>{{ $trip->from_date }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>الى يوم</td>
+                                                <th>{{ $trip->to_date }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('passengers.hajDetails', ['id' => $trip->trip_id]) }}" class="btn btn-outline-secondary">التفاصيل</a>
+                                                </td>
+                                                <th>
+                                                    <a href="{{ route('passengers.hajCheckout', ['id' => $trip->trip_id]) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>حجز</a>
+                                                </th>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            
+                        </div>
                     </div>
+
+
+
+
                 </div>
             </div>
 

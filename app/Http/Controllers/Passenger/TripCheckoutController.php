@@ -403,6 +403,8 @@ class TripCheckoutController extends Controller
             'payment_method' => $request->payment_method, //['telr','bank','inBus'])->default('inBus')
         ]);
         if ($request->payment_method == 'telr') {
+            // $url = $this->telrPay($reservation->id, $price, $reservation->trip->id);
+
             return  $this->telrPay($reservation->id, $price, $reservation->trip->id);
         } else {
         }

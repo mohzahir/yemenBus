@@ -142,10 +142,11 @@
                                 </div>
                                 <!-- /.row-->
                             </div>
-                            <div class="box-footer d-flex justify-content-between"><a
+                            <div class="box-footer d-flex justify-content-between">
+                                <!-- <a
                                     href="{{ route('passengers.home', ['slug' => 'haj']) }}"
                                     class="btn btn-outline-secondary"><i class="fa fa-chevron-right"></i>العودة لقائمة
-                                    الرحلات</a>
+                                    الرحلات</a> -->
                                 <button type="submit" class="btn btn-primary">المتابعه لطرق الدفع<i
                                         class="fa fa-chevron-left"></i></button>
                             </div>
