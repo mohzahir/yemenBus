@@ -461,6 +461,7 @@ class TripCheckoutController extends Controller
         $reservation->update([
             'payment_method' => $request->payment_method,
             'payment_image' => $payment_image,
+            'status' => 'created',
         ]);
 
         return redirect()->route('passengers.orderDetails', [

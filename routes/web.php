@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Haj\HajReservationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 /*
@@ -235,6 +236,14 @@ Route::prefix('dashboard')->middleware('admin')->group(function () {
     Route::get('admin/passengres/reservation', 'admin\TicketController@index')->name('admin.ticket.index');
     Route::get('admin/passengres/sms/{phone}/{country}', 'admin\TicketController@sendsms')->name('admin.passenger.sendsms');
     Route::post('admin/passengres/sms', 'admin\TicketController@storesms')->name('admin.passenger.storesms');
+
+
+
+    // moh zahir haj routes
+    Route::get('haj/reservations', [HajReservationController::class, 'index'])->name('haj.reservations.index');
+    Route::get('haj/reservations/{id}', [HajReservationController::class, 'show'])->name('haj.reservations.show');
+    Route::post('haj/reservations/{id}', [HajReservationController::class, 'update'])->name('haj.reservations.update');
+    Route::post('haj/reservations/{id}', [HajReservationController::class, 'destroy'])->name('haj.reservations.destroy');
 });
 
 Route::prefix('marketers')->middleware('marketer')->group(function () {

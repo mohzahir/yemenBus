@@ -34,6 +34,68 @@
         <div class="container">
 
             <div class="row mt-5">
+                <div class="col-sm-3">
+                    <div>
+                        <div id="order-summary" class="box">
+                            <div class="box-header">
+                                <h3 class="mb-0">تفاصيل البرنامج</h3>
+                            </div>
+                            <p class="text-muted">هنا يمكنك تتبع مختصر تفاصيل البرنامج</p>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>رقم الرحله</td>
+                                            <th>{{ $trip->id }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>نوع البرنامج</td>
+                                            <th>{{ $trip->sub_service_id == '1' ? 'عمرة' : 'حج' }}</th>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>التنظيم</td>
+                                            <th>{{ $trip->name_company }}</th>
+                                        </tr> -->
+                                        <tr>
+                                            <td>جهة الصعود</td>
+                                            <th>{{ $trip->air_river == 'air' ? 'جوا' : 'برا' }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>مكان التجمع</td>
+                                            <th>{{ $trip->takeoff_city->name }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>اليوم</td>
+                                            <th>{{ $trip->day }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>الساعة</td>
+                                            <th>{{ $trip->coming_time }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>بداية البرنامج</td>
+                                            <th>{{ $trip->from_date }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>عدد الايام </td>
+                                            <th>{{ $trip->days_count }}</th>
+                                        </tr>
+                                        <tr>
+                                            <td>السعر </td>
+                                            <th>SAR {{ $trip->price }}</th>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>تاريخ العودة</td>
+                                            <th>{{ $trip->to_date }}</th>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-sm-9">
 
                     <div id="details" class="box ">
@@ -47,7 +109,7 @@
                         <div class="social">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="{{ url($trip->program_details_file) }}" download>
+                                    <a href="{{ url($trip->program_details_file ?? '') }}" download>
                                         <h4>تحميل ملف البرنامج <i class="fa fa-download mx-3"></i></h4>
                                     </a>
                                 </div>
@@ -65,59 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div>
-                        <div id="order-summary" class="box">
-                            <div class="box-header">
-                                <h3 class="mb-0">تفاصيل البرنامج</h3>
-                            </div>
-                            <p class="text-muted">هنا يمكنك تتبع مختصر تفاصيل البرنامج</p>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <tbody>
-                                        <tr>
-                                            <td>نوع الرحله</td>
-                                            <th>{{ $trip->sub_service->name }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>التنظيم</td>
-                                            <th>{{ $trip->provider->name_company }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>جهة القدوم</td>
-                                            <th>{{ $trip->air_river == 'air' ? 'جوا' : 'برا' }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>المدينه</td>
-                                            <th>{{ $trip->takeoff_city->name }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>عدد الايام </td>
-                                            <th>{{ $trip->days_count }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>من يوم</td>
-                                            <th>{{ $trip->from_date }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>الى يوم</td>
-                                            <th>{{ $trip->to_date }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td> الحضور</td>
-                                            <th>{{ $trip->coming_time }}</th>
-                                        </tr>
-                                        <tr>
-                                            <td>السعر </td>
-                                            <th>SAR {{ $trip->price }}</th>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
         </div>

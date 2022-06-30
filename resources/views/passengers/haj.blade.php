@@ -146,27 +146,43 @@
                         <div class="col-md-6">
                             <div id="order-summary" class="box">
                                 <div class="box-header">
-                                    <h3 class="mb-0">{{ $trip->name_company }}</h3>
+                                    <h3 class="mb-0"> <strong>المنظم شركة</strong> {{ $trip->name_company }} </h3>
                                 </div>
                                 <!-- <p class="text-muted">هنا يمكنك تتبع مختصر تفاصيل البرنامج</p> -->
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td>نوع الرحله</td>
+                                                <td>رقم الرحله</td>
+                                                <th>{{ $trip->id }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>نوع البرنامج</td>
                                                 <th>{{ $trip->sub_service_id == '1' ? 'عمرة' : 'حج' }}</th>
                                             </tr>
                                             <!-- <tr>
                                                 <td>التنظيم</td>
                                                 <th>{{ $trip->name_company }}</th>
-                                            </tr>
-                                            <tr>
-                                                <td>جهة القدوم</td>
-                                                <th>{{ $trip->air_river == 'air' ? 'جوا' : 'برا' }}</th>
                                             </tr> -->
                                             <tr>
-                                                <td>المدينه</td>
+                                                <td>جهة الصعود</td>
+                                                <th>{{ $trip->air_river == 'air' ? 'جوا' : 'برا' }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>مكان التجمع</td>
                                                 <th>{{ $trip->takeoff_city }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>اليوم</td>
+                                                <th>{{ $trip->day }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>الساعة</td>
+                                                <th>{{ $trip->coming_time }}</th>
+                                            </tr>
+                                            <tr>
+                                                <td>بداية البرنامج</td>
+                                                <th>{{ $trip->from_date }}</th>
                                             </tr>
                                             <tr>
                                                 <td>عدد الايام </td>
@@ -181,11 +197,7 @@
                                                 <th>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }}</th>
                                             </tr>
                                             <tr>
-                                                <td>من يوم</td>
-                                                <th>{{ $trip->from_date }}</th>
-                                            </tr>
-                                            <tr>
-                                                <td>الى يوم</td>
+                                                <td>تاريخ العودة</td>
                                                 <th>{{ $trip->to_date }}</th>
                                             </tr>
                                             <tr>
