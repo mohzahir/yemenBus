@@ -516,6 +516,7 @@ class TripCheckoutController extends Controller
 
         $reservation = Reseervation::find($transaction->order_id);
         $reservation->update([
+            'payment_method' => 'telr',
             'payment_time' => date('Y-m-d H:i:s'),
             'paid' => $transaction->amount,
             'currency' => 'rs',

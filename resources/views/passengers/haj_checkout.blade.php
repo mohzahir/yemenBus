@@ -126,6 +126,7 @@
                                             <label for="state">تاريخ الميلاد</label>
                                             <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
                                                 style="margin-right: 3px">
+                                                
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
