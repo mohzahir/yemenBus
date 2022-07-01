@@ -17905,3 +17905,138 @@ namespac...')
 [stacktrace]
 #0 {main}
 "} 
+[2022-07-01 14:34:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:35:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:36:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:37:31] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:38:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:39:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:40:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:41:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:42:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:43:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:44:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:45:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:46:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:47:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:48:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:49:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
+[2022-07-01 14:50:12] local.ERROR: Target class [App\Http\Controllers\Admin\HajReservationController] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [App\\Http\\Controllers\\Admin\\HajReservationController] does not exist. at D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:805)
+[stacktrace]
+#0 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('App\\\\Http\\\\Contro...')
+#1 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(785): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Contro...', Array, true)
+#2 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(629): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Contro...', Array)
+#3 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(770): Illuminate\\Container\\Container->make('App\\\\Http\\\\Contro...', Array)
+#4 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(233): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Contro...')
+#5 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(833): Illuminate\\Routing\\Route->getController()
+#6 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(794): Illuminate\\Routing\\Route->controllerMiddleware()
+#7 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(694): Illuminate\\Routing\\Route->gatherMiddleware()
+#8 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(674): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#9 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(658): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#10 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(624): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#11 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(613): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#12 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(170): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#13 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(130): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#14 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#15 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#16 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#17 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#18 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#19 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#20 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php(63): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#21 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#22 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\fideloper\\proxy\\src\\TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#23 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#24 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(105): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#25 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#26 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#27 D:\\web\\work experience\\YemenBus\\buss-test2\\public\\index.php(56): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#28 D:\\web\\work experience\\YemenBus\\buss-test2\\server.php(21): require_once('D:\\\\web\\\\work exp...')
+#29 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class App\\Http\\Controllers\\Admin\\HajReservationController does not exist at D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:803)
+[stacktrace]
+#0 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(803): ReflectionClass->__construct('App\\\\Http\\\\Contro...')
+#1 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(681): Illuminate\\Container\\Container->build('App\\\\Http\\\\Contro...')
+#2 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(785): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Contro...', Array, true)
+#3 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(629): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Contro...', Array)
+#4 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(770): Illuminate\\Container\\Container->make('App\\\\Http\\\\Contro...', Array)
+#5 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(233): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Contro...')
+#6 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(833): Illuminate\\Routing\\Route->getController()
+#7 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Route.php(794): Illuminate\\Routing\\Route->controllerMiddleware()
+#8 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(694): Illuminate\\Routing\\Route->gatherMiddleware()
+#9 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(674): Illuminate\\Routing\\Router->gatherRouteMiddleware(Object(Illuminate\\Routing\\Route))
+#10 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(658): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#11 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(624): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#12 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(613): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#13 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(170): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#14 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(130): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#15 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#16 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#17 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#18 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#19 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#20 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#21 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode.php(63): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#22 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#23 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\fideloper\\proxy\\src\\TrustProxies.php(57): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#24 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(171): Fideloper\\Proxy\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#25 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(105): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#26 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(145): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#27 D:\\web\\work experience\\YemenBus\\buss-test2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(110): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#28 D:\\web\\work experience\\YemenBus\\buss-test2\\public\\index.php(56): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#29 D:\\web\\work experience\\YemenBus\\buss-test2\\server.php(21): require_once('D:\\\\web\\\\work exp...')
+#30 {main}
+"} 
+[2022-07-01 14:50:32] local.ERROR: Cannot redeclare sendSASMS() (previously declared in D:\web\work experience\YemenBus\buss-test2\app\helpers.php:3) {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): Cannot redeclare sendSASMS() (previously declared in D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3) at D:\\web\\work experience\\YemenBus\\buss-test2\\app\\helpers.php:3)
+[stacktrace]
+#0 {main}
+"} 
