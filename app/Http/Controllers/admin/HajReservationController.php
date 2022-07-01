@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Haj;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Provider;
@@ -15,10 +15,10 @@ class HajReservationController extends Controller
 {
     public function index()
     {
-        $providers_ids = Provider::where('service_id', '3')->pluck('id');
-        $trips_ids = Trip::whereIn('provider_id', $providers_ids,)->pluck('id');
-        $reservations = Reseervation::whereIn('trip_id', $trips_ids)->paginate('10');
-        // dd($providers_ids, $trips_ids, $reservations);
+        // $providers_ids = Provider::where('service_id', '3')->pluck('id');
+        // $trips_ids = Trip::whereIn('provider_id', $providers_ids)->pluck('id');
+        // $reservations = Reseervation::whereIn('trip_id', $trips_ids)->paginate('10');
+        dd($providers_ids, $trips_ids, $reservations);
         return view('dashboard.haj-reservation.index', compact('reservations'));
     }
 
