@@ -240,10 +240,10 @@ Route::prefix('dashboard')->middleware('admin')->group(function () {
 
 
     // moh zahir haj routes
-    Route::get('haj/reservations', 'Admin\Haj\HajReservationController@index')->name('haj.reservations.index');
-    Route::get('haj/reservations/{id}', 'Admin\Haj\HajReservationController@show')->name('haj.reservations.show');
-    Route::post('haj/reservations/{id}', 'Admin\Haj\HajReservationController@update')->name('haj.reservations.update');
-    Route::post('haj/reservations/{id}', 'Admin\Haj\HajReservationController@destroy')->name('haj.reservations.destroy');
+    Route::get('haj/reservations', 'Admin\HajReservationController@index')->name('haj.reservations.index');
+    Route::get('haj/reservations/{id}', 'Admin\HajReservationController@show')->name('haj.reservations.show');
+    Route::post('haj/reservations/{id}', 'Admin\HajReservationController@update')->name('haj.reservations.update');
+    Route::post('haj/reservations/{id}', 'Admin\HajReservationController@destroy')->name('haj.reservations.destroy');
 });
 
 Route::prefix('marketers')->middleware('marketer')->group(function () {
