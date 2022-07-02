@@ -177,6 +177,10 @@
                     <li><span class="glyphicon glyphicon-map-marker"></span><a href="{{route('dashboard.raiseOnMap.index')}}">اضافة مصعد على الخريطه</a></li>
 
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.reservations.confirmAll')}}">الحجوزات </a></li>
+                    <li>
+                        <span class="glyphicon glyphicon-user"></span>
+                        <a href="{{ route('provider.haj.reservations.index') }}">حجوزات الحج والعمرة </a>
+                    </li>
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.trip.create')}}">اضافة الرحلات</a></li>
                     {{-- @if ($provider->haj)
                         

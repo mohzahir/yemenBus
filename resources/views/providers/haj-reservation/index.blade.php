@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.providerDashboard')
 @section('style')
 <meta name="_token" content="{{csrf_token()}}" />
 <link href="{{asset('css/ar.css')}}" rel="stylesheet" class="lang_css arabic">

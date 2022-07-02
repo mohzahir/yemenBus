@@ -358,6 +358,13 @@ Route::prefix('provider')->middleware('provider')->group(function () {
     Route::get('dashboard/noms/index', 'FinancialPermessionController@noms')->name('provider.nom.index');
     Route::post('dashboard/noms/store', 'FinancialPermessionController@storeNoms')->name('provider.nom.store');
     Route::delete('dashboard/noms/delete/{id}', 'FinancialPermessionController@destroyNoms')->name('provider.nom.delete');
+
+
+    // moh zahir haj routes
+    Route::get('haj/reservations', 'provider\HajReservationController@index')->name('provider.haj.reservations.index');
+    Route::get('haj/reservations/{id}', 'provider\HajReservationController@show')->name('provider.haj.reservations.show');
+    Route::post('haj/reservations/{id}', 'provider\HajReservationController@update')->name('provider.haj.reservations.update');
+    Route::post('haj/reservations/{id}', 'provider\HajReservationController@destroy')->name('provider.haj.reservations.destroy');
 });
 
 Route::prefix('dashboard')->middleware('lab')->group(function () {

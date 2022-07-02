@@ -106,133 +106,30 @@
         <nav aria-label="breadcrumb" style="margin-top:-50px;">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard.admin.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-                <li class="breadcrumb-item active" aria-current="page"> الحجوزات المؤكدة</li>
+                <li class="breadcrumb-item " aria-current="page"> <a href="{{route('haj.reservations.index')}}">حجوزات الحج والعمرة</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> حجز رقم {{ ($reservation->id) }}</li>
             </ol>
         </nav>
-        <h1 style="text-align:center">حجوزات الحج والعمرة</h1>
+        <h1 style="text-align:center">تاكيد حجز حج وعمرة</h1>
 
         @include('flash-message')
     </div>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="البحث عن الحجز  " style="background-image: url('{{ asset('img/search.png')}}');">
 
-    <div class="table-responsive">
+    <div class="row">
+        <div class="col-md-12">
+            <img style="width: 100%;" src="{{ asset($reservation->payment_image) }}" alt="">
+            <p class="text-danger"> الرجاء التأكد من الحساب البنكي والصورة المرفقه قبل تأكيد الحجز </p>
+        </div>
+        <div class="col-md-12 mt-3">
+            <button onclick="submitForm()" class="btn btn-success">تاكيد الحجز</button>
+            <a href="{{ route('haj.reservations.index') }}" class="btn btn-danger">الغاء</a>
+        </div>
+        <form id="form" action="{{ route('haj.reservations.update', ['id' => $reservation->id]) }}" method="post" >
+            @csrf
 
-        <table id="myTable" class="table table-striped table-bordered" style="width:100%;text-align:center">
-            <thead>
-                <tr>
-
-                    <th colspan="2" style="horizontal-align : middle;text-align:center; width: 50%;">الحجز </th>
-                    <th rowspan="2">رقم الرحله</th>
-                    <th rowspan="2"> المزود</th>
-                    <th rowspan="2"> المسوق</th>
-                    <th rowspan="2">اسم المسافر </th>
-                    <th rowspan="2">مكان الصعود </th>
-                    <th rowspan="2">مكان النزول </th>
-                    <th rowspan="2">جوال المسافر السعودي</th>
-                    <th rowspan="2">جوال المسافر اليمني</th>
-                    <th rowspan="2">التاريخ</th>
-                    <th rowspan="2">اليوم</th>
-                    <th rowspan="2">من مدينة</th>
-                    <th rowspan="2">الى مدينة</th>
-                    <th rowspan="2">مبلغ الحجز الكلي بالطلب</th>
-                    <th rowspan="2">المبلغ المدفوع</th>
-                    <th rowspan="2">نوع التأكيد</th>
-                    <th rowspan="2">بوابة الدفع</th>
-                    <th rowspan="2">عدد التذاكر</th>
-                    <!-- <th  rowspan="2">رقم الطلب</th> -->
- 
-                    <th rowspan="2">اجراءات</th>
-                    <th rowspan="2">وسائل التواصل</th>
-                </tr>
-                <tr>
-                    <th scope="col"> رقم الحجز</th>
-                    <th scope="col">حالة الحجز</th>
-
-                </tr>
-            </thead>
-            <tbody>
-
-
-
-
-
-                @foreach ($reservations as $reservation)
-                <?php $marketer = App\Marketer::where('code', $reservation->code)->first();
-
-                ?>
-                {{-- @if($marketer) --}}
-
-                <?php $provider_name = App\Provider::select('name_company')->where('id', $reservation->trip->provider_id)->first() ?>
-                {{-- @if($provider_name) --}}
-                <tr>
-                    <td>{{ $reservation->id }}</td>
-                    <td><span class="badge badge-primary">@switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break @case('canceled') ملغي @break @default @endswitch</span></td>
-                    <td>{{ $reservation->trip_id }}</td>
-                    <td>{{ $provider_name->name_company }}</td>
-                    <td>{{ $reservation->marketer_id  ?? '-'}}</td>
-
-                    {{-- <td>{{ $reservation->code }}</td> --}}
-                    <td>{{ $reservation->passenger->name_passenger }}</td>
-                    <td>{{ $reservation->ride_place ?? '-' }}</td>
-                    <td>{{ $reservation->drop_place ?? '-' }}</td>
-                    <td>{{ $reservation->passenger->phone ?? '-' }}</td>
-                    <td>{{ $reservation->passenger->y_phone ?? '-' }}</td>
-                    <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
-
-                    <td>
-                        @switch($reservation->trip->day)
-                        @case('sat')السبت@break
-                        @case('sun')الاحد@break
-                        @case('mon')الاثنين@break
-                        @case('tue')الثلاثاء@break
-                        @case('wed')الاربعاء@break
-                        @case('thu')الخميس@break
-                        @case('fri')الجمعة@break
-                        @default
-                        @endswitch
-                    </td>
-                    <td>{{ $reservation->trip->takeoff_city->name }}</td>
-                    <td>{{ $reservation->trip->arrival_city->name }}</td>
-                    <td>{{ $reservation->total_price }} SAR</td>
-                    <td>{{ $reservation->paid ?? 0 }} SAR</td>
-                    <td>
-                        @switch($reservation->payment_type)
-                        @case('total_payment') المبلغ كامل @break
-                        @case('deposit_payment')بعربون@break
-                        @case('later_payment')الدفع لاحقا@break
-                        @default
-                        @endswitch</td>
-                    <td>
-                        @switch($reservation->payment_method)
-                        @case('bank') الدفع البنكي @break
-                        @case('telr')بوبة تبلر@break
-                        @endswitch</td>
-
-                    <td>{{ $reservation->ticket_no }} </td>
-
-                    <td>
-                        <!-- <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a> -->
-                        <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
-                        <button onclick="submitForm()" class="btn btn-sm btn-danger {{ $reservation->status != 'canceled' ? '' : 'disabled' }}">الغاء الحجز</button>
-                        <a class="btn btn-sm btn-success {{ $reservation->payment_method == 'bank' && $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد التحويل البنكي</a>
-                    </td>
-                    <td style="width:150px;margin-top:30px">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>
-                        <a class="btn btn-sm btn-success" @if($reservation->passenger->phone) href="https://api.whatsapp.com/send?phone={{$reservation->passenger->phone}}" @else href="https://api.whatsapp.com/send?phone={{$reservation->passenger->y_phone}}" @endif style="width:100px">واتس اب </a>
-
-                        <form id="form" action="{{ route('haj.reservations.destroy',['id' => $reservation->id]) }}" method="post">
-                            @csrf
-                        </form>
-
-                    </td>
-                </tr>
-                {{-- @endif --}}
-                {{-- @endif --}}
-                @endforeach
-            </tbody>
-        </table>
-        {{ $reservations->links() }}
+        </form>
     </div>
+    
 </div>
 
 
@@ -254,11 +151,10 @@
     });
 
     function submitForm(){
-        x = confirm('هل انت متاكد ؟');
-        if(x){
-            $('#form').submit();
-        }
+        $('#form').submit();
     }
+
+
 
     function myFunction() {
         var input, filter, table, tr, td, i, txtValue;
