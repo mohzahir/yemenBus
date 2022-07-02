@@ -16,7 +16,9 @@ class CreateMarketersTable extends Migration
         Schema::create('marketers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 255);
-            $table->integer('provider_id')->nullable()->comment("null=gloabal_marketer");
+            $table->integer('provider_id')->nullable()->comment("only exists if the marketer is provider_marketer");
+            $table->integer('service_id')->nullable()->comment("only exists if the marketer is service_marketer");
+            $table->enum('marketer_type', ['global_marketer', 'provider_marketer', 'service_marketer']);
             $table->double('balance_rs')->default(0);
             $table->double('balance_ry')->default(0);
             $table->double('tip_ry', 8, 2)->default(0.00);

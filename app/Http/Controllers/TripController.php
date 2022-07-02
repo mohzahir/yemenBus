@@ -81,6 +81,7 @@ class TripController extends Controller
         $trip->lines_trip = $request->lines_trip;
         $trip->note = $request->note;
         $trip->price = $request->price;
+        $trip->deposit_price = $request->deposit_price;
         $trip->currency = $currency;
         $trip->day = $day;
         $trip->days_count = $request->days_count;
@@ -166,6 +167,7 @@ class TripController extends Controller
         $trip->weight = $request->weight;
         // $trip->trip_no = $request->trip_no;
         $trip->price = $request->price;
+        $trip->deposit_price = $request->deposit_price;
         $trip->currency = $request->direcation == 'yts' ? 'ry' : 'rs';
         $trip->no_ticket = $request->no_ticket;
         $trip->note = $request->note;

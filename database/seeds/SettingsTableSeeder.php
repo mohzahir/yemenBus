@@ -13,6 +13,8 @@ class SettingsTableSeeder extends Seeder
     public function run()
     {
         Setting::insert([
+            ['key' => 'BUS_RS_DEPOSIT_VALUE', 'value' => '100'],
+            ['key' => 'BUS_RY_DEPOSIT_VALUE', 'value' => '100'],
             ['key' => 'HAJ_PROGRAM_RS_DEPOSIT', 'value' => '100'],
             ['key' => 'OMRA_PROGRAM_RS_DEPOSIT', 'value' => '200'],
             ['key' => 'HAJ_SERVICE_RS_PRICE', 'value' => '200'],

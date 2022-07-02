@@ -31,6 +31,7 @@ class CreateTripsTable extends Migration
             $table->text('lines_trip')->nullable();
             $table->text('note')->nullable();
             $table->double('price', 8, 2);
+            $table->double('deposit_price', 8, 2)->nullable();
             $table->string('currency')->nullable();
             $table->double('weight', 8, 2)->nullable();
             $table->integer('days_count')->nullable()->comment("omar and haj program");
@@ -44,7 +45,7 @@ class CreateTripsTable extends Migration
             $table->string('trip_type')->nullable();
             $table->string('to')->nullable();
             $table->string('from')->nullable();
-            
+
             $table->foreign('provider_id', 'provider_id')->references('id')->on('providers')->onDelete('cascade')->onUpdate('cascade');
         });
     }

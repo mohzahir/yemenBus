@@ -17,7 +17,9 @@ class CreateReseervationsTable extends Migration
             $table->increments('id');
             $table->string('trip_id', 250)->nullable();
             $table->integer('marketer_id')->nullable()->index('reservation_marketer_id');
-            $table->integer('main_passenger_id');
+            $table->integer('main_passenger_id'); //for passenger
+            $table->string('ride_place')->nullable(); //for passenger
+            $table->string('drop_place')->nullable(); //for passenger
             $table->integer('ticket_no')->default(1)->comment("count of tickets for this reservation");
             $table->enum('payment_method', ['paybal', 'bank', 'telr', 'inbus'])->nullable();
             $table->timestamp('payment_time')->nullable();

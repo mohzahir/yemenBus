@@ -112,7 +112,13 @@ class PassengerController extends Controller
     {
         $trip = Trip::findOrFail($id);
         // dd($trip);
-        return view('passengers.haj_details', ['trip' => $trip]);
+        $haj_deposit_value = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
+        $omra_deposit_value = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
+        return view('passengers.haj_details', [
+            'trip' => $trip,
+            'haj_deposit_value' => $haj_deposit_value,
+            'omra_deposit_value' => $omra_deposit_value,
+        ]);
     }
 
 

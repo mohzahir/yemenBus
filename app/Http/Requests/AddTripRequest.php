@@ -39,6 +39,7 @@ class AddTripRequest extends FormRequest
             'line_trip' => 'nullable',
             'note' => 'nullable',
             'price' => 'required|numeric',
+            'deposit_price' => 'nullable|numeric',
             'currency' => 'nullable|string',
             'weight' => 'nullable|numeric',
             'days_count' => 'nullable|numeric',

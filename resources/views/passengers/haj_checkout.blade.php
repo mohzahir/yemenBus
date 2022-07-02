@@ -65,36 +65,27 @@
                             </div>
                             <div class="content py-3">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstname">الاسم الكامل <strong class=" text-danger">*</strong></label>
                                             <input id="firstname" type="text" class="form-control" name="name">
                                         </div>
                                     </div>
-                                </div>
-                                <!-- /.row-->
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
                                             <div class=" d-flex">
                                                 <input class="form-control valid" name="phone" id="phone" type="text">
-
+    
                                                 <div class="phone-intro">
                                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
                                                         <option value="s">966+</option>
                                                         <option value="y">967+</option>
                                                     </select>
                                                 </div>
-
+    
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="street">البريد الالكتروني</label>
-                                            <input id="street" type="email" class="form-control" name="email">
+    
                                         </div>
                                     </div>
                                 </div>
@@ -136,7 +127,29 @@
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country">مكان الصعود</label>
+                                            <input class="form-control" name="ride_place" id="ride_place" type="text"
+                                                style="margin-right: 3px">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="country">مكان النزول</label>
+                                            <input class="form-control" name="drop_place" id="drop_place" type="text"
+                                                style="margin-right: 3px">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="street">البريد الالكتروني</label>
+                                            <input id="street" type="email" class="form-control" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="passport">صوره الجواز</label>
                                             <input id="passport" type="file" class="form-control" name="passport_img">
@@ -173,6 +186,10 @@
                                             <th>1</th>
                                         </tr>
                                         <tr>
+                                            <td>خط السير</td>
+                                            <th>{{ $trip->lines_trip }}</th>
+                                        </tr>
+                                        <tr>
                                             <td>نوع البرنامج</td>
                                             @if ($trip->sub_service_id == '1')
                                                 <th>عمره
@@ -190,7 +207,7 @@
                                             <td>السعر الكلي</td>
                                             <th> {{ $trip->price }} SAR</th>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>قيمه العربون</td>
                                             @if ($trip->sub_service_id == '1')
                                                 <th>
@@ -203,6 +220,10 @@
                                                     SAR
                                                 </th>
                                             @endif
+                                        </tr> -->
+                                        <tr>
+                                            <td> العربون</td>
+                                            <th>{{ $trip->deposit_price ? $trip->deposit_price : ($trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value) }}</th>
                                         </tr>
                                         <tr>
                                             <td>خدمات اداريه</td>

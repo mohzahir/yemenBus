@@ -145,6 +145,8 @@ class TripCheckoutController extends Controller
         //return $seatCount;
         $rules['phone'] = 'required|numeric|digits:9'; // for yemen 967-767-890-965 ,sa -> 966-531-066-035 ,
         $rules['email'] = 'nullable|email';
+        $rules['ride_place'] = 'nullable|string';
+        $rules['drop_place'] = 'nullable|string';
         $rules['notes'] = 'nullable|string|max:1500';
 
         $validator = Validator::make($request->all(), $rules);
@@ -186,6 +188,8 @@ class TripCheckoutController extends Controller
                     'trip_id' => $tripId,
                     'marketer_id' => null,
                     'main_passenger_id' => $passenger->id,
+                    'ride_place' => $request->ride_place,
+                    'drop_place' => $request->drop_place,
                     'ticket_no' =>  $seatCount,
                     'payment_method' =>  null,
                     'payment_time' =>  null,
@@ -260,7 +264,11 @@ class TripCheckoutController extends Controller
             $trip = Trip::find($reservation->trip_id);
 
             $payment_method = $request->payment_type == 'later_payment' ? 'inBus' : $request->paymentType;
-            $price = $request->payment_type == 'total_payment' ? $reservation->total_price : ($request->payment_type == 'deposit_payment' ? ($trip->currency == 'rs' ? env('DEPOSIT_RS_VALUE', 50) : env('DEPOSIT_RY_VALUE', 5000)) : 0);
+
+            $BUS_RS_DEPOSIT_VALUE = Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value;
+            $BUS_RY_DEPOSIT_VALUE = Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value;
+            $deposit = $trip->deposit_price ? $trip->deposit_price : ($request->currency == 'rs' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE);
+            $price = $request->payment_type == 'total_payment' ? $reservation->total_price : ($request->payment_type == 'deposit_payment' ? $deposit : 0);
 
 
             //check if there are tickets available in trip 
@@ -308,7 +316,13 @@ class TripCheckoutController extends Controller
     {
         $trip = Trip::findOrFail($id);
         // dd($trip);
-        return view('passengers.haj_checkout', ['trip' => $trip]);
+        $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
+        $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
+        return view('passengers.haj_checkout', [
+            'trip' => $trip,
+            'omra_deposit_value' => $omra_deposit,
+            'haj_deposit_value' => $haj_deposit,
+        ]);
     }
 
     public function storeHajCheckout(HajCheckoutRequest $request, $tripId)
@@ -351,6 +365,8 @@ class TripCheckoutController extends Controller
                 'trip_id' => $tripId,
                 'marketer_id' => null,
                 'main_passenger_id' => $passenger->id,
+                'ride_place' => $request->ride_place,
+                'drop_place' => $request->drop_place,
                 'ticket_no' =>  1,
                 'payment_method' =>  null,
                 'payment_time' =>  null,
@@ -387,9 +403,15 @@ class TripCheckoutController extends Controller
     public function hajPayment($reservationId)
     {
         $reservation = Reseervation::findOrFail($reservationId);
+        $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
+        $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
 
 
-        return view('passengers.haj_payment', ['reservation' => $reservation]);
+        return view('passengers.haj_payment', [
+            'reservation' => $reservation,
+            'omra_deposit_value' => $omra_deposit,
+            'haj_deposit_value' => $haj_deposit,
+        ]);
     }
 
     public function storeHajPayment(HajPaymentRequest $request, $reservation_id)
@@ -427,8 +449,9 @@ class TripCheckoutController extends Controller
         $isOmra = $reservation->sub_service_id == 1 ? true : false;
         $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
         $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
+        $deposit = $reservation->trip->deposit_price ? $reservation->trip->deposit_price : ($isOmra ? $omra_deposit : $haj_deposit);
 
-        $total = ($reservation->payment_type == 'total_payment' ? $reservation->trip->price : ($isOmra ? $omra_deposit : $haj_deposit));
+        $total = ($reservation->payment_type == 'total_payment' ? $reservation->trip->price : $deposit);
         $billingParams = [
             'first_name' => 'Abc',
             'sur_name' => 'Xyz',
@@ -445,7 +468,12 @@ class TripCheckoutController extends Controller
         $url = $url_link->getTargetUrl();
         //copied code
 
-        return view('passengers.haj_payment_gateway', ['reservation' => $reservation, 'url' => $url]);
+        return view('passengers.haj_payment_gateway', [
+            'reservation' => $reservation,
+            'url' => $url,
+            'omra_deposit_value' => $omra_deposit,
+            'haj_deposit_value' => $haj_deposit,
+        ]);
     }
 
     public function storeHajBankPayment(Request $request, $reservation_id)

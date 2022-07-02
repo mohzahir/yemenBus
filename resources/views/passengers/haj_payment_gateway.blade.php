@@ -156,7 +156,7 @@
                                             <td>السعر الكلي</td>
                                             <th> {{ $reservation->trip->price }} SAR</th>
                                         </tr>
-                                        <tr>
+                                        <!-- <tr>
                                             <td>قيمه العربون</td>
                                             @if ($reservation->trip->sub_service_id == '1')
                                                 <th>
@@ -169,6 +169,10 @@
                                                     SAR
                                                 </th>
                                             @endif
+                                        </tr> -->
+                                        <tr>
+                                            <td> العربون</td>
+                                            <th>{{ $reservation->trip->deposit_price ? $reservation->trip->deposit_price : ($reservation->trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value) }}</th>
                                         </tr>
                                         <tr>
                                             <td>خدمات اداريه</td>

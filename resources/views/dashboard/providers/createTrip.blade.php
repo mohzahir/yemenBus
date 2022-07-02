@@ -243,9 +243,19 @@
                         </div>
 
 
-                        <div class="form-group mt-2">
-                            <label for="price">سعر الرحلة </label> - <span class="currency"></span>
-                            <input type="text" class="form-control" id="price" name="price" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="">سعر العربون </label> - <span class="currency"></span>
+                                    <input type="text" class="form-control" id="deposit_price" name="deposit_price">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mt-2">
+                                    <label for="price">سعر الرحلة </label> - <span class="currency"></span>
+                                    <input type="text" class="form-control" id="price" name="price" required>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group mt-10" style="margin-top:10px;">

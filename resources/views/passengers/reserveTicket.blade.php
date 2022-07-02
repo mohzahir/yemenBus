@@ -63,6 +63,18 @@
                                 placeholder="البريد الالكتروني">
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control valid" name="ride_place" id="ride_place" type="text" value="{{ old('ride_place') }}"
+                                placeholder="مكان الصعود">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control valid" name="drop_place" id="drop_place" type="text" value="{{ old('drop_place') }}"
+                                placeholder="مكان النزول">
+                            </div>
+                        </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <textarea class="form-control w-100" name="notes" id="notes" cols="30" rows="6" 
@@ -128,6 +140,8 @@
                         <div class="col-6"><p>{{$ticketNo}}</p></div>
                         <div class="col-6"><h3>تاريخ الرحلة</h3></div>
                         <div class="col-6"><p>{{ $trip->from_date}}</p></div>
+                        <div class="col-6"><h3>مسار الرحلة</h3></div>
+                        <div class="col-6"><p>{{ $trip->lines_trip}}</p></div>
                         <div class="col-6"><h3>سعر التذكرة</h3></div>
                         <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
                         <div class="col-6"><h3>السعر الاجمالي</h3></div>

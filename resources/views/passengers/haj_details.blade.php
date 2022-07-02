@@ -84,6 +84,10 @@
                                             <td>السعر </td>
                                             <th>SAR {{ $trip->price }}</th>
                                         </tr>
+                                        <tr>
+                                            <td> العربون</td>
+                                            <th>{{ $trip->deposit_price ? $trip->deposit_price : ($trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value) }}</th>
+                                        </tr>
                                         
                                         <tr>
                                             <td>تاريخ العودة</td>

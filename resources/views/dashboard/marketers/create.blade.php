@@ -24,6 +24,9 @@ label{
  
 }
 </style>
+
+<script src="//unpkg.com/alpinejs" defer></script>
+
 @endsection
 @section('content_header')
     <h1>إضافة مسوق</h1>
@@ -40,12 +43,51 @@ label{
 </nav>
    <h1 style ="text-align:center">اضافة مسوق  </h1>
 @include('flash-message')
-    <form method="POST" action="{{ route('dashboard.marketers.store') }}"  class="pb-4 @if ($errors->any()) was-validated @endif" enctype="multipart/form-data">
+    <form x-data="{active: null}" method="POST" action="{{ route('dashboard.marketers.store') }}"  class="pb-4 @if ($errors->any()) was-validated @endif" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">اسم المسوق</label>
             <input type="text" class="form-control" id="name" name="name"  value="{{ old('name') }}" required>
             @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="name">نوع المسوق</label> <br>
+            <input @click="active = null" type="radio" name="marketer_type"  value="global"> مسوق عام <br>
+            <input @click="active = 'provider'" type="radio" name="marketer_type"  value="provider_marketer"> مسوق مخصص لمزود <br>
+            <input @click="active = 'service'" type="radio" name="marketer_type"  value="service_marketer"> مسوق مخصص لقسم <br>
+            @error('name')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        <div x-show="active == 'provider'" class="form-group" x-transition>
+            <label for="name">اختر المزود</label>
+            <!-- <input type="text" class="form-control" id="provider_id" name="provider_id"  value="{{ old('provider_id') }}" > -->
+            <select class="form-control" name="provider_id" id="">
+                @foreach($providers as $provider)
+                    <option value="{{ $provider->id }}">{{ $provider->name_company }}</option>
+                @endforeach
+            </select>
+            @error('provider_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div x-show="active == 'service'" class="form-group" x-transition>
+            <label for="name">اختر الخدمة</label>
+            <!-- <input type="text" class="form-control" id="service_id" name="service_id"  value="{{ old('service_id') }}" > -->
+            <select class="form-control" name="service_id" id="">
+                @foreach($services as $service)
+                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                @endforeach
+            </select>
+            @error('service_id')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>

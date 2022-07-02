@@ -23,6 +23,7 @@ class Trip extends Model
     'no_ticket', 
     'note', 
     'price', 
+    'deposit_price', 
     'created_at', 
     'status'
   ];

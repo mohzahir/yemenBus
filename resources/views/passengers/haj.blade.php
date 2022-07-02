@@ -173,6 +173,10 @@
                                                 <th>{{ $trip->takeoff_city }}</th>
                                             </tr>
                                             <tr>
+                                                <td>خط السير</td>
+                                                <th>{{ $trip->lines_trip }}</th>
+                                            </tr>
+                                            <tr>
                                                 <td>اليوم</td>
                                                 <th>{{ $trip->day }}</th>
                                             </tr>
@@ -194,7 +198,7 @@
                                             </tr>
                                             <tr>
                                                 <td> العربون</td>
-                                                <th>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }}</th>
+                                                <th>{{ $trip->deposit_price ? $trip->deposit_price : ($trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value) }}</th>
                                             </tr>
                                             <tr>
                                                 <td>تاريخ العودة</td>
