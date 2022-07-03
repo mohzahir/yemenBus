@@ -94,10 +94,10 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
                         <nav aria-label="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard.provider.showAccountInfo')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-    <li class="breadcrumb-item active" aria-current="page">   الحجوزات المؤكده </li>
+    <li class="breadcrumb-item active" aria-current="page">   قائمة حجزوات النقل بالباص </li>
   </ol>
 </nav>
-        <h1 style ="text-align:center">الحجوزات المؤكده</h1>
+        <h1 style ="text-align:center">قائمة حجزوات النقل بالباص</h1>
 
 @include('flash-message')
 
@@ -124,7 +124,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
             <th rowspan="2">من مدينة</th>
             <th rowspan="2">الى مدينة</th>
             <th rowspan="2">مبلغ الحجز الكلي بالطلب</th>
-            <th rowspan="2">مبلغ العربون بالطلب</th>
+            <th rowspan="2">المبلغ المدفوع</th>
             <th rowspan="2">نوع  التأكيد</th>
             <th rowspan="2">عدد  التذاكر</th>
              {{-- <th  rowspan="2">رقم الطلب</th>
@@ -155,14 +155,14 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
 
  <tr>                   
    <td >{{ $reservation->id }}</td>
-   <td>@switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break   @case('transfer') تم نقله @break @default @endswitch</td>
+   <td> <span  class="badge badge-success"> @switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break   @case('canceled') ملغي @break @default @endswitch</span></td>
    <td >{{ $reservation->trip_id }}</td>
 
 
- <td>{{ $reservation->marketer_name }}</td>
-     <td>{{ $reservation->phone }}</td>
-     <td>{{ $reservation->y_phone }}</td>
-     <td>{{ $reservation->name_passenger }}</td>
+ <td>{{ $reservation->marketer->name ?? '-' }}</td>
+     <td>{{ $reservation->passenger->phone }}</td>
+     <td>{{ $reservation->passenger->y_phone }}</td>
+     <td>{{ $reservation->passenger->name_passenger }}</td>
      <td>{{ date('d-m-Y', strtotime($reservation->from_date) )}}</td>
 
      <td> 
@@ -177,8 +177,8 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
 @default
 @endswitch
 </td>
-     <td>{{ $reservation->takeoff_city }}</td>
-     <td>{{ $reservation->arrival_city }}</td>
+     <td>{{ $reservation->trip->takeoff_city->name }}</td>
+     <td>{{ $reservation->trip->arrival_city->name }}</td>
      <td>{{ $reservation->total_price }}@switch($reservation->currency)@case('rs')سعودي@break @case('ry') يمني@break @default @endswitch</td>
      <td>{{ $reservation->paid }}@switch($reservation->currency)@case('rs')ريال سعودي@break @case('ry')ريال يمني @break @default @endswitch</td>
      <td>
@@ -199,9 +199,12 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
      <td style="display:inline-block;width:350px;">
      {{-- <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->id) }}">تعديل الحجز</a> --}}
      <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
-     <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a>
-     <a class="btn btn-sm btn-danger" href="{{ route('provider.reservations.cancel',$reservation->id) }}">الغاء الحجز</a>
-     <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->id) }}">نقل الى</a>
+     <!-- <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
+     <button class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}" onclick="cancelReservation()">الغاء الحجز</button>
+     <form id="cancel_reservation_form" action="{{ route('provider.reservations.cancel',$reservation->id) }}" method="post">
+      @csrf
+     </form>
+     <!-- <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->id) }}">نقل الى</a> -->
      </td>
      <td style="width:150px;margin-top:30px">
      <a class="btn btn-sm btn-primary" href="{{ route('provider.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span>   راسل المسافر   </a>
@@ -236,7 +239,13 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
 <script type="text/javascript">
 
 
+function cancelReservation(){
+  x =confirm('هل انت متاكد من الغاء الحجز ؟');
 
+  if(x){
+    $('#cancel_reservation_form').submit();
+  }
+}
 
 function myFunction() {
   var input, filter, table, tr, td, i, txtValue;

@@ -56,7 +56,7 @@ label{
         </div>
         <div class="form-group">
             <label for="name">نوع المسوق</label> <br>
-            <input @click="active = null" type="radio" name="marketer_type"  value="global"> مسوق عام <br>
+            <input @click="active = null" type="radio" name="marketer_type"  value="global_marketer"> مسوق عام <br>
             <input @click="active = 'provider'" type="radio" name="marketer_type"  value="provider_marketer"> مسوق مخصص لمزود <br>
             <input @click="active = 'service'" type="radio" name="marketer_type"  value="service_marketer"> مسوق مخصص لقسم <br>
             @error('name')
@@ -69,6 +69,7 @@ label{
             <label for="name">اختر المزود</label>
             <!-- <input type="text" class="form-control" id="provider_id" name="provider_id"  value="{{ old('provider_id') }}" > -->
             <select class="form-control" name="provider_id" id="">
+                <option value=""> ---- </option>
                 @foreach($providers as $provider)
                     <option value="{{ $provider->id }}">{{ $provider->name_company }}</option>
                 @endforeach
@@ -83,6 +84,7 @@ label{
             <label for="name">اختر الخدمة</label>
             <!-- <input type="text" class="form-control" id="service_id" name="service_id"  value="{{ old('service_id') }}" > -->
             <select class="form-control" name="service_id" id="">
+                <option value=""> ---- </option>
                 @foreach($services as $service)
                     <option value="{{ $service->id }}">{{ $service->name }}</option>
                 @endforeach

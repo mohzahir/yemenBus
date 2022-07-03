@@ -71,7 +71,7 @@ th,td{
         </div>
     @endif
     <div class="d-flex justify-content-between" style="dispaly:inline;">
-        <h1>الحجوزات المؤكده</h1>        
+        <h1>حجوزات النقل بالباص</h1>        
     </div>
 @endsection
 
@@ -80,10 +80,10 @@ th,td{
           <nav aria-label="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard.marketer.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-    <li class="breadcrumb-item active" aria-current="page">  حجوزات  مؤكده</li>
+    <li class="breadcrumb-item active" aria-current="page">  حجوزات النقل بالباص</li>
   </ol>
 </nav>
-<h1 style="text-align:center">حجوزات مؤكده  </h1>
+<h1 style="text-align:center">حجوزات النقل بالباص  </h1>
 @include('flash-message')
 
 

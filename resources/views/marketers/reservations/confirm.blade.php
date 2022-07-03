@@ -37,10 +37,10 @@ label{
     <nav aria-label="breadcrumb" style="" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard.marketer.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-    <li class="breadcrumb-item active" aria-current="page">  طلب تاكيد حجز</li>
+    <li class="breadcrumb-item active" aria-current="page">  حجز رحلة نقل بالباص</li>
   </ol>
 </nav>
-<h1 style="text-align:center">طلب تاكيد حجز</h1>
+<h1 style="text-align:center">حجز رحلة نقل بالباص</h1>
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success alert-block">

@@ -175,12 +175,15 @@
                     <li><span class="glyphicon glyphicon-plus"></span><a href="{{route('provider.nom.index')}}"> ترشيح مسوقين </a></li>
 
                     <li><span class="glyphicon glyphicon-map-marker"></span><a href="{{route('dashboard.raiseOnMap.index')}}">اضافة مصعد على الخريطه</a></li>
-
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.reservations.confirmAll')}}">الحجوزات </a></li>
+                    @if(auth()->guard('provider')->user()->service_id == 1)
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.reservations.confirmAll')}}">حجوزات رحلات النقل</a></li>
+                    @endif
+                    @if(auth()->guard('provider')->user()->service_id == 3)
                     <li>
                         <span class="glyphicon glyphicon-user"></span>
                         <a href="{{ route('provider.haj.reservations.index') }}">حجوزات الحج والعمرة </a>
                     </li>
+                    @endif
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.trip.create')}}">اضافة الرحلات</a></li>
                     {{-- @if ($provider->haj)
                         

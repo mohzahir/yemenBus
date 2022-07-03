@@ -13,7 +13,7 @@ class Marketer extends Authenticatable
     protected $guard = 'marketer';
 
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'balance_rs', 'balance_ry', 'state', 'provider_id', 'currency', 'max_rs', 'max_ry', 'tip_rs', 'tip_ry', 'address_address', 'address_latitude', 'address_longitude', 'code'
+        'name', 'email', 'password', 'phone', 'balance_rs', 'balance_ry', 'state', 'provider_id', 'service_id', 'currency', 'max_rs', 'max_ry', 'tip_rs', 'tip_ry', 'address_address', 'address_latitude', 'address_longitude', 'code'
     ];
     protected $guarded = ['id'];
 
@@ -33,5 +33,9 @@ class Marketer extends Authenticatable
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id');
+    }
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
     }
 }

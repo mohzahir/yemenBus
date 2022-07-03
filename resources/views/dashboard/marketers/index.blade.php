@@ -98,6 +98,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
         <thead >
             <th>كود المسوق</th>
             <th style="text-align:center;vertical-align:center">اسم المسوق</th>
+            <th>نوع المسوق</th>
             <th>رقم الجوال</th>
             <th>الحالة</th>
             <th>المزود</th>
@@ -113,9 +114,10 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
                 <tr>                   
                      <td>{{ $marketer->code }}</td>
                     <td>{{ $marketer->name }}</td>
+                    <td>{{ $marketer->marketer_type}}</td>
                     <td>@if($marketer->phone!=null){{ $marketer->phone }}@else{{ $marketer->y_phone }}@endif</td>
                     <td>@if($marketer->state == 'active') مفعل @elseif($marketer->state == 'not_active') غير مفعل @elseif($marketer->state == 'suspended') موقوف @else  @endif</td>
-                    <td>@if($marketer->provide == 'global') عام @else {{$marketer->provide}} @endif</td>
+                    <td>{{ $marketer->provider->name ?? $marketer->service->name ?? '-'}}</td>
                     <td>{{ $marketer->max_rs }}</td>
                     <td>{{ $marketer->max_ry }}</td>
                  

@@ -180,8 +180,13 @@ class ProviderController extends Controller
     public function confirm()
     {
         $id = Auth::guard('provider')->user()->id;
-        // $reservations = Reseervation::where('provider_id', $id)->paginate('10');
-        $reservations = Reseervation::getFullReservationsDetails($id);
+        $trips = Trip::query()
+            ->join('providers', 'providers.id', 'trips.provider_id')
+            ->where('trips.provider_id', $id)
+            ->where('providers.service_id', '1')
+            ->pluck('trips.id');
+        $reservations = Reseervation::whereIn('trip_id', $trips)->paginate('10');
+        // $reservations = Reseervation::getFullReservationsDetails($id);
         // dd($reservations);
         return view('providers.reservation.conform')->with('reservations', $reservations);
     }
@@ -677,11 +682,13 @@ class ProviderController extends Controller
     public function cancel($id)
     {
         $reservation = Reseervation::where('id', $id)->first();
-        $marketer = Marketer::where('id', $reservation->marketer_id)->first();
-        $code = null;
-        $marketer ? $code = $marketer->code : $code = null;
+        $reservation->update(['status' => 'canceled']);
+        return redirect()->back()->with(['message' => 'تم الغاء الطلب بنجاح']);
+        // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
+        // $code = null;
+        // $marketer ? $code = $marketer->code : $code = null;
 
-        return view('providers.reservation.cancel')->with(['reservation' => $reservation, 'code' => $code]);
+        // return view('providers.reservation.cancel')->with(['reservation' => $reservation, 'code' => $code]);
     }
 
     public function cancel_car($id)

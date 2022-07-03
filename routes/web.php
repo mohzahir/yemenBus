@@ -291,6 +291,13 @@ Route::prefix('marketers')->middleware('marketer')->group(function () {
     Route::get('sms/{id?}', 'MarketersController@sms')->name('dashboard.marketer.sms');
     Route::get('reservations/confirm/sms/{id?}', 'MarketersController@sms');
     Route::post('sms/store', 'MarketersController@storeSms')->name('dashboard.marketer.storeSms');
+
+
+
+    //haj section moh zahir
+    Route::get('haj-reservations/index', 'marketer\HajReservationController@index')->name('marketer.haj.reservations.index');
+    Route::get('haj-reservations/create', 'marketer\HajReservationController@create')->name('marketer.haj.reservations.create');
+    Route::post('haj-reservations/store', 'marketer\HajReservationController@store')->name('marketers.haj.reservations.store');
 });
 Route::prefix('provider')->middleware('provider')->group(function () {
     Route::get('dashboard', 'ProviderController@showAccountInfo')->name('dashboard.provider.showAccountInfo');
@@ -319,7 +326,7 @@ Route::prefix('provider')->middleware('provider')->group(function () {
     Route::post('reservations/storePostpone', 'ProviderController@storePostpone')->name('provider.reservations.storePostpone');
     Route::post('reservations/storePostpone_car', 'ProviderController@storePostpone_car')->name('provider.reservations.storePostpone_car');
 
-    Route::get('reservations/cancel/{id}', 'ProviderController@cancel')->name('provider.reservations.cancel');
+    Route::post('reservations/cancel/{id}', 'ProviderController@cancel')->name('provider.reservations.cancel');
     Route::get('reservations/cancel_car/{id}', 'ProviderController@cancel_car')->name('provider.reservations.cancel_car');
     Route::post('reservations/storeCancel', 'ProviderController@storeCancel')->name('provider.reservations.storeCancel');
     Route::post('reservations/storeCancel_car', 'ProviderController@storeCancel_car')->name('provider.reservations.storeCancel_car');

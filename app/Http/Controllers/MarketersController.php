@@ -143,9 +143,43 @@ class MarketersController extends Controller
 
     public function confirm()
     {
-        $id = Auth::guard('marketer')->user()->id;
+        $marketer = Auth::guard('marketer')->user();
         // dd($id);
-        $reservations = Reseervation::where('marketer_id', $id)->orderby('id', 'desc')->paginate('10');
+        $reservations = [];
+        switch ($marketer->marketer_type) {
+            case 'global_marketer':
+                $reservations = Reseervation::query()
+                    ->join('trips', 'trips.id', 'reseervations.trip_id')
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('reseervations.status', '!=', 'canceled')
+                    ->paginate(10);
+                break;
+            case 'provider_marketer':
+                $reservations = Reseervation::query()
+                    ->join('trips', 'trips.id', 'reseervations.trip_id')
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('trips.provider_id', $marketer->provider_id)
+                    ->where('reseervations.status', '!=', 'canceled')
+                    ->paginate(10);
+                break;
+            case 'service_marketer':
+                $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                $reservations = Reseervation::query()
+                    ->join('trips', 'trips.id', 'reseervations.trip_id')
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->whereIn('trips.provider_id', $providers_ids)
+                    ->where('reseervations.status', '!=', 'canceled')
+                    ->paginate(10);
+                break;
+
+            default:
+                $reservations = [];
+                break;
+        }
+        // $reservations = Reseervation::where('marketer_id', $id)->orderby('id', 'desc')->paginate('10');
 
         return view('marketers.reservation.conform')->with('reservations', $reservations);
     }

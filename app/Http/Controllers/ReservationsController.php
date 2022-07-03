@@ -20,6 +20,7 @@ use App\Postpone_reservation;
 use App\Cancel_reservation;
 use App\Http\Requests\ConfirmRequest;
 use App\Passenger;
+use App\Setting;
 use App\Trip;
 use App\TripOrderPassenger;
 use Session;
@@ -35,23 +36,25 @@ class ReservationsController extends Controller
 
     public function confirm()
     {
-        $id = Auth::guard('marketer')->user()->id;
-        $marketer = Marketer::findOrFail($id);
-        //      $code=$marketer->code;
+        $marketer = Auth::guard('marketer')->user();
+        // dd($marketer);
+        $trips = [];
+        switch ($marketer->marketer_type) {
+            case 'global_marketer':
+                $trips = Trip::where('no_ticket', '>', 0)->where('status', 'active')->get();
+                break;
+            case 'provider_marketer':
+                $trips = Trip::where('provider_id', $marketer->provider_id)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                break;
+            case 'service_marketer':
+                $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                $trips = Trip::whereIn('provider_id', $providers_ids)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                break;
 
-        //     $provide_name = $marketer->provide;
-
-
-        //     $provide=  $marketer->provide;
-        //   if($provide == 'global'){
-        //       $companies =  Provider::all();
-        //   }else{
-        //     $comp = $marketer->provide;
-        //       $companies =Provider::where('name_company',$comp)->get();
-        //   }
-
-        $provider = Provider::where('id', $marketer->provider_id)->first();
-        $trips = Trip::where('provider_id', $provider->id)->where('no_ticket', '>', 0)->get();
+            default:
+                $trips = [];
+                break;
+        }
         // dd($trips);
         return view('marketers.reservations.confirm')->with(['trips' => $trips, 'marketer' => $marketer]);
     }
@@ -101,7 +104,12 @@ class ReservationsController extends Controller
 
                 $total = (float)$trip->price * ((int)$seatCount);
 
-                $paid = $request->payment_type == 'total_payment' ? $total : ($trip->currency == 'rs' ? env('DEPOSIT_RS_VALUE', 50) : env('DEPOSIT_RY_VALUE', 5000));
+                $BUS_RS_DEPOSIT_VALUE = Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value;
+                $BUS_RY_DEPOSIT_VALUE = Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value;
+
+                $deposit = ($trip->currency == 'rs' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE);
+
+                $paid = $request->payment_type == 'total_payment' ? $total : $deposit;
 
                 // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
                 if (($trip->currency == 'rs' && $paid > $marketer->balance_rs) || ($trip->currency == 'ry' && $paid > $marketer->balance_ry)) {
