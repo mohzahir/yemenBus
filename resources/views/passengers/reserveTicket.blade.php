@@ -109,7 +109,8 @@
                                 </select>
                           
                                 <input class="form-control" name="dateofbirth[]" id="dateofbirth" type="text"
-                                style="margin-right: 3px" onfocus="(this.type='date')"
+                                style="margin-right: 3px" 
+                                onfocus="(this.type='date')"
                                 placeholder="تاريخ الميلاد">
 
                                 <input class="form-control" name="nid[]" id="nid" type="text"

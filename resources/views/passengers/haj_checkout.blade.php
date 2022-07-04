@@ -4,10 +4,13 @@
     <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
     <!-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> -->
     <style>
+        [type="date"]::-webkit-inner-spin-button {
+            display: none;
+        }
         input::-webkit-calendar-picker-indicator {
             display: none;
         }
-        #checkout > div > form > div.content.py-3 > div:nth-child(2) > div:nth-child(1) > div > div > div > div > span{
+        #checkout > div > form > div.content.py-3 > div:nth-child(1) > div:nth-child(2) > div > div > div > div > span{
             padding-left: 0;
         }
 
@@ -114,9 +117,12 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="form-group">
-                                            <label for="state">تاريخ الميلاد</label>
-                                            <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
-                                                style="margin-right: 3px">
+                                            <label for="state">تاريخ الميلاد <strong class="text-danger">*</strong></label><br>
+                                            <!-- <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
+                                                style="margin-right: 3px"> -->
+                                                <input type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" placeholder="يوم" class="form-control">
+                                                <input type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" placeholder="شهر" class="form-control">
+                                                <input type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" placeholder="سنة" class="form-control">
                                                 
                                         </div>
                                     </div>

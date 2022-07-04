@@ -130,9 +130,13 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="form-group">
-                            <label for="state">تاريخ الميلاد</label>
-                            <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
-                                style="margin-right: 3px">
+                            <label for="state">تاريخ الميلاد</label><br>
+                            <!-- <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
+                                style="margin-right: 3px"> -->
+                                <input type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" placeholder="يوم" class="form-control">
+                                <input type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" placeholder="شهر" class="form-control">
+                                <input type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" placeholder="سنة" class="form-control">
+                                
                                 
                         </div>
                     </div>

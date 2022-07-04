@@ -14,6 +14,7 @@ use App\Http\Requests\HajPaymentRequest;
 use App\Passenger;
 use App\Reseervation;
 use App\Setting;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -140,6 +141,7 @@ class TripCheckoutController extends Controller
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
             $rules["name.{$key}"] = 'required|string|min:3|max:50';
+            $rules["dateofbirth.{$key}"] = 'date';
             $seatCount = $key + 1;
         }
         //return $seatCount;
@@ -209,6 +211,19 @@ class TripCheckoutController extends Controller
 
 
                 foreach ($request->input('name') as $key => $value) {
+
+                    // $dateOfBirth = "";
+                    // if ($request->dateofbirth[0] && $request->dateofbirth[1] && $request->dateofbirth[2]) {
+                    //     foreach ($request->dateofbirth as $key => $value) {
+                    //         if ($key == 2) {
+                    //             $dateOfBirth .= $value;
+                    //         } else {
+                    //             $dateOfBirth .= $value . '-';
+                    //         }
+                    //     }
+                    //     $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
+                    //         ->format('Y-m-d');
+                    // }
 
                     TripOrderPassenger::create([
                         // 'trip_id' => $trip->id,
@@ -315,7 +330,7 @@ class TripCheckoutController extends Controller
     public function hajCheckout($id)
     {
         $trip = Trip::findOrFail($id);
-        // dd($trip);
+        // dd($reservation);
         $omra_deposit = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
         $haj_deposit = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
         return view('passengers.haj_checkout', [
@@ -328,7 +343,20 @@ class TripCheckoutController extends Controller
     public function storeHajCheckout(HajCheckoutRequest $request, $tripId)
     {
         $trip = Trip::findOrFail($tripId);
-        // dd($request, $trip);
+
+        $dateOfBirth = "";
+        if ($request->dateofbirth[0] && $request->dateofbirth[1] && $request->dateofbirth[2]) {
+            foreach ($request->dateofbirth as $key => $value) {
+                if ($key == 2) {
+                    $dateOfBirth .= $value;
+                } else {
+                    $dateOfBirth .= $value . '-';
+                }
+            }
+            $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
+                ->format('Y-m-d');
+        }
+        // dd($request, $dateOfBirth);
 
         $file = null;
         if ($request->hasFile('passport_img')) {
@@ -353,7 +381,7 @@ class TripCheckoutController extends Controller
                         'name_passenger' => $request->name,
                         $phoneColumnName => $phone,
                         'age' => $request->age,
-                        'dateofbirth' => $request->dateofbirth,
+                        'dateofbirth' => $dateOfBirth,
                         'p_id' => $request->nid,
                         'passport_img' => $file,
                     ]);

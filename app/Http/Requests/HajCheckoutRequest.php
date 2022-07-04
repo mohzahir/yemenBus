@@ -28,6 +28,10 @@ class HajCheckoutRequest extends FormRequest
             'phone' => 'required|numeric|digits:9',
             'email' => 'nullable|email',
             'nid' => 'nullable',
+            'dateofbirth' => 'required',
+            'dateofbirth.*.0' => 'numeric|max:31',
+            'dateofbirth.*.1' => 'numeric|max:12',
+            'dateofbirth.*.2' => 'numeric|max:2022',
         ];
     }
 }

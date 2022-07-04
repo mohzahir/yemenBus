@@ -88,9 +88,9 @@ font-family: 'Cairo', sans-serif;
                     <li><span class="glyphicon glyphicon-edit"></span><a href="https://www.yemenbus.com/orders">بحث عن طلب   </a></li>
                     
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('dashboard.reservations.confirm')}}">حجز رحلة نقل بالباص</a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.create')}}">حجز رحلة حج وعمرة</a></li>
- 
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.reservations.confirmAll')}}">حجوزات النقل بالباص </a>
+                    
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.create')}}">حجز رحلة حج وعمرة</a></li>
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.index')}}">حجوزات الحج والعمرة </a>
                         
                     </li>

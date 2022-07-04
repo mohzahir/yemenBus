@@ -109,11 +109,34 @@ class HajReservationController extends \App\Http\Controllers\Controller
             'trip_id' => 'required',
             "name" => "required",
             "phone" => "required|numeric|digits:9",
+            'dateofbirth' => 'required',
+            'dateofbirth.*.0' => 'numeric|max:31',
+            'dateofbirth.*.1' => 'numeric|max:12',
+            'dateofbirth.*.2' => 'numeric|max:2022',
         ]);
 
         $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
 
         if ($validator->passes()) {
+
+            $dateOfBirth = "";
+            if ($request->dateofbirth[0] && $request->dateofbirth[1] && $request->dateofbirth[2]) {
+                foreach ($request->dateofbirth as $key => $value) {
+                    if ($key == 2) {
+                        $dateOfBirth .= $value;
+                    } else {
+                        $dateOfBirth .= $value . '-';
+                    }
+                }
+                $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
+                    ->format('Y-m-d');
+            }
+            // dd($request, $dateOfBirth);
+
+            $file = null;
+            if ($request->hasFile('passport_img')) {
+                $file = $request->passport_img->store('files', 'public_folder');
+            }
 
             DB::beginTransaction();
 
@@ -125,7 +148,11 @@ class HajReservationController extends \App\Http\Controllers\Controller
                     $passenger = Passenger::create([
                         'email' => $request->email,
                         'name_passenger' => $request->name[0],
-                        $phoneColumnName => $phone
+                        $phoneColumnName => $phone,
+                        'age' => $request->age,
+                        'dateofbirth' => $dateOfBirth,
+                        'p_id' => $request->nid,
+                        'passport_img' => $file,
                     ]);
                 }
 
@@ -146,7 +173,28 @@ class HajReservationController extends \App\Http\Controllers\Controller
 
                 // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
                 if (($paid > $marketer->balance_rs)) {
-                    return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
+
+                    $reservation_id = Reseervation::insertGetId([
+                        // 'id' => Str::uuid()->toString(),
+                        'trip_id' => $request->trip_id,
+                        'marketer_id' => auth()->guard('marketer')->user()->id,
+                        'main_passenger_id' => $passenger->id,
+                        'ticket_no' =>  '1',
+                        'payment_method' =>  null,
+                        'payment_time' => null,
+                        'payment_type' =>  null,
+                        'total_price' =>  $trip->price,
+                        'paid' => 0,
+                        'ride_place' => $request->ride_place,
+                        'drop_place' => $request->drop_place,
+                        'currency' => 'rs',
+                        // 'note' => $request->notes,
+                        'status' => 'created',
+
+                    ]);
+
+                    // return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
+                    return redirect()->route('passengers.hajPayment', ['reservationId' => $reservation_id])->with(['warning' => ' رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك او مواصلة الحجز من خلال الدفع الالكتروني']);
                 }
 
                 // var_dump($tripId);exit;

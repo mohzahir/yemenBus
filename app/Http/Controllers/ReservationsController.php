@@ -41,14 +41,29 @@ class ReservationsController extends Controller
         $trips = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $trips = Trip::where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->get();
                 break;
             case 'provider_marketer':
-                $trips = Trip::where('provider_id', $marketer->provider_id)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('trips.provider_id', $marketer->provider_id)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->get();
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $trips = Trip::whereIn('provider_id', $providers_ids)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->whereIn('provider_id', $providers_ids)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')
+                    ->get();
                 break;
 
             default:
@@ -113,7 +128,27 @@ class ReservationsController extends Controller
 
                 // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
                 if (($trip->currency == 'rs' && $paid > $marketer->balance_rs) || ($trip->currency == 'ry' && $paid > $marketer->balance_ry)) {
-                    return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
+                    // return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
+                    $reservation_id = Reseervation::insertGetId([
+                        // 'id' => Str::uuid()->toString(),
+                        'trip_id' => $request->trip_id,
+                        'marketer_id' => auth()->guard('marketer')->user()->id,
+                        'main_passenger_id' => $passenger->id,
+                        'ticket_no' =>  '1',
+                        'payment_method' =>  null,
+                        'payment_time' => null,
+                        'payment_type' =>  null,
+                        'total_price' =>  $trip->price,
+                        'paid' => 0,
+                        'ride_place' => $request->ride_place,
+                        'drop_place' => $request->drop_place,
+                        'currency' => 'rs',
+                        // 'note' => $request->notes,
+                        'status' => 'created',
+
+                    ]);
+
+                    return redirect()->route('passengers.tripPayment', ['trip' => $request->trip_id, 'reservation' => $reservation_id])->with(['warning' => ' رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك او مواصلة الحجز من خلال الدفع الالكتروني']);
                 }
 
                 // var_dump($tripId);exit;
