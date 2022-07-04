@@ -66,7 +66,7 @@
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>دفع كامل المبلغ</h4>
-                                            <p>حجز مضمون</p>
+                                            <p>سوف تدفع المبلغ كاملا ({{ $reservation->trip->price }})ريال سعودي</p>
                                             <div class="box-footer text-center">
                                                 <input type="radio"
                                                     name="payment_type" value="total_payment" placeholder="">
@@ -76,7 +76,7 @@
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>دفع عربون</h4>
-                                            <p>قيمه دخول الجواز للسفاره للتأشير</p>
+                                            <p>سوف تدفع عربون ({{ $reservation->trip->deposit_price ? $reservation->trip->deposit_price : ($reservation->trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value) }}) ريال سعودي</p>
                                             <div class="box-footer text-center">
                                                 <input type="radio"
                                                     name="payment_type" value="deposit_payment" placeholder="placeholder">
