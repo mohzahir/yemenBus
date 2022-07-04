@@ -74,14 +74,29 @@ class HajReservationController extends \App\Http\Controllers\Controller
         $trips = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $trips = Trip::where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->get();
                 break;
             case 'provider_marketer':
-                $trips = Trip::where('provider_id', $marketer->provider_id)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->where('trips.provider_id', $marketer->provider_id)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->get();
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $trips = Trip::whereIn('provider_id', $providers_ids)->where('no_ticket', '>', 0)->where('status', 'active')->get();
+                $trips = Trip::query()
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->whereIn('provider_id', $providers_ids)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')
+                    ->get();
                 break;
 
             default:
