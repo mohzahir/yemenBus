@@ -91,14 +91,14 @@
                         <div class="form-group">
                             <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
                             <div class=" d-flex">
-                                <input class="form-control valid" value="{{ old('phone') }}" name="phone" id="phone" type="text">
-
+                                
                                 <div class="phone-intro">
                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
                                         <option @if(old('phoneCountry')=='s') selected @endif value="s">966+</option>
                                         <option @if(old('phoneCountry')=='y') selected @endif value="y">967+</option>
                                     </select>
                                 </div>
+                                <input class="form-control valid" value="{{ old('phone') }}" name="phone" id="phone" type="text">
 
                             </div>
 

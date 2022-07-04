@@ -75,16 +75,16 @@ label{
                         @endif
                     </select>
                    </div>
-                   <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}"
-                   placeholder=" * رقم الجوال ">
-
+                   
                    <div class="phone-intro">
                        <select class="form-control" name="phoneCountry" id="phoneCountry">
                            <option value="s" @if(old('phoneCountry') == 's') selected @endif>966+</option>
                            <option value="y" @if(old('phoneCountry') == 'y') selected @endif>967+</option>
-
-                       </select>
-                   </div>  
+                           
+                        </select>
+                    </div>  
+                    <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}"
+                    placeholder=" * رقم الجوال ">
 
                </div>
                
