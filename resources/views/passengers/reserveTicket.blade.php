@@ -90,7 +90,7 @@
                             <h3 style="margin-bottom: 20px"> بيانات الراكب</h3>
 
                             <div class="form-group d-flex passenger-row" id="passenger-row">
-                                <input class="form-control valid" name="name[]" value="{{ old(name.0) }}" id="name" type="text"
+                                <input class="form-control valid" name="name[]" value="{{ old('name.0') }}" id="name" type="text"
                                 placeholder=" اسم الراكب">
                                 
                                 <div style="margin-right: 3px"></div>
@@ -108,12 +108,12 @@
                                     <option @if( old('gender.0') == 'male') selected  @endif value="male">ذكر</option>
                                 </select>
                           
-                                <input class="form-control" name="dateofbirth[]" value="{{ old(dateofbirth.0) }}" id="dateofbirth" type="text"
+                                <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" id="dateofbirth" type="text"
                                 style="margin-right: 3px" 
                                 onfocus="(this.type='date')"
                                 placeholder="تاريخ الميلاد">
 
-                                <input class="form-control" name="nid[]" id="nid" value="{{ old(nid.0) }}" type="text"
+                                <input class="form-control" name="nid[]" id="nid" value="{{ old('nid.0') }}" type="text"
                                 style="margin-right: 3px"
                                 placeholder="رقم هوية الراكب">
                             </div>
