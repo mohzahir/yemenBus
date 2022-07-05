@@ -300,9 +300,9 @@ class TripCheckoutController extends Controller
 
                 ]);
 
-                $trip->update([
-                    'no_ticket' => ($trip->no_ticket - $reservation->ticket_no),
-                ]);
+                // $trip->update([
+                //     'no_ticket' => ($trip->no_ticket - $reservation->ticket_no),
+                // ]);
 
                 DB::commit();
 
@@ -418,7 +418,7 @@ class TripCheckoutController extends Controller
 
             // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
 
-            // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+            $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
             return redirect()->route('passengers.hajPayment', [
                 'reservationId' => $reservation->id,
@@ -584,7 +584,7 @@ class TripCheckoutController extends Controller
         :https://www.yemenbus.com/passengers/order/' . $reservation->id;
 
         // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
-
+        $reservation->passenger->phone ? $this->sendSASMS($reservation->passenger->phone, $body) : $this->sendYESMS($reservation->passenger->y_phone, $body);
 
         return redirect()->route('passengers.orderDetails', [
             'id' => $transaction->order_id,

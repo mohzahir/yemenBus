@@ -74,7 +74,7 @@
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>تيلر</h4>
-                                            <p>حجز مضمون</p>
+                                            <p>الحجز عبر بطاقات الدفع الالكتروني</p>
                                             <div class="box-footer text-center">
                                                 <input @click="showBankPayment = false" type="radio" checked
                                                     name="payment_method" value="telr" placeholder="">
@@ -84,7 +84,7 @@
                                     <div class="col-md-6">
                                         <div class="box payment-method">
                                             <h4>تحويل بنكي</h4>
-                                            <p>قيمه دخول الجواز للسفاره للتأشير</p>
+                                            <p>الدفع عن طريق التحويل البنكي وارسال اشعار الدفع</p>
                                             <div class="box-footer text-center">
                                                 <input @click="showBankPayment = true" type="radio"
                                                     name="payment_method" value="bank" placeholder="placeholder">
