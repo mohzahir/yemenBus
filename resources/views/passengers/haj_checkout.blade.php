@@ -120,23 +120,23 @@
                                             <label for="state">تاريخ الميلاد <strong class="text-danger">*</strong></label><br>
                                             <!-- <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
                                                 style="margin-right: 3px"> -->
-                                                <input value="{{ old('dateofbirth.0') }}" type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" placeholder="يوم" class="form-control">
-                                                <input value="{{ old('dateofbirth.1') }}" type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" placeholder="شهر" class="form-control">
-                                                <input value="{{ old('dateofbirth.2') }}" type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" placeholder="سنة" class="form-control">
+                                                <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" placeholder="يوم" class="form-control">
+                                                <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" placeholder="شهر" class="form-control">
+                                                <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" placeholder="سنة" class="form-control">
                                                 
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="form-group">
                                             <label for="country">رقم الهوية</label>
-                                            <input class="form-control" value="{{ old('nid') }}" name="nid" id="nid" type="text"
+                                            <input class="form-control" name="nid" value="{{ old('nid') }}"  id="nid" type="text"
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">مكان الصعود</label>
-                                            <input class="form-control" name="ride_place" id="ride_place" value="{{ old('ride_place) }}" type="text"
+                                            <input class="form-control" name="ride_place" id="ride_place" value="{{ old('ride_place') }}"  type="text"
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
@@ -152,13 +152,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="street">البريد الالكتروني</label>
-                                            <input id="street" type="email" class="form-control" value="{{ old('email') }}" name="email">
+                                            <input id="street" type="email" class="form-control" value="{{ old('email') }}" name="email" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="passport">صوره الجواز</label>
-                                            <input id="passport" type="file" class="form-control" value="{{ old('passport_img') }}" name="passport_img">
+                                            <input id="passport" type="file" class="form-control" value="{{ old('passport_img') }}"  name="passport_img" >
                                         </div>
                                     </div>
                                 </div>
