@@ -1399,7 +1399,8 @@ class ProviderController extends Controller
             ]);
         }
 
-        return response()->json(['url' => route('provider.reservations.confirmAll'), 'msge' => 'success']);
+        // return response()->json(['url' => route('provider.reservations.confirmAll'), 'msge' => 'success']);
+        return redirect()->back()->with(['info' => 'تم حفظ ارقام التزاكر']);
     }
     public function Update(Request $request, $id)
     {

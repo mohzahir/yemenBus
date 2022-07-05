@@ -71,7 +71,7 @@ class AdminReservationController extends Controller
             ]);
         }
 
-        return response()->json(['url' => route('admin.reservations.confirmAll'), 'msge' => 'success']);
+        return redirect()->back()->with(['info' => 'تم حفظ ارقام التزاكر']);
     }
 
     //postpone reservation

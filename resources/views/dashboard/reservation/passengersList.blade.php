@@ -157,7 +157,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
     <div class="text-center">
 
       <button class="btn btn-success btn-sm" onclick="$('#ticketsForm').submit()">حفظ ارقام التزاكر</button>
-      <a class="btn btn-danger btn-sm" href="{{ route('provider.reservations.confirmAll') }}">الغاء</a>
+      <a class="btn btn-danger btn-sm" href="{{ route('admin.reservations.confirmAll') }}">الغاء</a>
       
     </div>
 
