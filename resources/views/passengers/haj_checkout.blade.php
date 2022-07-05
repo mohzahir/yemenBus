@@ -71,19 +71,19 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="firstname">الاسم الكامل <strong class=" text-danger">*</strong></label>
-                                            <input id="firstname" type="text" class="form-control" name="name">
+                                            <input id="firstname" type="text" class="form-control" name="name" value="{{ old('name') }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone">رقم الهاتف <strong class=" text-danger">*</strong></label>
                                             <div class=" d-flex">
-                                                <input class="form-control valid" name="phone" id="phone" type="text">
+                                                <input class="form-control valid" name="phone" value="{{ old('phone') }}" id="phone" type="text">
     
                                                 <div class="phone-intro">
                                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
-                                                        <option value="s">966+</option>
-                                                        <option value="y">967+</option>
+                                                        <option @if(old('phoneCountry') == 's') selected @endif value="s">966+</option>
+                                                        <option @if(old('phoneCountry') == 'y') selected @endif value="y">967+</option>
                                                     </select>
                                                 </div>
     
@@ -99,8 +99,8 @@
                                             <label for="street">جنس الراكب</label>
                                             <select class="form-control w-100" name="gender" id="gender">
                                                 <option value="">--</option>
-                                                <option value="male">ذكر</option>
-                                                <option value="femal">انثى</option>
+                                                <option @if(old('gender') == 'male') selected @endif value="male">ذكر</option>
+                                                <option @if(old('gender') == 'female') selected @endif value="female">انثى</option>
                                             </select>
                                         </div>
                                     </div>
@@ -109,9 +109,9 @@
                                             <label for="zip">الفئة العمرية</label>
                                             <select class="form-control w-100" name="age" id="age">
                                                 <option value="">--</option>
-                                                <option value="adult">بالغ</option>
-                                                <option value="child">طفل (من سنتين الى 12)</option>
-                                                <option value="baby">رضيع (تحت السنتين)</option>
+                                                <option @if(old('age') == 'adult') selected @endif value="adult">بالغ</option>
+                                                <option @if(old('age') == 'child') selected @endif value="child">طفل (من سنتين الى 12)</option>
+                                                <option @if(old('age') == 'baby') selected @endif value="baby">رضيع (تحت السنتين)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -120,30 +120,30 @@
                                             <label for="state">تاريخ الميلاد <strong class="text-danger">*</strong></label><br>
                                             <!-- <input class="form-control" name="dateofbirth" id="dateofbirth" type="date"
                                                 style="margin-right: 3px"> -->
-                                                <input type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" placeholder="يوم" class="form-control">
-                                                <input type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" placeholder="شهر" class="form-control">
-                                                <input type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" placeholder="سنة" class="form-control">
+                                                <input value="{{ old('dateofbirth.0') }}" type="text" style="width: 25%; display: inline-block;" name="dateofbirth[]" placeholder="يوم" class="form-control">
+                                                <input value="{{ old('dateofbirth.1') }}" type="text" style="width: 30%; display: inline-block;" name="dateofbirth[]" placeholder="شهر" class="form-control">
+                                                <input value="{{ old('dateofbirth.2') }}" type="text" style="width: 40%; display: inline-block;" name="dateofbirth[]" placeholder="سنة" class="form-control">
                                                 
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="form-group">
                                             <label for="country">رقم الهوية</label>
-                                            <input class="form-control" name="nid" id="nid" type="text"
+                                            <input class="form-control" value="{{ old('nid') }}" name="nid" id="nid" type="text"
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">مكان الصعود</label>
-                                            <input class="form-control" name="ride_place" id="ride_place" type="text"
+                                            <input class="form-control" name="ride_place" id="ride_place" value="{{ old('ride_place) }}" type="text"
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="country">مكان النزول</label>
-                                            <input class="form-control" name="drop_place" id="drop_place" type="text"
+                                            <input class="form-control" name="drop_place" value="{{ old('drop_place') }}" id="drop_place" type="text"
                                                 style="margin-right: 3px">
                                         </div>
                                     </div>
@@ -152,13 +152,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="street">البريد الالكتروني</label>
-                                            <input id="street" type="email" class="form-control" name="email">
+                                            <input id="street" type="email" class="form-control" value="{{ old('email') }}" name="email">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="passport">صوره الجواز</label>
-                                            <input id="passport" type="file" class="form-control" name="passport_img">
+                                            <input id="passport" type="file" class="form-control" value="{{ old('passport_img') }}" name="passport_img">
                                         </div>
                                     </div>
                                 </div>
