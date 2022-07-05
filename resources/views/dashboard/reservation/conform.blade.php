@@ -163,7 +163,7 @@
           <td>{{ $reservation->id }}</td>
           <td> <span class="badge badge-success"> @switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break @case('canceled') ملغي @break @default @endswitch</span></td>
           <td>{{ $reservation->trip_id }}</td>
-          <td>{{ $provider_name->name_company }}</td>
+          <td>{{ $reservation->trip->provider->name_company }}</td>
           <td>{{ $reservation->marketer->name ?? '-' }}</td>
           <td>{{ $reservation->passenger->phone }}</td>
           <td>{{ $reservation->passenger->y_phone }}</td>
