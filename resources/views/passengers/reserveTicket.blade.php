@@ -90,30 +90,30 @@
                             <h3 style="margin-bottom: 20px"> بيانات الراكب</h3>
 
                             <div class="form-group d-flex passenger-row" id="passenger-row">
-                                <input class="form-control valid" name="name[]" id="name" type="text"
+                                <input class="form-control valid" name="name[]" value="{{ old(name.0) }}" id="name" type="text"
                                 placeholder=" اسم الراكب">
                                 
                                 <div style="margin-right: 3px"></div>
                                 <select class="form-control" name="age[]" id="age">
                                     <option value="">الفئة العمرية للراكب</option>
-                                    <option value="adult">بالغ</option>
-                                    <option value="child">طفل (من سنتين الى 12)</option>
-                                    <option value="baby">رضيع (تحت السنتين)</option>
+                                    <option @if( old('age.0') == 'adult') selected  @endif value="adult">بالغ</option>
+                                    <option @if( old('age.0') == 'child') selected  @endif value="child">طفل (من سنتين الى 12)</option>
+                                    <option @if( old('age.0') == 'baby') selected  @endif value="baby">رضيع (تحت السنتين)</option>
                                 </select>
                                 <div style="margin-right: 3px"></div>
 
                                 <select class="form-control" name="gender[]" id="gender">
                                     <option value="">جنس الراكب</option>
-                                    <option value="femal">انثى</option>
-                                    <option value="male">ذكر</option>
+                                    <option @if( old('gender.0') == 'female') selected  @endif value="female">انثى</option>
+                                    <option @if( old('gender.0') == 'male') selected  @endif value="male">ذكر</option>
                                 </select>
                           
-                                <input class="form-control" name="dateofbirth[]" id="dateofbirth" type="text"
+                                <input class="form-control" name="dateofbirth[]" value="{{ old(dateofbirth.0) }}" id="dateofbirth" type="text"
                                 style="margin-right: 3px" 
                                 onfocus="(this.type='date')"
                                 placeholder="تاريخ الميلاد">
 
-                                <input class="form-control" name="nid[]" id="nid" type="text"
+                                <input class="form-control" name="nid[]" id="nid" value="{{ old(nid.0) }}" type="text"
                                 style="margin-right: 3px"
                                 placeholder="رقم هوية الراكب">
                             </div>
