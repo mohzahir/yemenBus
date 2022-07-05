@@ -123,7 +123,7 @@
                         </li>
 
                         <li><span class="glyphicon glyphicon-user"></span><a
-                                href="{{ route('admin.reservations.confirmAll') }}">الحجوزات </a>
+                                href="{{ route('admin.reservations.confirmAll') }}">حجوزات النقل بالباص </a>
                         </li>
                         <li><span class="glyphicon glyphicon-user"></span><a
                                 href="{{ route('haj.reservations.index') }}">حجوزات الحج والعمرة </a>

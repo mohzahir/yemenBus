@@ -25,6 +25,8 @@ use App\Mail\PostponeReservation;
 use App\Mail\TransferReservation;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Trip;
+use App\TripOrderPassenger;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Jawaly;
@@ -41,10 +43,35 @@ class AdminReservationController extends Controller
     public function confirm()
     {
         // $reservations=Reseervation::orderby('created_at', 'desc')->paginate('10');
-        $reservations = Reseervation::getFullReservationsDetails();
+        // $reservations = Reseervation::getFullReservationsDetails();
+        $trips = Trip::query()
+            ->join('providers', 'providers.id', 'trips.provider_id')
+            ->where('providers.service_id', '1')
+            ->pluck('trips.id');
+        $reservations = Reseervation::whereIn('trip_id', $trips)->paginate('10');
 
         // dd($reservations);
         return view('dashboard.reservation.conform')->with('reservations', $reservations);
+    }
+
+
+    public function passengersList($id)
+    {
+        $passengers = TripOrderPassenger::where('reservation_id', $id)->get();
+        // dd($reservation);
+        return view('dashboard.reservation.passengersList')->with(['passengers' => $passengers]);
+    }
+
+    public function savePassengersTickets(Request $request)
+    {
+        foreach ($request->external_ticket_no as $key => $item) {
+            // dd($request->id[$key]);
+            TripOrderPassenger::where('id', $request->id[$key])->update([
+                'external_ticket_no' => $item
+            ]);
+        }
+
+        return response()->json(['url' => route('admin.reservations.confirmAll'), 'msge' => 'success']);
     }
 
     //postpone reservation
@@ -244,9 +271,13 @@ class AdminReservationController extends Controller
     public function cancel($id)
     {
         $reservation = Reseervation::where('id', $id)->first();
-        $marketer = Marketer::where('code', $reservation->code)->first();
-        $code = $marketer->code;
-        return view('dashboard.reservation.cancel')->with(['reservation' => $reservation, 'code' => $code]);
+        $reservation->update(['status' => 'canceled']);
+        return redirect()->back()->with(['message' => 'تم الغاء الطلب بنجاح']);
+        // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
+        // $code = null;
+        // $marketer ? $code = $marketer->code : $code = null;
+
+        // return view('providers.reservation.cancel')->with(['reservation' => $reservation, 'code' => $code]);
     }
 
 

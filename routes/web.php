@@ -152,6 +152,8 @@ Route::prefix('dashboard')->middleware('admin')->group(function () {
     Route::get('reservations/confirm/index', 'admin\AdminReservationController@confirm')->name('admin.reservations.confirmAll');
     Route::get('/downloadImage/{id}', 'admin\AdminReservationController@downloadImage')->name('admin.image.download');
     Route::get('reservation/admin/edit/{id}', 'admin\AdminReservationController@edit')->name('admin.reservations.edit');
+    Route::post('reservation/savePassengersTickets', 'admin\AdminReservationController@savePassengersTickets')->name('admin.reservations.savePassengersTickets');
+    Route::get('reservation/passengers-list/{id}', 'admin\AdminReservationController@passengersList')->name('admin.reservations.passengersList');
     Route::post('reservation/admin/update/{id}', 'admin\AdminReservationController@update')->name('admin.reservations.update');
 
     Route::get('reservations/confirm', 'admin\AdminReservationController@confirm')->name('admin.reservations.confirm');
