@@ -131,7 +131,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
         
         
         
-          <form id="ticketsForm" action="{{route('provider.reservations.savePassengersTickets')}}" method="POST">
+          <form id="ticketsForm" action="{{route('admin.reservations.savePassengersTickets')}}" method="POST">
           @foreach ($passengers as $passenger)
   
 
