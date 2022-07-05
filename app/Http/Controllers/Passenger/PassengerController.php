@@ -316,7 +316,6 @@ class PassengerController extends Controller
         return view('passengers.ticketDetails', [
             'reservation' => $reservation,
             'trip' => $trip,
-
         ]);
     }
 }

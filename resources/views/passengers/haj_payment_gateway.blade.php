@@ -12,7 +12,7 @@
     <style>
         #telr {
             width: 100%;
-            min-width: 600px;
+            /* min-width: 600px; */
             height: 600px;
             frameborder: 0;
         }
@@ -212,7 +212,7 @@
                 </button>
                 </div> -->
                 <div class="modal-body">
-                    <iframe id= "telr" src= " {{ $url }} " style="width: 100%;height: 100%;frameborder: 0;" ></iframe>
+                    <iframe id= "telr" src= " {{ $url }} " sandbox="allow-forms allow-modals allow-popups-to-escape-sandbox allow-popups allow-scripts allow-top-navigation allow-same-origin" ></iframe>
                 </div>
                 <!-- <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

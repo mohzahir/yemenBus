@@ -42,17 +42,20 @@
                         <div class="col-6"><p>{{$trip->provider}}</p></div>
 
                         <div class="col-6"><h3>سعر التذكرة</h3></div>
-                        <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
+                        <div class="col-6"><p>{{ $trip->price}} </p></div>
 
                         <div class="col-6"> <h3>عدد التذاكر</h3></div>
                         <div class="col-6"><p>{{$reservation->ticket_no}}</p></div>
 
-                        <div class="col-6"><h3>السعر الاجمالي</h3></div>
-                        <div class="col-6"><p>{{ $reservation->total_price}} {{$currency}}</p></div>
+                        <div class="col-6"><h3>المبلغ الاجمالي</h3></div>
+                        <div class="col-6"><p>{{ $reservation->total_price}} </p></div>
 
                         <div class="col-6"><h3>الدفعة المقدمة </h3></div>
-                        <div class="col-6"><p>{{ $reservation->paid}} {{$currency}}</p></div>
+                        <div class="col-6"><p>{{ $reservation->paid}} </p></div>
 
+                        <div class="col-6"><h3>المبلغ المتبقي </h3></div>
+                        <div class="col-6"><p>{{ $reservation->paid - $reservation->total_price}} </p></div>
+                        
                         <div class="col-6"><h3>تاريخ السفر</h3></div>
                         <div class="col-6"><p>{{ $trip->from_date}}</p></div>
                        
