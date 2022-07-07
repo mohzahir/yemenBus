@@ -84,7 +84,6 @@ class AdminTripController extends Controller
         //if service is haj currency is in rs
         $currency = $request->service_id == 3 ? 'rs' : ($request->direcation == 'sty' ? 'rs' : 'ry');
 
-        $day = implode(',', $request['day']);
         $trip = new Trip();
         $trip->provider_id = $request->provider_id;
         $trip->sub_service_id = $request->sub_service_id;
@@ -103,7 +102,7 @@ class AdminTripController extends Controller
         $trip->price = $request->price;
         $trip->deposit_price = $request->deposit_price;
         $trip->currency = $currency;
-        $trip->day = $day;
+        $trip->day = $request->day;
         $trip->days_count = $request->days_count;
         $trip->program_details_file = $file;
         $trip->program_details_page_content = $request->program_details_page_content;

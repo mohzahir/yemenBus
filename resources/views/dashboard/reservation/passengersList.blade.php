@@ -114,6 +114,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
           <tr> 
           
             <th rowspan="2">رقم الحجز</th>
+            <th rowspan="2">رقم المسافر </th>
             <th rowspan="2">اسم المسافر </th>
             <th rowspan="2">جوال </th>
             <th rowspan="2">الرقم الوطني</th>
@@ -137,6 +138,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
 
  <tr>                   
     <td> {{ $passenger->reservation_id}}</td>
+    <td> {{ $passenger->id}}</td>
     <td> {{ $passenger->name}}</td>
     <td> {{ $passenger->phone}}</td>
     <td> {{ $passenger->p_id}}</td>
@@ -157,7 +159,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
     <div class="text-center">
 
       <button class="btn btn-success btn-sm" onclick="$('#ticketsForm').submit()">حفظ ارقام التزاكر</button>
-      <a class="btn btn-danger btn-sm" href="{{ route('admin.reservations.confirmAll') }}">الغاء</a>
+      <a class="btn btn-danger btn-sm" href="{{ route('admin.reservations.confirmAll') }}">رجوع</a>
       
     </div>
 

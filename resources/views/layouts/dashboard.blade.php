@@ -85,19 +85,46 @@ font-family: 'Cairo', sans-serif;
 
                 <ul>
                     <li><span class="glyphicon glyphicon-home"></span><a href="{{route('dashboard.marketer.index')}}">الصفحة الرئيسية</a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="https://www.yemenbus.com/orders">بحث عن طلب   </a></li>
-                    
+                    <!-- <li><span class="glyphicon glyphicon-edit"></span><a href="https://www.yemenbus.com/orders">بحث عن طلب   </a></li> -->
+                    @php
+                        $permission = [];
+                        $marketer = auth()->guard('marketer')->user();
+                        $marketer_provider_service_id = $marketer->provider->service->id ?? null;
+                        $marketer_service_id = $marketer->service->id ?? null;
+                        switch($marketer->marketer_type){
+                            case 'global_marketer':
+                                array_push($permission, 'haj');
+                                array_push($permission, 'bus');
+                            break;
+                            case 'provider_marketer':
+                                if($marketer_provider_service_id == 1){
+                                    array_push($permission, 'bus');
+                                }elseif($marketer_provider_service_id == 3){
+                                    array_push($permission, 'haj');
+                                }
+                            break;
+                            case 'service_marketer':
+                                if($marketer_service_id == 1){
+                                    array_push($permission, 'bus');
+                                }elseif($marketer_service_id == 3){
+                                    array_push($permission, 'haj');
+                                }
+                            break;
+                        }
+                    @endphp
+                    @if($permission == ['bus'] || $permission == ['bus', 'haj'])
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('dashboard.reservations.confirm')}}">حجز رحلة نقل بالباص</a></li>
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.reservations.confirmAll')}}">حجوزات النقل بالباص </a>
-                    
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.trips')}}">بحث عن رحلات</a></li>
+                    @endif
+                    @if($permission == ['haj'] || $permission == ['bus', 'haj'])
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.create')}}">حجز رحلة حج وعمرة</a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.index')}}">حجوزات الحج والعمرة </a>
-                        
-                    </li>
-  <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.trips')}}">بحث عن رحلات</a></li>
-                 
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.index')}}">حجوزات الحج والعمرة </a></li>
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.haj-trips')}}">بحث عن رحلات</a></li>
+                    @endif
+
                     
-                     <li><span class="glyphicon glyphicon-edit"></span><a href="https://www.yemenbus.com/trips/order">طلب عرض سعر  </a></li>
+                     <!-- <li><span class="glyphicon glyphicon-edit"></span><a href="https://www.yemenbus.com/trips/order">طلب عرض سعر  </a></li> -->
                      
                      
                     <li><span class="glyphicon glyphicon-envelope"></span><a href="{{route('dashboard.marketer.sms')}}">ارسال رسالة للعميل</a></li>

@@ -74,7 +74,7 @@
 @endsection
 
 @section('content')
-    <div class="container col-md-12 col-md-8 col-sm-12 col-xs-" style="margin-left:70px;">
+    <div class="container col-md-12 col-md-8 col-sm-12 col-xs-">
         <nav aria-label="breadcrumb" style="margin-top:-50px;">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard.provider.showAccountInfo') }}"> <span
@@ -113,13 +113,13 @@
                         <div x-show="haj_is_active" class="row" x-transition>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for=""> نوع الرحله </label> <br>
+                                    <label for=""> جهه القدوم </label> <br>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <input type="radio" id="" name="air_river" value="air"> جوا
+                                            <input @if(old('air_river') == 'air') checked @endif type="radio" id="" name="air_river" value="air"> جوا
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="radio" id="" name="air_river" value="river"> برا
+                                            <input @if(old('air_river') == 'river') checked @endif type="radio" id="" name="air_river" value="river"> برا
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">عدد ايام البرنامج</label> <br>
-                                    <input type="number" name="days_count" class="form-control">
+                                    <input value="{{ old('days_count') }}" type="number" name="days_count" class="form-control" placeholder="10">
                                 </div>
                             </div>
                         </div>
@@ -138,9 +138,9 @@
                                 <label for="order_id">اتجاه الرحله </label>
                                 <select class="form-control direcation" name="direcation" required>
                                     <option value=""> -- اختر--</option>
-                                    <option value="yts"> من اليمن للسعوديه </option>
-                                    <option value="sty"> من السعوديه لليمن </option>
-                                    <option value="loc">بين المدن اليمنيه</option>
+                                    <option @if(old('direcation') == 'yts') selected @endif value="yts"> من اليمن للسعوديه </option>
+                                    <option @if(old('direcation') == 'sty') selected @endif value="sty"> من السعوديه لليمن </option>
+                                    <option @if(old('direcation') == 'loc') selected @endif value="loc">بين المدن اليمنيه</option>
                                 </select>
                             </div>
                         </template>
@@ -158,7 +158,7 @@
                                     <select name="arrival_city_id" id="arrival_city_id" class="form-control">
                                         <option value=""> -- اختر--</option>
                                         @foreach ($cities as $city)
-                                            <option data-country="{{ $city->country }}" value="{{ $city->id }}">
+                                            <option @if(old('arrival_city_id') == $city->id) selected @endif data-country="{{ $city->country }}" value="{{ $city->id }}">
                                                 {{ $city->name }}</option>
                                         @endforeach
                                     </select>
@@ -170,7 +170,7 @@
                                     <select name="takeoff_city_id" id="takeoff_city_id" class="form-control">
                                         <option value=""> -- اختر--</option>
                                         @foreach ($cities as $city)
-                                            <option data-country="{{ $city->country }}" value="{{ $city->id }}">
+                                            <option @if(old('takeoff_city_id') == $city->id) selected @endif data-country="{{ $city->country }}" value="{{ $city->id }}">
                                                 {{ $city->name }}</option>
                                         @endforeach
                                     </select>
@@ -183,21 +183,21 @@
                             <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="">سعر العربون </label> - <span class="currency"></span>
-                                    <input type="text" class="form-control" id="deposit_price" name="deposit_price">
+                                    <input type="text" class="form-control" id="deposit_price" name="deposit_price" placeholder="500" value="{{ old('deposit_price') }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="price">سعر الرحلة </label> - <span class="currency"></span>
-                                    <input type="text" class="form-control" id="price" name="price" required>
+                                    <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" placeholder="500" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group mt-10" style="margin-top:10px;">
                             <label for="order_url">خط سير الرحلة بالمدن التالية: </label>
-                            <input type="text" name="lines_trip" id="lines_trip" data-role="tagsinput"
-                                placeholder="خط السير" class="tm-input form-control tm-input-info" />
+                            <input type="text"  value="{{ old('lines_trip') }}" name="lines_trip" id="lines_trip" data-role="tagsinput"
+                                placeholder="صنعاء - مأرب - الرياض" class="tm-input form-control tm-input-info" />
 
                         </div>
 
@@ -206,13 +206,13 @@
 
                                 <div class="form-group">
                                     <label for="date"> الى تاريخ </label>
-                                    <input type="date" class="form-control" id="to_date" name="to_date" required>
+                                    <input type="date" value="{{ old('to_date') }}" class="form-control" id="to_date" name="to_date" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="date"> من تاريخ </label>
-                                    <input type="date" class="form-control" id="from_date" name="from_date" required>
+                                    <input type="date" value="{{ old('from_date') }}" class="form-control" id="from_date" name="from_date" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -220,13 +220,13 @@
                                     <label for="days">اليوم</label>
 
                                     <select name="day[]" class=" form-control " id="select2" required>
-                                        <option id="sat" value="sat">السبت</option>
-                                        <option id="sun" value="sun">الاحد </option>
-                                        <option id="mon" value="mon">الاثنين </option>
-                                        <option id="tue" value="tue">الثلاثاء </option>
-                                        <option id="wed" value="wed">الاربعاء </option>
-                                        <option id="thu" value="thu">الخميس </option>
-                                        <option id="fri" value="fri">الجمعة </option>
+                                        <option @if(old('day') == 'sat') selected @endif id="sat" value="sat">السبت</option>
+                                        <option @if(old('day') == 'sun') selected @endif id="sun" value="sun">الاحد </option>
+                                        <option @if(old('day') == 'mon') selected @endif id="mon" value="mon">الاثنين </option>
+                                        <option @if(old('day') == 'tue') selected @endif id="tue" value="tue">الثلاثاء </option>
+                                        <option @if(old('day') == 'wed') selected @endif id="wed" value="wed">الاربعاء </option>
+                                        <option @if(old('day') == 'thu') selected @endif id="thu" value="thu">الخميس </option>
+                                        <option @if(old('day') == 'fri') selected @endif id="fri" value="fri">الجمعة </option>
 
                                     </select>
 
@@ -240,7 +240,7 @@
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx1">حدد ساعة الحضور</label>
 
-                                    <input type="time" id="inputMDEx1" class="form-control" name="coming_time">
+                                    <input type="time" id="inputMDEx1" value="{{ old('coming_time') }}" class="form-control" name="coming_time">
                                     <span style="color:red;font-size:12px;margin-right:10px">ملاحظه://ساعة الحضور قبل موعد
                                         الحركة بساعتين</span>
                                 </div>
@@ -250,21 +250,21 @@
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx2">حدد ساعة الحركة</label>
 
-                                    <input type="time" id="inputMDEx2" class="form-control" name="leave_time">
+                                    <input type="time" id="inputMDEx2" class="form-control" name="leave_time" value="{{ old('leave_time') }}">
                                 </div>
 
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mt-2">
                                     <label for="no_ticket">عدد التذاكر </label>
-                                    <input type="number" min="0" class="form-control" name="no_ticket">
+                                    <input type="number" min="0" class="form-control" placeholder="200" name="no_ticket" value="{{ old('no_ticket') }}">
                                 </div>
 
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group mt-2">
                                     <label for="weight">وزن العفش </label>
-                                    <input type="number" min="1" class="form-control" name="weight">
+                                    <input type="number" min="1" class="form-control" placeholder="300" name="weight" value="{{ old('weight') }}">
                                 </div>
                             </div>
                         </div>
@@ -275,24 +275,21 @@
 
                         <div class="form-group mt-2">
                             <label for="note">ملاحظة </label>
-                            <textarea type="text" class="form-control" name="note"></textarea>
+                            <textarea type="text" class="form-control" name="note"> {{ old('note') }}</textarea>
                         </div>
                         <div x-show="haj_is_active" class="form-group mt-2" x-transition>
                             <label for="program_details_page_content"> محتوى صفحه تفاصيل البرنامج </label>
                             <textarea x-init="CKEDITOR.replace($el)" type="file" class="form-control cke_rtl" name="program_details_page_content">
-
+                                {{ old('program_details_page_content') }}
                             </textarea>
                         </div>
                         <div x-show="haj_is_active" class="form-group mt-2" x-transition>
                             <label for="program_details_file"> ملف تفاصيل البرنامج </label>
-                            <input type="file" class="form-control" name="program_details_file">
+                            <input type="file" class="form-control" name="program_details_file" value="{{ old('program_details_file') }}">
                         </div>
                         <button type="submit" class="btn btn-success btn-lg">اضافه الرحلة </button>
                         {{-- <a class="btn btn-success btn-lg" href="{{route('provider.trip.create')}}">اضافه رحلة جديدة</a> --}}
-                        {{-- <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a> --}}
-                        <a class="btn btn-danger btn-close btn-lg" href="{{ route('provider.trip.index') }}">اغلاق</a>
-
-
+                        <a class="btn btn-danger btn-close btn-lg" href="{{ route('provider.trip.index') }}">رجوع</a>
 
                         <!-- TODO confirmation message after submission:
                                                 سوف يتم خصم مبلغ الحجز () ريال. / سعودي. /يمني. من رصيدك ... -->

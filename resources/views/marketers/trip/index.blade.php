@@ -173,7 +173,7 @@
 
         <th> ساعة لحركة </th>
         <th>وزن العفش</th>
-        <th style="width:300px;">اجراءات</th>
+        <!-- <th style="width:300px;">اجراءات</th> -->
 
 
 
@@ -183,7 +183,7 @@
         @foreach ($trips as $trip)
 
         <tr>
-          <td>{{ $trip->id}}</td>
+          <td>{{ $trip->trip_id}}</td>
           <td>{{ $trip->provider->service->name}}</td>
           <td>{{ $trip->price }}</td>
           <td>{{ App\Trip::getCityName($trip->takeoff_city_id)}}</td>
@@ -211,13 +211,13 @@
           <td>@if($trip->leave_time){{ $trip->leave_time}}@else @endif</td>
           <td>@if($trip->coming_time){{ $trip->coming_time}}@else @endif</td>
           <td>@if($trip->weight){{ $trip->weight}}@else @endif</td>
-          <td>
+          <!-- <td>
 
-            {{-- <a class="btn btn-sm btn-danger" href="{{ route('marketer.trip.destroy',$trip->id) }}">الغاء </a>
-            <a class="btn btn-sm btn-success" href="{{ route('marketer.trip.edit',$trip->id) }}">
+             <a class="btn btn-sm btn-danger" href="{{ route('marketer.trip.destroy',$trip->trip_id) }}">الغاء </a>
+            <a class="btn btn-sm btn-success" href="{{ route('marketer.trip.edit',$trip->trip_id) }}">
 
-              تعديل</a> --}}
-          </td>
+              تعديل</a> 
+          </td> -->
         </tr>
 
         @endforeach

@@ -96,7 +96,7 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
 
 <table id="myTable" class="table table-striped table-bordered"text-align:center">
         <thead >
-            <th>كود المسوق</th>
+            <th>رقم المسوق</th>
             <th style="text-align:center;vertical-align:center">اسم المسوق</th>
             <th>نوع المسوق</th>
             <th>رقم الجوال</th>
@@ -112,14 +112,14 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
         <tbody>
             @foreach ($marketers as $marketer)
                 <tr>                   
-                     <td>{{ $marketer->code }}</td>
+                     <td>{{ $marketer->id }}</td>
                     <td>{{ $marketer->name }}</td>
                     <td>{{ $marketer->marketer_type}}</td>
                     <td>@if($marketer->phone!=null){{ $marketer->phone }}@else{{ $marketer->y_phone }}@endif</td>
                     <td>@if($marketer->state == 'active') مفعل @elseif($marketer->state == 'not_active') غير مفعل @elseif($marketer->state == 'suspended') موقوف @else  @endif</td>
-                    <td>{{ $marketer->provider->name ?? $marketer->service->name ?? '-'}}</td>
-                    <td>{{ $marketer->max_rs }}</td>
-                    <td>{{ $marketer->max_ry }}</td>
+                    <td>{{ $marketer->provider->name_company ?? $marketer->service->name ?? '-'}}</td>
+                    <td>{{ $marketer->balance_rs }}</td>
+                    <td>{{ $marketer->balance_ry }}</td>
                  
                     <td style="display:inline-block;width:100%">
                     <a class="btn btn-sm btn-info" href="{{ route('dashboard.marketers.edit', $marketer->id) }}">تعديل</a>

@@ -71,8 +71,7 @@
                             <option value="">اختر رحلة</option>
                             @if (count($trips) > 0)
                             @foreach ($trips as $trip)
-                            {{-- <option value="{{$trip->id}}" @if(old('trip_id') == $trip->id) selected @endif>{{$trip->takeoff_city->name ?? $trip->takeoff_city->name }} -> {{$trip->arrival_city->name ?? $trip->arrival_city->name }} - {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} - {{ $trip->provider->name_company }} - {{ $trip->price }} ريال</option> --}}
-                            <option value="{{$trip->id}}" @if(old('trip_id')==$trip->id) selected @endif> من مدينه {{$trip->takeoff_city->name }} الى مدينه {{$trip->arrival_city->name }} . اتجاه الرحله {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} . مزود الخدمه {{ $trip->provider->name_company }} . سعر الرحله {{ $trip->price }} ريال</option>
+                                <option value="{{$trip->trip_id}}" @if(old('trip_id')==$trip->trip_id) selected @endif> من مدينه {{$trip->takeoff_city->name }} الى مدينه {{$trip->arrival_city->name }} . اتجاه الرحله {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} . مزود الخدمه {{ $trip->provider->name_company }} . سعر الرحله {{ $trip->price }} ريال</option>
                             @endforeach
                             @endif
                         </select>
@@ -84,7 +83,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="firstname">الاسم الكامل <strong class=" text-danger">*</strong></label>
-                            <input id="firstname" type="text" class="form-control" value="{{ old('name') }}" name="name">
+                            <input id="firstname" placeholder="قم بادخال اسم العميل" type="text" class="form-control" value="{{ old('name') }}" name="name">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -98,7 +97,7 @@
                                         <option @if(old('phoneCountry')=='y') selected @endif value="y">967+</option>
                                     </select>
                                 </div>
-                                <input class="form-control valid" value="{{ old('phone') }}" name="phone" id="phone" type="text">
+                                <input class="form-control valid" value="{{ old('phone') }}"  placeholder="512345678" name="phone" id="phone" type="text">
 
                             </div>
 
@@ -143,21 +142,21 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="form-group">
                             <label for="country">رقم الهوية</label>
-                            <input class="form-control" name="nid" id="nid" value="{{ old('nid') }}" type="text"
+                            <input class="form-control" name="nid" placeholder="123456" id="nid" value="{{ old('nid') }}" type="text"
                                 style="margin-right: 3px">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="country">مكان الصعود</label>
-                            <input class="form-control" name="ride_place" value="{{ old('ride_place') }}" id="ride_place" type="text"
+                            <input class="form-control" name="ride_place" placeholder="الرياض" value="{{ old('ride_place') }}" id="ride_place" type="text"
                                 style="margin-right: 3px">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="country">مكان النزول</label>
-                            <input class="form-control" name="drop_place" value="{{ old('drop_place') }}" id="drop_place" type="text"
+                            <input class="form-control" name="drop_place" placeholder="مأرب" value="{{ old('drop_place') }}" id="drop_place" type="text"
                                 style="margin-right: 3px">
                         </div>
                     </div>
@@ -166,7 +165,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="street">البريد الالكتروني</label>
-                            <input id="street" type="email" class="form-control" value="{{ old('email') }}" name="email">
+                            <input id="street" type="email" class="form-control" placeholder="example@gmail.com" value="{{ old('email') }}" name="email">
                         </div>
                     </div>
                     <div class="col-md-6">

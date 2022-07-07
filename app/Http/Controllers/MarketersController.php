@@ -148,7 +148,7 @@ class MarketersController extends Controller
         $reservations = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
@@ -156,7 +156,7 @@ class MarketersController extends Controller
                     ->paginate(10);
                 break;
             case 'provider_marketer':
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
@@ -166,7 +166,7 @@ class MarketersController extends Controller
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
@@ -257,9 +257,41 @@ class MarketersController extends Controller
     }
     public function trips()
     {
-        $id = Auth::guard('marketer')->user()->id;
-        $marketer = Marketer::findOrFail($id);
-        $trips = Trip::where('provider_id', $marketer->provider_id)->orderby('created_at', 'desc')->paginate(10);
+        $marketer = Auth::guard('marketer')->user();
+        // $marketer = Marketer::findOrFail($id);
+        $trips = [];
+        switch ($marketer->marketer_type) {
+            case 'global_marketer':
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->paginate(10);
+                break;
+            case 'provider_marketer':
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->where('trips.provider_id', $marketer->provider_id)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->paginate(10);
+                break;
+            case 'service_marketer':
+                $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 1)
+                    ->whereIn('provider_id', $providers_ids)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')
+                    ->paginate(10);
+                break;
+
+            default:
+                $trips = [];
+                break;
+        }
+        // $trips = Trip::where('provider_id', $marketer->provider_id)->orderby('created_at', 'desc')->paginate(10);
         return view('marketers.trip.index')->with('trips', $trips);
     }
 

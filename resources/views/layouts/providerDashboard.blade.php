@@ -168,13 +168,21 @@
 
                     <li><span class="glyphicon glyphicon-home"></span><a href="#">الصفحة الرئيسية</a></li>
 
+                    <!-- <li><span class="glyphicon glyphicon-plus"></span><a href="{{route('provider.nom.index')}}"> اضافة مسوقين </a></li>
 
-                    <li><span class="glyphicon glyphicon-plus"></span><a href="{{route('dashboard.financialSetting.index')}}">اضافة صلاحيه الوكلاء الماليه</a></li>
+                    <li><span class="glyphicon glyphicon-plus"></span><a href="{{route('dashboard.financialSetting.index')}}">شحن مسوق</a></li> -->
 
+                    <li><span class="glyphicon glyphicon-user"></span><a href="">المسوقون </a>
+                        <ul class="drop_main_menu">
+                            <li><a href="{{ route('provider.marketers.index') }}">عرض المسوقون </a></li>
+                            <!-- <li><a href="{{ route('admin.nom.index') }}"> قائمة المسوقين الغير معتمدين</a></li> -->
 
-                    <li><span class="glyphicon glyphicon-plus"></span><a href="{{route('provider.nom.index')}}"> ترشيح مسوقين </a></li>
+                            <li><a href="{{ route('provider.marketers.chargeForm', 'null') }}">شحن مسوق </a>
+                            </li>
+                        </ul>
+                    </li>
 
-                    <li><span class="glyphicon glyphicon-map-marker"></span><a href="{{route('dashboard.raiseOnMap.index')}}">اضافة مصعد على الخريطه</a></li>
+                    <!-- <li><span class="glyphicon glyphicon-map-marker"></span><a href="{{route('dashboard.raiseOnMap.index')}}">اضافة مصعد على الخريطه</a></li> -->
                     @if(auth()->guard('provider')->user()->service_id == 1)
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.reservations.confirmAll')}}">حجوزات رحلات النقل</a></li>
                     @endif

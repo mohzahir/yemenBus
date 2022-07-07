@@ -140,7 +140,7 @@ th,td{
 {{-- @if($marketer) --}}
 
 <tr>                   
-<td >{{ $reservation->id }}</td>
+<td >{{ $reservation->reservation_id }}</td>
 <td>@switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break   @case('transfer') تم نقله @break @default @endswitch</td>
 <td >{{ $reservation->trip_id }}</td>
 
@@ -180,17 +180,17 @@ th,td{
 <td>@if($reservation->demand_id !=0){{ $reservation->demand_id}}@else @endif </td>
 
 <td>@if( $reservation->order_url){{ $reservation->order_url }}@endif</td>
-<td>@if( $reservation->image)<a href="{{ route('provider.image.download', $reservation->id) }}">صورة الطلب</a>@endif</td> --}}
+<td>@if( $reservation->image)<a href="{{ route('provider.image.download', $reservation->reservation_id) }}">صورة الطلب</a>@endif</td> --}}
 
 {{-- <td style="display:inline-block;width:350px;">
-<a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
-<a class="btn btn-sm btn-info" href="{{ route('provider.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
-<a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a>
-<a class="btn btn-sm btn-danger" href="{{ route('provider.reservations.cancel',$reservation->id) }}">الغاء الحجز</a>
-<a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->id) }}">نقل الى</a>
+<a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->reservation_id) }}">تعديل الحجز</a>
+<a class="btn btn-sm btn-info" href="{{ route('provider.reservations.passengersList',$reservation->reservation_id) }}">قائمه المسافرين</a>
+<a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->reservation_id) }}">تأجيل الحجز</a>
+<a class="btn btn-sm btn-danger" href="{{ route('provider.reservations.cancel',$reservation->reservation_id) }}">الغاء الحجز</a>
+<a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->reservation_id) }}">نقل الى</a>
 </td> --}}
 <td style="width:150px;margin-top:30px">
-<a class="btn btn-sm btn-primary" href="{{ route('provider.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span>   راسل المسافر   </a>
+<a class="btn btn-sm btn-primary" href="{{ route('dashboard.marketer.sms',$reservation->reservation_id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span>   راسل المسافر   </a>
 <a class="btn btn-sm btn-success" @if($reservation->passenger->phone) href="https://api.whatsapp.com/send?phone={{ $reservation->passenger->phone}}" @else href="https://api.whatsapp.com/send?phone={{ $reservation->passenger_phone_yem}}" @endif style="width:100px">واتس اب </a>
 
 

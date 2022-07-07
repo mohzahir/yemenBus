@@ -25,7 +25,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
         $reservations = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
@@ -33,7 +33,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
                     ->paginate(10);
                 break;
             case 'provider_marketer':
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
@@ -43,7 +43,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $reservations = Reseervation::query()
+                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
                     ->join('trips', 'trips.id', 'reseervations.trip_id')
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
@@ -74,14 +74,14 @@ class HajReservationController extends \App\Http\Controllers\Controller
         $trips = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
                     ->where('no_ticket', '>', 0)
                     ->where('status', 'active')->get();
                 break;
             case 'provider_marketer':
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
                     ->where('trips.provider_id', $marketer->provider_id)
@@ -90,7 +90,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
                     ->whereIn('provider_id', $providers_ids)
@@ -105,6 +105,47 @@ class HajReservationController extends \App\Http\Controllers\Controller
         }
         // dd($trips);
         return view('marketers.haj-reservations.create')->with(['trips' => $trips, 'marketer' => $marketer]);
+    }
+
+
+    public function hajTrips()
+    {
+        $marketer = Auth::guard('marketer')->user();
+        // $marketer = Marketer::findOrFail($id);
+        $trips = [];
+        switch ($marketer->marketer_type) {
+            case 'global_marketer':
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->paginate(10);
+                break;
+            case 'provider_marketer':
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->where('trips.provider_id', $marketer->provider_id)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')->paginate(10);
+                break;
+            case 'service_marketer':
+                $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                    ->join('providers', 'providers.id', 'trips.provider_id')
+                    ->where('providers.service_id', 3)
+                    ->whereIn('provider_id', $providers_ids)
+                    ->where('no_ticket', '>', 0)
+                    ->where('status', 'active')
+                    ->paginate(10);
+                break;
+
+            default:
+                $trips = [];
+                break;
+        }
+        // $trips = Trip::where('provider_id', $marketer->provider_id)->orderby('created_at', 'desc')->paginate(10);
+        return view('marketers.haj-trip.index')->with('trips', $trips);
     }
 
     public function store(Request $request)
@@ -134,6 +175,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
 
         if ($validator->passes()) {
 
+
             $dateOfBirth = "";
             if ($request->dateofbirth[0] && $request->dateofbirth[1] && $request->dateofbirth[2]) {
                 foreach ($request->dateofbirth as $key => $value) {
@@ -156,6 +198,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
             DB::beginTransaction();
 
             try {
+
                 $passenger = Passenger::where('email', $request->email)->first();
                 if (!$passenger) {
                     //passenger is not registered
@@ -186,7 +229,6 @@ class HajReservationController extends \App\Http\Controllers\Controller
 
                 $paid = $request->payment_type == 'total_payment' ? $trip->price : $deposit;
 
-                // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
                 if (($paid > $marketer->balance_rs)) {
 
                     $reservation_id = Reseervation::insertGetId([

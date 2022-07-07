@@ -195,15 +195,11 @@
 
           <td>{{ $reservation->ticket_no }} </td>
          
-
           <td style="display:inline-block;width:350px;">
-            {{-- <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->id) }}">تعديل الحجز</a> --}}
-            <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
+            <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
+            <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
-            <button class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}" onclick="cancelReservation()">الغاء الحجز</button>
-            <form id="cancel_reservation_form" action="{{ route('provider.reservations.cancel',$reservation->id) }}" method="post">
-              @csrf
-            </form>
+            <a href="{{ route('provider.reservations.cancel', ['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}">الغاء الحجز</a>
             <!-- <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->id) }}">نقل الى</a> -->
           </td>
           <td style="width:150px;margin-top:30px">
@@ -236,11 +232,21 @@
 
 
 <script type="text/javascript">
+
+  $('#cancel_reservation_button').on('click', function(e){
+    id = this.data('id');
+    console.log(id);
+    x = confirm('هل انت متاكد من الغاء الحجز ؟');
+    if (x) {
+      $('#cancel_reservation_form_' + id ).submit();
+    }
+  });
+
   function cancelReservation() {
     x = confirm('هل انت متاكد من الغاء الحجز ؟');
 
     if (x) {
-      $('#cancel_reservation_form').submit();
+      $('#cancel_reservation_form_' + id ).submit();
     }
   }
 

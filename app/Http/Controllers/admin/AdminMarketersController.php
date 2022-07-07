@@ -92,11 +92,12 @@ class AdminMarketersController extends Controller
 
         $marketer = new Marketer();
         $marketer->name = $request['name'];
+        $marketer->marketer_type = $request['marketer_type'];
         $marketer->provider_id = $request['provider_id'] ?? null;
         $marketer->service_id = $request['service_id'] ?? null;
         $marketer->password = Hash::make($request['password']);
-        $marketer->code = str_pad(rand(0, 999), 3, "0", STR_PAD_LEFT);
-        $body = 'مبروك عليك تم اضافتك كمسوق .اكسب مع يمن باص الفلوس كمسوق لتذاكر والخدمات السفر من والى اليمن  كلمه السر :' . $request->password . 'رابط نسجيل  رابط ادارتك : https://dashboard.yemenbus.com/login/marketer';
+        // $marketer->code = str_pad(rand(0, 999), 3, "0", STR_PAD_LEFT);
+        $body = 'مبروك عليك تم اضافتك كمسوق .اكسب مع يمن باص الفلوس كمسوق لتذاكر والخدمات السفر من والى اليمن  كلمه السر :' . $request->password . 'رابط نسجيل  رابط ادارتك : https://yemenbus.com/login/marketer';
 
         if ($request->y_phone) {
             $marketer->y_phone = $phoneProv;

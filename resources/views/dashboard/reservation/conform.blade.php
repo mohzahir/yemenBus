@@ -168,10 +168,10 @@
           <td>{{ $reservation->passenger->phone }}</td>
           <td>{{ $reservation->passenger->y_phone }}</td>
           <td>{{ $reservation->passenger->name_passenger }}</td>
-          <td>{{ date('d-m-Y', strtotime($reservation->from_date) )}}</td>
+          <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
 
           <td>
-            @switch($reservation->day)
+            @switch($reservation->trip->day)
             @case('sat')السبت@break
             @case('sun')الاحد@break
             @case('mon')الاثنين@break
@@ -185,24 +185,22 @@
           <td>{{ $reservation->trip->takeoff_city->name }}</td>
           <td>{{ $reservation->trip->arrival_city->name }}</td>
           <td>{{ $reservation->total_price }}@switch($reservation->currency)@case('rs')سعودي@break @case('ry') يمني@break @default @endswitch</td>
-          <td>{{ $reservation->paid }}@switch($reservation->currency)@case('rs')ريال سعودي@break @case('ry')ريال يمني @break @default @endswitch</td>
+          <td>{{ $reservation->paid }}@switch($reservation->currency)@case('rs')ريال سعودي@break @case('ry')ريال يمني @break @default 0 @endswitch</td>
           <td>
             @switch($reservation->payment_type)
             @case('total_payment') المبلغ كامل @break
             @case('deposit_payment')بعربون@break
             @case('later_payment')الدفع لاحقا@break
-            @default
+            @default -
             @endswitch</td>
 
           <td>{{ $reservation->ticket_no }} </td>
           <td style="display:inline-block;width:350px;">
-            <!-- <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a> -->
+            <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
+            <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
-            <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
-            <button class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}" onclick="cancelReservation()">الغاء الحجز</button>
-            <form id="cancel_reservation_form" action="{{ route('admin.reservations.cancel',$reservation->id) }}" method="post">
-              @csrf
-            </form>
+            <a href="{{ route('admin.reservations.cancel',['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}">الغاء الحجز</a>
+            
             <!-- <a class="btn btn-sm btn-success" href="{{ route('admin.reservations.transfer',$reservation->id) }}">نقل الى</a> -->
           </td>
           <td style="width:150px;margin-top:30px">

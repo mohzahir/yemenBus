@@ -307,8 +307,8 @@
                                             class="btn btn-sm btn-warning">
                                             تفعيل / الغاء تفعيل
                                         </a>
-                                        <a class="btn btn-sm btn-danger"
-                                            href="{{ route('dashboard.provider.trip.delete', $trip->id) }}">الغاء </a>
+                                        <!-- <a class="btn btn-sm btn-danger"
+                                            href="{{ route('dashboard.provider.trip.delete', $trip->id) }}">الغاء </a> -->
                                         <a class="btn btn-sm btn-success"
                                             href="{{ route('dashboard.provider.trip.edit', $trip->id) }}">
 

@@ -30,6 +30,9 @@ class CreateReseervationsTable extends Migration
             $table->string('payment_image', 500)->nullable();
             $table->text('note')->nullable();
             $table->enum('status', ['created', 'confirmed', 'canceled'])->default('created');
+            $table->string('haj_passenger_external_ticket_number')->nullable();
+            $table->string('haj_passenger_hotel_details')->nullable();
+            $table->string('haj_passenger_sickness_status')->nullable();
             $table->string('code', 7)->nullable()->index('code');
             $table->string('order_id')->nullable();
             $table->integer('demand_id')->nullable();

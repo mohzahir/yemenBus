@@ -69,8 +69,7 @@ label{
                         <option value="">اختر رحلة</option>
                         @if (count($trips) > 0)
                             @foreach ($trips as $trip)
-                                {{-- <option value="{{$trip->id}}" @if(old('trip_id') == $trip->id) selected @endif>{{$trip->takeoff_city->name ?? $trip->takeoff_city->name }} -> {{$trip->arrival_city->name ?? $trip->arrival_city->name }} - {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} - {{ $trip->provider->name_company }} - {{ $trip->price }} ريال</option> --}}
-                                <option value="{{$trip->id}}" @if(old('trip_id') == $trip->id) selected @endif> من مدينه {{$trip->takeoff_city->name }} الى مدينه {{$trip->arrival_city->name }} . اتجاه الرحله {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} . مزود الخدمه {{ $trip->provider->name_company }} . سعر الرحله {{ $trip->price }} ريال</option>
+                                <option value="{{$trip->trip_id}}" @if(old('trip_id') == $trip->trip_id) selected @endif> من مدينه {{$trip->takeoff_city->name }} الى مدينه {{$trip->arrival_city->name }} . اتجاه الرحله {{ $trip->direcation == 'yts' ? ' من اليمن للسعوديه ' : ($trip->direcation == 'sty' ? ' من السعوديه لليمن' : 'رحله داخل اليمن')}} . مزود الخدمه {{ $trip->provider->name_company }} . سعر الرحله {{ $trip->price }} ريال</option>
                             @endforeach
                         @endif
                     </select>
@@ -83,7 +82,7 @@ label{
                            
                         </select>
                     </div>  
-                    <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}"
+                    <input class="form-control valid" placeholder="512345678" name="phone" id="phone" type="text" value="{{ old('phone') }}"
                     placeholder=" * رقم الجوال ">
 
                </div>
@@ -110,30 +109,30 @@ label{
                <h3 style="margin-bottom: 20px"> بيانات الراكب</h3>
 
                <div class="form-group d-flex passenger-row" id="passenger-row">
-                   <input class="form-control valid" name="name[]" id="name" type="text" value="{{ old(name) }}"
+                   <input class="form-control valid" name="name[]" id="name" type="text" value="{{ old('name') }}"
                    placeholder=" اسم الراكب">
                    
                    <div style="margin-right: 3px"></div>
                    <select class="form-control" name="age[]" id="age">
                        <option value="">الفئة العمرية للراكب</option>
-                       <option {{ old(age[]) == 'adult' ? 'checked' : '' }} value="adult">بالغ</option>
-                       <option  {{ old(age[]) == 'child' ? 'checked' : '' }} value="child">طفل (من سنتين الى 12)</option>
-                       <option {{ old(age[]) == 'baby' ? 'checked' : '' }} value="baby">رضيع (تحت السنتين)</option>
+                       <option {{ old('age.0') == 'adult' ? 'checked' : '' }} value="adult">بالغ</option>
+                       <option  {{ old('age.1') == 'child' ? 'checked' : '' }} value="child">طفل (من سنتين الى 12)</option>
+                       <option {{ old('age.2') == 'baby' ? 'checked' : '' }} value="baby">رضيع (تحت السنتين)</option>
                    </select>
                    <div style="margin-right: 3px"></div>
 
                    <select class="form-control" name="gender[]" id="gender">
                        <option  value="">جنس الراكب</option>
-                       <option {{ old(gender[]) == 'female' ? 'checked' : '' }} value="femal">انثى</option>
-                       <option {{ old(gender[]) == 'male' ? 'checked' : '' }} value="male">ذكر</option>
+                       <option {{ old('gender.0') == 'female' ? 'checked' : '' }} value="femal">انثى</option>
+                       <option {{ old('gender.0') == 'male' ? 'checked' : '' }} value="male">ذكر</option>
                    </select>
              
                    <input class="form-control" name="dateofbirth[]" id="dateofbirth" type="text"
                    style="margin-right: 3px" onfocus="(this.type='date')"
-                   placeholder="تاريخ الميلاد">
+                   placeholder="تاريخ الميلاد" value="{{ old('dateofbirth.0') }}">
 
                    <input class="form-control" name="nid[]" id="nid" type="text"
-                   style="margin-right: 3px" value="{{ old(nid[]) }}"
+                   style="margin-right: 3px" value="{{ old('nid.0') }}"
                    placeholder="رقم هوية الراكب">
                </div>
                

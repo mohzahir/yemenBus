@@ -77,13 +77,13 @@ label{
         
         <div class="form-group mt-2">
             <label for="passenger_phone">جوال المسافر</label>
-            <input type="text" class="form-control" id="passenger_phone" name="passenger_phone" placeholder="مثال +9661231313131" @if($reservation) value="{{$reservation->passenger_phone}}" @endif >
+            <input type="text" class="form-control" id="passenger_phone" name="passenger_phone" placeholder="مثال +9661231313131" @if($reservation) value="{{$reservation->passenger->phone}}" @endif >
         </div>
         <div class="form-group mt-2">
             <label for="passenger_phone_yem"> رقم الجوال اليمني</label>
-            <input type="text" class="form-control" id="passenger_phone_yem" name="passenger_phone_yem" placeholder="مثال +9661231313131" @if($reservation) value="{{$reservation->passenger_phone_yem}}" @endif >
+            <input type="text" class="form-control" id="passenger_phone_yem" name="passenger_phone_yem" placeholder="مثال +9661231313131" @if($reservation) value="{{$reservation->passenger->y_phone}}" @endif >
         </div>
-        @if($reservation)
+        <!-- @if($reservation)
         <div class="form-group mt-2">
             <label for="currency">العملة</label>
             <select name="currency" class="form-control" id="currency" >
@@ -95,7 +95,7 @@ label{
             <label for="amount">المبلغ</label>
             <input type="number" min="1" class="form-control" id="amount" name="amount" @if($reservation) value="{{$reservation->amount}}" required @endif  >
         </div>
-        @endif
+        @endif -->
         
         <div class="form-group mt-2">
             <label for="message">الرسالة</label>

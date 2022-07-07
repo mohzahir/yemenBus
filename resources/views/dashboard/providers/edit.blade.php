@@ -54,7 +54,7 @@ label{
 
         <div class="form-group" id="discount_percentage-warapper">
             <label for="phone"> رقم الجوال السعودي</label>
-            <input type="text" class="form-control" id="phone" name="phone"    value= "{{$provider->phone}}">
+            <input type="text" class="form-control" id="phone" name="phone"  placeholder="966512345678"  value= "{{$provider->phone}}">
             @error('phone')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -64,7 +64,7 @@ label{
         
         <div class="form-group" id="discount_percentage-warapper">
             <label for="phone"> رقم الجوال اليمني</label>
-            <input type="text" class="form-control" id="y_phone" name="y_phone"    value= "{{$provider->y_phone}}">
+            <input type="text" class="form-control" id="y_phone" name="y_phone"  placeholder="967712345678"  value= "{{$provider->y_phone}}">
             @error('y_phone')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -75,8 +75,7 @@ label{
         
       
         <button type="submit" class="btn btn-success btn-lg">تعديل</button>
-          <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
-     <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.admin.index') }}">اغلاق</a>
+     <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.providers.index') }}">رجوع</a>
         
     </form>
     </div>

@@ -208,10 +208,8 @@
                   <td >@if($trip->weight){{ $trip->weight}}@else  @endif</td>
                   <td style="display:inline-block;width:300px;">
                 
-                  <a class="btn btn-sm btn-danger" href="{{ route('provider.trip.destroy',$trip->id) }}">الغاء </a>
-                  <a class="btn btn-sm btn-success" href="{{ route('provider.trip.edit',$trip->id) }}">
-    
-                  تعديل</a>
+                  <!-- <a class="btn btn-sm btn-danger" href="{{ route('provider.trip.destroy',$trip->id) }}">الغاء </a> -->
+                  <a class="btn btn-sm btn-success" href="{{ route('provider.trip.edit',$trip->id) }}">تعديل</a>
                   </td>
                 </tr>
             @endforeach

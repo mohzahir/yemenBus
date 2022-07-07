@@ -123,13 +123,13 @@
 
                     <th colspan="2" style="horizontal-align : middle;text-align:center; width: 50%;">الحجز </th>
                     <th rowspan="2">رقم الرحله</th>
-                    <th rowspan="2"> المزود</th>
+                    <!-- <th rowspan="2"> المزود</th> -->
                     <th rowspan="2"> المسوق</th>
-                    <th rowspan="2">اسم المسافر </th>
+                    <!-- <th rowspan="2">اسم المسافر </th> -->
                     <th rowspan="2">مكان الصعود </th>
                     <th rowspan="2">مكان النزول </th>
-                    <th rowspan="2">جوال المسافر السعودي</th>
-                    <th rowspan="2">جوال المسافر اليمني</th>
+                    <!-- <th rowspan="2">جوال المسافر السعودي</th> -->
+                    <!-- <th rowspan="2">جوال المسافر اليمني</th> -->
                     <th rowspan="2">التاريخ</th>
                     <th rowspan="2">اليوم</th>
                     <th rowspan="2">من مدينة</th>
@@ -140,7 +140,6 @@
                     <th rowspan="2">بوابة الدفع</th>
                     <th rowspan="2">عدد التذاكر</th>
                     <!-- <th  rowspan="2">رقم الطلب</th> -->
- 
                     <th rowspan="2">اجراءات</th>
                     <th rowspan="2">وسائل التواصل</th>
                 </tr>
@@ -168,16 +167,16 @@
                     <td>{{ $reservation->id }}</td>
                     <td><span class="badge badge-primary">@switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break @case('canceled') ملغي @break @default @endswitch</span></td>
                     <td>{{ $reservation->trip_id }}</td>
-                    <td>{{ $provider_name->name_company }}</td>
+                    <!-- <td>{{ $provider_name->name_company }}</td> -->
                     <td>{{ $reservation->marketer_id  ?? '-'}}</td>
 
                     {{-- <td>{{ $reservation->code }}</td> --}}
-                    <td>{{ $reservation->passenger->name_passenger }}</td>
+                    <!-- <td>{{ $reservation->passenger->name_passenger }}</td> -->
                     <td>{{ $reservation->ride_place ?? '-' }}</td>
                     <td>{{ $reservation->drop_place ?? '-' }}</td>
-                    <td>{{ $reservation->passenger->phone ?? '-' }}</td>
-                    <td>{{ $reservation->passenger->y_phone ?? '-' }}</td>
-                    <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
+                    <!-- <td>{{ $reservation->passenger->phone ?? '-' }}</td> -->
+                    <!-- <td>{{ $reservation->passenger->y_phone ?? '-' }}</td> -->
+                    <td>{{ $reservation->trip->from_date ?? '-'}}</td>
 
                     <td>
                         @switch($reservation->trip->day)
@@ -213,16 +212,14 @@
                     <td>
                         <!-- <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a> -->
                         <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
-                        <button onclick="submitForm()" class="btn btn-sm btn-danger {{ $reservation->status != 'canceled' ? '' : 'disabled' }}">الغاء الحجز</button>
+                        <a href="{{ route('haj.reservations.destroy',['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status != 'canceled' ? '' : 'disabled' }}">الغاء الحجز</a>
                         <a class="btn btn-sm btn-success {{ $reservation->payment_method == 'bank' && $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد التحويل البنكي</a>
+                        <a class="btn btn-sm btn-warning" href="{{ route('provider.haj.reservations.passenger.info', ['id' => $reservation->id]) }}">معلومات الحاج\المعتمر</a>
+
                     </td>
                     <td style="width:150px;margin-top:30px">
-                        <a class="btn btn-sm btn-primary" href="{{ route('admin.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('provider.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>
                         <a class="btn btn-sm btn-success" @if($reservation->passenger->phone) href="https://api.whatsapp.com/send?phone={{$reservation->passenger->phone}}" @else href="https://api.whatsapp.com/send?phone={{$reservation->passenger->y_phone}}" @endif style="width:100px">واتس اب </a>
-
-                        <form id="form" action="{{ route('haj.reservations.destroy',['id' => $reservation->id]) }}" method="post">
-                            @csrf
-                        </form>
 
                     </td>
                 </tr>
@@ -253,9 +250,9 @@
         $('#example').DataTable();
     });
 
-    function submitForm(){
+    function submitForm() {
         x = confirm('هل انت متاكد ؟');
-        if(x){
+        if (x) {
             $('#form').submit();
         }
     }

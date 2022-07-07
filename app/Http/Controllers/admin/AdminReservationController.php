@@ -747,33 +747,41 @@ class AdminReservationController extends Controller
     public function edit($id)
     {
         $reservation = Reseervation::where('id', $id)->first();
-        return view('dashboard.reservation.update')->with(['reservation' => $reservation]);
+        $bus_trips = Trip::query()
+            ->join('providers', 'providers.id', 'trips.provider_id')
+            ->where('providers.service_id', 1)
+            ->where('trips.status', 'active')
+            ->get();
+        $marketers = Marketer::get();
+
+        return view('dashboard.reservation.update')->with([
+            'reservation' => $reservation,
+            'bus_trips' => $bus_trips,
+            'marketers' => $marketers,
+        ]);
     }
     public function Update(Request $request, $id)
     {
+        $request->validate([
+            'trip_id' => 'required|numeric|exists:trips,id',
+            'marketer_id' => 'nullable|numeric',
+            'ride_place' => 'nullable',
+            'drop_place' => 'nullable',
+            'note' => 'nullable',
+        ]);
 
-        $preseervation = Reseervation::where('id', $request->id)->first();
-        $preseervation->order_id = $request->order_id;
-        $preseervation->demand_id = $request->demand_id;
+        $preseervation = Reseervation::findOrFail($id);
+        $preseervation->trip_id = $request->trip_id;
+        $preseervation->marketer_id = $request->marketer_id;
 
-        $preseervation->order_url = $request->order_url;
-        $preseervation->ticket_no = $request->ticket_no;
+        $preseervation->ride_place = $request->ride_place;
+        $preseervation->drop_place = $request->drop_place;
+        $preseervation->note = $request->note;
 
-        if ($request->hasFile('image')) {
-            if ($preseervation->image) {
-                $image_path = public_path() . '/images/reservation/' . $preseervation->image;
-                unlink($image_path);
-            }
-            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-            $input['image'] = $imageName;
-            request()->image->move(public_path('/images/reservation/'), $imageName);
-
-            $preseervation->image = $imageName;
-        }
         $preseervation->save();
 
 
-        return response()->json(['url' => route('admin.reservations.confirmAll'), 'msge' => 'success']);
+        return redirect()->route('admin.reservations.confirmAll')->with(['success' => 'تم تعديل بيانات الحجز بنجاح']);
     }
     public function downloadImage($id)
     {

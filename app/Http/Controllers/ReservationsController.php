@@ -41,14 +41,14 @@ class ReservationsController extends Controller
         $trips = [];
         switch ($marketer->marketer_type) {
             case 'global_marketer':
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
                     ->where('no_ticket', '>', 0)
                     ->where('status', 'active')->get();
                 break;
             case 'provider_marketer':
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
                     ->where('trips.provider_id', $marketer->provider_id)
@@ -57,7 +57,7 @@ class ReservationsController extends Controller
                 break;
             case 'service_marketer':
                 $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $trips = Trip::query()
+                $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
                     ->whereIn('provider_id', $providers_ids)

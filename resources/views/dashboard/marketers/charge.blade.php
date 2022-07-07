@@ -46,27 +46,27 @@ $(".alert").alert('close')
 <form enctype="multipart/form-data" action="{{ route('dashboard.marketers.charge')}}" method="POST" style="margin-bottom:40px;" >  
       @csrf
       <div class="form-group mt-2">
-            <label for="marketer_id">كود المسوق </label>
-            <input type="text" class="form-control" name="marketer_id" @if($marketer)value="{{$marketer->code}}"@endif>
+            <label for="marketer_id">رقم المسوق </label>
+            <input type="text" class="form-control" name="marketer_id" @if($marketer)value="{{$marketer->id}}"@endif>
         </div>
         <div class="form-group mt-2">
             <label for="amount">المبلغ</label>
-            <input type="number" class="form-control" name="amount" >
+            <input type="number" class="form-control" name="amount" value="{{ old('amount') }}">
         </div>
         <div class="form-group mt-2">
             <label for="currecny">العملة</label>
-            <select name="currecny" class="form-control" id="currecny">
-                <option value="sar">ريال سعودي</option>
-                <option value="yer">ريال يمني</option>
+            <select name="currecny" class="form-control" id="currecny" >
+                <option @if(old('currecny') == 'rs') selected @endif value="rs">ريال سعودي</option>
+                <option @if(old('currecny') == 'ry') selected @endif value="yer">ريال يمني</option>
             </select>
         </div>
         <div class="form-group mt-2">
             <label for="notes">ملاحظات</label>
-            <textarea class="form-control" name="notes"></textarea>
+            <textarea class="form-control" name="notes">{{ old('notes') }}</textarea>
         </div>
         <div class="form-group mt-2">
             <label for="transfer_img">صورة الحوالة</label>
-            <input type="file" class="form-control" name="transfer_img">
+            <input type="file" class="form-control" name="transfer_img" value="{{ old('transfer_img') }}">
         </div>
         <button class="btn btn-success btn-lg">شحن الرصيد</button> 
 

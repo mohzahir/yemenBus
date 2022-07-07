@@ -68,7 +68,7 @@
 @endsection
 
 @section('content')
-<div class="main_container col-md-12 col-md-8 col-sm-12 col-xs- " style="margin-left:70px;">
+<div class="main_container col-md-12 col-md-8 col-sm-12 ">
     <nav aria-label="breadcrumb" style="margin-top:-50px;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dashboard.admin.index')}}"> <span
@@ -145,15 +145,14 @@
         <div class="form-group mt-2">
             <label for="days">اليوم</label>
 
-            <select name="day[]" class=" form-control " data-live-search="true" id="select2" multiple required>
-                <option id="all" value="all">كل يوم </option>
-                <option id="sat" value="sat">السبت</option>
-                <option id="sun" value="sun">الاحد </option>
-                <option id="mon" value="mon">الاثنين </option>
-                <option id="tue" value="tue">الثلاثاء </option>
-                <option id="wed" value="wed">الاربعاء </option>
-                <option id="thu" value="thu">الخميس </option>
-                <option id="fri" value="fri">الجمعة </option>
+            <select name="day" class=" form-control " required>
+                <option @if($trip->day == 'sat') selected @endif id="sat" value="sat">السبت</option>
+                <option @if($trip->day == 'sun') selected @endif id="sun" value="sun">الاحد </option>
+                <option @if($trip->day == 'mon') selected @endif id="mon" value="mon">الاثنين </option>
+                <option @if($trip->day == 'tue') selected @endif id="tue" value="tue">الثلاثاء </option>
+                <option @if($trip->day == 'wed') selected @endif id="wed" value="wed">الاربعاء </option>
+                <option @if($trip->day == 'thu') selected @endif id="thu" value="thu">الخميس </option>
+                <option @if($trip->day == 'fri') selected @endif id="fri" value="fri">الجمعة </option>
 
             </select>
 
@@ -200,8 +199,7 @@
             <input type="text" @if($trip->note)value="{{$trip->note}}"@endif class="form-control" name="note">
         </div>
         <button type="submit" class="btn btn-success btn-lg">تعديل</button>
-        <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
-        <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.admin.index') }}">اغلاق</a>
+        <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.providers.trips') }}">اغلاق</a>
 
 
         <!-- TODO confirmation message after submission: 

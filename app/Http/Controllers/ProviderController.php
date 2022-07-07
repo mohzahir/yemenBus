@@ -681,9 +681,11 @@ class ProviderController extends Controller
 
     public function cancel($id)
     {
-        $reservation = Reseervation::where('id', $id)->first();
+        // dd($id);
+        $reservation = Reseervation::findOrFail($id);
         $reservation->update(['status' => 'canceled']);
-        return redirect()->back()->with(['message' => 'تم الغاء الطلب بنجاح']);
+        // dd($reservation);
+        return redirect()->back()->with(['success' => 'تم الغاء الطلب بنجاح']);
         // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
         // $code = null;
         // $marketer ? $code = $marketer->code : $code = null;
@@ -1380,8 +1382,21 @@ class ProviderController extends Controller
     public function edit($id)
     {
         $reservation = Reseervation::where('id', $id)->first();
+        $bus_trips = Trip::query()
+            ->join('providers', 'providers.id', 'trips.provider_id')
+            ->where('providers.service_id', 1)
+            ->where('trips.status', 'active')
+            ->get();
+        $marketers = Marketer::get();
+
+        return view('providers.reservation.update')->with([
+            'reservation' => $reservation,
+            'bus_trips' => $bus_trips,
+            'marketers' => $marketers,
+        ]);
+        // $reservation = Reseervation::where('id', $id)->first();
         // dd($reservation);
-        return view('providers.reservation.update')->with(['reservation' => $reservation]);
+        // return view('providers.reservation.update')->with(['reservation' => $reservation]);
     }
     public function passengersList($id)
     {
@@ -1405,30 +1420,26 @@ class ProviderController extends Controller
     public function Update(Request $request, $id)
     {
 
-        $preseervation = Reseervation::where('id', $request->id)->first();
-        $this->authorize('update', $preseervation);
+        $request->validate([
+            'trip_id' => 'required|numeric|exists:trips,id',
+            'marketer_id' => 'nullable|numeric',
+            'ride_place' => 'nullable',
+            'drop_place' => 'nullable',
+            'note' => 'nullable',
+        ]);
 
-        $preseervation->order_id = $request->order_id;
-        $preseervation->demand_id = $request->demand_id;
+        $preseervation = Reseervation::findOrFail($id);
+        $preseervation->trip_id = $request->trip_id;
+        $preseervation->marketer_id = $request->marketer_id;
 
-        $preseervation->order_url = $request->order_url;
-        $preseervation->ticket_no = $request->ticket_no;
+        $preseervation->ride_place = $request->ride_place;
+        $preseervation->drop_place = $request->drop_place;
+        $preseervation->note = $request->note;
 
-        if ($request->hasFile('image')) {
-            if ($preseervation->image) {
-                $image_path = public_path() . '/images/reservation/' . $preseervation->image;
-                unlink($image_path);
-            }
-            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-            $input['image'] = $imageName;
-            request()->image->move(public_path('/images/reservation/'), $imageName);
-
-            $preseervation->image = $imageName;
-        }
         $preseervation->save();
 
 
-        return response()->json(['url' => route('provider.reservations.confirmAll'), 'msge' => 'success']);
+        return redirect()->route('provider.reservations.confirmAll')->with(['success' => 'تم تعديل بيانات الحجز بنجاح']);
     }
     public function downloadImage($id)
     {

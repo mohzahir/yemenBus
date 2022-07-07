@@ -56,48 +56,52 @@ label{
         </div>
         <div class="form-group">
             <label for="name">نوع المسوق</label> <br>
-            <input @click="active = null" type="radio" name="marketer_type"  value="global_marketer"> مسوق عام <br>
-            <input @click="active = 'provider'" type="radio" name="marketer_type"  value="provider_marketer"> مسوق مخصص لمزود <br>
-            <input @click="active = 'service'" type="radio" name="marketer_type"  value="service_marketer"> مسوق مخصص لقسم <br>
+            <input @click="active = null" type="radio" name="marketer_type"  value="global_marketer" required> مسوق عام <br>
+            <input @click="active = 'provider'" type="radio" name="marketer_type"  value="provider_marketer" required> مسوق مخصص لمزود <br>
+            <input @click="active = 'service'" type="radio" name="marketer_type"  value="service_marketer" required> مسوق مخصص لقسم <br>
             @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
-        <div x-show="active == 'provider'" class="form-group" x-transition>
-            <label for="name">اختر المزود</label>
-            <!-- <input type="text" class="form-control" id="provider_id" name="provider_id"  value="{{ old('provider_id') }}" > -->
-            <select class="form-control" name="provider_id" id="">
-                <option value=""> ---- </option>
-                @foreach($providers as $provider)
-                    <option value="{{ $provider->id }}">{{ $provider->name_company }}</option>
-                @endforeach
-            </select>
-            @error('provider_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-        <div x-show="active == 'service'" class="form-group" x-transition>
-            <label for="name">اختر الخدمة</label>
-            <!-- <input type="text" class="form-control" id="service_id" name="service_id"  value="{{ old('service_id') }}" > -->
-            <select class="form-control" name="service_id" id="">
-                <option value=""> ---- </option>
-                @foreach($services as $service)
-                    <option value="{{ $service->id }}">{{ $service->name }}</option>
-                @endforeach
-            </select>
-            @error('service_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
+        <template x-if="active == 'provider'">
+            <div class="form-group" x-transition>
+                <label for="name">اختر المزود</label>
+                <!-- <input type="text" class="form-control" id="provider_id" name="provider_id"  value="{{ old('provider_id') }}" > -->
+                <select class="form-control" name="provider_id" id="">
+                    <option value=""> ---- </option>
+                    @foreach($providers as $provider)
+                        <option @if(old('provider_id') == $provider->id ) selected @endif value="{{ $provider->id }}">{{ $provider->name_company }}</option>
+                    @endforeach
+                </select>
+                @error('provider_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </template>
+        <template x-if="active == 'service'">
+            <div class="form-group" x-transition>
+                <label for="name">اختر الخدمة</label>
+                <!-- <input type="text" class="form-control" id="service_id" name="service_id"  value="{{ old('service_id') }}" > -->
+                <select class="form-control" name="service_id" id="">
+                    <option value=""> ---- </option>
+                    @foreach($services as $service)
+                        <option @if(old('service_id') == $service->id ) selected @endif value="{{ $service->id }}">{{ $service->name }}</option>
+                    @endforeach
+                </select>
+                @error('service_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </template>
         <div class="form-group" id="discount_percentage-warapper">
             <label for="phone">رقم الجوال  السعودي</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"  placeholder="مثال +123456789" >
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"  placeholder="مثال 966512345678" >
             @error('phone')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -105,9 +109,9 @@ label{
             @enderror
         </div>
 
-         <div class="form-group" id="discount_percentage-warapper">
+        <div class="form-group" id="discount_percentage-warapper">
             <label for="phone">رقم الجوال  اليمني</label>
-           <input type="text" name="y_phone" id="y_phone" value="{{ old('y_phone') }}" placeholder="ادخل رقم الجوال اليمني  :+9671231313131" class="form-control" >
+            <input type="text" name="y_phone" id="y_phone" value="{{ old('y_phone') }}" placeholder="ادخل رقم الجوال اليمني  :967712345678" class="form-control" >
                     @error('y_phone')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror

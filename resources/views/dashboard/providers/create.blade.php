@@ -45,7 +45,7 @@ label{
         @csrf
         <div class="form-group">
             <label for="name">اسم الشركة   </label>
-            <input type="text" class="form-control" id="name_company" name="name_company"  value="{{ old('name_company') }}" required>
+            <input type="text" class="form-control" placeholder="الرواد" id="name_company" name="name_company"  value="{{ old('name_company') }}" required>
             @error('name_company')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -57,7 +57,7 @@ label{
             <select name="service_id" class="form-control">
                 <option value="">  ---- </option>
                 @foreach ($services as $service)
-                    <option value="{{$service->id}}"> {{$service->name}}</option>
+                    <option @if(old('service_id') == $service->id) selected @endif value="{{$service->id}}"> {{$service->name}}</option>
                 @endforeach
             </select>
             @error('service_id')
@@ -68,7 +68,7 @@ label{
         </div>
          <div class="form-group">
             <label for="name">المدينة   </label>
-            <input type="text" class="form-control" id="city" name="city"  value="{{ old('city') }}" required>
+            <input type="text" class="form-control" id="city" name="city" placeholder="الرياض"  value="{{ old('city') }}" required>
             @error('city')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -77,7 +77,7 @@ label{
         </div>
         <div class="form-group" id="discount_percentage-warapper">
             <label for="phone">رقم الجوال  السعودي</label>
-            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"  placeholder="مثال +123456789" >
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}"  placeholder="مثال +966512345678" >
             @error('phone')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -87,7 +87,7 @@ label{
 
          <div class="form-group" id="discount_percentage-warapper">
             <label for="y_phone">رقم الجوال  اليمني</label>
-           <input type="text" name="y_phone"  id="y_phone" value="{{ old('y_phone') }}"  placeholder="ادخل رقم الجوال اليمني  :+9671231313131" class="form-control" >
+           <input type="text" name="y_phone"  id="y_phone" value="{{ old('y_phone') }}"  placeholder="ادخل رقم الجوال اليمني  :967712345678" class="form-control" >
                     @error('y_phone')
                         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
                     @enderror
@@ -96,7 +96,7 @@ label{
         
         <div class="form-group">
             <label for="password">كلمة السر</label>
-            <input type="password" class="form-control" id="password" name="password"  value="{{ old('password') }}"   required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="******"  value="{{ old('password') }}"   required>
             @error('password')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -106,8 +106,7 @@ label{
        
         <button type="submit" class="btn btn-success btn-lg">ااضافة  </button>
          
-         <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
-     <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.providers.index') }}">اغلاق</a>
+     <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.providers.index') }}">رجوع</a>
     </form>
     </div>
 @endsection

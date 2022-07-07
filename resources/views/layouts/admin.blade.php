@@ -96,31 +96,31 @@
                         <li><span class="glyphicon glyphicon-home"></span><a
                                 href="{{ route('dashboard.admin.index') }}">صفحه رئيسية</a></li>
 
-                        <li><span class="glyphicon glyphicon-user"></span><a href="">القرع </a>
+                        <!-- <li><span class="glyphicon glyphicon-user"></span><a href="">القرع </a>
                             <ul class="drop_main_menu">
                                 <li><a href="{{ route('dashboard.competitions.index') }}">عرض القرع </a></li>
                                 <li><a href="{{ route('dashboard.competitions.create') }}">انشاء القرع </a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
-                        <li><span class="glyphicon glyphicon-home"></span><a
-                                href="{{ route('dashboard.participants.index') }}">المشاركون</a></li>
+                        <!-- <li><span class="glyphicon glyphicon-home"></span><a
+                                href="{{ route('dashboard.participants.index') }}">المشاركون</a></li> -->
                         <li><span class="glyphicon glyphicon-user"></span><a href="">المسوقون </a>
                             <ul class="drop_main_menu">
                                 <li><a href="{{ route('dashboard.marketers.index') }}">عرض المسوقون </a></li>
-                                <li><a href="{{ route('admin.nom.index') }}"> قائمة المسوقين الغير معتمدين</a></li>
+                                <!-- <li><a href="{{ route('admin.nom.index') }}"> قائمة المسوقين الغير معتمدين</a></li> -->
 
                                 <li><a href="{{ route('dashboard.marketers.chargeForm', 'null') }}">شحن مسوق </a>
                                 </li>
                             </ul>
                         </li>
-                        <li><span class="glyphicon glyphicon-user"></span><a
+                        <!-- <li><span class="glyphicon glyphicon-user"></span><a
                                 href="{{ route('admin.lab.index') }}">المختبرات </a>
                             <ul class="drop_main_menu">
                                 <li><a href="{{ route('admin.lab.index') }}">عرض المختبرات </a></li>
                                 <li><a href="{{ route('admin.pcrs', 'null') }}">طلبات فحص كرونا </a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         <li><span class="glyphicon glyphicon-user"></span><a
                                 href="{{ route('admin.reservations.confirmAll') }}">حجوزات النقل بالباص </a>
@@ -135,9 +135,9 @@
                             <ul class="drop_main_menu">
                                 <li><a href="{{ route('dashboard.providers.index') }}">اداره المزودون </a></li>
                                 {{-- <li><a href="{{route('dashboard.providers.provider_car')}}">مزود بسيارة خاصة </a></li> --}}
-                                <li><a href="{{ route('dashboard.providers.pfar') }}">طلبات صلاحيه مالية للمسوقين
+                                <!-- <li><a href="{{ route('dashboard.providers.pfar') }}">طلبات صلاحيه مالية للمسوقين
                                     </a>
-                                </li>
+                                </li> -->
 
                             </ul>
                         </li>

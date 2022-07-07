@@ -32,6 +32,26 @@ class HajReservationController extends \App\Http\Controllers\Controller
         return view('providers.haj-reservation.show', ['reservation' => $reservation]);
     }
 
+    public function passengerInfo($reservation)
+    {
+        $reservation = Reseervation::findOrFail($reservation);
+        // dd($reservation);
+
+        return view('providers.haj-reservation.passenger-info', ['reservation' => $reservation]);
+    }
+
+    public function storePassengerInfo(Request $request, $reservation_id)
+    {
+        // dd($request->all());
+        $reservation = Reseervation::findOrFail($reservation_id);
+        $reservation->update([
+            'haj_passenger_external_ticket_number' => $request->haj_passenger_external_ticket_number,
+            'haj_passenger_hotel_details' => $request->haj_passenger_hotel_details,
+            'haj_passenger_sickness_status' => $request->haj_passenger_sickness_status,
+        ]);
+        return redirect()->route('provider.haj.reservations.index')->with(['success' => 'تم تعديل البيانات بنجاح']);
+    }
+
     public function create()
     {
         // 

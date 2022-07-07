@@ -74,20 +74,20 @@ label{
        
         <div class="form-group mt-2">
             <label for="passenger_phone">جوال المسافر</label>
-        <input type="text" class="form-control" id="passenger_phone" name="passenger_phone" placeholder="مثال 0598745632" @if($reservation) value="{{$reservation->passenger_phone}}" @endif >
+        <input type="text" class="form-control" id="passenger_phone" name="passenger_phone" placeholder="مثال 966512345678" @if($reservation) value="{{$reservation->passenger->phone ?? old('passenger_phone')}}" @endif >
         </div>
         <div class="form-group mt-2">
             <label for="passenger_phone">جوال المسافر اليمني  </label>
-           <input type="text" class="form-control" id="passenger_phone_yem" name="passenger_phone_yem" placeholder="مثال 712313131" @if($reservation) value="{{$reservation->passenger_phone_yem}}" @endif >
+           <input type="text" class="form-control" id="passenger_phone_yem" name="passenger_phone_yem" placeholder="مثال 967712345678" @if($reservation) value="{{$reservation->passenger->y_phone ?? old('passenger_phone_yem')}}" @endif >
         </div>
         
         <div class="form-group mt-2">
             <label for="subject">موضوع الرسالة</label>
-            <input type="text" class="form-control" name="subject" id="subject" required>
+            <input type="text" class="form-control" name="subject" value="{{ old('subject') }}" id="subject" required>
         </div>
         <div class="form-group mt-2">
             <label for="message">الرسالة</label>
-            <textarea class="form-control" id="message"  name="message"></textarea>
+            <textarea class="form-control" id="message"  name="message">{{ old('message') }}</textarea>
         </div>
         <button class="btn btn-success btn-lg" type="submit">أرسل الرسالة</button>
           <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
