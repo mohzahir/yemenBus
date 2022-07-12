@@ -126,16 +126,18 @@
                     <th rowspan="2"> المزود</th>
                     <th rowspan="2"> المسوق</th>
                     <!-- <th rowspan="2">اسم المسافر </th> -->
-                    <th rowspan="2">مكان الصعود </th>
-                    <th rowspan="2">مكان النزول </th>
+                    <th rowspan="2">مكان الانطلاق</th>
+                    <th rowspan="2">مكان الوصول</th>
+                    <th rowspan="2">مكان صعود الراكب </th>
+                    <th rowspan="2">مكان نزول الراكب </th>
                     <!-- <th rowspan="2">جوال المسافر السعودي</th> -->
                     <!-- <th rowspan="2">جوال المسافر اليمني</th> -->
+                    <th rowspan="2">مبلغ التزكرة</th>
+                    <th rowspan="2">المبلغ المدفوع</th>
+                    <th rowspan="2">المبلغ المتبقي</th>
                     <th rowspan="2">التاريخ</th>
                     <th rowspan="2">اليوم</th>
-                    <th rowspan="2">من مدينة</th>
-                    <th rowspan="2">الى مدينة</th>
-                    <th rowspan="2">مبلغ الحجز الكلي بالطلب</th>
-                    <th rowspan="2">المبلغ المدفوع</th>
+                    <th rowspan="2">موعد الحضور</th>
                     <th rowspan="2">نوع التأكيد</th>
                     <th rowspan="2">بوابة الدفع</th>
                     <th rowspan="2">عدد التذاكر</th>
@@ -173,12 +175,18 @@
 
                     {{-- <td>{{ $reservation->code }}</td> --}}
                     <!-- <td>{{ $reservation->passenger->name_passenger }}</td> -->
-                    <td>{{ $reservation->ride_place ?? '-' }}</td>
-                    <td>{{ $reservation->drop_place ?? '-' }}</td>
+                    <td>{{ $reservation->trip->takeoff_city->name }}</td>
+                    <td>{{ $reservation->trip->arrival_city->name }}</td>
+                    <td>{{ $reservation->ride_place ?? $reservation->trip->takeoff_city->name }}</td>
+                    <td>{{ $reservation->drop_place ?? $reservation->trip->arrival_city->name }}</td>
                     <!-- <td>{{ $reservation->passenger->phone ?? '-' }}</td> -->
                     <!-- <td>{{ $reservation->passenger->y_phone ?? '-' }}</td> -->
+                    <td>{{ $reservation->total_price }} SAR</td>
+                    <td>{{ $reservation->paid ?? 0 }} SAR</td>
+                    <td>{{ ($reservation->total_price - $reservation->paid) }} SAR</td>
                     <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
-
+                    
+                    
                     <td>
                         @switch($reservation->trip->day)
                         @case('sat')السبت@break
@@ -191,10 +199,7 @@
                         @default
                         @endswitch
                     </td>
-                    <td>{{ $reservation->trip->takeoff_city->name }}</td>
-                    <td>{{ $reservation->trip->arrival_city->name }}</td>
-                    <td>{{ $reservation->total_price }} SAR</td>
-                    <td>{{ $reservation->paid ?? 0 }} SAR</td>
+                    <td>{{ $reservation->trip->coming_time }}</td>
                     <td>
                         @switch($reservation->payment_type)
                         @case('total_payment') المبلغ كامل @break
@@ -215,7 +220,7 @@
                         <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
                         <a href="{{ route('haj.reservations.destroy',['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status != 'canceled' ? '' : 'disabled' }}">الغاء الحجز</a>
                         <a class="btn btn-sm btn-success {{ $reservation->payment_method == 'bank' && $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد التحويل البنكي</a>
-                        <a class="btn btn-sm btn-warning" href="{{ route('provider.haj.reservations.passenger.info', ['id' => $reservation->id]) }}">معلومات الحاج\المعتمر</a>
+                        <a class="btn btn-sm btn-warning" href="{{ route('haj.reservations.passenger.info', ['id' => $reservation->id]) }}">معلومات الحاج\المعتمر</a>
                     </td>
                     <td style="width:150px;margin-top:30px">
                         <a class="btn btn-sm btn-primary" href="{{ route('admin.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>

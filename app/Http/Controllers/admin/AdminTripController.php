@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\City;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddTripRequest;
 use Illuminate\Http\Request;
@@ -19,13 +20,32 @@ class AdminTripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $trips = Trip::orderBy('id', 'DESC')->paginate(10);
-
-
-        return view('dashboard.providers.trips')->with('trips', $trips);
+        $providers = Provider::when($request->service_id, function ($q) use ($request) {
+            $q->where('service_id', $request->service_id);
+        })->pluck('id');
+        $trips = Trip::query()
+            ->when($request->provider_id, function ($q) use ($request) {
+                $q->where('provider_id', $request->provider_id);
+            })
+            ->when($request->day, function ($q) use ($request) {
+                $q->where('day', $request->day);
+            })
+            ->when($request->takeoff_city_id, function ($q) use ($request) {
+                $q->where('takeoff_city_id', $request->takeoff_city_id);
+            })
+            ->when($request->arrival_city_id, function ($q) use ($request) {
+                $q->where('arrival_city_id', $request->arrival_city_id);
+            })
+            ->whereIn('provider_id', $providers)->orderBy('id', 'DESC')->paginate(10);
+        $services = Service::all();
+        $cities = City::all();
+        return view('dashboard.providers.trips')->with([
+            'trips' => $trips,
+            'services' => $services,
+            'cities' => $cities,
+        ]);
     }
 
     /**

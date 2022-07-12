@@ -83,7 +83,7 @@
 </div>
 @endif
 <div class="d-flex justify-content-between" style="dispaly:inline;">
-  <h1>المزودين</h1>
+  <h1>المزودون</h1>
 </div>
 @endsection
 
@@ -94,17 +94,33 @@
   <nav aria-label="breadcrumb" style="margin-top:-50px;">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{route('dashboard.admin.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-      <li class="breadcrumb-item active" aria-current="page"> المزودين</li>
+      <li class="breadcrumb-item active" aria-current="page"> المزودون</li>
     </ol>
   </nav>
   <div>
-    <h1 style="display: inline-block">المزودين</h1><a href="{{route('dashboard.providers.create')}}" class="btn btn-success btn-lg" style="float:left">اضافة مزود </a>
+    <h1 style="display: inline-block">المزودون</h1><a href="{{route('dashboard.providers.create')}}" class="btn btn-success btn-lg" style="float:left">اضافة مزود </a>
  
     {{-- <a href="{{route('dashboard.providers.create_haj')}}" class="btn btn-success btn-lg" style="float:left">اضافة مزود حج وعمرة </a> --}}
     
   </div>
   @include('flash-message')
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="اكتب اسم الشركة او رقم الجوال او المدينة " style="background-image: url('{{ asset('img/search.png')}}');">
+  <div class="row">
+    <div class="col-md-6">
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="اكتب اسم الشركة او رقم الجوال او المدينة " style="background-image: url('{{ asset('img/search.png')}}');">
+    </div>
+    <div class="col-md-6">
+      <form id="form" action="">
+        <div class="form-group">
+          <select onchange="$('#form').submit()" class="form-control" name="service_id" id="">
+            <option value=""> -- اختر القسم -- </option>
+            @foreach($services as $service)
+            <option value="{{ $service->id }}"> {{ $service->name }} </option>
+            @endforeach
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div class="table-responsive">
 

@@ -130,17 +130,19 @@
                         </li>
 
 
-                        <li><span class="glyphicon glyphicon-user"></span><a
+                        <!-- <li><span class="glyphicon glyphicon-user"></span><a
                                 href="{{ route('dashboard.providers.index') }}">المزودون </a>
                             <ul class="drop_main_menu">
                                 <li><a href="{{ route('dashboard.providers.index') }}">اداره المزودون </a></li>
-                                {{-- <li><a href="{{route('dashboard.providers.provider_car')}}">مزود بسيارة خاصة </a></li> --}}
-                                <!-- <li><a href="{{ route('dashboard.providers.pfar') }}">طلبات صلاحيه مالية للمسوقين
+                                <li><a href="{{route('dashboard.providers.provider_car')}}">مزود بسيارة خاصة </a></li>
+                                <li><a href="{{ route('dashboard.providers.pfar') }}">طلبات صلاحيه مالية للمسوقين
                                     </a>
-                                </li> -->
+                                </li>
 
                             </ul>
-                        </li>
+                        </li> -->
+                        <li><span class="glyphicon glyphicon-edit"></span>
+                            <a href="{{ route('dashboard.providers.index') }}"> المزودون </a></li>
                         <li><span class="glyphicon glyphicon-edit"></span><a
                                 href="{{ route('dashboard.provider.trip.create') }}">اضافة رحلات</a></li>
                         <li><span class="glyphicon glyphicon-edit"></span><a

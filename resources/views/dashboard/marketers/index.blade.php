@@ -91,7 +91,22 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
  </div>
      @include('flash-message')
 
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="بحث عن  المسوق " style="background-image: url('{{ asset('img/search.png')}}');">
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="بحث عن  المسوق " style="background-image: url('{{ asset('img/search.png')}}');">
+      </div>
+      <form id="provider_form" action="">
+        <div class="col-md-6">
+          <select onchange="$('#provider_form').submit()" class="form-control" name="provider_id" id="">
+            <option value=""> -- اختر المزود -- </option>
+            @foreach($providers as $provider)
+            <option @if(request('provider_id') == $provider->id) selected @endif value="{{ $provider->id }}"> {{ $provider->name_company }} </option>
+            @endforeach
+          </select>
+        </div>
+      </form>
+    </div>
+
   <div class="table-responsive">
 
 <table id="myTable" class="table table-striped table-bordered"text-align:center">

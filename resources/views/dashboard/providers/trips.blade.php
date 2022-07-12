@@ -113,7 +113,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard.admin.index') }}"> <span
                             class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-                <li class="breadcrumb-item active" aria-current="page">>قائمة الرحلات</li>
+                <li class="breadcrumb-item active" aria-current="page">>قائمة رحلات النقل بالباص</li>
             </ol>
         </nav>
 
@@ -162,27 +162,42 @@
                                 <option value=""> الكل </option>
 
                                 @foreach ($providers as $provider)
-                                    <option value="{{ $provider->id }}">{{ $provider->name_company }}</option>
+                                    <option @if(request('provider_id') == $provider->id) selected @endif value="{{ $provider->id }}">{{ $provider->name_company }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <label>من تاريخ </label>
-                            <input type="date" name="from_date" id="from_date" class="form-control">
+                            <label>القسم\الخدمة</label>
+                            <select name="service_id" id="" class="form-control">
+                                <option value="">-- اختر القسم --</option>
+                                @foreach($services as $service)
+                                    <option @if(request('service_id') == $service->id) selected @endif value="{{ $service->id }}">{{ $service->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>الى مدينة </label>
+                            <select name="arrival_city_id" id="" class="form-control">
+                                <option  value="">-- اختر المدينة--</option>
+                                @foreach($cities as $city)
+                                    <option @if(request('arrival_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-sm-6">
                             <label>من مدينة</label>
-                            <input type="text" name="from" id="from" class="form-control">
+                            <select name="takeoff_city_id" id="" class="form-control">
+                                <option value="">-- اختر المدينة--</option>
+                                @foreach($cities as $city)
+                                    <option @if(request('takeoff_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="col-sm-6">
-                            <label>الى مدينة </label>
-                            <input type="text" name="to" id="to" class="form-control">
-                        </div>
 
                     </div>
-                    <button class="btn btn-success" id="serch" type="submit">بحث</button>
-                    <a class="btn btn-warning btn-close " href="">الغاء</a>
+                    <button class="btn btn-success" type="submit">بحث</button>
+                    <a class="btn btn-warning btn-close" href="{{ route('dashboard.providers.trips') }}">الغاء</a>
 
                 </form>
             </div>
@@ -192,7 +207,7 @@
         <div class="panel panel-primary" style="overflow: auto">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h3> قائمه الرحلات </h3>
+                    <h3> قائمه رحلات النقل بالباص </h3>
                 </div>
             </div>
             <div class="panel-body">
@@ -333,48 +348,4 @@
     <script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/js.js') }}"></script>
-    <script type="text/javascript">
-        $('#serch').on('click', function(e) {
-            e.preventDefault();
-            $day = $('#day').val();
-            $from_date = $('#from_date').val();
-            $from = $('#from').val();
-            $to = $('#to').val();
-            $pid = $('#provider_id').val();
-
-            $.ajax({
-                type: 'post',
-                url: '{{ route('dashboard.provider.filter') }}',
-                data: {
-
-                    'day': $day,
-                    'date': $from_date,
-                    'from': $from,
-                    'to': $to,
-                    'provider_id': $pid,
-                    '_token': '{{ csrf_token() }}',
-
-
-                },
-                success: function(data) {
-                    if (data) {
-                        $('#trips').html(" ");
-                        for (i = 0; i < data.length; i++) {
-
-                            $('#trips').append(data[i]);
-                        }
-                    } else {
-                        $('#trips').html(" ");
-                    }
-                }
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'csrftoken': '{{ csrf_token() }}'
-            }
-        });
-    </script>
 @endsection

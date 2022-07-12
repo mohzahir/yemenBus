@@ -17,10 +17,17 @@ use Str;
 
 class AdminMarketersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $marketers = Marketer::orderby('created_at', 'desc')->paginate('10');
-        return view('dashboard.marketers.index')->with('marketers', $marketers);
+        $marketers = Marketer::when($request->provider_id, function ($q) use ($request) {
+            $q->where('provider_id');
+        })
+            ->orderby('created_at', 'desc')->paginate('10');
+        $providers = Provider::all();
+        return view('dashboard.marketers.index')->with([
+            'marketers' => $marketers,
+            'providers' => $providers
+        ]);
     }
     public function show($id)
     {

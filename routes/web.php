@@ -246,7 +246,7 @@ Route::prefix('dashboard')->middleware('admin')->group(function () {
     Route::get('haj/reservations/passenger/{id}', 'admin\HajReservationController@passengerInfo')->name('haj.reservations.passenger.info');
     Route::post('haj/reservations/passenger/{id}', 'admin\HajReservationController@storePassengerInfo')->name('haj.reservations.storePassengerInfo');
     Route::post('haj/reservations/{id}', 'admin\HajReservationController@update')->name('haj.reservations.update');
-    Route::get('haj/reservations/{id}', 'admin\HajReservationController@destroy')->name('haj.reservations.destroy');
+    Route::get('haj/reservations/destroy/{id}', 'admin\HajReservationController@destroy')->name('haj.reservations.destroy');
 });
 
 Route::prefix('marketers')->middleware('marketer')->group(function () {
@@ -390,7 +390,7 @@ Route::prefix('provider')->middleware('provider')->group(function () {
     Route::get('haj/reservations', 'provider\HajReservationController@index')->name('provider.haj.reservations.index');
     Route::get('haj/reservations/{id}', 'provider\HajReservationController@show')->name('provider.haj.reservations.show');
     Route::post('haj/reservations/{id}', 'provider\HajReservationController@update')->name('provider.haj.reservations.update');
-    Route::get('haj/reservations/{id}', 'provider\HajReservationController@destroy')->name('provider.haj.reservations.destroy');
+    Route::get('haj/reservations/destroy/{id}', 'provider\HajReservationController@destroy')->name('provider.haj.reservations.destroy');
     Route::get('haj/reservations/passenger/{id}', 'provider\HajReservationController@passengerInfo')->name('provider.haj.reservations.passenger.info');
     Route::post('haj/reservations/passenger/{id}', 'provider\HajReservationController@storePassengerInfo')->name('provider.haj.reservations.storePassengerInfo');
 });

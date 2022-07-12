@@ -14,10 +14,17 @@ use Str;
 
 class AdminProvidersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $providers = Provider::orderby('created_at', 'desc')->paginate('10');
-        return view('dashboard.providers.index')->with('providers', $providers);
+        // dd($request);
+        $providers = Provider::when($request->service_id, function ($q) use ($request) {
+            $q->where('service_id', $request->service_id);
+        })->orderby('created_at', 'desc')->paginate('10');
+        $services = Service::all();
+        return view('dashboard.providers.index')->with([
+            'providers' => $providers,
+            'services' => $services,
+        ]);
     }
     public function pfar()
     {
