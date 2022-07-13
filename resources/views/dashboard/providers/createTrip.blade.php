@@ -143,7 +143,7 @@
                     }">
                         <div class="form-group">
                             <label for="order_id">الخدمة </label>
-                            <select x-on:change="getServiceProviders($($el).val())" class="form-control" required>
+                            <select x-on:change="getServiceProviders($($el).val())" name="service_id" class="form-control" required>
                                 <option value=""> -- اختر الخدمه --</option>
                                 @foreach ($services as $service)
                                     <option @if(old('service_id') == $service->id) selected @endif value="{{ $service->id }}">{{ $service->name }}</option>
@@ -214,7 +214,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="arrival_city_id">الى مدينة </label>
-                                    <select name="arrival_city_id" id="arrival_city_id" class="form-control">
+                                    <select name="arrival_city_id" id="arrival_city_id" class="form-control" required>
                                         <option value=""> -- اختر--</option>
                                         @foreach ($cities as $city)
                                             <option @if(old('arrival_city_id') == $city->id) selected @endif data-country="{{ $city->country }}" value="{{ $city->id }}">
@@ -226,7 +226,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="takeoff_city_id">من مدينة </label>
-                                    <select name="takeoff_city_id" id="takeoff_city_id" class="form-control">
+                                    <select name="takeoff_city_id" id="takeoff_city_id" class="form-control" required>
                                         <option value=""> -- اختر--</option>
                                         @foreach ($cities as $city)
                                             <option @if(old('takeoff_city_id') == $city->id) selected @endif data-country="{{ $city->country }}" value="{{ $city->id }}">
@@ -321,7 +321,7 @@
                             <div class="col-md-3">
                                 <div class="form-group mt-2">
                                     <label for="no_ticket">عدد التذاكر </label>
-                                    <input type="number" min="0" placeholder="30" class="form-control" name="no_ticket" value="{{ old('no_ticket') }}">
+                                    <input type="number" min="0" placeholder="30" class="form-control" name="no_ticket" value="{{ old('no_ticket') }}" required>
                                 </div>
 
                             </div>
