@@ -113,7 +113,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard.admin.index') }}"> <span
                             class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-                <li class="breadcrumb-item active" aria-current="page">>قائمة رحلات النقل بالباص</li>
+                <li class="breadcrumb-item active" aria-current="page">>قائمة الرحلات</li>
             </ol>
         </nav>
 
@@ -137,23 +137,23 @@
                     @csrf
                     <div class="row">
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label>اليوم </label>
 
                             <select name="day" class="form-control" id="day">
                                 <option value="">اختر</option>
 
-                                <option value="all">كل يوم </option>
-                                <option value="sat">السبت</option>
-                                <option value="sun">الاحد </option>
-                                <option value="mon">الاثنين </option>
-                                <option value="tue">الثلاثاء </option>
-                                <option value="wed">الاربعاء </option>
-                                <option value="thu">الخميس </option>
-                                <option value="fri">الجمعة </option>
+                                <option @if(request('day') == 'all') selected @endif value="all">كل يوم </option>
+                                <option @if(request('day') == 'sat') selected @endif value="sat">السبت</option>
+                                <option @if(request('day') == 'sun') selected @endif value="sun">الاحد </option>
+                                <option @if(request('day') == 'mon') selected @endif value="mon">الاثنين </option>
+                                <option @if(request('day') == 'tue') selected @endif value="tue">الثلاثاء </option>
+                                <option @if(request('day') == 'wed') selected @endif value="wed">الاربعاء </option>
+                                <option @if(request('day') == 'thu') selected @endif value="thu">الخميس </option>
+                                <option @if(request('day') == 'fri') selected @endif value="fri">الجمعة </option>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label>الشركة </label>
                             <select name="provider_id" class="form-control" id="provider_id">
                                 <?php $providers = App\Provider::all(); ?>
@@ -166,7 +166,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
+                            <label>التاريخ</label>
+                            <input type="date" class="form-control" value="{{ request('from_date') }}" name="from_date">
+                        </div>
+                        <div class="col-sm-3">
                             <label>القسم\الخدمة</label>
                             <select name="service_id" id="" class="form-control">
                                 <option value="">-- اختر القسم --</option>
@@ -207,7 +211,7 @@
         <div class="panel panel-primary" style="overflow: auto">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h3> قائمه رحلات النقل بالباص </h3>
+                    <h3> قائمه الرحلات </h3>
                 </div>
             </div>
             <div class="panel-body">
@@ -248,7 +252,7 @@
                                     <td>{{ $trip->lines_trip }}</td>
                                     <td>{{ $trip->no_ticket }}</td>
                                     <td>
-                                        <?php $days = explode(',', $trip->day); ?>
+                                        <?php $days = json_decode($trip->day, true); ?>
                                         @foreach ($days as $day)
                                             @switch($day)
                                                 @case('sat')

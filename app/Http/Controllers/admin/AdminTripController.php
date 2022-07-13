@@ -29,8 +29,11 @@ class AdminTripController extends Controller
             ->when($request->provider_id, function ($q) use ($request) {
                 $q->where('provider_id', $request->provider_id);
             })
-            ->when($request->day, function ($q) use ($request) {
-                $q->where('day', $request->day);
+            ->when($request->from_date, function ($q) use ($request) {
+                $q->where('from_date', '>', $request->from_date);
+            })
+            ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                $q->where('day', 'like', '%' . $request->day . '%');
             })
             ->when($request->takeoff_city_id, function ($q) use ($request) {
                 $q->where('takeoff_city_id', $request->takeoff_city_id);
@@ -122,7 +125,7 @@ class AdminTripController extends Controller
         $trip->price = $request->price;
         $trip->deposit_price = $request->deposit_price;
         $trip->currency = $currency;
-        $trip->day = $request->day;
+        $trip->day = json_encode($request->day);
         $trip->days_count = $request->days_count;
         $trip->program_details_file = $file;
         $trip->program_details_page_content = $request->program_details_page_content;
