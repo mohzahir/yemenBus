@@ -110,7 +110,7 @@
                 <li class="breadcrumb-item active" aria-current="page"> حجز رقم {{ ($reservation->id) }}</li>
             </ol>
         </nav>
-        <h1 style="text-align:center">تاكيد حجز حج وعمرة</h1>
+        <h1 style="text-align:center">تاكيد حجز</h1>
 
         @include('flash-message')
     </div>

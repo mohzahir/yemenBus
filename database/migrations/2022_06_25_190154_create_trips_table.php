@@ -17,6 +17,7 @@ class CreateTripsTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('provider_id');
             $table->integer('sub_service_id');
+            $table->string('title')->nullable();
             $table->enum('air_river', ['air', 'river'])->nullable()->comment("omra haj program");
             $table->enum('direcation', ['sty', 'yts', 'loc', '']);
             $table->integer('takeoff_city_id');

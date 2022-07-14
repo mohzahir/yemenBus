@@ -37,7 +37,7 @@
             </div>
             <div class="col-lg-8">
                 <form class="form-contact contact_form" action="{{ route('passengers.tripCheckout',[$order->id])}}"
-                     method="post">
+                     method="post" enctype="multipart/form-data">
                      @csrf
                     <div class="row">
                         <div class="col-sm-12 amount-pay">
@@ -102,7 +102,8 @@
                         <div class="col-sm-12 bank-trans" style="display: none">
                             <div class="form-group">
                                 <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
-                                <p>يرجى ارسال صورة التحويل الى رقم الواتس او البريد الالكتروني</p>
+                                <p>يرجى التحويل الى رقم الحساب (1232323) وارفاق صورة التحويل </p>
+                                <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
                             </div>
 
                         </div>

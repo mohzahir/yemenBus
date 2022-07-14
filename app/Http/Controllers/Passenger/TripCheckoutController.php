@@ -289,14 +289,21 @@ class TripCheckoutController extends Controller
             //check if there are tickets available in trip 
             if ($trip->no_ticket > $reservation->ticket_no) {
                 //progress
+
+                $payment_image = null;
+                if ($request->payment_image) {
+                    $payment_image = $request->file('payment_image')->store('files', 'public_folder');
+                }
+
                 $reservation->update([
                     //    'passenger_id' => Auth::guard('passenger')->id() ,
                     'payment_type' => $request->payment_type, // ['total_payment','deposit_payment','later_payment'])->default('later_payment')
                     'payment_method' => $payment_method, //['telr','bank','inBus'])->default('inBus')
                     'payment_time' => date('Y-m-d H:i:s'),
+                    'payment_image' => $payment_image,
                     'paid' => $price,
                     'currency' => $trip->currency,
-                    'status' => $request->payment_type == 'later_payment' ? 'created' : 'confirmed',
+                    'status' => 'created',
 
                 ]);
 
@@ -388,6 +395,8 @@ class TripCheckoutController extends Controller
                 }
             }
 
+
+
             $reservation = Reseervation::create([
                 // 'id' => Str::uuid()->toString(),
                 'trip_id' => $tripId,
@@ -400,7 +409,7 @@ class TripCheckoutController extends Controller
                 'payment_time' =>  null,
                 'payment_type' =>  null,
                 'total_price' =>  $trip->price,
-                'paid' => null,
+                'paid' => 0,
                 'currency' => null,
                 // 'note' => $request->notes,
                 'status' => 'created',
@@ -539,6 +548,7 @@ class TripCheckoutController extends Controller
         $request->validate([
             'payment_type' => 'nullable|string|in:total_payment,deposit_payment,later_payment', // ['f','p','n'])->default('n')
             'payment_method' => 'nullable|string|in:telr,bank,inBus,paypal', //['telr','bank'])->default('bank')
+            'payment_image' => 'nullable',
 
         ]);
     }
@@ -575,7 +585,7 @@ class TripCheckoutController extends Controller
             'payment_method' => 'telr',
             'payment_time' => date('Y-m-d H:i:s'),
             'paid' => $transaction->amount,
-            'currency' => 'rs',
+            'currency' => $reservation->trip->currency,
             'status' => 'confirmed',
         ]);
 

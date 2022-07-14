@@ -261,6 +261,12 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
+                                            @if($trip->title)
+                                            <tr>
+                                                <td>العنوان</td>
+                                                <th>{{ $trip->title}}</th>
+                                            </tr>
+                                            @endif
                                             <tr>
                                                 <td>رقم الرحله</td>
                                                 <th>{{ $trip->id }}</th>

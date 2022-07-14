@@ -75,7 +75,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
             'status' => 'confirmed'
         ]);
 
-        return redirect()->route('haj.reservations.index')->with(['message' => 'تم تاكيد الحجز بنجاح']);
+        return redirect()->back()->with(['success' => 'تم تاكيد الحجز بنجاح']);
     }
 
     public function destroy($reservation_id)

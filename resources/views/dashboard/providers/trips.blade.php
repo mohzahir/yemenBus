@@ -225,6 +225,7 @@
                             <th>الخدمة </th>
                             <th>الخدمة الفرعية </th>
                             <th>الشركة </th>
+                            <th>العنوان </th>
                             <th> من </th>
                             <th>الى</th>
                             <th>سعر الرحلة </th>
@@ -246,6 +247,7 @@
                                     <td>{{ $trip->provider->service->name }}</td>
                                     <td>{{ $trip->sub_service->name }}</td>
                                     <td>{{ $trip->provider->name_company }}</td>
+                                    <td>{{ $trip->title }}</td>
                                     <td>{{ App\Trip::getCityName($trip->takeoff_city_id) }}</td>
                                     <td>{{ App\Trip::getCityName($trip->arrival_city_id) }}</td>
                                     <td>{{ $trip->price }}</td>

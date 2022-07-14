@@ -88,6 +88,10 @@
             @php $cities= App\City::all(); @endphp
 
             <div class="col-md-12 mt-2">
+                <label for="takeoff_city_id">العنوان </label>
+                <input type="text" class="form-control" name="title" placeholder="عنوان البرنامخ (اختياري)" value="{{ $trip->title }}">
+            </div>
+            <div class="col-md-12 mt-2">
                 <label for="takeoff_city_id">من مدينة </label>
                 <select name="takeoff_city_id" id="takeoff_city_id" class="form-control">
                     <option value=""> -- اختر--</option>

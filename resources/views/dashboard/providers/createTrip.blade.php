@@ -142,6 +142,10 @@
                         }
                     }">
                         <div class="form-group">
+                            <label for="order_id">عنوان البرنامج </label>
+                            <input type="text" class="form-control" name="title" placeholder="عنوان البرنامخ (اختياري)" value="{{ old('title') }}">
+                        </div>
+                        <div class="form-group">
                             <label for="order_id">الخدمة </label>
                             <select x-on:change="getServiceProviders($($el).val())" name="service_id" class="form-control" required>
                                 <option value=""> -- اختر الخدمه --</option>

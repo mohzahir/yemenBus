@@ -211,6 +211,7 @@
 
           <td>{{ $reservation->ticket_no }} </td>
           <td style="display:inline-block;width:350px;">
+            <a class="btn btn-sm btn-success {{ $reservation->payment_method == 'bank' && $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد التحويل البنكي</a>
             <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
             <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->

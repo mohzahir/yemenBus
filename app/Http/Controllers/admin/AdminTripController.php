@@ -108,6 +108,7 @@ class AdminTripController extends Controller
         $currency = $request->service_id == 3 ? 'rs' : ($request->direcation == 'sty' ? 'rs' : 'ry');
 
         $trip = new Trip();
+        $trip->title = $request->title;
         $trip->provider_id = $request->provider_id;
         $trip->sub_service_id = $request->sub_service_id;
         $trip->air_river = $request->air_river;
@@ -167,6 +168,7 @@ class AdminTripController extends Controller
     {
 
         $trip = Trip::where('id', $id)->first();
+        $trip->title = $request->title;
         $trip->direcation = $request->direcation;
         $trip->takeoff_city_id = $request->takeoff_city_id;
         $trip->arrival_city_id = $request->arrival_city_id;
