@@ -184,6 +184,7 @@
 
           <td>
             @switch($reservation->trip->day)
+            @case('all')يوميا@break
             @case('sat')السبت@break
             @case('sun')الاحد@break
             @case('mon')الاثنين@break
@@ -202,16 +203,19 @@
             @case('deposit_payment')بعربون@break
             @case('later_payment')الدفع لاحقا@break
             @default -
-            @endswitch</td>
-            <td>
-              @switch($reservation->payment_method)
-              @case('bank') الدفع البنكي @break
-              @case('telr')بوبة تبلر@break
-              @endswitch</td>
+            @endswitch
+          </td>
+          <td>
+            @switch($reservation->payment_method)
+            @case('bank') الدفع البنكي @break
+            @case('telr')بوبة تبلر@break
+            @case('inBus')كاش@break
+            @endswitch
+          </td>
 
           <td>{{ $reservation->ticket_no }} </td>
           <td style="display:inline-block;width:350px;">
-            <a class="btn btn-sm btn-success {{ $reservation->payment_method == 'bank' && $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد التحويل البنكي</a>
+            <a class="btn btn-sm btn-success {{ $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد الدفع\الحجز</a>
             <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
             <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->

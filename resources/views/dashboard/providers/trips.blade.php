@@ -285,6 +285,10 @@
                                                     الجمعة
                                                 @break
 
+                                                @case('all')
+                                                    كل الايام
+                                                @break
+
                                                 @default
                                             @endswitch
                                         @endforeach

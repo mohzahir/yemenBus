@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Http\Requests\AddTripRequest;
 use Illuminate\Http\Request;
 use App\Provider;
@@ -18,11 +19,36 @@ class TripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $id = Auth::guard('provider')->user()->id;
-        $trips = Trip::where('provider_id', $id)->orderby('created_at', 'desc')->paginate(10);
-        return view('providers.trip.index')->with('trips', $trips);
+        $trips = Trip::query()
+            // ->when($request->provider_id, function ($q) use ($request) {
+            //     $q->where('provider_id', $request->provider_id);
+            // })
+            ->when($request->from_date, function ($q) use ($request) {
+                $q->where('from_date', '>', $request->from_date);
+            })
+            ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                $q->where('day', 'like', '%' . $request->day . '%');
+            })
+            ->when($request->takeoff_city_id, function ($q) use ($request) {
+                $q->where('takeoff_city_id', $request->takeoff_city_id);
+            })
+            ->when($request->arrival_city_id, function ($q) use ($request) {
+                $q->where('arrival_city_id', $request->arrival_city_id);
+            })
+            // ->whereIn('provider_id', $providers)
+            ->where('provider_id', $id)
+            ->orderBy('id', 'DESC')->paginate(10);
+        $services = Service::all();
+        $cities = City::all();
+        // $trips = Trip::where('provider_id', $id)->orderby('created_at', 'desc')->paginate(10);
+        return view('providers.trip.index')->with([
+            'trips' => $trips,
+            'services' => $services,
+            'cities' => $cities,
+        ]);
     }
     public function haj()
     {
@@ -64,9 +90,10 @@ class TripController extends Controller
         //if service is haj currency is in rs
         $currency = $request->service_id == 3 ? 'rs' : ($request->direcation == 'sty' ? 'rs' : 'ry');
 
-        $day = implode(',', $request['day']);
+        // $day = implode(',', $request['day']);
         $trip = new Trip();
         $trip->provider_id = $request->provider_id;
+        $trip->title = $request->title;
         $trip->sub_service_id = $request->sub_service_id;
         $trip->air_river = $request->air_river;
         $trip->direcation = $request->direcation;
@@ -83,7 +110,7 @@ class TripController extends Controller
         $trip->price = $request->price;
         $trip->deposit_price = $request->deposit_price;
         $trip->currency = $currency;
-        $trip->day = $day;
+        $trip->day = json_encode($request->day);
         $trip->days_count = $request->days_count;
         $trip->program_details_file = $file;
         $trip->program_details_page_content = $request->program_details_page_content;
@@ -94,7 +121,7 @@ class TripController extends Controller
     {
         $user = Auth::guard('provider')->user()->car;
         // dd($user); 
-        $day = implode(',', $request['day']);
+        // $day = implode(',', $request['day']);
         $trip = new Trip();
         $trip->direcation = $request->direcation;
         $trip->haj = $request->haj;
@@ -111,7 +138,7 @@ class TripController extends Controller
         $trip->no_ticket = $request->no_ticket;
         $trip->note = $request->note;
         $trip->price = $request->price;
-        $trip->day = $day;
+        $trip->day = json_encode($request->day);
 
 
         $trip->save();
@@ -154,13 +181,14 @@ class TripController extends Controller
     public function update(Request $request, $id)
     {
         $trip = Trip::where('id', $id)->first();
+        $trip->title = $request->title;
         $trip->direcation = $request->direcation;
         $trip->takeoff_city_id = $request->takeoff_city_id;
         $trip->arrival_city_id = $request->arrival_city_id;
         $trip->lines_trip = $request->lines_trip;
         $trip->to_date = $request->to_date;
         $trip->from_date = $request->from_date;
-        $trip->day = implode(',', $request['day']);
+        $trip->day = json_encode($request->day);
 
         $trip->coming_time = $request->coming_time;
         $trip->leave_time = $request->leave_time;

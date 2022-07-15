@@ -119,10 +119,11 @@
         <div class="col-md-12">
             <img style="width: 100%;" src="{{ asset($reservation->payment_image) }}" alt="">
             <p class="text-danger"> الرجاء التأكد من الحساب البنكي والصورة المرفقه قبل تأكيد الحجز </p>
+            <p class="text-danger"> اذا كان الدفع كاش الرجاء تاكيد الدفع بعد استلام المبلغ من العميل </p>
         </div>
         <div class="col-md-12 mt-3">
             <button onclick="submitForm()" class="btn btn-success">تاكيد الحجز</button>
-            <a href="{{ route('haj.reservations.index') }}" class="btn btn-danger">الغاء</a>
+            <button onclick="history.back();" class="btn btn-danger">رجوع</button>
         </div>
         <form id="form" action="{{ route('haj.reservations.update', ['id' => $reservation->id]) }}" method="post" >
             @csrf

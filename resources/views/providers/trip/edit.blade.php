@@ -70,97 +70,6 @@ a.tm-tag-remove {
 <h1 style="text-align:center"> تعديل رحلة  </h1>
 @include('flash-message')
 
-    {{-- <form action="{{ route('provider.trip.update',$trip->id) }}" class="pb-4 @if ($errors->any()) was-validated @endif" method="POST"style="margin-bottom:40px;">
-        @csrf
-        @method('put')
-        <div class="form-group mt-2">
-            <label for="order_id">اتجاه الرحله </label>
-        <select  class="form-control" name="direcation" required>
-  <option value="yts" @if($trip->direcation=='yts')selected @endif>من اليمن الى  السعودية </option>
-  <option value="byc" @if($trip->direcation=='byc')selected @endif>بين المدن  اليمنيه</option>
-        </select>
-           
-        </div>
-        <div class="form-group mt-2">
-            <label for="price">سعر الرحلة </label>
-            <input type="text" class="form-control" id="price" name="price" value="{{$trip->price}}" required>
-        </div>
-        <div class="row">
-        <div class="col-md-12 mt-2">
-            <label for="from">من مدينة </label>
-            <input type="text" class="form-control" id="from" name="from" value="{{$trip->from}}" required>
-        </div>
-        <div class="col-md-12 mt-2">
-            <label for="to">الى  مدينة </label>
-            <input type="text" class="form-control" value="{{$trip->to}}" id="to" name="to" required>
-        </div>
-    </div>
-
-       <div class="form-group mt-10"  style="margin-top:10px;">
-            <label for="order_url">خط سير الرحلة بالمدن التالية: </label>
-            <input type="text" name="lines_trip" id="lines_trip"  data-role="tagsinput"  @if($trip->lines_trip)value="{{$trip->lines_trip}}"@endif  placeholder="خط السير" class="tm-input form-control tm-input-info"/>
-
-        </div>
-        
-        <div class="form-group mt-2">
-            <label for="date">  من تاريخ  </label>
-            <input type="date" class="form-control" value="{{$trip->from_date}}" id="from_date" name="from_date"  required>
-        </div>
-        <div class="form-group mt-2">
-            <label for="date">  الى تاريخ  </label>
-            <input type="date" class="form-control" id="to_date" name="to_date"  value="{{$trip->to_date}}" required>
-        </div>
-        
-        
-               <div class="form-group mt-2">
-            <label for="days">اليوم</label>
-
-<select name="day[]" class=" form-control " data-live-search="true"  id="select2"   multiple required>
-                <option  id="all" value="all">كل  يوم </option>
-                <option id="sat" value="sat">السبت</option>
-                <option  id="sun"value="sun">الاحد </option>
-                <option  id="mon" value="mon">الاثنين </option>
-                <option id="tue" value="tue">الثلاثاء </option>
-                <option id="wed" value="wed">الاربعاء </option>
-                <option id="thu" value="thu">الخميس </option>
-                <option id="fri" value="fri">الجمعة </option>
-               
-            </select> 
-
-     </div>
- 
-             <div class="form-group mt-2">
-            <label for="date"> عدد التذاكر  </label>
-      <input type="number" class="form-control" id="number" name="no_ticket"  @if($trip->no_ticket)value="{{$trip->no_ticket}}"@endif>
-        </div>
-        
-        <div class="md-form mx-5 my-5">
-            <label for="inputMDEx1">حدد ساعة الحضور</label>
-
-            <input type="time" id="inputMDEx1" class="form-control" name="coming_time" @if($trip->coming_time)value="{{$trip->coming_time}}"@endif>
-        </div>
-      <span style="color:red;font-size:16px;margin-right:10px">ملاحظه://ساعة الحضور قبل موعد الحركة بساعتين</span>
-
-        <div class="md-form mx-5 my-5">
-            <label for="inputMDEx2">حدد ساعة  الحركة</label>
-
-            <input type="time" id="inputMDEx2" class="form-control" name="leave_time" @if($trip->leave_time)value="{{$trip->leave_time}}"@endif>
-        </div>
-
-        <div class="form-group mt-2">
-            <label for="weight">وزن العفش </label>
-            <input type="number" min="1" class="form-control" name="weight"   @if($trip->weight)value="{{$trip->weight}}"@endif>
-        </div>
-        <div class="form-group mt-2">
-            <label for="note">ملاحظة </label>
-            <input type="text" @if($trip->note)value="{{$trip->note}}"@endif  class="form-control" name="note">
-        </div>
-        <button type="submit" class="btn btn-success btn-lg">تعديل</button>
-    
-  <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a><a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.provider.showAccountInfo') }}">اغلاق</a>    <!-- TODO confirmation message after submission: 
-            سوف يتم خصم مبلغ الحجز () ريال. / سعودي. /يمني. من رصيدك ... -->
-    </form> --}}
-
     <form action="{{ route('provider.trip.update',$trip->id) }}"
         class="pb-4 @if ($errors->any()) was-validated @endif" method="POST" style=" margin-bottom:40px;">
         @csrf
@@ -169,6 +78,10 @@ a.tm-tag-remove {
         <div class="row">
             @php $cities= App\City::all(); @endphp
 
+            <div class="col-md-12 mt-2">
+                <label for="order_id">عنوان البرنامج </label>
+                <input type="text" class="form-control" name="title" placeholder="عنوان البرنامخ (اختياري)" value="{{ $trip->title }}">
+            </div>
             <div class="col-md-12 mt-2">
                 <label for="takeoff_city_id">من مدينة </label>
                 <select name="takeoff_city_id" id="takeoff_city_id" class="form-control">
@@ -227,17 +140,17 @@ a.tm-tag-remove {
         <div class="form-group mt-2">
             <label for="days">اليوم</label>
 
-            <select name="day[]" class=" form-control " data-live-search="true" id="select2" multiple required>
-                <option id="all" value="all">كل يوم </option>
-                <option id="sat" value="sat">السبت</option>
-                <option id="sun" value="sun">الاحد </option>
-                <option id="mon" value="mon">الاثنين </option>
-                <option id="tue" value="tue">الثلاثاء </option>
-                <option id="wed" value="wed">الاربعاء </option>
-                <option id="thu" value="thu">الخميس </option>
-                <option id="fri" value="fri">الجمعة </option>
-
-            </select>
+            <select name="day[]" class=" form-control " id="select2" multiple required>
+                <option  @if(strpos($trip->day, 'all') !== false) selected @endif  value="all">كل  يوم </option>
+                <option @if(strpos($trip->day, 'sat') !== false) selected @endif  value="sat">السبت</option>
+                <option  @if(strpos($trip->day, 'sun') !== false) selected @endif value="sun">الاحد </option>
+                <option  @if(strpos($trip->day, 'mon') !== false) selected @endif  value="mon">الاثنين </option>
+                <option @if(strpos($trip->day, 'tue') !== false) selected @endif  value="tue">الثلاثاء </option>
+                <option @if(strpos($trip->day, 'wed') !== false) selected @endif  value="wed">الاربعاء </option>
+                <option @if(strpos($trip->day, 'thu') !== false) selected @endif  value="thu">الخميس </option>
+                <option @if(strpos($trip->day, 'fri') !== false) selected @endif  value="fri">الجمعة </option>
+            
+            </select> 
 
         </div>
         <div class="form-group mt-2">
@@ -298,28 +211,12 @@ a.tm-tag-remove {
 
     <script>
         $('#select2').select2({
-            data:  ["all","sat","sun","mon","tue","tue","wed","thu","fri"],
+            data:  ["all","sat","sun","mon","tue","wed","thu","fri"],
             tags: true,
             maximumSelectionLength: 10,
             tokenSeparators: [',', ' '],
             placeholder: "حدد الايام",
                 dir: "rtl",
-
-            //minimumInputLength: 1,
-            //ajax: {
-           //   url: "you url to data",
-           //   dataType: 'json',
-            //  quietMillis: 250,
-            //  data: function (term, page) {
-            //     return {
-            //         q: term, // search term
-            //    };
-           //  },
-           //  results: function (data, page) { 
-           //  return { results: data.items };
-          //   },
-          //   cache: true
-           // }
         });
     </script>
 

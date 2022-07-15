@@ -196,7 +196,7 @@
           <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.passengersList',$reservation->reservation_id) }}">قائمه المسافرين</a>
           <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->reservation_id) }}">تأجيل الحجز</a>
           <a class="btn btn-sm btn-danger" href="{{ route('provider.reservations.cancel',$reservation->reservation_id) }}">الغاء الحجز</a>
-          <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->reservation_id) }}">نقل الى</a>
+          <!-- <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->reservation_id) }}">نقل الى</a> -->
           </td> --}}
           <td style="width:150px;margin-top:30px">
             <a class="btn btn-sm btn-primary" href="{{ route('dashboard.marketer.sms',$reservation->reservation_id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>

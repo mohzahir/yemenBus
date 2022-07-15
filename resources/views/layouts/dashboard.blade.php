@@ -39,7 +39,7 @@ font-family: 'Cairo', sans-serif;
     <!--Start header-->
     <div class="row header_section" >
         <div class="col-sm-3 col-xs-12 logo_area bring_right" style="float:right">
-            <h1 class="inline-block" ><img src="{{asset('img/logo.png')}}" alt="">لوحة تحكم</h1>
+            <h1 class="inline-block" ><img src="{{asset('img/logo.png')}}" alt="">{{ auth()->guard('admin')->user()->name }}</h1>
             <span class="glyphicon glyphicon-align-justify bring_left open_close_menu" data-toggle="tooltip"
                   data-placement="right" title="Tooltip on left"></span>
         </div>

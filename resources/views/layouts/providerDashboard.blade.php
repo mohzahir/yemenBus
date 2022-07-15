@@ -131,7 +131,7 @@
 
         <div class="row header_section">
             <div class="col-sm-3 col-xs-12 logo_area bring_right" style="float:right">
-                <h1 class="inline-block"><img src="{{asset('img/logo.png')}}" alt="">لوحة تحكم</h1>
+                <h1 class="inline-block"><img src="{{asset('img/logo.png')}}" alt="">{{ auth()->guard('provider')->user()->name_company }}</h1>
                 <span class="glyphicon glyphicon-align-justify bring_left open_close_menu" data-toggle="tooltip" data-placement="right" title="Tooltip on left"></span>
             </div>
             <div class="col-sm-3 col-xs-12 head_buttons_area bring_right hidden-xs" style="float:right">

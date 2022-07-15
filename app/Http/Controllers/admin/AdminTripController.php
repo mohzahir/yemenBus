@@ -175,7 +175,7 @@ class AdminTripController extends Controller
         $trip->lines_trip = $request->lines_trip;
         $trip->to_date = $request->to_date;
         $trip->from_date = $request->from_date;
-        $trip->day = implode(',', $request['day']);
+        $trip->day = json_encode($request->day);
 
         $trip->coming_time = $request->coming_time;
         $trip->leave_time = $request->leave_time;

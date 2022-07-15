@@ -149,15 +149,15 @@
         <div class="form-group mt-2">
             <label for="days">اليوم</label>
 
-            <select name="day" class=" form-control " required>
-                <option @if($trip->day == 'sat') selected @endif id="sat" value="sat">السبت</option>
-                <option @if($trip->day == 'sun') selected @endif id="sun" value="sun">الاحد </option>
-                <option @if($trip->day == 'mon') selected @endif id="mon" value="mon">الاثنين </option>
-                <option @if($trip->day == 'tue') selected @endif id="tue" value="tue">الثلاثاء </option>
-                <option @if($trip->day == 'wed') selected @endif id="wed" value="wed">الاربعاء </option>
-                <option @if($trip->day == 'thu') selected @endif id="thu" value="thu">الخميس </option>
-                <option @if($trip->day == 'fri') selected @endif id="fri" value="fri">الجمعة </option>
-
+            <select name="day[]" class=" form-control " id="select2" multiple required>
+                <option  @if(strpos($trip->day, 'all') !== false) selected @endif  value="all">كل  يوم </option>
+                <option @if(strpos($trip->day, 'sat') !== false) selected @endif  value="sat">السبت</option>
+                <option  @if(strpos($trip->day, 'sun') !== false) selected @endif value="sun">الاحد </option>
+                <option  @if(strpos($trip->day, 'mon') !== false) selected @endif  value="mon">الاثنين </option>
+                <option @if(strpos($trip->day, 'tue') !== false) selected @endif  value="tue">الثلاثاء </option>
+                <option @if(strpos($trip->day, 'wed') !== false) selected @endif  value="wed">الاربعاء </option>
+                <option @if(strpos($trip->day, 'thu') !== false) selected @endif  value="thu">الخميس </option>
+                <option @if(strpos($trip->day, 'fri') !== false) selected @endif  value="fri">الجمعة </option>
             </select>
 
         </div>
@@ -216,28 +216,14 @@
 
 <script>
     $('#select2').select2({
-            data:  ["all","sat","sun","mon","tue","tue","wed","thu","fri"],
+            data:  ["all","sat","sun","mon","tue","wed","thu","fri"],
             tags: true,
             maximumSelectionLength: 10,
             tokenSeparators: [',', ' '],
             placeholder: "حدد الايام",
                 dir: "rtl",
 
-            //minimumInputLength: 1,
-            //ajax: {
-           //   url: "you url to data",
-           //   dataType: 'json',
-            //  quietMillis: 250,
-            //  data: function (term, page) {
-            //     return {
-            //         q: term, // search term
-            //    };
-           //  },
-           //  results: function (data, page) { 
-           //  return { results: data.items };
-          //   },
-          //   cache: true
-           // }
+            
         });
 </script>
 

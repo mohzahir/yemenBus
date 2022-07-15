@@ -124,37 +124,58 @@
     @csrf
     <div class="row">
 
-      <div class="col-sm-6">
-        <label>اليوم </label>
+      <div class="col-sm-4">
+          <label>اليوم </label>
 
-        <select name="day" class="form-control" id="day">
-          <option value="">اختر</option>
+          <select name="day" class="form-control" id="day">
+              <option value="">اختر</option>
 
-          <option value="all">كل يوم </option>
-          <option value="sat">السبت</option>
-          <option value="sun">الاحد </option>
-          <option value="mon">الاثنين </option>
-          <option value="tue">الثلاثاء </option>
-          <option value="wed">الاربعاء </option>
-          <option value="thu">الخميس </option>
-          <option value="fri">الجمعة </option>
-        </select>
+              <option @if(request('day') == 'all') selected @endif value="all">كل يوم </option>
+              <option @if(request('day') == 'sat') selected @endif value="sat">السبت</option>
+              <option @if(request('day') == 'sun') selected @endif value="sun">الاحد </option>
+              <option @if(request('day') == 'mon') selected @endif value="mon">الاثنين </option>
+              <option @if(request('day') == 'tue') selected @endif value="tue">الثلاثاء </option>
+              <option @if(request('day') == 'wed') selected @endif value="wed">الاربعاء </option>
+              <option @if(request('day') == 'thu') selected @endif value="thu">الخميس </option>
+              <option @if(request('day') == 'fri') selected @endif value="fri">الجمعة </option>
+          </select>
+      </div>
+      
+      <div class="col-sm-4">
+          <label>التاريخ</label>
+          <input type="date" class="form-control" value="{{ request('from_date') }}" name="from_date">
+      </div>
+      <div class="col-sm-4">
+          <label>القسم\الخدمة</label>
+          <select name="service_id" id="" class="form-control">
+              <option value="">-- اختر القسم --</option>
+              @foreach($services as $service)
+                  <option @if(request('service_id') == $service->id) selected @endif value="{{ $service->id }}">{{ $service->name }}</option>
+              @endforeach
+          </select>
       </div>
       <div class="col-sm-6">
-        <label>من تاريخ </label>
-        <input type="date" name="from_date" id="from_date" class="form-control">
+          <label>الى مدينة </label>
+          <select name="arrival_city_id" id="" class="form-control">
+              <option  value="">-- اختر المدينة--</option>
+              @foreach($cities as $city)
+                  <option @if(request('arrival_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+              @endforeach
+          </select>
       </div>
       <div class="col-sm-6">
-        <label>الى مدينة </label>
-        <input type="text" name="to" id="to" class="form-control">
-      </div>
-      <div class="col-sm-6">
-        <label>من مدينة</label>
-        <input type="text" name="from" id="from" class="form-control">
+          <label>من مدينة</label>
+          <select name="takeoff_city_id" id="" class="form-control">
+              <option value="">-- اختر المدينة--</option>
+              @foreach($cities as $city)
+                  <option @if(request('takeoff_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+              @endforeach
+          </select>
       </div>
 
-    </div>
-    <button class="btn btn-success " id="serch" type="submit">بحث</button>
+
+  </div>
+    <button class="btn btn-success " type="submit">بحث</button>
     <a class="btn btn-warning btn-close " href="">الغاء</a>
   </form>
   <div class="table-responsive" style="margin-top:20px;">
@@ -164,6 +185,7 @@
         
         <th>رقم الرحلة</th>
         <th>الخدمة الفرعية </th>
+        <th>العنوان </th>
         <th> من </th>
         <th>الى</th>
         <th>سعر الرحلة </th>
@@ -175,6 +197,7 @@
         <th>ساعة الحضور</th>
         <th> ساعة لحركة  </th>
         <th>وزن العفش</th>
+        <th>الحاله</th>
         <th style="width:300px;">اجراءات</th>
       </thead>
       <tbody id="trips">
@@ -182,30 +205,59 @@
                  <tr>
                   <td>{{ $trip->id }}</td>
                   <td>{{ $trip->sub_service->name}}</td>   
+                  <td>{{ $trip->title}}</td>   
                   <td>{{ App\Trip::getCityName($trip->takeoff_city_id)}}</td> 
                   <td >{{ App\Trip::getCityName($trip->arrival_city_id)}}</td>
                   <td>{{ $trip->price }}</td>
                   <td >{{ $trip->lines_trip}}</td>
                   <td >{{ $trip->no_ticket}}</td>
                   <td>
-                      <?php $days =explode(',',$trip->day);?>
-                                  @foreach($days as $day)
-                      @switch($day)
-                        @case('sat')السبت @break
-                        @case('sun') الاحد@break
-                        @case('mon') الاثنين @break
-                        @case('tue') الثلاثاء @break
-                        @case('wed') الاربعاء @break
-                        @case('thu') الخميس @break
-                        @case('fri') الجمعة @break
-                        @default
-                      @endswitch
-                  @endforeach</td>
+                    <?php $days = json_decode($trip->day, true); ?>
+                    @foreach ($days as $day)
+                        @switch($day)
+                            @case('sat')
+                                السبت
+                            @break
+
+                            @case('sun')
+                                الاحد
+                            @break
+
+                            @case('mon')
+                                الاثنين
+                            @break
+
+                            @case('tue')
+                                الثلاثاء
+                            @break
+
+                            @case('wed')
+                                الاربعاء
+                            @break
+
+                            @case('thu')
+                                الخميس
+                            @break
+
+                            @case('fri')
+                                الجمعة
+                            @break
+
+                            @case('all')
+                                كل الايام
+                            @break
+
+                            @default
+                        @endswitch
+                    @endforeach
+                  </td>
                   <td >@if($trip->from_date !=null){{ date('d-m-Y', strtotime($trip->from_date) )}}@else @endif</td>
                   <td >@if($trip->to_date !=null){{ date('d-m-Y', strtotime($trip->to_date) )}}@else @endif</td>
                   <td >@if($trip->leave_time){{ $trip->leave_time}}@else  @endif</td>
                   <td >@if($trip->coming_time){{ $trip->coming_time}}@else  @endif</td>
                   <td >@if($trip->weight){{ $trip->weight}}@else  @endif</td>
+                  <td ><span
+                    class="badge badge-success">{{ $trip->status == 'active' ? 'مفعل' : 'غير مفعل' }}</span></td>
                   <td style="display:inline-block;width:300px;">
                 
                   <!-- <a class="btn btn-sm btn-danger" href="{{ route('provider.trip.destroy',$trip->id) }}">الغاء </a> -->
@@ -235,41 +287,6 @@
 <script type="text/javascript" src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/js.js')}}"></script>
-<script type="text/javascript">
-  $('#serch').on('click', function(e) {
-    e.preventDefault();
-    $day = $('#day').val();
-    $from_date = $('#from_date').val();
-    $from = $('#from').val();
-    $to = $('#to').val();
-
-    $.ajax({
-      type: 'post',
-      url: "{{route('filter_haj')}}",
-      data: {
-        'day': $day,
-        'from_date': $from_date,
-        'from': $from,
-        'to': $to,
-        '_token': '{{csrf_token()}}',
-
-
-      },
-      success: function(data) {
-        $('#trips').html(" ");
-        if (data) {
-          for (i = 0; i < data.length; i++) {
-
-            $('#trips').append(data[i]);
-          }
-        } else {
-          $('#trips').html(" ");
-        }
-
-      }
-    });
-  })
-</script>
 <script type="text/javascript">
   $.ajaxSetup({
     headers: {
