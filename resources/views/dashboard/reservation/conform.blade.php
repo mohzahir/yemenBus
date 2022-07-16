@@ -183,17 +183,21 @@
           <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
 
           <td>
-            @switch($reservation->trip->day)
-            @case('all')يوميا@break
-            @case('sat')السبت@break
-            @case('sun')الاحد@break
-            @case('mon')الاثنين@break
-            @case('tue')الثلاثاء@break
-            @case('wed')الاربعاء@break
-            @case('thu')الخميس@break
-            @case('fri')الجمعة@break
+            <?php $days = json_decode($reservation->trip->day, true); ?>
+            @foreach($days as $day)
+            @switch($day)
+            @case('all')يوميا @break
+            @case('sat')السبت @break
+            @case('all') كل الايام@break
+            @case('sun') الاحد@break
+            @case('mon') الاثنين @break
+            @case('tue') الثلاثاء @break
+            @case('wed') الاربعاء @break
+            @case('thu') الخميس @break
+            @case('fri') الجمعة @break
             @default
             @endswitch
+            @endforeach
           </td>
           <td>{{ $reservation->trip->coming_time }}</td>
           

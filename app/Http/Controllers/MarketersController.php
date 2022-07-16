@@ -10,6 +10,7 @@ use App\Admin;
 use App\Provider;
 use App\Sms;
 use App\Cancel_reservation;
+use App\City;
 use App\Http\Requests\SmsRequest;
 
 use Auth;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Jawaly;
 use App\helpers;
+use App\Service;
 use App\Trip;
 use App\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -143,42 +145,9 @@ class MarketersController extends Controller
 
     public function confirm()
     {
-        $marketer = Auth::guard('marketer')->user();
-        // dd($id);
-        $reservations = [];
-        switch ($marketer->marketer_type) {
-            case 'global_marketer':
-                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
-                    ->join('trips', 'trips.id', 'reseervations.trip_id')
-                    ->join('providers', 'providers.id', 'trips.provider_id')
-                    ->where('providers.service_id', 1)
-                    ->where('reseervations.status', '!=', 'canceled')
-                    ->paginate(10);
-                break;
-            case 'provider_marketer':
-                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
-                    ->join('trips', 'trips.id', 'reseervations.trip_id')
-                    ->join('providers', 'providers.id', 'trips.provider_id')
-                    ->where('providers.service_id', 1)
-                    ->where('trips.provider_id', $marketer->provider_id)
-                    ->where('reseervations.status', '!=', 'canceled')
-                    ->paginate(10);
-                break;
-            case 'service_marketer':
-                $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
-                $reservations = Reseervation::query()->select(['*', 'reseervations.id as reservation_id'])
-                    ->join('trips', 'trips.id', 'reseervations.trip_id')
-                    ->join('providers', 'providers.id', 'trips.provider_id')
-                    ->where('providers.service_id', 1)
-                    ->whereIn('trips.provider_id', $providers_ids)
-                    ->where('reseervations.status', '!=', 'canceled')
-                    ->paginate(10);
-                break;
-
-            default:
-                $reservations = [];
-                break;
-        }
+        $reservations = Reseervation::where('reseervations.marketer_id', auth()->guard('marketer')->user()->id)
+            ->where('reseervations.status', '!=', 'canceled')
+            ->paginate(10);
         // $reservations = Reseervation::where('marketer_id', $id)->orderby('id', 'desc')->paginate('10');
 
         return view('marketers.reservation.conform')->with('reservations', $reservations);
@@ -255,7 +224,7 @@ class MarketersController extends Controller
 
         return back()->with('success', 'تم ارسال رسال الى العميل ');
     }
-    public function trips()
+    public function trips(Request $request)
     {
         $marketer = Auth::guard('marketer')->user();
         // $marketer = Marketer::findOrFail($id);
@@ -266,6 +235,18 @@ class MarketersController extends Controller
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 1)
                     ->where('no_ticket', '>', 0)
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->where('status', 'active')->paginate(10);
                 break;
             case 'provider_marketer':
@@ -274,6 +255,18 @@ class MarketersController extends Controller
                     ->where('providers.service_id', 1)
                     ->where('trips.provider_id', $marketer->provider_id)
                     ->where('no_ticket', '>', 0)
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->where('status', 'active')->paginate(10);
                 break;
             case 'service_marketer':
@@ -284,6 +277,18 @@ class MarketersController extends Controller
                     ->whereIn('provider_id', $providers_ids)
                     ->where('no_ticket', '>', 0)
                     ->where('status', 'active')
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->paginate(10);
                 break;
 
@@ -291,8 +296,14 @@ class MarketersController extends Controller
                 $trips = [];
                 break;
         }
+        $services = Service::all();
+        $cities = City::all();
         // $trips = Trip::where('provider_id', $marketer->provider_id)->orderby('created_at', 'desc')->paginate(10);
-        return view('marketers.trip.index')->with('trips', $trips);
+        return view('marketers.trip.index')->with([
+            'trips' => $trips,
+            'services' => $services,
+            'cities' => $cities,
+        ]);
     }
 
     function sendYESMS($to, $body)

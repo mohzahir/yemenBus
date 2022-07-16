@@ -26,9 +26,9 @@ use App\TripOrderPassenger;
 use Session;
 use Carbon\Carbon;
 use Response;
-use Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class ReservationsController extends Controller
 {
@@ -79,7 +79,6 @@ class ReservationsController extends Controller
 
     public function storeConfirm(Request $request)
     {
-        // dd($request->all());
         $rules = [];
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
@@ -91,127 +90,130 @@ class ReservationsController extends Controller
         $rules['email'] = 'nullable|email';
         $rules['notes'] = 'nullable|string|max:1500';
 
-        $validator = Validator::make($request->all(), $rules);
+        // $validator = Validator::make($request->all(), $rules);
+
+        // dd($rules);
+        $request->validate($rules);
 
         $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
 
-        if ($validator->passes()) {
+        // if ($validator->passes()) {
 
-            DB::beginTransaction();
+        DB::beginTransaction();
 
-            try {
-                $passenger = Passenger::where('email', $request->email)->first();
-                if (!$passenger) {
-                    //passenger is not registered
-                    $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
-                    $passenger = Passenger::create([
-                        'email' => $request->email,
-                        'name_passenger' => $request->name[0],
-                        $phoneColumnName => $phone
-                    ]);
-                }
+        try {
+            $passenger = Passenger::where('email', $request->email)->first();
+            if (!$passenger) {
+                //passenger is not registered
+                $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
+                $passenger = Passenger::create([
+                    'email' => $request->email,
+                    'name_passenger' => $request->name[0],
+                    $phoneColumnName => $phone
+                ]);
+            }
 
 
-                // create reservation 
-                $trip = Trip::findOrFail($request->trip_id);
+            // create reservation 
+            $trip = Trip::findOrFail($request->trip_id);
 
-                $marketer = Marketer::findOrFail(auth()->guard('marketer')->user()->id);
+            $marketer = Marketer::findOrFail(auth()->guard('marketer')->user()->id);
 
-                $total = (float)$trip->price * ((int)$seatCount);
+            $total = (float)$trip->price * ((int)$seatCount);
 
-                $BUS_RS_DEPOSIT_VALUE = Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value;
-                $BUS_RY_DEPOSIT_VALUE = Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value;
+            $BUS_RS_DEPOSIT_VALUE = Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value;
+            $BUS_RY_DEPOSIT_VALUE = Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value;
 
-                $deposit = ($trip->currency == 'rs' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE);
+            $deposit = $trip->deposit_price ?? ($trip->currency == 'rs' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE);
 
-                $paid = $request->payment_type == 'total_payment' ? $total : $deposit;
+            $paid = $request->payment_type == 'total_payment' ? $total : $deposit;
 
-                // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
-                if (($trip->currency == 'rs' && $paid > $marketer->balance_rs) || ($trip->currency == 'ry' && $paid > $marketer->balance_ry)) {
-                    // return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
-                    $reservation_id = Reseervation::insertGetId([
-                        // 'id' => Str::uuid()->toString(),
-                        'trip_id' => $request->trip_id,
-                        'marketer_id' => auth()->guard('marketer')->user()->id,
-                        'main_passenger_id' => $passenger->id,
-                        'ticket_no' =>  '1',
-                        'payment_method' =>  null,
-                        'payment_time' => null,
-                        'payment_type' =>  null,
-                        'total_price' =>  $trip->price,
-                        'paid' => 0,
-                        'ride_place' => $request->ride_place,
-                        'drop_place' => $request->drop_place,
-                        'currency' => 'rs',
-                        // 'note' => $request->notes,
-                        'status' => 'created',
-
-                    ]);
-
-                    return redirect()->route('passengers.tripPayment', ['trip' => $request->trip_id, 'reservation' => $reservation_id])->with(['warning' => ' رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك او مواصلة الحجز من خلال الدفع الالكتروني']);
-                }
-
-                // var_dump($tripId);exit;
-
-                $reservation = Reseervation::create([
+            // dd($paid, $marketer->balance_ry, $request->all(), $trip->currency);
+            if (($trip->currency == 'rs' && $paid > $marketer->balance_rs) || ($trip->currency == 'ry' && $paid > $marketer->balance_ry)) {
+                // return redirect()->back()->withErrors(['error' => 'رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك'])->withInput();
+                $reservation_id = Reseervation::insertGetId([
                     // 'id' => Str::uuid()->toString(),
                     'trip_id' => $request->trip_id,
                     'marketer_id' => auth()->guard('marketer')->user()->id,
                     'main_passenger_id' => $passenger->id,
-                    'ticket_no' =>  $seatCount,
+                    'ticket_no' =>  '1',
                     'payment_method' =>  null,
-                    'payment_time' => date('Y-m-d H:i:s'),
-                    'payment_type' =>  $request->payment_type,
-                    'total_price' =>  $total,
-                    'paid' => $paid,
-                    'currency' => null,
-                    'note' => $request->notes,
-                    'status' => 'confirmed',
-                    // 's_phone' => $request->phoneCountry == 's' ? '966' . $request->phone : null,
-                    // 'y_phone' => $request->phoneCountry == 'y' ? '967' . $request->phone : null,
-                    // 'email' => $request->email,
-                    // 'price' => $trip->price,
-                    // 'remain' => $this->calcRemainOfPrice($total),
+                    'payment_time' => null,
+                    'payment_type' =>  null,
+                    'total_price' =>  $trip->price,
+                    'paid' => 0,
+                    'ride_place' => $request->ride_place,
+                    'drop_place' => $request->drop_place,
+                    'currency' => 'rs',
+                    // 'note' => $request->notes,
+                    'status' => 'created',
 
                 ]);
 
-                if ($reservation) {
-                    $balance_column = $trip->currency == 'rs' ? 'balance_rs' : 'balance_ry';
-                    $marketer->update([
-                        $balance_column => ($marketer[$balance_column] - $paid)
-                    ]);
-                }
-
-
-                foreach ($request->input('name') as $key => $value) {
-
-                    TripOrderPassenger::create([
-                        // 'trip_id' => $trip->id,
-                        'reservation_id' => $reservation->id,
-                        'external_ticket_no' => null,
-                        'p_id' => $request->input('nid')[$key],
-                        'dateofbirth' => $request->input('dateofbirth')[$key],
-                        'age' => $request->input('age')[$key],
-                        'gender' => $request->input('gender')[$key],
-                        'phone' => $request->input('phone'),
-                        'name' => $request->input('name')[$key],
-                    ]);
-                }
-
-                DB::commit(); //966507703877
-
-                // $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
-
-                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
-
-                return redirect()->route('marketer.reservations.confirmAll')->with(['success' => ' تم اضافه الحجز بنجاح']);
-            } catch (\Throwable $th) {
-                DB::rollBack();
-                throw $th;
+                return redirect()->route('passengers.tripPayment', ['trip' => $request->trip_id, 'reservation' => $reservation_id])->with(['warning' => ' رصيدك غير كافي لاجراء هذا الحجز الرجاء شحن رصيدك او مواصلة الحجز من خلال الدفع الالكتروني']);
             }
-        } else {
-            return redirect()->back()->withErrors($validator)->withInput();
+
+            // var_dump($tripId);exit;
+
+            $reservation = Reseervation::create([
+                // 'id' => Str::uuid()->toString(),
+                'trip_id' => $request->trip_id,
+                'marketer_id' => auth()->guard('marketer')->user()->id,
+                'main_passenger_id' => $passenger->id,
+                'ticket_no' =>  $seatCount,
+                'payment_method' =>  null,
+                'payment_time' => date('Y-m-d H:i:s'),
+                'payment_type' =>  $request->payment_type,
+                'total_price' =>  $total,
+                'paid' => $paid,
+                'currency' => null,
+                'note' => $request->notes,
+                'status' => 'confirmed',
+                // 's_phone' => $request->phoneCountry == 's' ? '966' . $request->phone : null,
+                // 'y_phone' => $request->phoneCountry == 'y' ? '967' . $request->phone : null,
+                // 'email' => $request->email,
+                // 'price' => $trip->price,
+                // 'remain' => $this->calcRemainOfPrice($total),
+
+            ]);
+
+            if ($reservation) {
+                $balance_column = $trip->currency == 'rs' ? 'balance_rs' : 'balance_ry';
+                $marketer->update([
+                    $balance_column => ($marketer[$balance_column] - $paid)
+                ]);
+            }
+
+
+            foreach ($request->input('name') as $key => $value) {
+
+                TripOrderPassenger::create([
+                    // 'trip_id' => $trip->id,
+                    'reservation_id' => $reservation->id,
+                    'external_ticket_no' => null,
+                    'p_id' => $request->input('nid')[$key],
+                    'dateofbirth' => $request->input('dateofbirth')[$key],
+                    'age' => $request->input('age')[$key],
+                    'gender' => $request->input('gender')[$key],
+                    'phone' => $request->input('phone'),
+                    'name' => $request->input('name')[$key],
+                ]);
+            }
+
+            DB::commit(); //966507703877
+
+            // $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
+
+            // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+
+            return redirect()->route('marketer.reservations.confirmAll')->with(['success' => ' تم اضافه الحجز بنجاح']);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
         }
+        // } else {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
     }
 
 

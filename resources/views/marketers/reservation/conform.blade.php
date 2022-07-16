@@ -71,7 +71,7 @@ th,td{
         </div>
     @endif
     <div class="d-flex justify-content-between" style="dispaly:inline;">
-        <h1>حجوزات النقل بالباص</h1>        
+        <h1>حجوزاتي</h1>        
     </div>
 @endsection
 
@@ -80,10 +80,10 @@ th,td{
           <nav aria-label="breadcrumb" >
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('dashboard.marketer.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-    <li class="breadcrumb-item active" aria-current="page">  حجوزات النقل بالباص</li>
+    <li class="breadcrumb-item active" aria-current="page">  حجوزاتي</li>
   </ol>
 </nav>
-<h1 style="text-align:center">حجوزات النقل بالباص  </h1>
+<h1 style="text-align:center">حجوزاتي  </h1>
 @include('flash-message')
 
 
@@ -99,26 +99,28 @@ th,td{
   <thead >
     <tr> 
     
-     <th colspan="2" style="horizontal-align : middle;text-align:center; width: 50%;">الحجز </th>
+      <th colspan="2" style="horizontal-align : middle;text-align:center; width: 50%;">الحجز </th>
       <th rowspan="2">رقم الرحله</th>
-      {{-- <th rowspan="2">كود المسوق</th> --}}
+      <th rowspan="2">الخدمة</th>
+      <th rowspan="2"> المزود</th>
+      <th rowspan="2"> المسوق</th>
       <th rowspan="2">جوال المسافر السعودي</th>
       <th rowspan="2">جوال المسافر اليمني</th>
       <th rowspan="2">اسم المسافر </th>
+      <th rowspan="2">مكان الانطلاق</th>
+      <th rowspan="2">مكان الوصول</th>
+      <th rowspan="2">مكان صعود الراكب </th>
+      <th rowspan="2">مكان نزول الراكب </th>
+      <th rowspan="2">مبلغ الحجز الكلي</th>
+      <th rowspan="2">المبلغ المدفوع</th>
+      <th rowspan="2">المبلغ المتبقي</th>
       <th rowspan="2">التاريخ</th>
       <th rowspan="2">اليوم</th>
-      <th rowspan="2">من مدينة</th>
-      <th rowspan="2">الى مدينة</th>
-      <th rowspan="2">مبلغ الحجز الكلي بالطلب</th>
-      <th rowspan="2">مبلغ العربون بالطلب</th>
-      <th rowspan="2">نوع  التأكيد</th>
-      <th rowspan="2">عدد  التذاكر</th>
-       {{-- <th  rowspan="2">رقم الطلب</th>
-      <th  rowspan="2" >رقم العرض الفائز </th>
-
-      <th rowspan="2">رابط  الطلب</th>
-      <th rowspan="2">صورة  الطلب</th> --}}
-      {{-- <th rowspan="2">اجراءات</th> --}}
+      <th rowspan="2">موعد الحضور</th>
+      <th rowspan="2">نوع التأكيد</th>
+      <th rowspan="2">بوابة الدفع</th>
+      <th rowspan="2">عدد التذاكر</th>
+      <!-- <th rowspan="2">اجراءات</th> -->
       <th rowspan="2">وسائل التواصل</th>
     </tr>
      <tr>
@@ -140,47 +142,61 @@ th,td{
 {{-- @if($marketer) --}}
 
 <tr>                   
-<td >{{ $reservation->reservation_id }}</td>
-<td>@switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break   @case('transfer') تم نقله @break @default @endswitch</td>
-<td >{{ $reservation->trip_id }}</td>
+  <td>{{ $reservation->id }}</td>
+  <td> <span class="badge badge-success"> @switch($reservation->status)@case('confirmed') مؤكد @break @case('created')بانتظار التاكيد @break @case('payed') تم الدفع @break @case('canceled') ملغي @break @default @endswitch</span></td>
+  <td>{{ $reservation->trip_id }}</td>
+  <td>{{ $reservation->trip->provider->service->name }}</td>
+  <td>{{ $reservation->trip->provider->name_company }}</td>
+  <td>{{ $reservation->marketer->name ?? '-' }}</td>
+  <td>{{ $reservation->passenger->phone }}</td>
+  <td>{{ $reservation->passenger->y_phone }}</td>
+  <td>{{ $reservation->passenger->name_passenger }}</td>
+  <td>{{ $reservation->trip->takeoff_city->name }}</td>
+  <td>{{ $reservation->trip->arrival_city->name }}</td>
+  <td>{{ $reservation->ride_place ?? $reservation->trip->takeoff_city->name }}</td>
+  <td>{{ $reservation->drop_place ?? $reservation->trip->arrival_city->name }}</td>
+  <td>{{ $reservation->total_price }}@switch($reservation->trip->currency)@case('rs')ريال سعودي@break @case('ry') ريال يمني@break @default @endswitch</td>
+  <td>{{ $reservation->paid }}@switch($reservation->trip->currency)@case('rs')ريال سعودي@break @case('ry')ريال يمني @break @default 0 @endswitch</td>
+  <td>{{ $reservation->total_price - $reservation->paid }} @switch($reservation->trip->currency)@case('rs')ريال سعودي@break @case('ry') ريال يمني@break @default @endswitch</td>
+  <td>{{ date('d-m-Y', strtotime($reservation->trip->from_date) )}}</td>
 
+  <td>
+    <?php $days = json_decode($reservation->trip->day, true); ?>
+    @foreach($days as $day)
+    @switch($day)
+    @case('all')يوميا @break
+    @case('sat')السبت @break
+    @case('all') كل الايام@break
+    @case('sun') الاحد@break
+    @case('mon') الاثنين @break
+    @case('tue') الثلاثاء @break
+    @case('wed') الاربعاء @break
+    @case('thu') الخميس @break
+    @case('fri') الجمعة @break
+    @default
+    @endswitch
+    @endforeach
+  </td>
+  <td>{{ $reservation->trip->coming_time }}</td>
+  
+  <td>
+    @switch($reservation->payment_type)
+    @case('total_payment') المبلغ كامل @break
+    @case('deposit_payment')بعربون@break
+    @case('later_payment')الدفع لاحقا@break
+    @default -
+    @endswitch
+  </td>
+  <td>
+    @switch($reservation->payment_method)
+    @case('bank') الدفع البنكي @break
+    @case('telr')بوبة تبلر@break
+    @case('inBus')كاش@break
+    @endswitch
+  </td>
 
-{{-- <td>{{ $reservation->code }}</td> --}}
-<td>{{ $reservation->passenger->phone }}</td>
-<td>{{ $reservation->passenger->y_phone }}</td>
-<td>{{ $reservation->passenger->name_passenger }}</td>
-<td>{{ date('d-m-Y', strtotime($reservation->from_date) )}}</td>
+  <td>{{ $reservation->ticket_no }} </td>
 
-<td> 
-@switch($reservation->trip->day)
-@case('sat')السبت@break
-@case('sun')الاحد@break
-@case('mon')الاثنين@break
-@case('tue')الثلاثاء@break
-@case('wed')الاربعاء@break
-@case('thu')الخميس@break
-@case('fri')الجمعة@break
-@default
-@endswitch
-</td>
-<td>{{ $reservation->trip->takeoff_city->name }}</td>
-<td>{{ $reservation->trip->arrival_city->name }}</td>
-<td>{{ $reservation->total_price }}@switch($reservation->currency)@case('rs')سعودي@break @case('ry') يمني@break @default @endswitch</td>
-<td>{{ $reservation->paid }}@switch($reservation->currency)@case('rs')ريال سعودي@break @case('ry')ريال يمني @break @default @endswitch</td>
-<td>
-  @switch($reservation->payment_type)
-    @case('total_payment') المبلغ كامل @break 
-    @case('deposit_payment')بعربون@break 
-    @case('later_payment')الدفع لاحقا@break 
-    @default 
-  @endswitch</td>
-
-<td>{{ $reservation->ticket_no }} </td>
-{{-- <td >@if( $reservation->order_id){{ $reservation->order_id }}@else @endif</td>
-<td>@if($reservation->demand_id !=0){{ $reservation->demand_id}}@else @endif </td>
-
-<td>@if( $reservation->order_url){{ $reservation->order_url }}@endif</td>
-<td>@if( $reservation->image)<a href="{{ route('provider.image.download', $reservation->reservation_id) }}">صورة الطلب</a>@endif</td> --}}
 
 {{-- <td style="display:inline-block;width:350px;">
 <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->reservation_id) }}">تعديل الحجز</a>

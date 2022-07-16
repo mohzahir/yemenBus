@@ -61,6 +61,7 @@ class Reseervation extends Model
         return $this->belongsTo(Marketer::class, 'marketer_id');
     }
 
+
     public static function getFullReservationsDetails($id = null)
     {
         return DB::table('trips')

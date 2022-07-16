@@ -122,37 +122,58 @@
     @csrf
     <div class="row">
 
-      <div class="col-sm-6">
-        <label>اليوم </label>
+      <div class="col-sm-4">
+          <label>اليوم </label>
 
-        <select name="day" class="form-control" id="day">
-          <option value="">اختر</option>
+          <select name="day" class="form-control" id="day">
+              <option value="">اختر</option>
 
-          <option value="all">كل يوم </option>
-          <option value="sat">السبت</option>
-          <option value="sun">الاحد </option>
-          <option value="mon">الاثنين </option>
-          <option value="tue">الثلاثاء </option>
-          <option value="wed">الاربعاء </option>
-          <option value="thu">الخميس </option>
-          <option value="fri">الجمعة </option>
-        </select>
+              <option @if(request('day') == 'all') selected @endif value="all">كل يوم </option>
+              <option @if(request('day') == 'sat') selected @endif value="sat">السبت</option>
+              <option @if(request('day') == 'sun') selected @endif value="sun">الاحد </option>
+              <option @if(request('day') == 'mon') selected @endif value="mon">الاثنين </option>
+              <option @if(request('day') == 'tue') selected @endif value="tue">الثلاثاء </option>
+              <option @if(request('day') == 'wed') selected @endif value="wed">الاربعاء </option>
+              <option @if(request('day') == 'thu') selected @endif value="thu">الخميس </option>
+              <option @if(request('day') == 'fri') selected @endif value="fri">الجمعة </option>
+          </select>
+      </div>
+      
+      <div class="col-sm-4">
+          <label>التاريخ</label>
+          <input type="date" class="form-control" value="{{ request('from_date') }}" name="from_date">
+      </div>
+      <div class="col-sm-4">
+          <label>القسم\الخدمة</label>
+          <select name="service_id" id="" class="form-control">
+              <option value="">-- اختر القسم --</option>
+              @foreach($services as $service)
+                  <option @if(request('service_id') == $service->id) selected @endif value="{{ $service->id }}">{{ $service->name }}</option>
+              @endforeach
+          </select>
       </div>
       <div class="col-sm-6">
-        <label>من تاريخ </label>
-        <input type="date" name="from_date" id="from_date" class="form-control">
+          <label>الى مدينة </label>
+          <select name="arrival_city_id" id="" class="form-control">
+              <option  value="">-- اختر المدينة--</option>
+              @foreach($cities as $city)
+                  <option @if(request('arrival_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+              @endforeach
+          </select>
       </div>
       <div class="col-sm-6">
-        <label>الى مدينة </label>
-        <input type="text" name="to" id="to" class="form-control">
-      </div>
-      <div class="col-sm-6">
-        <label>من مدينة</label>
-        <input type="text" name="from" id="from" class="form-control">
+          <label>من مدينة</label>
+          <select name="takeoff_city_id" id="" class="form-control">
+              <option value="">-- اختر المدينة--</option>
+              @foreach($cities as $city)
+                  <option @if(request('takeoff_city_id') == $city->id) selected @endif value="{{ $city->id }}">{{ $city->name }}</option>
+              @endforeach
+          </select>
       </div>
 
-    </div>
-    <button class="btn btn-success " id="serch" type="submit">بحث</button>
+
+  </div>
+    <button class="btn btn-success " type="submit">بحث</button>
     <a class="btn btn-warning btn-close " href="">الغاء</a>
   </form>
   <div class="table-responsive" style="margin-top:20px;">
@@ -191,9 +212,10 @@
           <td>{{ $trip->lines_trip}}</td>
 
           <td>
-            <?php $days = explode(',', $trip->day); ?>
+            <?php $days = json_decode($trip->day, true); ?>
             @foreach($days as $day)
             @switch($day)
+            @case('all')يوميا @break
             @case('sat')السبت @break
             @case('all') كل الايام@break
             @case('sun') الاحد@break

@@ -42,22 +42,7 @@ label{
 </nav>
 <h1 style="text-align:center">حجز رحلة نقل بالباص</h1>
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>	
-    <strong>{{ $message }}</strong>
-</div>
-@endif
-{{-- @if ($message = Session::get('error')) --}}
-
-@if ($errors->any())
-<div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    @foreach ($errors->all() as $error)
-  <p class="yellow-text font lato-normal center">{{ $error }}</p>
-  @endforeach
-</div>
-@endif
+@include('flash-message')
     <form class="form-contact contact_form" action="{{ route('dashboard.reservations.storeConfirm') }}"
         method="post" novalidate="novalidate">
         @csrf
@@ -83,7 +68,7 @@ label{
                         </select>
                     </div>  
                     <input class="form-control valid" placeholder="512345678" name="phone" id="phone" type="text" value="{{ old('phone') }}"
-                    placeholder=" * رقم الجوال ">
+                    placeholder=" * رقم الجوال " required>
 
                </div>
                
@@ -109,8 +94,8 @@ label{
                <h3 style="margin-bottom: 20px"> بيانات الراكب</h3>
 
                <div class="form-group d-flex passenger-row" id="passenger-row">
-                   <input class="form-control valid" name="name[]" id="name" type="text" value="{{ old('name') }}"
-                   placeholder=" اسم الراكب">
+                   <input class="form-control valid" name="name[]" id="name" type="text" value="{{ old('name.0') }}"
+                   placeholder=" اسم الراكب" required>
                    
                    <div style="margin-right: 3px"></div>
                    <select class="form-control" name="age[]" id="age">
@@ -154,8 +139,9 @@ label{
                 <div id="deposit_value" style="display: none">
                     {{-- <input type="text" class="form-control" placeholder="المبلغ المدفوع" name="paid" value="{{old('paid')}}"> --}}
                     <div>
-                        <p class="text-danger">قيمه العربون للرحلات من السعوديه لليمن هي {{ env('DEPOSIT_RS_VALUE', 50) }}</p>
-                        <p class="text-danger">قيمه العربون للرحلات من اليمن للسعوديه هي {{ env('DEPOSIT_RY_VALUE', 5000) }}</p>
+                        <p class="text-danger">قيمه العربون للرحلات من السعوديه لليمن هي {{ $trip->deposit_price ?? \App\Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value }}</p>
+                        <p class="text-danger">قيمه العربون للرحلات من اليمن للسعودية هي {{ $trip->deposit_price ?? \App\Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value }}</p>
+                        <!-- <p class="text-danger">قيمه العربون للرحلات من اليمن للسعوديه هي {{ env('DEPOSIT_RY_VALUE', 5000) }}</p> -->
                     </div>
                 </div>
 

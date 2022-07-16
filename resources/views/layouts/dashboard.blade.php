@@ -114,13 +114,13 @@ font-family: 'Cairo', sans-serif;
                     @endphp
                     @if(in_array('bus' ,$permission))
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('dashboard.reservations.confirm')}}">حجز رحلة نقل بالباص</a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.reservations.confirmAll')}}">حجوزات النقل بالباص </a>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.trips')}}">بحث عن رحلات</a></li>
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.trips')}}">بحث عن رحلات نقل بالباص</a></li>
                     @endif
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.reservations.confirmAll')}}">حجوزاتي </a>
                     @if(in_array('haj' ,$permission))
                     <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.create')}}">حجز رحلة حج وعمرة</a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.index')}}">حجوزات الحج والعمرة </a></li>
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.haj-trips')}}">بحث عن رحلات</a></li>
+                    <!-- <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('marketer.haj.reservations.index')}}">حجوزاتي الحج والعمرة </a></li> -->
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{ route('marketer.haj-trips')}}"> بحث عن رحلات حج وعمرة</a></li>
                     @endif
 
                     

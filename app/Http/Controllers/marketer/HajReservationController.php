@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\marketer;
 
 // use App\Http\Controllers\Controller;
+
+use App\City;
 use App\marketer;
 use App\Passenger;
 use App\Provider;
 use App\Reseervation;
+use App\Service;
 use App\Setting;
 use App\Trip;
 use Carbon\Carbon;
@@ -108,7 +111,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
     }
 
 
-    public function hajTrips()
+    public function hajTrips(Request $request)
     {
         $marketer = Auth::guard('marketer')->user();
         // $marketer = Marketer::findOrFail($id);
@@ -119,6 +122,18 @@ class HajReservationController extends \App\Http\Controllers\Controller
                     ->join('providers', 'providers.id', 'trips.provider_id')
                     ->where('providers.service_id', 3)
                     ->where('no_ticket', '>', 0)
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->where('status', 'active')->paginate(10);
                 break;
             case 'provider_marketer':
@@ -127,6 +142,18 @@ class HajReservationController extends \App\Http\Controllers\Controller
                     ->where('providers.service_id', 3)
                     ->where('trips.provider_id', $marketer->provider_id)
                     ->where('no_ticket', '>', 0)
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->where('status', 'active')->paginate(10);
                 break;
             case 'service_marketer':
@@ -136,6 +163,18 @@ class HajReservationController extends \App\Http\Controllers\Controller
                     ->where('providers.service_id', 3)
                     ->whereIn('provider_id', $providers_ids)
                     ->where('no_ticket', '>', 0)
+                    ->when($request->from_date, function ($q) use ($request) {
+                        $q->where('from_date', '>', $request->from_date);
+                    })
+                    ->when($request->day && $request->day != 'all', function ($q) use ($request) {
+                        $q->where('day', 'like', '%' . $request->day . '%');
+                    })
+                    ->when($request->takeoff_city_id, function ($q) use ($request) {
+                        $q->where('takeoff_city_id', $request->takeoff_city_id);
+                    })
+                    ->when($request->arrival_city_id, function ($q) use ($request) {
+                        $q->where('arrival_city_id', $request->arrival_city_id);
+                    })
                     ->where('status', 'active')
                     ->paginate(10);
                 break;
@@ -144,8 +183,14 @@ class HajReservationController extends \App\Http\Controllers\Controller
                 $trips = [];
                 break;
         }
+        $services = Service::all();
+        $cities = City::all();
         // $trips = Trip::where('provider_id', $marketer->provider_id)->orderby('created_at', 'desc')->paginate(10);
-        return view('marketers.haj-trip.index')->with('trips', $trips);
+        return view('marketers.haj-trip.index')->with([
+            'trips' => $trips,
+            'services' => $services,
+            'cities' => $cities,
+        ]);
     }
 
     public function store(Request $request)
@@ -225,7 +270,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
                 $HAJ_PROGRAM_RS_DEPOSIT = Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value;
                 $OMRA_PROGRAM_RS_DEPOSIT = Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value;
 
-                $deposit = ($trip->sub_service_id == '1' ? $OMRA_PROGRAM_RS_DEPOSIT : $HAJ_PROGRAM_RS_DEPOSIT);
+                $deposit = $trip->deposit_price ?? ($trip->sub_service_id == '1' ? $OMRA_PROGRAM_RS_DEPOSIT : $HAJ_PROGRAM_RS_DEPOSIT);
 
                 $paid = $request->payment_type == 'total_payment' ? $trip->price : $deposit;
 
@@ -307,7 +352,7 @@ class HajReservationController extends \App\Http\Controllers\Controller
 
                 // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
-                return redirect()->route('marketer.haj.reservations.create')->with(['success' => ' تم اضافه الحجز بنجاح']);
+                return redirect()->route('marketer.reservations.confirmAll')->with(['success' => ' تم اضافه الحجز بنجاح']);
             } catch (\Throwable $th) {
                 DB::rollBack();
                 throw $th;

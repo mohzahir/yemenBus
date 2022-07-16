@@ -187,8 +187,8 @@
                 <div id="deposit_value" style="display: none">
                     {{-- <input type="text" class="form-control" placeholder="المبلغ المدفوع" name="paid" value="{{old('paid')}}"> --}}
                     <div>
-                        <p class="text-danger">قيمه العربون للرحلات من السعوديه لليمن هي {{ env('DEPOSIT_RS_VALUE', 50) }}</p>
-                        <p class="text-danger">قيمه العربون للرحلات من اليمن للسعوديه هي {{ env('DEPOSIT_RY_VALUE', 5000) }}</p>
+                        <p class="text-danger">قيمه العربون للرحلات الحج هي {{ $trip->deposit_price ?? \App\Setting::where('key', 'HAJ_PROGRAM_RS_DEPOSIT')->first()->value }}</p>
+                        <p class="text-danger">قيمه العربون للرحلات العمرة هي {{ $trip->deposit_price ?? \App\Setting::where('key', 'OMRA_PROGRAM_RS_DEPOSIT')->first()->value }}</p>
                     </div>
                 </div>
 
