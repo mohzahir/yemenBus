@@ -149,6 +149,8 @@
                                 href="{{ route('dashboard.providers.trips') }}">الرحلات</a></li>
 
                         <li><span class="glyphicon glyphicon-edit"></span><a
+                                href="{{ route('dashboard.admin.general.setting') }}">أعدادت عامة </a></li>
+                        <li><span class="glyphicon glyphicon-edit"></span><a
                                 href="{{ route('dashboard.admin.setting') }}">أعدادت الحساب </a></li>
                         <li><span class="glyphicon glyphicon-envelope"></span><a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">

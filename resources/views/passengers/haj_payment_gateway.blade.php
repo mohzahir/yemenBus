@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="box payment-method">
                                             <div class="form-group">
-                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب (122394) وارفاق صورة التحويل</label>
+                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل</label>
                                                 <input type="file" class="form-control" name="payment_image">
                                             </div>
                                         </div>

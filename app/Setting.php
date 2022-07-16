@@ -10,4 +10,6 @@ class Setting extends Model
         'key',
         'value'
     ];
+
+    public $timestamps = false;
 }

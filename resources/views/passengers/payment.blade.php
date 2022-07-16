@@ -102,7 +102,7 @@
                         <div class="col-sm-12 bank-trans" style="display: none">
                             <div class="form-group">
                                 <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
-                                <p>يرجى التحويل الى رقم الحساب (1232323) وارفاق صورة التحويل </p>
+                                <p>يرجى التحويل الى رقم الحساب ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل </p>
                                 <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
                             </div>
 

@@ -102,6 +102,8 @@ Route::get('pcrs_request/get-lab-list', 'PcrsController@getLabList')->name('labs
 Route::prefix('dashboard')->middleware('admin')->group(function () {
     Route::get('admin', 'admin\AdminController@index')->name('dashboard.admin.index');
     Route::get('admin/setting', 'admin\AdminController@admin')->name('dashboard.admin.setting');
+    Route::get('admin/general-setting', 'admin\AdminController@generalSettings')->name('dashboard.admin.general.setting');
+    Route::post('admin/general-setting', 'admin\AdminController@storeGeneralSettings')->name('dashboard.admin.general.setting.store');
     Route::post('admin/update', 'admin\AdminController@update')->name('dashboard.admin.update');
 
     //admin dashboard  manage lab

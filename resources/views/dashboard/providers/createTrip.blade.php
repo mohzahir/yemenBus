@@ -215,6 +215,7 @@
                         <div class="row">
                             @php $cities= App\City::all(); @endphp
 
+                            <template x-if="!haj_is_active">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="arrival_city_id">الى مدينة </label>
@@ -227,6 +228,12 @@
                                     </select>
                                 </div>
                             </div>
+                            </template>
+
+
+                            <template x-if="haj_is_active">
+                                <input type="hidden" name="arrival_city_id" value="1">
+                            </template>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="takeoff_city_id">من مدينة </label>
