@@ -16,7 +16,7 @@
                                 <h3> احجز رحلة </h3>
                                 </div>
                                 @php $sCities= App\City::where('country',1)->get(); 
-                                $yCities= App\City::where('country',2)->get(); 
+                                $yCities= App\City::where('country',0)->get(); 
                                 @endphp
 
                                 <div class="line-form select-form mb-30 from-trip" style="width: 49%">
