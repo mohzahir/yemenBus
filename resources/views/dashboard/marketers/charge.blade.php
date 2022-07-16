@@ -47,11 +47,11 @@ $(".alert").alert('close')
       @csrf
       <div class="form-group mt-2">
             <label for="marketer_id">رقم المسوق </label>
-            <input type="text" class="form-control" name="marketer_id" @if($marketer)value="{{$marketer->id}}"@endif>
+            <input type="text" class="form-control" name="marketer_id" @if($marketer)value="{{$marketer->id}}"@endif required>
         </div>
         <div class="form-group mt-2">
             <label for="amount">المبلغ</label>
-            <input type="number" class="form-control" name="amount" value="{{ old('amount') }}">
+            <input type="number" class="form-control" name="amount" placeholder="2000" value="{{ old('amount') }}" required>
         </div>
         <div class="form-group mt-2">
             <label for="currecny">العملة</label>

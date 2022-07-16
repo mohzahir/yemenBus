@@ -99,7 +99,19 @@ label{
                     <label>رصيدي لاريال اليمني : </label> 
                         <p class="text-success">{{ $marketer->balance_ry }}</p>
                 </div>
-                <button class="btn btn-success btn-lg" type="submit" style="margin-top:20px;float:left;">تعديل البيانات</button>  
+                <div class="mb-2">
+                    <label>المزود الخاص بي </label> 
+                        <p class="text-success">{{ $marketer->provider->name_company ?? 'لا يوجد' }}</p>
+                </div>
+                <div class="mb-2">
+                    <label>الخدمة\القسم الخاص بي </label> 
+                        <p class="text-success">{{ $marketer->service ?? 'لا يوجد' }}</p>
+                </div>
+                <div class="mb-2">
+                    <label>هل انا مسوق عام ؟ </label> 
+                        <p class="text-success">{{ $marketer->marketer_type == 'global_marketer' ? 'نعم' : 'لا'}}</p>
+                </div>
+                <button class="btn btn-success btn-lg" type="submit" >تعديل البيانات</button>  
                 
   <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a><a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.marketer.index') }}">اغلاق</a>
 

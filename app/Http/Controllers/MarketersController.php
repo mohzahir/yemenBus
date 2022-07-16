@@ -20,6 +20,7 @@ use App\Mail\SmsSend;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Jawaly;
+use Illuminate\Support\Str;
 use App\helpers;
 use App\Service;
 use App\Trip;
@@ -140,7 +141,7 @@ class MarketersController extends Controller
 
         $marketer->save();
 
-        return view('marketers.info')->with('marketer', $marketer);
+        return redirect()->back();
     }
 
     public function confirm()
