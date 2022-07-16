@@ -36,7 +36,21 @@
 
       <td>{{$trip->leave_time}}</td>
 
-      <td>{{App\Trip::replaceDays($trip->day)}}</td>
+      <td><?php $days = json_decode($trip->day, true); ?>
+        @foreach($days as $day)
+        @switch($day)
+        @case('all')يوميا @break
+        @case('sat')السبت @break
+        @case('all') كل الايام@break
+        @case('sun') الاحد@break
+        @case('mon') الاثنين @break
+        @case('tue') الثلاثاء @break
+        @case('wed') الاربعاء @break
+        @case('thu') الخميس @break
+        @case('fri') الجمعة @break
+        @default
+        @endswitch
+        @endforeach</td>
 
 
 

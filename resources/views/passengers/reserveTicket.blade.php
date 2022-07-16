@@ -5,6 +5,9 @@
     input::-webkit-calendar-picker-indicator{
         display: none;
     }
+    body > section > div > div > div.col-lg-8 > form > div.row > div.col-12 > div > div > div > span{
+        padding-left: 0;
+    }
 </style>    
 
 @endsection
@@ -35,6 +38,25 @@
         <div class="row mt-5">
             <div class="col-12">
                 <h2 class="contact-title"> حجز رحلة</h2>
+            </div>
+            <div class="col-lg-3 offset-lg-1" style="">
+                <div class="media contact-info">
+                    <div class="row media-body">
+                        <div class="col-12"><h3 class="mb-30 trip-direction">  رحلة من  {{  $trip->depCity }} الى  {{  $trip->comCity }} </h3></div>
+                        <div class="col-6"> <h3>عدد التذاكر</h3></div>
+                        <div class="col-6"><p>{{$ticketNo}}</p></div>
+                        <div class="col-6"><h3>تاريخ الرحلة</h3></div>
+                        <div class="col-6"><p>{{ $trip->from_date}}</p></div>
+                        <div class="col-6"><h3>مسار الرحلة</h3></div>
+                        <div class="col-6"><p>{{ $trip->lines_trip}}</p></div>
+                        <div class="col-6"><h3>سعر التذكرة</h3></div>
+                        <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
+                        <div class="col-6"><h3>السعر الاجمالي</h3></div>
+                        <div class="col-6"><p>{{ $totalPrice}} {{$currency}}</p></div>
+
+                    </div>
+                </div>
+                
             </div>
             <div class="col-lg-8">
                 <form class="form-contact contact_form" action="{{ route('passengers.tripOrder',[$trip->id])}}"
@@ -133,25 +155,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 offset-lg-1" style="">
-                <div class="media contact-info">
-                    <div class="row media-body">
-                        <div class="col-12"><h3 class="mb-30 trip-direction">  رحلة من  {{  $trip->depCity }} الى  {{  $trip->comCity }} </h3></div>
-                        <div class="col-6"> <h3>عدد التذاكر</h3></div>
-                        <div class="col-6"><p>{{$ticketNo}}</p></div>
-                        <div class="col-6"><h3>تاريخ الرحلة</h3></div>
-                        <div class="col-6"><p>{{ $trip->from_date}}</p></div>
-                        <div class="col-6"><h3>مسار الرحلة</h3></div>
-                        <div class="col-6"><p>{{ $trip->lines_trip}}</p></div>
-                        <div class="col-6"><h3>سعر التذكرة</h3></div>
-                        <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
-                        <div class="col-6"><h3>السعر الاجمالي</h3></div>
-                        <div class="col-6"><p>{{ $totalPrice}} {{$currency}}</p></div>
-
-                    </div>
-                </div>
-                
-            </div>
+            
         </div>
     </div>
 </section>
