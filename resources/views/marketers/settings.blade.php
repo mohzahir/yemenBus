@@ -105,7 +105,7 @@ label{
                 </div>
                 <div class="mb-2">
                     <label>الخدمة\القسم الخاص بي </label> 
-                        <p class="text-success">{{ $marketer->service ?? 'لا يوجد' }}</p>
+                        <p class="text-success">{{ $marketer->service->name ?? 'لا يوجد' }}</p>
                 </div>
                 <div class="mb-2">
                     <label>هل انا مسوق عام ؟ </label> 
