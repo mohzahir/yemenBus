@@ -26,8 +26,8 @@ class MarketerRegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'marketer_type' => ['required', 'in:global_marketer,provider_marketer,service_marketer'],
-            'provider_id' => ["required_if:marketer_type,'provider_marketer'"],
-            'service_id' => ["required_if:marketer_type,'service_marketer'"],
+            'provider_id' => ["required_if:marketer_type,provider_marketer"],
+            'service_id' => ["required_if:marketer_type,service_marketer"],
             'password' => ['required'],
             'phone' => ['regex:/^(009665|9665|\+9665|05)([0-9]{8})$/i', 'required_without:y_phone', 'nullable'],
 
