@@ -177,9 +177,9 @@ class LoginController extends Controller
 
 
         if (Auth::guard('marketer')->attempt(
-            ['phone' =>  $phone, 'password' => $request->password],
+            ['phone' =>  $phone, 'state' =>  'active', 'password' => $request->password],
             $request->get('remember')
-        ) || Auth::guard('marketer')->attempt(['y_phone' => $phoneProv, 'password' => $request->password], $request->get('remember'))) {
+        ) || Auth::guard('marketer')->attempt(['y_phone' => $phoneProv, 'state' =>  'active', 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/marketers/archive');
         }

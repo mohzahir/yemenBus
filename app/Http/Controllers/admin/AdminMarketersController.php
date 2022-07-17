@@ -191,9 +191,12 @@ class AdminMarketersController extends Controller
     public function destroy($id)
     {
         $marketer = Marketer::findOrFail($id);
-        $marketer->delete();
+        $state = $marketer->state == 'active' ? 'inactive' : 'active';
+        $marketer->update([
+            'state' => $state
+        ]);
 
-        return redirect(route('dashboard.marketers.index'))->with('success', 'تم الحذف  بنجاح');
+        return redirect(route('dashboard.marketers.index'))->with('success', 'تم تغيير الحالة  بنجاح');
     }
 
     public function toActive($id)

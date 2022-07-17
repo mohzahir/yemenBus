@@ -131,14 +131,14 @@ style="border-width: 0;border-bottom-width: 1px; border-radius: 0;padding-left: 
                     <td>{{ $marketer->name }}</td>
                     <td>{{ $marketer->marketer_type}}</td>
                     <td>@if($marketer->phone!=null){{ $marketer->phone }}@else{{ $marketer->y_phone }}@endif</td>
-                    <td>@if($marketer->state == 'active') مفعل @elseif($marketer->state == 'not_active') غير مفعل @elseif($marketer->state == 'suspended') موقوف @else  @endif</td>
+                    <td>@if($marketer->state == 'active') مفعل @elseif($marketer->state == 'inactive') غير مفعل @elseif($marketer->state == 'suspended') موقوف @else  @endif</td>
                     <td>{{ $marketer->provider->name_company ?? $marketer->service->name ?? '-'}}</td>
                     <td>{{ $marketer->balance_rs }}</td>
                     <td>{{ $marketer->balance_ry }}</td>
                  
                     <td style="display:inline-block;width:100%">
                     <a class="btn btn-sm btn-info" href="{{ route('dashboard.marketers.edit', $marketer->id) }}">تعديل</a>
-                    <a class="btn btn-sm btn-danger" href="{{ route('dashboard.marketers.destroy', $marketer->id) }}">حذف </a>
+                    <a class="btn btn-sm btn-danger" href="{{ route('dashboard.marketers.destroy', $marketer->id) }}">تفعيل\الغاء تفعيل </a>
                         </form>
                         <a class="btn btn-sm btn-success" href="{{ route('dashboard.marketers.chargeForm', $marketer->id) }}"> شحن المسوق</a>
                         </form>

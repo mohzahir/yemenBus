@@ -12,10 +12,10 @@
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('passenger-assets/css/owl.carousel.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('passenger-assets/css/owl.carousel.min.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/slicknav.css') }}">
-    <link rel="stylesheet" href="{{ asset('passenger-assets/css/animate.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('passenger-assets/css/animate.min.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('passenger-assets/css/themify-icons.css') }}">
@@ -146,8 +146,7 @@
 
 
     @yield('content')
-    <footer>
-        <!-- Footer Start-->
+    <!-- <footer>
         <div class="footer-area footer-padding footer-bg" style="padding-bottom: 17px; padding-top:17px"
             data-background="{{ asset('passenger-assets/img/service/footer_bg.jpg') }}">
             <div class="container">
@@ -155,7 +154,6 @@
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
                         <div class="single-footer-caption mb-50">
                             <div class="single-footer-caption mb-30">
-                                <!-- logo -->
                                 <div class="footer-logo">
                                     <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                                 </div>
@@ -201,7 +199,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Footer bottom -->
                 <div class="row pt-padding">
                     <div class="col-xl-7 col-lg-7 col-md-7">
                         <div class="footer-copy-right">
@@ -212,16 +209,87 @@
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-5 col-md-5">
-                        <!-- social -->
-                        <!--   <div class="footer-social f-right">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
-                        </div>
-                    -->
                     </div>
                 </div>
+            </div>
+        </div>
+    </footer> -->
+
+    <footer>
+        <!-- Footer Start-->
+        <div style="padding-bottom: 0;" class="footer-area footer-padding footer-bg" data-background="https://yemenbus.com/passenger-assets/img/service/footer_bg.jpg" style="background-image: url(&quot;passenger-assets/img/service/footer_bg.jpg&quot;);">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                       <div class="single-footer-caption mb-50">
+                         <div class="single-footer-caption mb-30">
+                              <!-- logo -->
+                             <div class="footer-logo">
+                                 <a href="/">
+                                    <!-- <img src="https://yemenbus.com/passenger-assets/img/logo/yemen-logo.svg" alt="">-->
+                                </a>
+                             </div>
+                             <div class="footer-tittle">
+                                     <h4 style="text-align: center"> شركة يمن باص </h4>
+                             </div>
+                         </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4> شبكات اجتماعية</h4>
+                                <ul>
+                                    <li><a target="_blank" href="https://m.facebook.com/souq.zefaf?ref=bookmarks">فيسبوك</a></li>
+                                    <li><a target="_blank" href="https://youtu.be/x3e7nJkyQlw"> يوتيوب</a></li>
+                                    <li><a target="_blank" href="https://twitter.com/0FlXYerp2aibqFj?s=09"> تويتر</a></li>
+                                    <li><a href="#"> واتساب :00966507276370</a></li><a href="#">
+                                    </a><li><a href="#"></a><a href="#"> yemenbus1@gmail.com </a></li><a href="#">
+                                </a></ul><a href="#">
+                            </a></div><a href="#">
+                        </a></div><a href="#">
+                    </a></div><a href="#">
+                    
+                    </a>
+                    <!-- <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7"><a href="#">
+                        </a><div class="single-footer-caption mb-50"><a href="#">
+                            </a><div class="footer-tittle"><a href="#">
+                                <h4>روابط مهمه</h4>
+                                </a><ul><a href="#">
+                                 </a><li><a href="#"></a><a href="https://dashboard.yemenbus.com/wakeel">كن وكيلا لنا</a></li>
+                                 <li><a href="https://www.dashboard.yemenbus.com/pcrs_request">طلب فحص كرونا قبل السفر</a></li>
+                                 <li><a href="https://www.dashboard.yemenbus.com/">القرعه اليومية للتذاكر المجانية والمخفضة</a></li>
+                                 <li><a href="https://dashboard.yemenbus.com/Fasttecket">احجز الان وادفع عند الصعود</a></li>
+                                 <li><a href="https://play.google.com/store/apps/details?id=com.technology.yaminbus">نزل تطبيق يمن باص</a></li>
+                             </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>موقعنا على الخريطة</h4>
+                                <ul>
+                                    <li><a target="_blank" href="https://maps.app.goo.gl/ydXrqGYo3at6tNBa8">موقعنا على الخريطة</a></li>
+                                    <li><a target="_blank" href="https://maps.app.goo.gl/ydXrqGYo3at6tNBa8"> جدة - طريق الملك عبد الله الفرعي, الرويس</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row pt-padding">
+                 <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright ©<script>document.write(new Date().getFullYear());</script>2022
+
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                 </div>
+                 
+             </div>
             </div>
         </div>
         <!-- Footer End-->
