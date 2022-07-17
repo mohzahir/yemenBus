@@ -285,6 +285,14 @@ Route::prefix('marketers')->middleware('marketer')->group(function () {
     Route::get('reservations/postpone/index', 'MarketersController@postpone')->name('marketer.reservations.postponeAll');
     Route::get('reservations/postpone/index', 'MarketersController@postpone')->name('marketer.reservations.postponeAll');
     Route::get('reservations/cancel/index', 'MarketersController@cancel')->name('marketer.reservations.cancelAll');
+    Route::get('reservations/cancel/{id}', 'MarketersController@cancel')->name('marketer.reservations.cancel');
+    Route::get('marketer/reservation/edit/{id}', 'MarketersController@edit')->name('marketer.reservations.edit');
+    Route::get('marketer/reservation/passengers-list/{id}', 'MarketersController@passengersList')->name('marketer.reservations.passengersList');
+    Route::post('marketer/reservation/savePassengersTickets', 'MarketersController@savePassengersTickets')->name('marketer.reservations.savePassengersTickets');
+    Route::post('marketer/reservation/update/{id}', 'MarketersController@update')->name('marketer.reservations.update');
+    Route::get('haj/reservations/passenger/{id}', 'MarketersController@passengerInfo')->name('marketer.haj.reservations.passenger.info');
+    Route::post('haj/reservations/passenger/{id}', 'MarketersController@storePassengerInfo')->name('marketer.haj.reservations.storePassengerInfo');
+
 
 
     Route::get('trips', 'MarketersController@trips')->name('marketer.trips');

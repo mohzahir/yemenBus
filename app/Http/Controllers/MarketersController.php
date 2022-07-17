@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
 use App\helpers;
 use App\Service;
 use App\Trip;
+use App\TripOrderPassenger;
 use App\User;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\Hash;
@@ -147,12 +148,107 @@ class MarketersController extends Controller
     public function confirm()
     {
         $reservations = Reseervation::where('reseervations.marketer_id', auth()->guard('marketer')->user()->id)
-            ->where('reseervations.status', '!=', 'canceled')
+            // ->where('reseervations.status', '!=', 'canceled')
             ->paginate(10);
         // $reservations = Reseervation::where('marketer_id', $id)->orderby('id', 'desc')->paginate('10');
 
         return view('marketers.reservation.conform')->with('reservations', $reservations);
     }
+
+
+
+    public function edit($id)
+    {
+        $reservation = Reseervation::where('id', $id)->first();
+
+
+        return view('marketers.reservation.edit')->with([
+            'reservation' => $reservation,
+        ]);
+        // $reservation = Reseervation::where('id', $id)->first();
+        // dd($reservation);
+        // return view('providers.reservation.update')->with(['reservation' => $reservation]);
+    }
+    public function passengersList($id)
+    {
+        $passengers = TripOrderPassenger::where('reservation_id', $id)->get();
+        // dd($passengers);
+        return view('marketers.reservation.passengersList')->with(['passengers' => $passengers]);
+    }
+
+    public function savePassengersTickets(Request $request)
+    {
+        foreach ($request->external_ticket_no as $key => $item) {
+            // dd($request->id[$key]);
+            TripOrderPassenger::where('id', $request->id[$key])->update([
+                'external_ticket_no' => $item
+            ]);
+        }
+
+        // return response()->json(['url' => route('provider.reservations.confirmAll'), 'msge' => 'success']);
+        return redirect()->back()->with(['info' => 'تم حفظ ارقام التزاكر']);
+    }
+
+    public function passengerInfo($reservation)
+    {
+        $reservation = Reseervation::findOrFail($reservation);
+        // dd($reservation);
+
+        return view('marketers.reservation.passenger-info', ['reservation' => $reservation]);
+    }
+
+    public function storePassengerInfo(Request $request, $reservation_id)
+    {
+        // dd($request->all());
+        $reservation = Reseervation::findOrFail($reservation_id);
+        $reservation->update([
+            'haj_passenger_external_ticket_number' => $request->haj_passenger_external_ticket_number,
+            'haj_passenger_hotel_details' => $request->haj_passenger_hotel_details,
+            'haj_passenger_sickness_status' => $request->haj_passenger_sickness_status,
+        ]);
+        return redirect()->back()->with(['success' => 'تم تعديل البيانات بنجاح']);
+    }
+
+    public function Update(Request $request, $id)
+    {
+
+        // dd($request);
+        $request->validate([
+            'ride_place' => 'nullable',
+            'drop_place' => 'nullable',
+            'note' => 'nullable',
+        ]);
+
+        $preseervation = Reseervation::findOrFail($id);
+
+        $preseervation->ride_place = $request->ride_place;
+        $preseervation->drop_place = $request->drop_place;
+        $preseervation->note = $request->note;
+
+        $preseervation->save();
+
+
+        return redirect()->route('marketer.reservations.confirmAll')->with(['success' => 'تم تعديل بيانات الحجز بنجاح']);
+    }
+
+
+    //cancel reservation
+
+    public function cancel($id)
+    {
+        // dd($id);
+        $reservation = Reseervation::findOrFail($id);
+        $reservation->update(['status' => 'canceled']);
+        // dd($reservation);
+        return redirect()->back()->with(['success' => 'تم الغاء الحجز بنجاح']);
+        // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
+        // $code = null;
+        // $marketer ? $code = $marketer->code : $code = null;
+
+        // return view('providers.reservation.cancel')->with(['reservation' => $reservation, 'code' => $code]);
+    }
+
+
 
     public function sms($id = null)
     {
