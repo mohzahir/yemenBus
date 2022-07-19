@@ -77,7 +77,7 @@ label{
             <div class="small-box bg-info" style="width:300px;height:100px;color:#fff;background-color: #2c3e50;text-align:center;margin-top:20px;">
                     <div class="inner" style="float:center;padding-top:1px;">
                     <h3>{{$confirm}}</h3>
-                    <p> تاكيد الحجز </p>
+                    <p> الحجوزات المؤكدة </p>
                     </div>
                     {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
                 </div>

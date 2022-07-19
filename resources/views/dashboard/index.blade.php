@@ -70,7 +70,7 @@ label{
                                 <p class="h5" style="color:#fff">{{ $total_provider }}</p>
                             </a>
                             <a href="" style="background-color: #8e44ad">
-                                <h4>عدد الحجوزات المؤكده</h4>
+                                <h4>عدد الحجوزات </h4>
                                 <p class="h5"style="color:#fff">{{$total_reservation_confirm }}</p>
                             </a>
                            

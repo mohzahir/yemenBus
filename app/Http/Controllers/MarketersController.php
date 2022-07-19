@@ -44,14 +44,14 @@ class MarketersController extends Controller
     }
     public function archive()
     {
-        $code = Auth::guard('marketer')->user()->code;
-        //$markeetr=Marketer::where('code',$code)->first();
+        $marketer_id = Auth::guard('marketer')->user()->id;
+        //$markeetr=Marketer::where('marketer_id',$marketer_id)->first();
 
-        $postpone = Reseervation::where(['code' => $code, 'status' => 'postpone'])->count();
-        $confirm = Reseervation::where(['code' => $code, 'status' => 'confirm'])->count();
-        $cancel = Cancel_reservation::where('code', $code)->count();
-        $full_amount = Reseervation::where(['code' => $code, ['amount', '=', 'amount_deposit']])->count();
-        $deposit_amount = Reseervation::where(['code' => $code, ['amount', '<>', 'amount_deposit']])->count();
+        $postpone = Reseervation::where(['marketer_id' => $marketer_id, 'status' => 'postpone'])->count();
+        $confirm = Reseervation::where(['marketer_id' => $marketer_id, 'status' => 'confirm'])->count();
+        $cancel = Reseervation::where(['marketer_id' => $marketer_id, 'status' => 'canceled'])->count();
+        $full_amount = Reseervation::where(['marketer_id' => $marketer_id, ['total_price', '=', 'paid']])->count();
+        $deposit_amount = Reseervation::where(['marketer_id' => $marketer_id, ['total_price', '!=', 'paid']])->count();
 
         return view('marketers.archive')->with(['postpone' => $postpone, 'confirm' => $confirm, 'cancel' => $cancel, 'full_amount' => $full_amount, 'deposit_amount' => $deposit_amount]);
     }
