@@ -240,6 +240,12 @@ class MarketersController extends Controller
         $reservation = Reseervation::findOrFail($id);
         $reservation->update(['status' => 'canceled']);
         // dd($reservation);
+        if ($reservation->marketer_id) {
+            $column = $reservation->trip->currency == 'rs' ? 'balance_rs' : 'balance_ry';
+            $reservation->marketer->update([
+                $column => $reservation->marketer[$column] + $reservation->paid,
+            ]);
+        }
         return redirect()->back()->with(['success' => 'تم الغاء الحجز بنجاح']);
         // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
         // $code = null;

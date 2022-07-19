@@ -272,7 +272,14 @@ class AdminReservationController extends Controller
     {
         $reservation = Reseervation::where('id', $id)->first();
         $reservation->update(['status' => 'canceled']);
+        if ($reservation->marketer_id) {
+            $column = $reservation->trip->currency == 'rs' ? 'balance_rs' : 'balance_ry';
+            $reservation->marketer->update([
+                $column => $reservation->marketer[$column] + $reservation->paid,
+            ]);
+        }
         return redirect()->back()->with(['message' => 'تم الغاء الطلب بنجاح']);
+
         // $marketer = Marketer::where('id', $reservation->marketer_id)->first();
         // $code = null;
         // $marketer ? $code = $marketer->code : $code = null;

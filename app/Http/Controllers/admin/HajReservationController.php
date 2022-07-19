@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 // use App\Http\Controllers\Controller;
+
+use App\Marketer;
 use App\Provider;
 use App\Reseervation;
 use App\Setting;
@@ -82,7 +84,12 @@ class HajReservationController extends \App\Http\Controllers\Controller
     {
         $reservation = Reseervation::findOrFail($reservation_id);
         $reservation->update(['status' => 'canceled']);
-
+        if ($reservation->marketer_id) {
+            $column = $reservation->trip->currency == 'rs' ? 'balance_rs' : 'balance_ry';
+            $reservation->marketer->update([
+                $column => $reservation->marketer[$column] + $reservation->paid,
+            ]);
+        }
         return redirect()->route('haj.reservations.index')->with(['message' => 'تم الغاء الحجز بنجاح']);
     }
 }
