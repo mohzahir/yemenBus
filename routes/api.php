@@ -21,3 +21,4 @@ use Illuminate\Http\Request;
 
 Route::get('/getServiceProviders', 'admin\AdminTripController@getServiceProviders')->name('getServiceProviders');
 Route::get('/getServiceSubServices', 'admin\AdminTripController@getServiceSubServices')->name('getServiceSubServices');
+Route::get('/getTripData', 'GlobalSharedController@getTripData')->name('getTripData');

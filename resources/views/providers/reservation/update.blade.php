@@ -42,10 +42,10 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('dashboard.admin.index')}}"> <span class="glyphicon glyphicon-home"></span>صفحة رئيسية </a></li>
-            <li class="breadcrumb-item active" aria-current="page"> تعديل حجز رحلة باص</li>
+            <li class="breadcrumb-item active" aria-current="page"> تعديل حجز </li>
         </ol>
     </nav>
-    <h1 style="text-align:center"> تعديل حجز رحلة باص بالرقم ({{ $reservation->id }})</h1>
+    <h1 style="text-align:center"> تعديل حجز  بالرقم ({{ $reservation->id }})</h1>
     <div class="alert  alert-danger print-error-msg" style="display:none">
         <button type="button" class="close" data-dismiss="alert" style="float:left">×</button>
         <ul></ul>
@@ -76,7 +76,7 @@
             <input type="file" class="form-control" id="image" name="image" >
         </div> -->
 
-        <div class="form-group mt-2">
+        <!-- <div class="form-group mt-2">
             <label for="ticket_no">الرحلة</label>
             <select name="trip_id" class="form-control" id="">
                 <option value=""> --- </option>
@@ -84,7 +84,7 @@
                 <option @if($reservation->trip_id == $trip->id) selected @endif value="{{ $trip->id }}">رحلة من {{ $trip->takeoff_city->name }} الى {{ $trip->arrival_city->name }} - السعر {{ $trip->price }} - التاريخ {{ $trip->from_date }} - بالرقم {{ $trip->id }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> -->
         <div class="form-group mt-2">
             <label for="ticket_no">مسوق الحجز </label>
             <select name="trip_id" class="form-control" id="">
@@ -111,7 +111,7 @@
 
         <button class="btn btn-success btn-lg" type="submit">تعديل الحجز</button>
 
-        <a class="btn btn-danger btn-close btn-lg" href="{{ route('provider.reservations.confirmAll') }}">رجوع</a>
+        <a class="btn btn-danger btn-close btn-lg" onclick="javascript:history.back(1)">رجوع</a>
 
     </form>
 </div>

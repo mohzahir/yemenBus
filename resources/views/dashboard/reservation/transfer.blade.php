@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@1&family=Cairo:wght@200;400&family=Changa:wght@300&family=El+Messiri&family=Lateef&display=swap&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
 
   <style>
  
@@ -43,90 +44,170 @@ label{
 </nav>
 @include('flash-message')
 
-        <h1 style ="text-align:center">نقل  الحجز</h1>
+        <h1 style ="text-align:center">نقل الحجز بالرقم ({{ $reservation->id }})</h1>
+<div x-data="{
+    trip : null,
+    async getTripData(id) {
+        console.log(id)
+        if (id) {
+            this.trip = await (await fetch('{{ route('getTripData') }}' + '/?id=' + id)).json();
 
-<form  id="myForm" class="pb-4 @if ($errors->any()) was-validated @endif" style=" margin-bottom:40px;" >
-    @csrf
-    <input type="hidden" class="form-control"  id="code" name="code" value="{{$code}}" >
-<input type="hidden" class="form-control" name="id"  id="id" value="{{$reservation->id}}" >
-        <div class="form-group mt-2">
-            <label for="order_id">رقم الطلب</label>
-            <input type="text" class="form-control" id="order_id" name="order_id" value="{{$reservation->order_id}}">
+            // log out all the posts to the console
+            console.log(this.trip);
+        }
+    }
+}">
+    <form action="{{ route('admin.reservations.storetransfer') }}" method="post"  id="myForm" class="pb-4 @if ($errors->any()) was-validated @endif" style=" margin-bottom:40px;" >
+        @csrf
+
+        <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
+    
+        <div class="row">
+            <div class="col-12">
+                <p class="text-danger"> نلفت انتباهك الى انه سوف يتم الغاء الحجز الحالي للعميل واضافة حجز جديد في الرحلة التي ستقوم بإختيارها</p>
+            </div>
         </div>
-        <div class="form-group mt-2">
-            <label for="order_id">رقم الرحلة</label>
-            <input type="text" class="form-control" id="trip_id" name="trip_id" value="{{$reservation->trip_id}}">
+    
+        <div class="row">
+            <div class="col-md-">
+                <div class="form-group">
+                    <label for="trip_id">اسم العميل</label>
+                    <p>{{ $reservation->passenger->name_passenger }}</p>
+                </div>
+            </div>
         </div>
-   
+        <div class="row">
+            <div class="col-md-">
+                <div class="form-group">
+                    <label for="trip_id">معلومات الرحلة الحالية</label>
+                    <p>  رحلة من {{ $reservation->trip->takeoff_city->name }} الى {{ $reservation->trip->arrival_city->name }} - السعر {{ $reservation->trip->price }}  - التاريخ {{ $reservation->trip->from_date }} - بالرقم {{ $reservation->trip->id }} </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-">
+                <div class="form-group">
+                    <label for="trip_id">عدد التزاكر</label>
+                    <p> {{ $reservation->ticket_no }} </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-">
+                <div class="form-group">
+                    <label for="trip_id">اختر الرحلة الجديدة </label>
+                    <select x-on:change="getTripData($el.value)" name="trip_id" id="trip_id" class="form-control" required>
+                        <option value="">-- قم باختار الرحلة التي تريد نقل الحجز اليها --</option>
+                        @foreach($trips as $trip)
+                            <option  @if(old('trip_id') == $trip->id) selected @endif value="{{ $trip->id }}">رحلة من {{ $trip->takeoff_city->name }} الى {{ $trip->arrival_city->name }} - السعر {{ $trip->price }}  - التاريخ {{ $trip->from_date }} - بالرقم {{ $trip->id }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <template x-if="trip">
+            <div >
+                <h2>معلومات الرحلة الجديدة</h2>
         
-        <div class="form-group mt-2">
-            <label for="passenger_phone">جوال المسافر </label>
-            <input type="text" class="form-control" id="passenger_phone" name="passenger_phone" placeholder="مثال +9661231313131"  value="{{$reservation->passenger_phone}}" >
-        </div>
-        <div class="form-group mt-2">
-            <label for="passenger_phone_yem">   جوال المسافر اليمني  </label>
-            <input type="text" class="form-control" id="passenger_phone_yem" name="passenger_phone_yem" placeholder="مثال +9677231313131"  value="{{$reservation->passenger_phone_yem}}" >
-        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">رقم الرحلة</label>
+                            <p x-text="trip.id">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">المزود</label>
+                            <p x-text="trip.provider.name_company">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">مدينة الوصول</label>
+                            <p x-text="trip.arrival_city.name">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">مدينة الانطلاق</label>
+                            <p x-text="trip.takeoff_city.name">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">العملة</label>
+                            <p x-text="trip.currency == 'rs' ? 'ريال سعودي' : 'ريال يمني'" >  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">السعر</label>
+                            <p x-text="trip.price">  </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">التاريخ</label>
+                            <p x-text="trip.from_date">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">موعد الحضور</label>
+                            <p x-text="trip.coming_time">  </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <h2>البيانات المالية</h2>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">سعر الرحلة الجديدة</label>
+                            <p x-text="trip.price">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">المبلغ المدفوع للحجز الحالي</label>
+                            <p> {{ $reservation->paid }} </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">العملة</label>
+                            <p x-text="trip.currency == 'rs' ? 'ريال سعودي' : 'ريال يمني'" >  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="trip_id">  الفرق بين المبلغين <span class="text-danger text-sm">اذا كان المبلغ بالسالب فهذا يعني ان العميل يستحق المبلغ ادناه</span></label>
+                            <p x-text="trip.price - {{ $reservation->paid }}">  </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p class="text-danger">الرجاء تسوية الحسابات مع العميل قبل الضغط على ذر نقل الحجز</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
         
-        
-        <div class="form-group mt-2">
-            <label for="amount">مبلغ</label>
-            <input type="number" min="1" class="form-control" name="amount" value="{{$reservation->amount}}">
-        </div>
-               
-        <div class="form-group mt-2">
-            <label for="currency">العملة</label>
-            <select name="currency" class="form-control" id="currency" required>
-           
-                <option value="sar"  @if($reservation->currency=='sar')selected @endif >ريال سعودي</option>
-                <option value="yer"  @if($reservation->currency=='yer')selected @endif>ريال يمني</option>
-            </select>
-        </div>
-        <div class="form-group mt-2">
-            <label for="provider_id">الشركة</label>
-            <select name="provider_id" class="form-control" id="provider_id" required>
+    
             
-                @foreach ($companies as $company)
-                     <option value="{{$company->id}}"> {{$company->name_company}}</option>
-                @endforeach
-                
-            </select>
-        </div>
-                <div class="form-group mt-2">
-            <label for="day">اليوم</label>
-            <select name="day" class="form-control" id="day" required>
-                <option value="" @if($reservation->day=="")selected @endif >-- اختر -- </option>
-                 <option id="sat" value="sat" @if($reservation->day=="sat")selected @endif >السبت</option>
-                <option  id="sun"value="sun" @if($reservation->day=="sun")selected @endif>الاحد </option>
-                <option  id="mon" value="mon" @if($reservation->day=="mon")selected @endif>الاثنين </option>
-                <option id="tue" value="tue" @if($reservation->day=="tue")selected @endif>الثلاثاء </option>
-                <option id="wed" value="wed" @if($reservation->day=="wed")selected @endif>الاربعاء </option>
-                <option id="thu" value="thu" @if($reservation->day=="thu")selected @endif>الخميس </option>
-                <option id="fri" value="fri" @if($reservation->day=="fri")selected @endif>الجمعة </option>>
-                
-            </select>        </div>
+            <button id="submit" class="btn btn-success btn-lg" type="submit">نقل الحجز</button>    
+            
+            
+         
+                 <!-- <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
+         <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.admin.index') }}">اغلاق</a> -->
+    
+       
+        </form>
 
-
-        <div class="form-group mt-2">
-            <label for="date">التأجيل إلى تاريخ</label>
-            <input type="date" class="form-control" name="date" id="date" required @if($reservation->date)value="{{ \Carbon\Carbon::parse($reservation->date)->format('Y-m-d')}}"@endif >
-                
-        </div>
-        
-        <div class="form-group mt-2">
-            <label for="note">ملاحظات</label>
-            <textarea class="form-control" name="note" id="note"></textarea>
-        </div>
-        
-        <button class="btn btn-success btn-lg" type="submit">نقل الحجز</button>    
-        
-        
-     
-             <a class="btn btn-warning btn-close btn-lg" href="">الغاء</a>
-     <a class="btn btn-danger btn-close btn-lg" href="{{ route('dashboard.admin.index') }}">اغلاق</a>
-
-   
-    </form>
+</div>
     </div>
 @stop
 
@@ -158,12 +239,12 @@ $('#'+data).attr('selected','true');
 $(document).on('submit','#myForm', function (e) {
     e.preventDefault();
     var date= $("#date").val();
-    var order_id= $("#order_id").val();
+    var order_id= {{ $reservation->id }};
     var trip_id= $("#trip_id").val();
-    var provider_name= $( "#provider_id option:selected" ).text();
+    var provider_name= $( "#provider_name" ).val();
     
     swal({
-        title:' هل انت متاكد من نقل الحجز رقم  '+order_id+' الى رحله رقم '+trip_id+' تاريخ '+date+' شركة النقل '+provider_name ,
+        title:' هل انت متاكد من نقل الحجز رقم  '+order_id+' الى رحله رقم '+trip_id+' ,
         type: "question",
             confirmButtonClass: "btn-danger",
             confirmButtonText: 'نعم',
@@ -171,42 +252,9 @@ $(document).on('submit','#myForm', function (e) {
   showCancelButton: true,
   showCloseButton: true
         }).then(function () {
-            $.ajax({
-                type: "post",
-               url: "{{route('admin.reservations.storetransfer')}}",
-                data: {           
-                    "_token": "{{ csrf_token() }}",
-                    "order_id": $("#order_id").val(),
-                    "id": $("#id").val(),
-                    "trip_id": $("#trip_id").val(),
-                    "passenger_phone": $("#passenger_phone").val(),
-                    "passenger_phone_yem": $("#passenger_phone_yem").val(),
-                    "provider_id": $("#provider_id").val(),
-                    "amount": $("#amount").val(),
-                    "day": $("#day").val(),
-                    "date": $("#date").val(),
-                    "code": $("#code").val(),
-                    "currency": $("#currency").val(),
-
-},
-
- success: function(res) {
-            if(res.msge=='success'){
-
-        swal({
-                            title: "تم نقل الحجز بنجاح",
-                           text:' تم نقل الحجز رقم  '+order_id+' الى رحله رقم '+trip_id+' تاريخ '+date+' شركة النقل '+provider_name ,
-
-                            type: "success",
-                            confirmButtonText: 'توجه لصفحة الحجوزات',
-                            showCloseButton: true
-        }).then(function () {  
-            window.location=res.url;
- 
+            console.log('dsdsd');
+            $('#myForm').submit();
         });
-        }}
-    });
-});
       
         
        

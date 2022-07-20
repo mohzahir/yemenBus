@@ -200,7 +200,7 @@
 
                     @endif --}}
 
-                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.trip.index')}}">الرحلات</a></li>
+                    <li><span class="glyphicon glyphicon-edit"></span><a href="{{route('provider.trip.index')}}">رحلاتي</a></li>
 
 
                     <li><span class="glyphicon glyphicon-envelope"></span><a href="{{route('provider.sms')}}">ارسال رسالة للعميل</a></li>

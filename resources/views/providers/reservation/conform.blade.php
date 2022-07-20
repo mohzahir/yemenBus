@@ -218,6 +218,7 @@
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
             <a href="{{ route('provider.reservations.cancel', ['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}">الغاء الحجز</a>
             <!-- <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',$reservation->id) }}">نقل الى</a> -->
+            <a class="btn btn-sm btn-primary" href="{{ route('provider.reservations.transfer',['id' => $reservation->id]) }}">نقل الحجز</a>
           </td>
           <td style="width:150px;margin-top:30px">
             <a class="btn btn-sm btn-primary" href="{{ route('provider.sms',$reservation->id) }}" style="margin-bottom: 10px"> <span class="glyphicon glyphicon-envelope"></span> راسل المسافر </a>

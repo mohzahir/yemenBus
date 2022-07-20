@@ -208,6 +208,8 @@ th,td{
 @endif
 <!-- <a class="btn btn-sm btn-warning" href="{{ route('provider.reservations.postpone',['id' => $reservation->id]) }}">تأجيل الحجز</a> -->
 <a class="btn btn-sm btn-danger" href="{{ route('marketer.reservations.cancel',['id' => $reservation->id]) }}">الغاء الحجز</a>
+<a class="btn btn-sm btn-primary" href="{{ route('marketer.reservations.transfer',['id' => $reservation->id]) }}">نقل الحجز</a>
+
 <!-- <a class="btn btn-sm btn-success" href="{{ route('provider.reservations.transfer',['id' => $reservation->id]) }}">نقل الى</a> -->
 </td> 
 <td style="width:150px;margin-top:30px">

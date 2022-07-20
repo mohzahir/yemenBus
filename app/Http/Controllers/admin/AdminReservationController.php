@@ -424,187 +424,83 @@ class AdminReservationController extends Controller
 
 
 
-    //postpone reservation
+
+
     public function transfer($id)
     {
-        $reservation = Reseervation::where('id', $id)->first();
-        $marketer = Marketer::where('code', $reservation->code)->first();
-        $code = $marketer->code;
-        $provide_name = $marketer->provide;
-        $provide = Provider::where('name_company', $provide_name)->first();
+        // $reservation = Reseervation::where('id', $id)->first();
+        // $marketer = Marketer::where('code', $reservation->code)->first();
+        // $code = $marketer->code;
+        // $provide_name = $marketer->provide;
+        // $provide = Provider::where('name_company', $provide_name)->first();
 
 
-        $provide =  $marketer->provide;
-        if ($provide == 'global') {
-            $companies =  Provider::all();
+        // $provide =  $marketer->provide;
+        // if ($provide == 'global') {
+        //     $companies =  Provider::all();
+        // } else {
+        //     $comp = $marketer->provide;
+        //     $companies =  Provider::where('name_company', $comp)->get();
+        // }
+        $reservation = Reseervation::findOrFail($id);
+        if ($reservation->trip->provider->service_id == 1) {
+            //bus
+            $provider_ids = Provider::where('service_id', 1)->pluck('id');
+            $trips = Trip::whereIn('provider_id', $provider_ids)->where(['status' => 'active'])->get();
         } else {
-            $comp = $marketer->provide;
-            $companies =  Provider::where('name_company', $comp)->get();
+            // haj
+            $provider_ids = Provider::where('service_id', 3)->pluck('id');
+            $trips = Trip::whereIn('provider_id', $provider_ids)->where(['status' => 'active'])->get();
         }
 
-
-        return view('dashboard.reservation.transfer')->with(['reservation' => $reservation, 'code' => $code, 'companies' => $companies]);
+        return view('dashboard.reservation.transfer', [
+            'trips' => $trips,
+            'reservation' => $reservation,
+        ]);
     }
 
-
-    public function storeTransfer(Request $request)
+    public function storetransfer(Request $request)
     {
-        /*request()->validate([
-        'order_id' => ['required', 'string'],
-'passenger_phone'=>['regex:/^(009665|9665|\+9665|05)(5|0|3|6|4|9|1)([0-9]{7})$/i','required_without:passenger_phone_yem','nullable'],
+        // dd($request);
+        $request->validate([
+            'trip_id' => 'required|exists:trips,id',
+            'reservation_id' => 'required|exists:reseervations,id',
+        ]);
 
-'passenger_phone_yem'=>['regex:/^(00967|967|\+967)([0-9]{9})$/i','required_without:passenger_phone','nullable'],
-             'currency' => ['required', 'string', Rule::in(['sar','yer'])], 
-        'amount' => ['required', 'string'],
-        'date'=>['required']
+        $reservation = Reseervation::findOrFail($request->reservation_id);
 
-    ], [
-        'order_id.required' => 'رقم الطلب إجباري',
- 'passenger_phone.regex'=>'الرقم غير صحيح',
-'passenger_phone.required_without'=>'يجب ادخال احد الرقمين',
-'passenger_phone_yem.regex'=>'الرقم غير صحيح',
-'passenger_phone_yem.required_without'=>'يجب ادخال احد الرقمين',
-        'currency.required' => 'اختيار العملة إجباري',
-        'amount.required' => ' المبلغ إجباري',
-        'date.required' => ' يرجى ادخال تاريخ التاجيل ',
-    ]);*/
-        $data = $request->all();
-        $preseervation = Reseervation::where('id', $request->id)->first();
+        DB::transaction(function () use ($request, $reservation) {
+            try {
+                $reservation->update([
+                    'status' => 'canceled',
+                ]);
 
-        $tid = $preseervation->trip_id;
-        $tday = $preseervation->day;
-        $tdate = Carbon::parse($preseervation->date)->format('m-d');
-        $tpr = Provider::where('id', $preseervation->provider_id)->first();
-        $tprovide = $tpr->name_company;
+                Reseervation::create([
+                    'trip_id' => $request->trip_id,
+                    'marketer_id' => $reservation->marketer_id,
+                    'main_passenger_id' => $reservation->main_passenger_id,
+                    'ticket_no' => $reservation->ticket_no,
+                    'payment_method' => $reservation->payment_method,
+                    'payment_type' => $reservation->payment_type,
+                    'payment_time' => date('Y-m-d'),
+                    'total_price' => $reservation->total_price,
+                    'paid' => $reservation->total_price,
+                    'currency' => $reservation->currency,
+                    'payment_image' => $reservation->payment_image,
+                    'status' => 'confirmed',
+                    'note' => $reservation->note,
+                    'haj_passenger_external_ticket_number' => $reservation->haj_passenger_external_ticket_number,
+                    'haj_passenger_hotel_details' => $reservation->haj_passenger_hotel_details,
+                    'haj_passenger_sickness_status' => $reservation->haj_passenger_sickness_status,
+                ]);
 
-        $t2tid = $request->provider_id;
-        $t2pr = Provider::where('id', $t2tid)->first();
-        $t2tprovide = $t2pr->name_company;
-        $date = Carbon::parse($request->date)->format('m-d');
+                // dd($request);
+            } catch (\Throwable $th) {
 
-        switch ($tday) {
-            case 'sat':
-                $tday = "السبت";
-                break;
-            case 'sun':
-                $tday = "الاحد";
-                break;
-            case 'mon':
-                $tday = "الاثنين";
-                break;
-            case 'tue':
-                $tday = "الثلاثاء";
-                break;
-            case 'wed':
-                $tday = "الاربعاء";
-                break;
-            case 'thu':
-                $tday = "الخميس";
-                break;
-            case 'fri':
-                $tday = "الجمعة";
-                break;
-
-            default:
-                break;
-        }
-        $day = $request->day;
-        switch ($day) {
-            case 'sat':
-                $day = "السبت";
-                break;
-            case 'sun':
-                $day = "الاحد";
-                break;
-            case 'mon':
-                $day = "الاثنين";
-                break;
-            case 'tue':
-                $day = "الثلاثاء";
-                break;
-            case 'wed':
-                $day = "الاربعاء";
-                break;
-            case 'thu':
-                $day = "الخميس";
-                break;
-            case 'fri':
-                $day = "الجمعة";
-                break;
-
-            default:
-                break;
-        }
-
-        $msgP = 'عزيزي المسافر(' . $preseervation->passenger_name . ') تم نقل الحجز رقم (' . $request->id . ') من رحله (' . $tid . ') يوم ' . $tday . '/' . $tdate . ' شركة النقل: ' . $tprovide . ' الى رحله(' . $request->trip_id . ') يوم ' . $day . '/' . $date . ' شركة النقل: ' . $t2tprovide;
-
-        $msg = 'تم نقل الحجز رقم (' . $request->id . ')من رحله(' . $tid . ') يوم ' . $tday . '/' . $tdate . ' شركة النقل: ' . $tprovide . ' الى رحله ( ' . $request->trip_id . ' )  يوم ' . $day . '/' . $date . ' شركة نقل: ' . $t2tprovide;
-
-        $mailToAdmin = Admin::where('id', 1)->first()->email;
-        Mail::to($mailToAdmin)->send(new TransferReservation($msg));
-        $marketer = Marketer::where('code', $preseervation->code)->first();
-
-        // Send mail to marketer
-        if ($marketer->email) {
-            $mailToMarketer = $marketer->email;
-            Mail::to($mailToMarketer)->send(new TransferReservation($msg));
-        }
-        $preseervation->date = $request->date;
-        $preseervation->day = $request->day;
-        $preseervation->provider_id = $request->provider_id;
-        $preseervation->trip_id = $request->trip_id;
-        $preseervation->note = $request->note;
-        $preseervation->status = 'transfer';
-        $preseervation->save();
-
-
-
-        $provider_phone1 = Provider::where('id', $tpr->id)->first()->phone;
-        $provider_phone1_y = Provider::where('id', $tpr->id)->first()->y_phone;
-        $provider_phone2_y = Provider::where('id', $preseervation->provider_id)->first()->y_phone;
-        $provider_phone2 = Provider::where('id', $preseervation->provider_id)->first()->phone;
-
-        if ($preseervation->passenger_phone) {
-            $this->$this->sendSASMS($preseervation->passenger_phone, $msgP);
-        }
-        if ($preseervation->passenger_phone_yem) {
-            $this->sendYESMS($preseervation->passenger_phone_yem, $msgP);
-        }
-
-
-        if ($provider_phone2) {
-            $this->sendSASMS($provider_phone2, $msg);
-        }
-        if ($provider_phone1) {
-            $this->sendSASMS($provider_phone1, $msg);
-        }
-        if ($provider_phone2_y) {
-            $this->sendYESMS($provider_phone2_y, $msg);
-        }
-        if ($provider_phone1_y) {
-            $this->sendYESMS($provider_phone1_y, $msg);
-        }
-
-
-
-
-
-        // Send mail to admin
-
-
-        //send sms to passenger phone
-
-
-
-
-
-        /*  DB::commit();
-
-    } catch (Throwable $e) {
-        DB::rollBack();
-        throw $e;
-    }*/
-        return response()->json(['url' => route('admin.reservations.confirmAll'), 'msge' => 'success']);
+                throw $th;
+            }
+        });
+        return redirect()->back()->with(['success' => 'تم نقل الحجز بنجاح يمكنك مراجعه الحجوزات']);
     }
 
 
@@ -770,7 +666,7 @@ class AdminReservationController extends Controller
     public function Update(Request $request, $id)
     {
         $request->validate([
-            'trip_id' => 'required|numeric|exists:trips,id',
+            // 'trip_id' => 'required|numeric|exists:trips,id',
             'marketer_id' => 'nullable|numeric',
             'ride_place' => 'nullable',
             'drop_place' => 'nullable',
@@ -778,7 +674,7 @@ class AdminReservationController extends Controller
         ]);
 
         $preseervation = Reseervation::findOrFail($id);
-        $preseervation->trip_id = $request->trip_id;
+        // $preseervation->trip_id = $request->trip_id;
         $preseervation->marketer_id = $request->marketer_id;
 
         $preseervation->ride_place = $request->ride_place;

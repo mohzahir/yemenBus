@@ -218,6 +218,8 @@
                         <!-- <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a> -->
                         <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
                         <a href="{{ route('haj.reservations.destroy',['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status != 'canceled' ? '' : 'disabled' }}">الغاء الحجز</a>
+                        <a class="btn btn-sm btn-primary" href="{{ route('provider.reservations.transfer',['id' => $reservation->id]) }}">نقل الحجز</a>
+                        <a class="btn btn-sm btn-info" href="{{ route('provider.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
                         <a class="btn btn-sm btn-success {{ $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('provider.haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد الدفع\الحجز</a>
                         <a class="btn btn-sm btn-warning" href="{{ route('provider.haj.reservations.passenger.info', ['id' => $reservation->id]) }}">معلومات الحاج\المعتمر</a>
 

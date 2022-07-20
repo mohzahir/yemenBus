@@ -222,6 +222,7 @@
             <a class="btn btn-sm btn-success {{ $reservation->status == 'created' ? '' : 'disabled' }}" href="{{ route('haj.reservations.show', ['id' => $reservation->id]) }}">تاكيد الدفع\الحجز</a>
             <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.passengersList',$reservation->id) }}">قائمه المسافرين</a>
             <a class="btn btn-sm btn-info" href="{{ route('admin.reservations.edit',$reservation->id) }}">تعديل الحجز</a>
+            <a class="btn btn-sm btn-primary" href="{{ route('admin.reservations.transfer',['id' => $reservation->id]) }}">نقل الحجز</a>
             <!-- <a class="btn btn-sm btn-warning" href="{{ route('admin.reservations.postpone',$reservation->id) }}">تأجيل الحجز</a> -->
             <a href="{{ route('admin.reservations.cancel',['id' => $reservation->id]) }}" class="btn btn-sm btn-danger {{ $reservation->status == 'canceled' ? 'disabled' : '' }}">الغاء الحجز</a>
             

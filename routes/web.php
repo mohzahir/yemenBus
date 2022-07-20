@@ -279,6 +279,10 @@ Route::prefix('marketers')->middleware('marketer')->group(function () {
     Route::get('reservations/cancel/{id}', 'ReservationsController@cancel')->name('dashboard.reservations.cancel');
     Route::post('reservations/storeCancel', 'ReservationsController@storeCancel')->name('dashboard.reservations.storeCancel');
 
+    Route::get('reservations/transfer/{id}', 'ReservationsController@transfer')->name('marketer.reservations.transfer');
+    Route::post('reservations/storeTransfer', 'ReservationsController@storetransfer')->name('marketer.reservations.storetransfer');
+
+
 
 
     Route::get('reservations/confirm/index', 'MarketersController@confirm')->name('marketer.reservations.confirmAll');
@@ -426,6 +430,11 @@ Route::prefix('dashboard')->middleware('lab')->group(function () {
     Route::get('/lab/share/{id}', 'LabController@formShared')->name('dashboard.lab.share');
     Route::Post('/lab/sharesend/{id}', 'LabController@share')->name('dashboard.lab.shareSend');
 });
+
+
+// Route::get('reservation/transfer/{id}', 'GlobalSharedController@transfer')->name('reservations.transfer');
+// Route::post('reservation/transfer', 'GlobalSharedController@storeTransfer')->name('reservations.storeTransfer');
+
 
 /* ----------------------- Passenger Section ------------------------*/
 

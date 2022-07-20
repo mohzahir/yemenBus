@@ -498,6 +498,145 @@ class ReservationsController extends Controller
 
     }*/
 
+
+
+    public function transfer($id)
+    {
+        // $reservation = Reseervation::where('id', $id)->first();
+        // $marketer = Marketer::where('code', $reservation->code)->first();
+        // $code = $marketer->code;
+        // $provide_name = $marketer->provide;
+        // $provide = Provider::where('name_company', $provide_name)->first();
+
+
+        // $provide =  $marketer->provide;
+        // if ($provide == 'global') {
+        //     $companies =  Provider::all();
+        // } else {
+        //     $comp = $marketer->provide;
+        //     $companies =  Provider::where('name_company', $comp)->get();
+        // }
+        $reservation = Reseervation::findOrFail($id);
+        if ($reservation->trip->provider->service_id == 1) {
+            //bus
+            $marketer = Auth::guard('marketer')->user();
+            switch ($marketer->marketer_type) {
+                case 'global_marketer':
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 1)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')->get();
+                    break;
+                case 'provider_marketer':
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 1)
+                        ->where('trips.provider_id', $marketer->provider_id)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')->get();
+                    break;
+                case 'service_marketer':
+                    $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 1)
+                        ->whereIn('provider_id', $providers_ids)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')
+                        ->get();
+                    break;
+
+                default:
+                    $trips = [];
+                    break;
+            }
+        } else {
+            // haj
+            $marketer = Auth::guard('marketer')->user();
+            switch ($marketer->marketer_type) {
+                case 'global_marketer':
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 3)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')->get();
+                    break;
+                case 'provider_marketer':
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 3)
+                        ->where('trips.provider_id', $marketer->provider_id)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')->get();
+                    break;
+                case 'service_marketer':
+                    $providers_ids = Provider::where('service_id', $marketer->service_id)->pluck('id');
+                    $trips = Trip::query()->select(['*', 'trips.id as trip_id'])
+                        ->join('providers', 'providers.id', 'trips.provider_id')
+                        ->where('providers.service_id', 3)
+                        ->whereIn('provider_id', $providers_ids)
+                        ->where('no_ticket', '>', 0)
+                        ->where('status', 'active')
+                        ->get();
+                    break;
+
+                default:
+                    $trips = [];
+                    break;
+            }
+        }
+
+        return view('marketers.reservation.transfer', [
+            'trips' => $trips,
+            'reservation' => $reservation,
+        ]);
+    }
+
+    public function storetransfer(Request $request)
+    {
+        // dd($request);
+        $request->validate([
+            'trip_id' => 'required|exists:trips,id',
+            'reservation_id' => 'required|exists:reseervations,id',
+        ]);
+
+        $reservation = Reseervation::findOrFail($request->reservation_id);
+
+        DB::transaction(function () use ($request, $reservation) {
+            try {
+                $reservation->update([
+                    'status' => 'canceled',
+                ]);
+
+                Reseervation::create([
+                    'trip_id' => $request->trip_id,
+                    'marketer_id' => $reservation->marketer_id,
+                    'main_passenger_id' => $reservation->main_passenger_id,
+                    'ticket_no' => $reservation->ticket_no,
+                    'payment_method' => $reservation->payment_method,
+                    'payment_type' => $reservation->payment_type,
+                    'payment_time' => date('Y-m-d'),
+                    'total_price' => $reservation->total_price,
+                    'paid' => $reservation->total_price,
+                    'currency' => $reservation->currency,
+                    'payment_image' => $reservation->payment_image,
+                    'status' => 'confirmed',
+                    'note' => $reservation->note,
+                    'haj_passenger_external_ticket_number' => $reservation->haj_passenger_external_ticket_number,
+                    'haj_passenger_hotel_details' => $reservation->haj_passenger_hotel_details,
+                    'haj_passenger_sickness_status' => $reservation->haj_passenger_sickness_status,
+                ]);
+
+                // dd($request);
+            } catch (\Throwable $th) {
+
+                throw $th;
+            }
+        });
+        return redirect()->back()->with(['success' => 'تم نقل الحجز بنجاح يمكنك مراجعه الحجوزات']);
+    }
+
     //cancel reservation
 
     public function cancel($id)
