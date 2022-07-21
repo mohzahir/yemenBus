@@ -731,7 +731,7 @@ class ReservationsController extends Controller
                 $provider_phone2 = Provider::where('id', $new_reservation->trip->provider_id)->first()->phone;
 
                 if ($new_reservation->passenger->phone) {
-                    $this->$this->sendSASMS($new_reservation->passenger->phone, $msgP);
+                    $this->sendSASMS($new_reservation->passenger->phone, $msgP);
                 }
                 if ($new_reservation->passenger->y_phone) {
                     $this->sendYESMS($new_reservation->passenger->y_phone, $msgP);
