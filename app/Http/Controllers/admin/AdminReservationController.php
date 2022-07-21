@@ -589,8 +589,8 @@ class AdminReservationController extends Controller
 
                 $provider_phone1 = Provider::where('id', $tpr->id)->first()->phone;
                 $provider_phone1_y = Provider::where('id', $tpr->id)->first()->y_phone;
-                $provider_phone2_y = Provider::where('id', $new_reservation->provider_id)->first()->y_phone;
-                $provider_phone2 = Provider::where('id', $new_reservation->provider_id)->first()->phone;
+                $provider_phone2_y = Provider::where('id', $new_reservation->trip->provider_id)->first()->y_phone;
+                $provider_phone2 = Provider::where('id', $new_reservation->trip->provider_id)->first()->phone;
 
                 if ($new_reservation->passenger->phone) {
                     $this->$this->sendSASMS($new_reservation->passenger->phone, $msgP);
