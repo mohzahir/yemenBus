@@ -19,7 +19,7 @@ class TransferReservation extends Mailable
      */
     public $preseervation;
 
-   public function __construct($preseervation)
+    public function __construct($preseervation)
     {
         $this->preseervation = $preseervation;
     }
@@ -31,8 +31,8 @@ class TransferReservation extends Mailable
      */
     public function build()
     {
-       // return $this->view('view.name');
-       return $this->from('example@example.com')
-                ->view('emails.transferReservation');
+        // return $this->view('view.name');
+        return $this->from('example@example.com')
+            ->view('emails.transferReservation');
     }
 }

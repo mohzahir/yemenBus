@@ -475,7 +475,7 @@ class AdminReservationController extends Controller
                     'status' => 'canceled',
                 ]);
 
-                Reseervation::create([
+                $new_reservation = Reseervation::create([
                     'trip_id' => $request->trip_id,
                     'marketer_id' => $reservation->marketer_id,
                     'main_passenger_id' => $reservation->main_passenger_id,
@@ -494,12 +494,137 @@ class AdminReservationController extends Controller
                     'haj_passenger_sickness_status' => $reservation->haj_passenger_sickness_status,
                 ]);
 
+
+
+                //begin send msgs
+                // $preseervation = Reseervation::where('id', $request->id)->first();
+
+                $tid = $reservation->trip_id;
+                $tday = $reservation->trip->day;
+                $tdate = Carbon::parse($reservation->trip->date)->format('m-d');
+                $tpr = Provider::where('id', $reservation->trip->provider_id)->first();
+                $tprovide = $tpr->name_company;
+
+                $t2tid = $new_reservation->trip->provider_id;
+                $t2day = $new_reservation->trip->day;
+                $t2pr = Provider::where('id', $t2tid)->first();
+                $t2tprovide = $t2pr->name_company;
+                $date = Carbon::parse($new_reservation->trip->date)->format('m-d');
+
+                switch ($tday) {
+                    case 'sat':
+                        $tday = "السبت";
+                        break;
+                    case 'sun':
+                        $tday = "الاحد";
+                        break;
+                    case 'mon':
+                        $tday = "الاثنين";
+                        break;
+                    case 'tue':
+                        $tday = "الثلاثاء";
+                        break;
+                    case 'wed':
+                        $tday = "الاربعاء";
+                        break;
+                    case 'thu':
+                        $tday = "الخميس";
+                        break;
+                    case 'fri':
+                        $tday = "الجمعة";
+                        break;
+
+                    default:
+                        break;
+                }
+                switch ($t2day) {
+                    case 'sat':
+                        $t2day = "السبت";
+                        break;
+                    case 'sun':
+                        $t2day = "الاحد";
+                        break;
+                    case 'mon':
+                        $t2day = "الاثنين";
+                        break;
+                    case 'tue':
+                        $t2day = "الثلاثاء";
+                        break;
+                    case 'wed':
+                        $t2day = "الاربعاء";
+                        break;
+                    case 'thu':
+                        $t2day = "الخميس";
+                        break;
+                    case 'fri':
+                        $t2day = "الجمعة";
+                        break;
+
+                    default:
+                        break;
+                }
+
+                $msgP = 'عزيزي المسافر(' . $new_reservation->passenger->name_passenger . ') تم نقل الحجز رقم (' . $reservation->id . ') من رحله (' . $tid . ') يوم ' . $tday . '/' . $tdate . ' شركة النقل: ' . $tprovide . ' الى رحله(' . $t2tid . ') يوم ' . $t2day . '/' . $date . ' شركة النقل: ' . $t2tprovide;
+
+                $msg = 'تم نقل الحجز رقم (' . $reservation->id . ')من رحله(' . $tid . ') يوم ' . $tday . '/' . $tdate . ' شركة النقل: ' . $tprovide . ' الى رحله ( ' . $t2tid . ' )  يوم ' . $t2day . '/' . $date . ' شركة نقل: ' . $t2tprovide;
+
+                $mailToAdmin = Admin::where('id', 1)->first()->email;
+                Mail::to($mailToAdmin)->send(new TransferReservation($msg));
+                $marketer = Marketer::where('id', $new_reservation->marketer_id)->first();
+
+                // Send mail to marketer
+                if ($marketer->email) {
+                    $mailToMarketer = $marketer->email;
+                    Mail::to($mailToMarketer)->send(new TransferReservation($msg));
+                }
+                // $preseervation->date = $request->date;
+                // $preseervation->day = $request->day;
+                // $preseervation->provider_id = $request->provider_id;
+                // $preseervation->trip_id = $request->trip_id;
+                // $preseervation->note = $request->note;
+                // $preseervation->status = 'transfer';
+                // $preseervation->save();
+
+
+
+                $provider_phone1 = Provider::where('id', $tpr->id)->first()->phone;
+                $provider_phone1_y = Provider::where('id', $tpr->id)->first()->y_phone;
+                $provider_phone2_y = Provider::where('id', $new_reservation->provider_id)->first()->y_phone;
+                $provider_phone2 = Provider::where('id', $new_reservation->provider_id)->first()->phone;
+
+                if ($new_reservation->passenger->phone) {
+                    $this->$this->sendSASMS($new_reservation->passenger->phone, $msgP);
+                }
+                if ($new_reservation->passenger->y_phone) {
+                    $this->sendYESMS($new_reservation->passenger->y_phone, $msgP);
+                }
+
+
+                if ($provider_phone2) {
+                    $this->sendSASMS($provider_phone2, $msg);
+                }
+                if ($provider_phone1) {
+                    $this->sendSASMS($provider_phone1, $msg);
+                }
+                if ($provider_phone2_y) {
+                    $this->sendYESMS($provider_phone2_y, $msg);
+                }
+                if ($provider_phone1_y) {
+                    $this->sendYESMS($provider_phone1_y, $msg);
+                }
+
                 // dd($request);
             } catch (\Throwable $th) {
 
                 throw $th;
             }
         });
+
+
+
+
+
+
         return redirect()->back()->with(['success' => 'تم نقل الحجز بنجاح يمكنك مراجعه الحجوزات']);
     }
 
