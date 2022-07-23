@@ -252,7 +252,7 @@ class TripCheckoutController extends Controller
                 // Send mail to passenger
                 if ($reservation->passenger->email) {
                     // $mailToMarketer = $marketer->email;
-                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation->id));
+                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
                 }
 
                 return redirect()->route('passengers.tripPayment', [
@@ -544,6 +544,11 @@ class TripCheckoutController extends Controller
         // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
         $reservation->passenger->phone ? $this->sendSASMS($reservation->passenger->phone, $body) : $this->sendYESMS($reservation->passenger->y_phone, $body);
 
+        // Send mail to passenger
+        if ($reservation->passenger->email) {
+            // $mailToMarketer = $marketer->email;
+            Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
+        }
 
         return redirect()->route('passengers.orderDetails', [
             'id' => $reservation_id,
@@ -615,7 +620,7 @@ class TripCheckoutController extends Controller
         // Send mail to passenger
         if ($reservation->passenger->email) {
             // $mailToMarketer = $marketer->email;
-            Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation->id));
+            Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
         }
 
         return redirect()->route('passengers.orderDetails', [
