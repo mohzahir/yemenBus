@@ -32,7 +32,7 @@ class TransferReservation extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        return $this->from('example@example.com')
+        return $this->from('info@yemenbus.com')
             ->view('emails.transferReservation');
     }
 }

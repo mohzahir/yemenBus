@@ -19,7 +19,7 @@ class PostponeReservation extends Mailable
      */
     public $preseervation;
 
-   public function __construct(Reseervation $preseervation)
+    public function __construct(Reseervation $preseervation)
     {
         $this->preseervation = $preseervation;
     }
@@ -31,8 +31,8 @@ class PostponeReservation extends Mailable
      */
     public function build()
     {
-       // return $this->view('view.name');
-       return $this->from('example@example.com')
-                ->view('emails.postponeReservation');
+        // return $this->view('view.name');
+        return $this->from('info@yemenbus.com')
+            ->view('emails.postponeReservation');
     }
 }

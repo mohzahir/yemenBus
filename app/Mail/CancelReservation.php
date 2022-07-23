@@ -19,7 +19,7 @@ class CancelReservation extends Mailable
      */
     public $creseervation;
 
-   public function __construct(Reseervation $creseervation)
+    public function __construct(Reseervation $creseervation)
     {
         $this->creseervation = $creseervation;
     }
@@ -31,8 +31,8 @@ class CancelReservation extends Mailable
      */
     public function build()
     {
-       // return $this->view('view.name');
-       return $this->from('example@example.com')
-                ->view('emails.cancelReservation');
+        // return $this->view('view.name');
+        return $this->from('info@yemenbus.com')
+            ->view('emails.cancelReservation');
     }
 }

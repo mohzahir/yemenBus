@@ -19,7 +19,7 @@ class SmsSend extends Mailable
      */
     public $em;
 
-   public function __construct( $em)
+    public function __construct($em)
     {
         $this->em = $em;
     }
@@ -31,8 +31,8 @@ class SmsSend extends Mailable
      */
     public function build()
     {
-       // return $this->view('view.name');
-       return $this->from('example@example.com')
-                ->view('emails.sendSms');
+        // return $this->view('view.name');
+        return $this->from('info@yemenbus.com')
+            ->view('emails.sendSms');
     }
 }
