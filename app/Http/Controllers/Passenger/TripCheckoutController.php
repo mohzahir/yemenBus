@@ -163,6 +163,7 @@ class TripCheckoutController extends Controller
             DB::beginTransaction();
 
             try {
+                $passenger = null;
                 if (Auth::guard('passenger')->check()) {
                     //user is authentecated
                     $passenger = Auth::guard('passenger')->user();
@@ -383,6 +384,7 @@ class TripCheckoutController extends Controller
 
         DB::beginTransaction();
         try {
+            $passenger = null;
             if (Auth::guard('passenger')->check()) {
                 //user is authentecated
                 $passenger = Auth::guard('passenger')->user();
