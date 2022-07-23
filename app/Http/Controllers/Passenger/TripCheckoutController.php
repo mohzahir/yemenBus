@@ -11,11 +11,14 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HajCheckoutRequest;
 use App\Http\Requests\HajPaymentRequest;
+use App\Mail\ConfirmReservation;
+use App\Mail\TransferReservation;
 use App\Passenger;
 use App\Reseervation;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use TelrGateway\Transaction;
@@ -245,6 +248,12 @@ class TripCheckoutController extends Controller
                 // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
 
                 $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+
+                // Send mail to passenger
+                if ($reservation->passenger->email) {
+                    // $mailToMarketer = $marketer->email;
+                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation->id));
+                }
 
                 return redirect()->route('passengers.tripPayment', [
                     'trip' => $trip->id,
@@ -529,6 +538,13 @@ class TripCheckoutController extends Controller
             'status' => 'created',
         ]);
 
+        $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' تم تاكيد حجزك للمتابعة
+        :https://www.yemenbus.com/passengers/order/' . $reservation->id;
+
+        // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
+        $reservation->passenger->phone ? $this->sendSASMS($reservation->passenger->phone, $body) : $this->sendYESMS($reservation->passenger->y_phone, $body);
+
+
         return redirect()->route('passengers.orderDetails', [
             'id' => $reservation_id,
         ]);
@@ -595,6 +611,12 @@ class TripCheckoutController extends Controller
 
         // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
         $reservation->passenger->phone ? $this->sendSASMS($reservation->passenger->phone, $body) : $this->sendYESMS($reservation->passenger->y_phone, $body);
+
+        // Send mail to passenger
+        if ($reservation->passenger->email) {
+            // $mailToMarketer = $marketer->email;
+            Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation->id));
+        }
 
         return redirect()->route('passengers.orderDetails', [
             'id' => $transaction->order_id,
