@@ -630,7 +630,7 @@ class TripCheckoutController extends Controller
 
     public function cancel()
     {
-        return redirect()->route('passengers.home');
+        return redirect('/');
     }
     public function decline()
     {
