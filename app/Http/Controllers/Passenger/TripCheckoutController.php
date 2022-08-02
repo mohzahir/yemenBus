@@ -159,7 +159,8 @@ class TripCheckoutController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
+        // $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
+        $phone = '249927942031';
 
         if ($validator->passes()) {
 
