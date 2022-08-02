@@ -11,7 +11,10 @@ class Passenger extends Authenticatable
     use Notifiable;
 
     protected $guarded = [];
-   // protected $guard = 'passenger';
+    // protected $guard = 'passenger';
 
-
+    public function routeNotificationForWhatsApp()
+    {
+        return $this->phone ? $this->phone : $this->y_phone;
+    }
 }

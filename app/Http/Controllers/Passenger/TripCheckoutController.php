@@ -13,6 +13,7 @@ use App\Http\Requests\HajCheckoutRequest;
 use App\Http\Requests\HajPaymentRequest;
 use App\Mail\ConfirmReservation;
 use App\Mail\TransferReservation;
+use App\Notifications\ReservationDone;
 use App\Passenger;
 use App\Reseervation;
 use App\Setting;
@@ -170,10 +171,10 @@ class TripCheckoutController extends Controller
                     $passenger = Auth::guard('passenger')->user();
                 } else {
                     //user is not authenticated
-                    $passenger = Passenger::where('email', $request->email)->first();
+                    $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
+                    $passenger = Passenger::where($phoneColumnName, $phone)->first();
                     if (!$passenger) {
                         //passenger is not registered
-                        $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
                         $passenger = Passenger::create([
                             'email' => $request->email,
                             'name_passenger' => $request->name[0],
@@ -257,6 +258,10 @@ class TripCheckoutController extends Controller
                     // $mailToMarketer = $marketer->email;
                     Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
                 }
+
+                //send whatsapp notification
+                // $request->passenger()->notify(new ReservationDone($reservation));
+                $passenger->notify(new ReservationDone($reservation));
 
                 return redirect()->route('passengers.tripPayment', [
                     'trip' => $trip->id,
@@ -386,15 +391,33 @@ class TripCheckoutController extends Controller
 
         DB::beginTransaction();
         try {
+            // if (Auth::guard('passenger')->check()) {
+            //     $passenger = Auth::guard('passenger')->user();
+            // } else {
+            //     $passenger = Passenger::where('email', $request->email)->first();
+            //     if (!$passenger) {
+            //         $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
+            //         $passenger = Passenger::create([
+            //             'email' => $request->email,
+            //             'name_passenger' => $request->name,
+            //             $phoneColumnName => $phone,
+            //             'age' => $request->age,
+            //             'dateofbirth' => $dateOfBirth,
+            //             'p_id' => $request->nid,
+            //             'passport_img' => $file,
+            //         ]);
+            //     }
+            // }
+
             if (Auth::guard('passenger')->check()) {
                 //user is authentecated
                 $passenger = Auth::guard('passenger')->user();
             } else {
                 //user is not authenticated
-                $passenger = Passenger::where('email', $request->email)->first();
+                $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
+                $passenger = Passenger::where($phoneColumnName, $phone)->first();
                 if (!$passenger) {
                     //passenger is not registered
-                    $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
                     $passenger = Passenger::create([
                         'email' => $request->email,
                         'name_passenger' => $request->name,

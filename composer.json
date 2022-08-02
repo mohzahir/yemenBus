@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.5",
         "laravel_payment/telr": "^1.2",
         "ochui/d7sms": "^1.0",
-        "shivella/laravel-bitly": "^1.1"
+        "shivella/laravel-bitly": "^1.1",
+        "twilio/sdk": "^6.40"
     },
     "require-dev": {
         "bennett-treptow/laravel-migration-generator": "^4.2",
