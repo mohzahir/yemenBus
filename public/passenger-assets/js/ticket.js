@@ -46,11 +46,13 @@ $(document).on( 'click' , 'input[name = "paymentType"]', function(){
 
 ///////////// to add passengers tickets in form 
 
-var i=1;  
+var i=1; 
+var birth_index = 0; 
 
 $(document).on( 'click' , '.add-ticket',function(e){  
     e.preventDefault()
      i++;  
+     birth_index++;  
     $('.remove-ticket').show();
     $('.remove-ticket').attr('id',i);
      $('.add-passenger-container').append(`<div class="form-group d-flex passenger-row passenger-`+i+`" id="passenger-row">
@@ -65,16 +67,17 @@ $(document).on( 'click' , '.add-ticket',function(e){
                         <option value="baby">رضيع (تحت السنتين)</option>
                     </select>
                     <div style="margin-right: 3px"></div>
-
+                    
                     <select class="form-control" name="gender[]" id="gender-`+i+`">
-                        <option value="">جنس الراكب</option>
+                    <option value="">جنس الراكب</option>
                         <option value="femal">انثى</option>
                         <option value="male">ذكر</option>
                     </select>
-
-                    <input class="form-control" name="dateofbirth[]" id="dateofbirth" type="text"
-                    style="margin-right: 3px" onfocus="(this.type='date')"
-                    placeholder="تاريخ الميلاد">
+                    <div style="margin-right: 3px"></div>
+                    
+                    <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="يوم" class="form-control">
+                    <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="شهر" class="form-control">
+                    <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="سنة" class="form-control">
 
                     <input class="form-control" name="nid[]" id="nid" type="text" style="margin-right: 3px"
                     placeholder="رقم هوية الراكب">

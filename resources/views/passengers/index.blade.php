@@ -1,10 +1,13 @@
 @extends('layouts.passenger')
 @section('content')
-@section('css')
 
-<script src="{{asset('js/jquery-ui-1.12.1/jquery-ui.min.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js"></script>
-  <link rel="stylesheet" href="{{asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.css')}}">
+@section('css')
+    <script src="{{ asset('js/jquery-ui-1.12.1/jquery-ui.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.1.3/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <link rel="stylesheet" href="{{ asset('bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.default.css') }}" id="theme-stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection
 
 @include('incs.headerFormTrip')
@@ -16,11 +19,11 @@
     <h1 style="text-align: center">جميع الرحلات بشركة نقل  </h1>
 
       <h3 class="mb-30">جميع الرحلات (من السعودية إلى اليمن)</h3>
-      <div class="progress-table-wrap">
+      <!-- <div class="progress-table-wrap"> -->
         {{-- {{dd($tripsToYemen)}} --}}
               @include('incs.trips', ['trips' =>$tripsToYemen ,'currency' => 'ر.س'])
         
-      </div>
+      <!-- </div> -->
     </div>
 
     <div class="section-top-border">

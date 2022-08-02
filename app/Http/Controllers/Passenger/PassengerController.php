@@ -101,9 +101,11 @@ class PassengerController extends Controller
             ]);
         }
         return view('passengers.index', [
-            'tripsToYemen' => Trip::getTrips('sty', $slug),
-            'tripsToSa' => Trip::getTrips('yts', $slug),
-            'tripsBtYemen' => Trip::getTrips('loc', $slug),
+            'tripsToYemen' => Trip::where(['direcation' => 'sty', 'status' => 'active'])->paginate(10),
+            'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active'])->paginate(10),
+            'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active'])->paginate(10),
+            'BUS_RS_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value,
+            'BUS_RY_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value,
 
         ]);
     }
@@ -118,6 +120,18 @@ class PassengerController extends Controller
             'trip' => $trip,
             'haj_deposit_value' => $haj_deposit_value,
             'omra_deposit_value' => $omra_deposit_value,
+        ]);
+    }
+    public function busDetails($id)
+    {
+        $trip = Trip::findOrFail($id);
+        // dd($trip);
+        $BUS_RS_DEPOSIT_VALUE = Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value;
+        $BUS_RY_DEPOSIT_VALUE = Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value;
+        return view('passengers.bus_details', [
+            'trip' => $trip,
+            'BUS_RS_DEPOSIT_VALUE' => $BUS_RS_DEPOSIT_VALUE,
+            'BUS_RY_DEPOSIT_VALUE' => $BUS_RY_DEPOSIT_VALUE,
         ]);
     }
 

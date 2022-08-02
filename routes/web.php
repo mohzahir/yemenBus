@@ -455,6 +455,7 @@ Route::prefix('passengers')->as('passengers.')->namespace('Passenger')->group(fu
     // Route::get('/car', 'PassengerController@trips_car')->name('car');
     Route::get('/{slug}', 'PassengerController@index')->name('home');
     Route::get('/haj/{id}/details', 'PassengerController@hajDetails')->name('hajDetails');
+    Route::get('/bus/{id}/details', 'PassengerController@busDetails')->name('busDetails');
     Route::get('/haj/{id}/checkout', 'TripCheckoutController@hajCheckout')->name('hajCheckout');
     Route::post('/haj/{id}/storeCheckout', 'TripCheckoutController@storeHajCheckout')->name('storeHajCheckout');
     Route::get('/haj/hajPayment/{reservationId}', 'TripCheckoutController@hajPayment')->name('hajPayment');

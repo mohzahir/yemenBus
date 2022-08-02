@@ -49,6 +49,7 @@
         <form method="POST" action="{{ route('provider.marketers.store') }}" class="pb-4 @if ($errors->any()) was-validated @endif" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="marketer_type" value="provider_marketer">
+            <input type="hidden" name="provider_id" value="{{ auth()->guard('provider')->user()->id }}">
             <div class="form-group">
                 <label for="name">اسم المسوق</label>
                 <input type="text" class="form-control" placeholder="اسم المسوق" id="name" name="name" value="{{ old('name') }}" required>

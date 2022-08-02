@@ -206,48 +206,6 @@
 
                 </div>
                 <div class="col-md-9">
-                    <!-- <div class="box">
-                        <table class="table table-hover table-strip table-responsive">
-                            <thead>
-                                <tr class="text-center">
-                                    <th style="width: 5%">نوع البرنامح</th>
-                                    <th style="width: 20%">الجهة المنظمة</th>
-                                    <th style="width: 5%">مدينة البدايه</th>
-                                    <th style="width: 5%">عدد الايام </th>
-                                    <th style="width: 5%">سعر البرنامج</th>
-                                    <th style="width: 5%">قيمه العربون</th>
-                                    <th style="width: 15%">تاريخ المغادره</th>
-                                    <th style="width: 15%">تاريخ العوده</th>
-                                    <th style="width: 30%">الخيارات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (count($trips) > 0)
-                                    @foreach ($trips as $trip)
-                                        <tr class="text-center">
-                                            <td>{{ $trip->sub_service_id == '1' ? 'عمرة' : 'حج' }}</td>
-                                            <td>{{ $trip->name_company }}</td>
-                                            <td>{{ $trip->takeoff_city }}</td>
-                                            <td>{{ $trip->days_count }}</td>
-                                            <td>{{ $trip->price }} SAR</td>
-                                            <td>{{ $trip->sub_service_id == 2 ? $haj_deposit_value : $omra_deposit_value }}
-                                            </td>
-                                            <td>{{ $trip->from_date }}</td>
-                                            <td>{{ $trip->to_date }}</td>
-                                            <td>
-                                                <a href="{{ route('passengers.hajDetails', ['id' => $trip->trip_id]) }}"
-                                                    class="btn btn-secondary btn-sm">التفاصيل</a>
-                                                <a href="{{ route('passengers.hajCheckout', ['id' => $trip->trip_id]) }}"
-                                                    class="btn btn-warning btn-sm">حجز</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div> -->
-
-
                     <div class="row">
                         @if(count($trips) > 0)
                         @foreach ($trips as $trip)

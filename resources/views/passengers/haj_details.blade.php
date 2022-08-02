@@ -121,15 +121,17 @@
                             <h3>برنامج شركه {{ $trip->provider->name_company }} </h3>
                         </div>
                         <div>
-                            {!! $trip->program_details_page_content !!}
+                            {!! $trip->program_details_page_content ?? 'لايوجد تفاصيل لهذا البرنامج' !!}
                         </div>
                         <hr>
                         <div class="social">
                             <div class="row">
                                 <div class="col-sm-6">
+                                    @if($trip->program_details_file)
                                     <a href="{{ url($trip->program_details_file ?? '') }}" download>
                                         <h4>تحميل ملف البرنامج <i class="fa fa-download mx-3"></i></h4>
                                     </a>
+                                    @endif
                                 </div>
                                 <div class="col-sm-6 text-left">
                                     <a href="{{ route('passengers.hajCheckout', ['id' => $trip->id]) }}"

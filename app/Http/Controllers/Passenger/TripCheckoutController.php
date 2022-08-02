@@ -144,7 +144,9 @@ class TripCheckoutController extends Controller
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
             $rules["name.{$key}"] = 'required|string|min:3|max:50';
-            $rules["dateofbirth.{$key}"] = 'date';
+            $rules["dateofbirth.{$key}"] = 'required';
+            $rules["gender.{$key}"] = 'required';
+            $rules["age.{$key}"] = 'required';
             $seatCount = $key + 1;
         }
         //return $seatCount;
@@ -215,25 +217,26 @@ class TripCheckoutController extends Controller
 
                 foreach ($request->input('name') as $key => $value) {
 
-                    // $dateOfBirth = "";
-                    // if ($request->dateofbirth[0] && $request->dateofbirth[1] && $request->dateofbirth[2]) {
-                    //     foreach ($request->dateofbirth as $key => $value) {
-                    //         if ($key == 2) {
-                    //             $dateOfBirth .= $value;
-                    //         } else {
-                    //             $dateOfBirth .= $value . '-';
-                    //         }
-                    //     }
-                    //     $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
-                    //         ->format('Y-m-d');
-                    // }
+                    $dateOfBirth = "";
+                    if (count($request->dateofbirth[$key]) > 0) {
+                        foreach ($request->dateofbirth[$key] as $birth_key => $value) {
+                            if ($birth_key == 2) {
+                                $dateOfBirth .= $value;
+                            } else {
+                                $dateOfBirth .= $value . '-';
+                            }
+                        }
+                        $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
+                            ->format('Y-m-d');
+                    }
+                    // dd($dateOfBirth);
 
                     TripOrderPassenger::create([
                         // 'trip_id' => $trip->id,
                         'reservation_id' => $reservation->id,
                         'external_ticket_no' => null,
                         'p_id' => $request->input('nid')[$key],
-                        'dateofbirth' => $request->input('dateofbirth')[$key],
+                        'dateofbirth' => $dateOfBirth,
                         'age' => $request->input('age')[$key],
                         'gender' => $request->input('gender')[$key],
                         'phone' => $request->input('phone'),
