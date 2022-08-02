@@ -331,6 +331,7 @@
     <script src="{{ asset('passenger-assets/js/plugins.js') }}"></script>
     <script src="{{ asset('passenger-assets/js/main.js') }}"></script>
     <script src="{{ asset('passenger-assets/js/ticket.js') }}"></script>
+
     @yield('js')
 
 </body>

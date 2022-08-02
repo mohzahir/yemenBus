@@ -160,7 +160,7 @@
                                     <a href="{{ route('passengers.busDetails', ['id' => $trip->id]) }}" class="btn btn-outline-secondary">التفاصيل</a>
                                 </td>
                                 <th>
-                                    <a href="{{ route('passengers.hajCheckout', ['id' => $trip->id]) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>حجز</a>
+                                    <a href="{{ route('passengers.reserveTrips', ['id' => $trip->id]) }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>حجز</a>
                                 </th>
                             </tr>
 

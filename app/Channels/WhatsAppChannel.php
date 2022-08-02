@@ -13,7 +13,7 @@ class WhatsAppChannel
 
 
         $to = $notifiable->routeNotificationFor('WhatsApp');
-        $from = config('services.twilio.form');
+        $from = config('services.twilio.from');
 
 
         $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));

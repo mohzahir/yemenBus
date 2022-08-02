@@ -35,6 +35,7 @@ class ReservationDone extends Notification
 
 
         return (new WhatsAppMessage)
-            ->content("Your {$company} reservation of {$this->reservation->trip->title} has shipped and should be delivered on {$deliveryDate}. Details: {$reservationUrl}");
+            // ->content("Your {$company} reservation of {$this->reservation->trip->title} has shipped and should be delivered on {$deliveryDate}. Details: {$reservationUrl}");
+            ->content("حجوزات يمن باص رقم الحجز:  " . $this->reservation->id . "  يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/" . $this->reservation->id);
     }
 }

