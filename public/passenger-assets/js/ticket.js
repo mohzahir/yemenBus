@@ -26,15 +26,14 @@ $(document).on( 'click' , 'input[name = "payment_type"]', function(){
         $(".pay-div").hide('slow');
         $(".bank-trans").hide('slow');
     }
-    if (radioValue == "friend_payment") {
-        console.log("sdsdsd");
-        $(".pay-div").hide('slow');
-        $(".bank-trans").hide('slow');
-        $(".url-div").show('slow');
-    }
-
   //  $('input[name = "payment_type"]').trigger('click');  
 })
+
+$(document).on( 'click' , '#friend', function(){
+    $(".pay-div").hide('slow');
+    $(".bank-trans").hide('slow');
+    $(".url-div").show('slow');
+});
 
 
 $(document).on( 'click' , 'input[name = "paymentType"]', function(){

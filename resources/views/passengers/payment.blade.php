@@ -67,7 +67,7 @@
                                   </div>
                                   <div class="form-check amount-check">
                                     <input class="form-check-input" type="radio" name="payment_type" id="friend"
-                                     value="friend_payment" id="friend">
+                                     value="later_payment" id="friend">
                                     <label class="form-check-label" for="friend">
                                          الدفع عبر صديق (حجز انتظار)
                                     </label>
