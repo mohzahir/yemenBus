@@ -46,23 +46,30 @@
                             <div class="form-group d-flex">
                                 <div class="form-check amount-check">
                                     <input class="form-check-input" type="radio" name="payment_type" id="part" 
-                                    value="deposit_payment" id="part" >
+                                    value="deposit_payment" >
                                     <label class="form-check-label" for="part">
                                        دفع عربون (حجز مضمون)
                                     </label>
                                   </div>
                                   <div class="form-check amount-check">
                                     <input class="form-check-input" type="radio" name="payment_type" id="full" 
-                                    value="total_payment" id="full">
+                                    value="total_payment">
                                     <label class="form-check-label" for="full">
                                         دفع كامل المبلغ (حجز مضمون)
                                     </label>
                                   </div>
                                   <div class="form-check amount-check">
                                     <input class="form-check-input" type="radio" name="payment_type" id="nopay"
-                                     value="later_payment" id="nopay">
+                                     value="later_payment">
                                     <label class="form-check-label" for="nopay">
                                          دفع عند الاستلام (حجز انتظار)
+                                    </label>
+                                  </div>
+                                  <div class="form-check amount-check">
+                                    <input class="form-check-input" type="radio" name="payment_type" id="friend"
+                                     value="later_payment" id="friend">
+                                    <label class="form-check-label" for="friend">
+                                         الدفع عبر صديق (حجز انتظار)
                                     </label>
                                   </div>
 
