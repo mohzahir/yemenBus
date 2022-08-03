@@ -106,7 +106,6 @@ class PassengerController extends Controller
             'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active'])->paginate(10),
             'BUS_RS_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value,
             'BUS_RY_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value,
-
         ]);
     }
 

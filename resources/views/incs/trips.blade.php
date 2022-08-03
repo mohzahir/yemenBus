@@ -73,15 +73,15 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td>العنوان</td>
+                                <td>عنوان البرنامج</td>
                                 <th>{{ $trip->title ?? '-'}}</th>
                             </tr>
                             <tr>
-                                <td>الرحلة من</td>
+                                <td>المغادرة من مدينة</td>
                                 <th>{{ $trip->takeoff_city->name }}</th>
                             </tr>
                             <tr>
-                                <td>الرحلة الى</td>
+                                <td>الوصول الى مدينة</td>
                                 <th>{{ $trip->arrival_city->name }}</th>
                             </tr>
                             <tr>
@@ -112,12 +112,12 @@
                                     @endforeach</th>
                             </tr>
                             <tr>
-                                <td>السعر </td>
+                                <td>سعر التزكرة </td>
                                 <th> <span class="text-warning"> {{ $trip->price }} {{ $trip->direcation == 'sty' ? 'ر.س' : 'ر.ي' }}</span></th>
                             </tr>
                             <tr>
-                                <td> العربون</td>
-                                <th>{{ $trip->deposit_price ? $trip->deposit_price : ($trip->direcation == 'sty' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE) }}</th>
+                                <td> عربون التأكيد الحجز</td>
+                                <th>{{ $trip->deposit_price ? $trip->deposit_price : ($trip->direcation == 'sty' ? $BUS_RS_DEPOSIT_VALUE : $BUS_RY_DEPOSIT_VALUE) }}  {{ $trip->direcation == 'sty' ? 'ر.س' : 'ر.ي' }}</th>
                             </tr>
                             <!-- <tr>
                                 <td>نوع البرنامج</td>
@@ -141,15 +141,15 @@
                             </tr> -->
                             <tr>
                                 <td>وقت الحركة</td>
-                                <th>{{ $trip->leave_time }}</th>
+                                <th>{{ date('h:i A', strtotime($trip->leave_time)) }}</th>
                             </tr>
                             <tr>
                                 <td>وقت الحضور</td>
-                                <th>{{ $trip->coming_time }}</th>
+                                <th>{{ date('h:i A', strtotime($trip->coming_time)) }}</th>
                             </tr>
                             <tr>
                                 <td>وزن العفش </td>
-                                <th>{{ $trip->weight }}</th>
+                                <th>{{ $trip->weight }} كجم</th>
                             </tr>
                             <!-- <tr>
                                 <td>تاريخ العودة</td>

@@ -138,9 +138,7 @@ class TripCheckoutController extends Controller
 
     public function myTripOrder(Request $request, $tripId)
     {
-        // ddd($request);
-
-
+        // dd($request->all());
         $rules = [];
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
@@ -163,6 +161,7 @@ class TripCheckoutController extends Controller
         // $phone = '249927942031';
 
         if ($validator->passes()) {
+
 
             DB::beginTransaction();
 
@@ -233,6 +232,7 @@ class TripCheckoutController extends Controller
                     }
                     // dd($dateOfBirth);
 
+
                     TripOrderPassenger::create([
                         // 'trip_id' => $trip->id,
                         'reservation_id' => $reservation->id,
@@ -247,6 +247,8 @@ class TripCheckoutController extends Controller
                 }
 
                 DB::commit(); //966507703877
+
+
 
                 $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
 

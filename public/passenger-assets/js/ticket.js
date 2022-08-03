@@ -75,9 +75,9 @@ $(document).on( 'click' , '.add-ticket',function(e){
                     </select>
                     <div style="margin-right: 3px"></div>
                     
-                    <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="يوم" class="form-control">
-                    <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="شهر" class="form-control">
-                    <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="سنة" class="form-control">
+                    <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="يوم" class="form-control" required>
+                    <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="شهر" class="form-control" required>
+                    <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[${birth_index}][]" value="" placeholder="سنة" class="form-control" required>
 
                     <input class="form-control" name="nid[]" id="nid" type="text" style="margin-right: 3px"
                     placeholder="رقم هوية الراكب">

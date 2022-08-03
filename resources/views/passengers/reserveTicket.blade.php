@@ -124,9 +124,9 @@
 
                                 <!-- <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" id="dateofbirth" type="text" style="margin-right: 3px" onfocus="(this.type='date')" placeholder="تاريخ الميلاد" required> -->
 
-                                <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="يوم" class="form-control">
-                                <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control">
-                                <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control">
+                                <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="يوم" class="form-control" required>
+                                <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control" required>
+                                <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control" required>
 
                                 <input class="form-control" name="nid[]" id="nid" value="{{ old('nid.0') }}" type="text" style="margin-right: 3px" placeholder="رقم هوية الراكب" required>
                             </div>
