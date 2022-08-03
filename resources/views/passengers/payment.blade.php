@@ -67,7 +67,7 @@
                                   </div>
                                   <div class="form-check amount-check">
                                     <input class="form-check-input" type="radio" name="payment_type" id="friend"
-                                     value="later_payment" id="friend">
+                                     value="friend_payment" id="friend">
                                     <label class="form-check-label" for="friend">
                                          الدفع عبر صديق (حجز انتظار)
                                     </label>
@@ -111,6 +111,14 @@
                                 <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
                                 <p>يرجى التحويل الى رقم الحساب ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل </p>
                                 <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12 url-div" style="display: none">
+                            <div class="form-group">
+                                <h4 class="form-group"> رابط الحجز</h4>
+                                <p>يرجى نسخ الرابط لارساله لصديق للدفع ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل </p>
+                                <input type="file" class="form-contol" readonly name="link" value="{{ route()->url() }}">
                             </div>
 
                         </div>

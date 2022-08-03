@@ -25,8 +25,11 @@ $(document).on( 'click' , 'input[name = "payment_type"]', function(){
     if (radioValue == "later_payment") {
         $(".pay-div").hide('slow');
         $(".bank-trans").hide('slow');
-
-
+    }
+    if (radioValue == "friend_payment") {
+        $(".pay-div").hide('slow');
+        $(".bank-trans").hide('slow');
+        $(".url-div").show('slow');
     }
 
   //  $('input[name = "payment_type"]').trigger('click');  
