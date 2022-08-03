@@ -118,7 +118,7 @@ class Trip extends Model
   }
   public static function getTripDetails($id)
   {
-    return self::select('trips.*')
+    return self::select('trips.*', 'trips.currency as trip_currency')
       ->selectRaw('(select city.name from city where city.id = trips.takeoff_city_id) as depCity ')
       ->selectRaw('(select city.name from city where city.id = trips.arrival_city_id) as comCity ')
       ->selectRaw('(select providers.name_company from providers where providers.id = provider_id) as provider ')

@@ -101,9 +101,9 @@ class PassengerController extends Controller
             ]);
         }
         return view('passengers.index', [
-            'tripsToYemen' => Trip::where(['direcation' => 'sty', 'status' => 'active'])->paginate(10),
-            'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active'])->paginate(10),
-            'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active'])->paginate(10),
+            'tripsToYemen' => Trip::where(['direcation' => 'sty', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
+            'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
+            'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
             'BUS_RS_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value,
             'BUS_RY_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value,
         ]);
@@ -300,7 +300,7 @@ class PassengerController extends Controller
             'trip' => $trip,
             'ticketNo' => $ticketCount,
             'totalPrice' => $totalPrice,
-            'currency' => $trip->currency == 'rs' ? 'ريال سعودي' : 'ريال يمني',
+            'currency' => $trip->trip_currency == 'rs' ? 'ريال سعودي' : 'ريال يمني',
             'country' => Trip::getCityCountry($trip->arrival_city_id),
         ]);
     }
