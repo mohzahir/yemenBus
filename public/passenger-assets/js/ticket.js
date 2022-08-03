@@ -21,9 +21,11 @@ $(document).on( 'click' , 'input[name = "payment_type"]', function(){
     let radioValue = $(this).attr("value")
     if ( radioValue == "total_payment" || radioValue == 'deposit_payment') {
         $(".pay-div").show('slow');
+        $(".url-div").hide('slow');
     }
     if (radioValue == "later_payment") {
         $(".pay-div").hide('slow');
+        $(".url-div").hide('slow');
         $(".bank-trans").hide('slow');
     }
   //  $('input[name = "payment_type"]').trigger('click');  
