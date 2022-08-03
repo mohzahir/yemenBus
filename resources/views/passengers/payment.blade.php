@@ -118,7 +118,8 @@
                             <div class="form-group">
                                 <h4 class="form-group"> رابط الحجز</h4>
                                 <p>يرجى نسخ الرابط لارساله لصديق للدفع وارفاق صورة التحويل </p>
-                                <input type="text" class="form-control" readonly name="link" value="{{ request()->fullUrl() }}">
+                                <input type="text" class="form-control" onclick="this.select();
+                                document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
                             </div>
 
                         </div>
