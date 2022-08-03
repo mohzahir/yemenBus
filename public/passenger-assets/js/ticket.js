@@ -27,6 +27,7 @@ $(document).on( 'click' , 'input[name = "payment_type"]', function(){
         $(".bank-trans").hide('slow');
     }
     if (radioValue == "friend_payment") {
+        console.log("sdsdsd");
         $(".pay-div").hide('slow');
         $(".bank-trans").hide('slow');
         $(".url-div").show('slow');

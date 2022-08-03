@@ -117,7 +117,7 @@
                         <div class="col-sm-12 url-div" style="display: none">
                             <div class="form-group">
                                 <h4 class="form-group"> رابط الحجز</h4>
-                                <p>يرجى نسخ الرابط لارساله لصديق للدفع ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل </p>
+                                <p>يرجى نسخ الرابط لارساله لصديق للدفع وارفاق صورة التحويل </p>
                                 <input type="file" class="form-contol" readonly name="link" value="{{ request()->fullUrl() }}">
                             </div>
 
