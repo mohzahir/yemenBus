@@ -38,6 +38,7 @@ $(document).on( 'click' , '#friend', function(){
 });
 
 
+
 $(document).on( 'click' , 'input[name = "paymentType"]', function(){
     let radioValue = $(this).attr("value")
     if ( radioValue == "bank") {

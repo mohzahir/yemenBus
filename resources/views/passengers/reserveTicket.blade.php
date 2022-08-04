@@ -80,7 +80,7 @@
 
             </div>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" action="{{ route('passengers.tripOrder',[$trip->id])}}" method="post" novalidate="novalidate">
+                <form class="form-contact contact_form" action="{{ route('passengers.tripOrder',[$trip->id])}}" method="post" novalidate="novalidate" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -124,9 +124,9 @@
 
                                 <!-- <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" id="dateofbirth" type="text" style="margin-right: 3px" onfocus="(this.type='date')" placeholder="تاريخ الميلاد" required> -->
 
-                                <input  type="text" style="width: 25%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="يوم" class="form-control" required>
-                                <input  type="text" style="width: 30%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control" required>
-                                <input  type="text" style="width: 40%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control" required>
+                                <input  type="text" style="width: 15%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="يوم" class="form-control" required>
+                                <input  type="text" style="width: 15%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control" required>
+                                <input  type="text" style="width: 17%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control" required>
 
                                 <input class="form-control" name="nid[]" id="nid" value="{{ old('nid.0') }}" type="text" style="margin-right: 3px" placeholder="رقم هوية الراكب" required>
                             </div>
@@ -142,24 +142,30 @@
 
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <input class="form-control valid" name="email" id="email" type="text" value="{{ old('email') }}" placeholder="البريد الالكتروني">
+                                <input class="form-control valid" name="email" id="email" type="text" value="{{ old('email') }}" placeholder=" كتابة البريد (اختياري) example@domain.com">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="ride_place" id="ride_place" type="text" value="{{ old('ride_place') }}" placeholder="مكان الصعود">
+                                <input class="form-control valid" name="ride_place" id="ride_place" type="text" value="{{ old('ride_place') }}" placeholder="مدينة الطائف(اختياري)">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="drop_place" id="drop_place" type="text" value="{{ old('drop_place') }}" placeholder="مكان النزول">
+                                <input class="form-control valid" name="drop_place" id="drop_place" type="text" value="{{ old('drop_place') }}" placeholder="مدينة عدن(اختياري)">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <textarea class="form-control w-100" name="notes" id="notes" cols="30" rows="6" placeholder=" ملاحظات">{{ old('notes') }}</textarea>
+                                <textarea class="form-control w-100" name="notes" id="notes" cols="30" rows="6" placeholder="الملاحظات. (. اريد كرسي. بالمقدمة ..)(اختياري)">{{ old('notes') }}</textarea>
                             </div>
                             <input type="hidden" name="ticketNo" value="{{$ticketNo}}">
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="passport_img">صورة الجواز او اثبات الهوية(اختياري)</label>
+                                <input class="form-control valid" name="passport_img" id="passport_img" type="file" value="{{ old('passport_img') }}" placeholder="صورة الجواز او اثبات الهوية">
+                            </div>
                         </div>
                         <hr>
 

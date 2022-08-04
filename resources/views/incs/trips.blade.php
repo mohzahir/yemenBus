@@ -94,7 +94,7 @@
                                 <th>{{ $trip->from_date }}</th>
                             </tr>
                             <tr>
-                                <td>اليوم</td>
+                                <td>متاحة يوم</td>
                                 <th><?php $days = json_decode($trip->day, true); ?>
                                     @foreach($days as $day)
                                     @switch($day)

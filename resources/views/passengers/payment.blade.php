@@ -118,8 +118,13 @@
                             <div class="form-group">
                                 <h4 class="form-group"> رابط الحجز</h4>
                                 <p>يرجى نسخ الرابط لارساله لصديق للدفع وارفاق صورة التحويل </p>
-                                <input type="text" class="form-control" onclick="this.select();
-                                document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control mb-2" onclick="this.select();
+                                        document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
+                                        <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>

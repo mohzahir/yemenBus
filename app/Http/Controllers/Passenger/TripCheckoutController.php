@@ -171,6 +171,10 @@ class TripCheckoutController extends Controller
                     $passenger = Auth::guard('passenger')->user();
                 } else {
                     //user is not authenticated
+                    $passport_img = null;
+                    if ($request->hasFile('passport_img')) {
+                        $passport_img = $request->file('passport_img')->store('files', 'public_folder');
+                    }
                     $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
                     $passenger = Passenger::where($phoneColumnName, $phone)->first();
                     if (!$passenger) {
@@ -178,6 +182,7 @@ class TripCheckoutController extends Controller
                         $passenger = Passenger::create([
                             'email' => $request->email,
                             'name_passenger' => $request->name[0],
+                            'passport_img' => $passport_img,
                             $phoneColumnName => $phone
                         ]);
                     }
@@ -254,17 +259,16 @@ class TripCheckoutController extends Controller
 
                 // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
 
-                $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
                 // Send mail to passenger
-                if ($reservation->passenger->email) {
-                    // $mailToMarketer = $marketer->email;
-                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
-                }
+                // if ($reservation->passenger->email) {
+                //     Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
+                // }
 
                 //send whatsapp notification
                 // $request->passenger()->notify(new ReservationDone($reservation));
-                $passenger->notify(new ReservationDone($reservation));
+                // $passenger->notify(new ReservationDone($reservation));
 
                 return redirect()->route('passengers.tripPayment', [
                     'trip' => $trip->id,
