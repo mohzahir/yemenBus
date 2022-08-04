@@ -257,18 +257,15 @@ class TripCheckoutController extends Controller
 
                 $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
 
-                // $reservation->s_phone != null ? $this->sendSASMS($reservation->s_phone, $body) : $this->sendYESMS($reservation->y_phone, $body);
-
-                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+                $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
                 // Send mail to passenger
-                // if ($reservation->passenger->email) {
-                //     Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
-                // }
+                if ($reservation->passenger->email) {
+                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
+                }
 
                 //send whatsapp notification
-                // $request->passenger()->notify(new ReservationDone($reservation));
-                // $passenger->notify(new ReservationDone($reservation));
+                $passenger->notify(new ReservationDone($reservation));
 
                 return redirect()->route('passengers.tripPayment', [
                     'trip' => $trip->id,
