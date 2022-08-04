@@ -42,25 +42,25 @@
                         <div class="col-6"><p>{{$trip->provider}}</p></div>
 
                         <div class="col-6"><h3>سعر التذكرة</h3></div>
-                        <div class="col-6"><p>{{ $trip->price}} </p></div>
+                        <div class="col-6"><p>{{ $trip->price}} {{ $trip->currency == 'rs' ? 'ر.س' : 'ر.ي' }} </p></div>
 
                         <div class="col-6"> <h3>عدد التذاكر</h3></div>
                         <div class="col-6"><p>{{$reservation->ticket_no}}</p></div>
 
                         <div class="col-6"><h3>المبلغ الاجمالي</h3></div>
-                        <div class="col-6"><p>{{ $reservation->total_price}} </p></div>
+                        <div class="col-6"><p>{{ $reservation->total_price}} {{ $trip->currency == 'rs' ? 'ر.س' : 'ر.ي' }}</p></div>
 
                         <div class="col-6"><h3>الدفعة المقدمة </h3></div>
-                        <div class="col-6"><p>{{ $reservation->paid}} </p></div>
+                        <div class="col-6"><p>{{ $reservation->paid}} {{ $trip->currency == 'rs' ? 'ر.س' : 'ر.ي' }}</p></div>
 
                         <div class="col-6"><h3>المبلغ المتبقي </h3></div>
-                        <div class="col-6"><p>{{ $reservation->paid - $reservation->total_price}} </p></div>
+                        <div class="col-6"><p>{{ $reservation->total_price - $reservation->paid}} {{ $trip->currency == 'rs' ? 'ر.س' : 'ر.ي' }}</p></div>
                         
                         <div class="col-6"><h3>تاريخ السفر</h3></div>
                         <div class="col-6"><p>{{ $trip->from_date}}</p></div>
                        
                         <div class="col-6"><h3>وقت الحركة</h3></div>
-                        <div class="col-6"><p>{{ $trip->leave_time}}</p></div>
+                        <div class="col-6"><p>{{ date('h:i a', strtotime($trip->leave_time))}}</p></div>
 
                         <div class="col-6"><h3> فئة الباص</h3></div>
                         <div class="col-6"><p>استاندرز </p></div>
@@ -73,8 +73,8 @@
                             @case('confirmed')
                                 تم تأكيد الحجز
                                 @break
-                                @case('payed')
-                                مدفوع @if($reservation->payment_type == 'deposit_payment') عربون @elseif($reservation->payment_type == 'total_payment') كامل المبلغ @endif
+                                @case('canceled')
+                                ملغي 
                                 @break
                             @default
                                 

@@ -607,20 +607,31 @@ class TripCheckoutController extends Controller
     {
         $telrManager = new \TelrGateway\TelrManager();
 
-        /*   $trip = Trip::getTripDetails($tripId);
+        // $trip = Trip::getTripDetails($tripId);
+        // $billingParams = [
+        //     'first_name' => 'Moustafa Gouda',
+        //     'city' => 'Alexandria',
+        //     'region' => 'San Stefano',
+        //     'country' => 'EG',
+        // ];
         $billingParams = [
-                'first_name' => 'Moustafa Gouda',
-                'city' => 'Alexandria',
-                'region' => 'San Stefano',
-                'country' => 'EG',
-            ];*/
+            'first_name' => 'Abc',
+            'sur_name' => 'Xyz',
+            'address_1' => 'Test Address',
+            'address_2' => 'Test Address 2',
+            'city' => 'Dubai',
+            'zip' => 123456,
+            'country' => 'UAE',
+            // 'country' => 'United Arab Emirates',
+            'email' => 'testTelr@gmail.com',
+        ];
 
         //  session()->put('total', $price);
         // session()->put('reservation_id', $reservationId);
         // session()->put('trip_id', $tripId);
 
 
-        return $telrManager->pay($reservationId, $price, 'Telr payment ...')->redirect();
+        return $telrManager->pay($reservationId, $price, 'Telr payment ...', $billingParams)->redirect();
     }
 
     public function success(Request $request)
