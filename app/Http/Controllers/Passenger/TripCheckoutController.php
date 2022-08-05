@@ -138,12 +138,11 @@ class TripCheckoutController extends Controller
 
     public function myTripOrder(Request $request, $tripId)
     {
-        // dd($request->all());
         $rules = [];
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
             $rules["name.{$key}"] = 'required|string|min:3|max:50';
-            $rules["dateofbirth.{$key}"] = 'required';
+            $rules["dateofbirth.{$key}"] = 'required|date';
             $rules["gender.{$key}"] = 'required';
             $rules["age.{$key}"] = 'required';
             $seatCount = $key + 1;
@@ -157,11 +156,23 @@ class TripCheckoutController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
+        switch ($request->input('phoneCountry')) {
+            case 's':
+                $phone = '+966' . $request->phone;
+                break;
+            case 'y':
+                $phone = '+967' . $request->phone;
+                break;
+            case 'e':
+                $phone = '+971' . $request->phone;
+                break;
+        }
+        // $phone = $request->input('phoneCountry') == 's' ? '+966' . $request->phone : '+967' . $request->phone;
         // $phone = '249927942031';
 
         if ($validator->passes()) {
 
+            // dd($request->all());
 
             DB::beginTransaction();
 
@@ -175,7 +186,7 @@ class TripCheckoutController extends Controller
                     if ($request->hasFile('passport_img')) {
                         $passport_img = $request->file('passport_img')->store('files', 'public_folder');
                     }
-                    $phoneColumnName = $request->input('phoneCountry') == 's' ? 'phone' : 'y_phone';
+                    $phoneColumnName = $request->input('phoneCountry') == 's' || $request->input('phoneCountry') == 'e' ? 'phone' : 'y_phone';
                     $passenger = Passenger::where($phoneColumnName, $phone)->first();
                     if (!$passenger) {
                         //passenger is not registered
@@ -223,18 +234,18 @@ class TripCheckoutController extends Controller
 
                 foreach ($request->input('name') as $key => $value) {
 
-                    $dateOfBirth = "";
-                    if (count($request->dateofbirth[$key]) > 0) {
-                        foreach ($request->dateofbirth[$key] as $birth_key => $value) {
-                            if ($birth_key == 2) {
-                                $dateOfBirth .= $value;
-                            } else {
-                                $dateOfBirth .= $value . '-';
-                            }
-                        }
-                        $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
-                            ->format('Y-m-d');
-                    }
+                    // $dateOfBirth = "";
+                    // if (count($request->dateofbirth[$key]) > 0) {
+                    //     foreach ($request->dateofbirth[$key] as $birth_key => $value) {
+                    //         if ($birth_key == 2) {
+                    //             $dateOfBirth .= $value;
+                    //         } else {
+                    //             $dateOfBirth .= $value . '-';
+                    //         }
+                    //     }
+                    //     $dateOfBirth = Carbon::createFromFormat('d-m-Y', $dateOfBirth)
+                    //         ->format('Y-m-d');
+                    // }
                     // dd($dateOfBirth);
 
 
@@ -243,7 +254,7 @@ class TripCheckoutController extends Controller
                         'reservation_id' => $reservation->id,
                         'external_ticket_no' => null,
                         'p_id' => $request->input('nid')[$key],
-                        'dateofbirth' => $dateOfBirth,
+                        'dateofbirth' => date('Y-m-d', strtotime($request->dateofbirth[$key])),
                         'age' => $request->input('age')[$key],
                         'gender' => $request->input('gender')[$key],
                         'phone' => $request->input('phone'),
@@ -257,7 +268,18 @@ class TripCheckoutController extends Controller
 
                 $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
 
-                $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+                switch ($request->input('phoneCountry')) {
+                    case 's':
+                        $this->sendSASMS($phone, $body);
+                        break;
+                    case 'y':
+                        $this->sendYESMS($phone, $body);
+                        break;
+                    case 'e':
+                        // $this->sendYESMS($phone, $body)
+                        break;
+                }
+                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
                 // Send mail to passenger
                 if ($reservation->passenger->email) {

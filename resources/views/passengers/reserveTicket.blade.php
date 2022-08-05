@@ -91,6 +91,7 @@
                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
                                         <option value="s" @if(old('phoneCountry')=='s' ) selected @endif>966+</option>
                                         <option value="y" @if(old('phoneCountry')=='y' ) selected @endif>967+</option>
+                                        <option value="e" @if(old('phoneCountry')=='e' ) selected @endif>971+</option>
 
                                     </select>
                                 </div>
@@ -122,11 +123,12 @@
                                 </select>
                                 <div style="margin-right: 3px"></div>
 
-                                <!-- <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" id="dateofbirth" type="text" style="margin-right: 3px" onfocus="(this.type='date')" placeholder="تاريخ الميلاد" required> -->
+                                <!-- <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" id="dateofbirth" type="text" style="margin-right: 3px" onfocus="(this.type='date')" placeholder="تاريخ الميلاد(dd-mm-yyyy)" required> -->
+                                <input class="form-control" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" type="text" style="margin-right: 3px" placeholder="تاريخ الميلاد(dd-mm-yyyy)" required>
 
-                                <input  type="text" style="width: 15%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="يوم" class="form-control" required>
-                                <input  type="text" style="width: 15%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control" required>
-                                <input  type="text" style="width: 17%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control" required>
+                                <!-- <input  type="date" style=" display: inline-block;" name="dateofbirth[]" value="{{ old('dateofbirth.0') }}" placeholder="تاريخ الميلاد" class="form-control" required> -->
+                                <!-- <input  type="text" style="width: 15%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="شهر" class="form-control" required>
+                                <input  type="text" style="width: 17%; display: inline-block;" name="dateofbirth[0][]" value="{{ old('dateofbirth.0.0') }}" placeholder="سنة" class="form-control" required> -->
 
                                 <input class="form-control" name="nid[]" id="nid" value="{{ old('nid.0') }}" type="text" style="margin-right: 3px" placeholder="رقم هوية الراكب" required>
                             </div>
