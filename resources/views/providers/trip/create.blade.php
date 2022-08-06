@@ -93,7 +93,6 @@
                     class="pb-4 @if ($errors->any()) was-validated @endif" method="post"
                     style="margin-top: 20px;margin-bottom:40px;" enctype="multipart/form-data">
                     @csrf
-
                     <div class="mt-2" x-data="{
                         haj_is_active: {{ $service_id == 3 }},
                     }">
@@ -248,17 +247,17 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx1">حدد ساعة الحضور</label>
 
-                                    <input type="time" id="inputMDEx1" value="{{ old('coming_time') }}" class="form-control" name="coming_time">
+                                    <input type="time" id="inputMDEx1" class="form-control" name="coming_time" value="{{ old('coming_time') }}">
                                     <span style="color:red;font-size:12px;margin-right:10px">ملاحظه://ساعة الحضور قبل موعد
                                         الحركة بساعتين</span>
                                 </div>
 
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx2">حدد ساعة الحركة</label>
 
@@ -266,17 +265,31 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-sm-4">
+                                <div class="form-group mx-5 my-5">
+                                    <label for="time_zone">تمييز الوقت</label>
+
+                                    <input type="text" id="time_zone" class="form-control" placeholder="عصرا" name="time_zone" value="{{ old('time_zone') }}">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="no_ticket">عدد التذاكر </label>
-                                    <input type="number" min="0" class="form-control" placeholder="200" name="no_ticket" value="{{ old('no_ticket') }}" required>
+                                    <input type="number" min="0" placeholder="30" class="form-control" name="no_ticket" value="{{ old('no_ticket') }}" required>
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="weight">وزن العفش </label>
-                                    <input type="number" min="1" class="form-control" placeholder="300" name="weight" value="{{ old('weight') }}">
+                                    <input type="number" min="1" class="form-control" placeholder="200" value="{{ old('weight') }}" name="weight">
                                 </div>
                             </div>
                         </div>

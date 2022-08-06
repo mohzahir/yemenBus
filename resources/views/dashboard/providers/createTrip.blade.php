@@ -289,7 +289,7 @@
                                 <div class="form-group">
                                     <label for="days">اليوم</label>
 
-                                    <select name="day[]" class=" form-control " id="select2" multiple required>
+                                    <select name="day[]" class="form-control" id="select2" multiple required>
                                         <option @if(old('day') == 'all') selected @endif id="sat" value="sat">كل يوم</option>
                                         <option @if(old('day') == 'sat') selected @endif id="sat" value="sat">السبت</option>
                                         <option @if(old('day') == 'sun') selected @endif id="sun" value="sun">الاحد </option>
@@ -307,12 +307,8 @@
                         </div>
 
 
-
-
-
-
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx1">حدد ساعة الحضور</label>
 
@@ -322,7 +318,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group mx-5 my-5">
                                     <label for="inputMDEx2">حدد ساعة الحركة</label>
 
@@ -330,14 +326,28 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-sm-4">
+                                <div class="form-group mx-5 my-5">
+                                    <label for="time_zone">تمييز الوقت</label>
+
+                                    <input type="text" id="time_zone" class="form-control" placeholder="عصرا" name="time_zone" value="{{ old('time_zone') }}">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="no_ticket">عدد التذاكر </label>
                                     <input type="number" min="0" placeholder="30" class="form-control" name="no_ticket" value="{{ old('no_ticket') }}" required>
                                 </div>
 
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="weight">وزن العفش </label>
                                     <input type="number" min="1" class="form-control" placeholder="200" value="{{ old('weight') }}" name="weight">

@@ -119,6 +119,7 @@ class AdminTripController extends Controller
         $trip->from_date = $request->from_date;
         $trip->to_date = $request->to_date;
         $trip->leave_time = $request->leave_time;
+        $trip->time_zone = $request->time_zone;
         $trip->weight = $request->weight;
         $trip->no_ticket = $request->no_ticket;
         $trip->lines_trip = $request->lines_trip;

@@ -32,6 +32,7 @@ class AddTripRequest extends FormRequest
             'arrival_city_id' => 'required|exists:city,id',
             'coming_time' => 'nullable',
             'leaving_time' => 'nullable',
+            'time_zone' => 'nullable',
             'from_date' => 'nullable|date',
             'to_date' => 'nullable|date',
             'day' => 'nullable',

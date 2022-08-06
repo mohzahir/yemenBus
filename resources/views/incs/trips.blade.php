@@ -141,11 +141,11 @@
                             </tr> -->
                             <tr>
                                 <td>وقت الحركة</td>
-                                <th>{{ date('h:i A', strtotime($trip->leave_time)) }}</th>
+                                <th>{{ date('h:i', strtotime($trip->leave_time)) }} {{ $trip->time_zone }}</th>
                             </tr>
                             <tr>
                                 <td>وقت الحضور</td>
-                                <th>{{ date('h:i A', strtotime($trip->coming_time)) }}</th>
+                                <th>{{ date('h:i', strtotime($trip->coming_time)) }} {{ $trip->time_zone }}</th>
                             </tr>
                             <tr>
                                 <td>وزن العفش </td>

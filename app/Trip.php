@@ -19,6 +19,7 @@ class Trip extends Model
     'day',
     'coming_time',
     'leave_time',
+    'time_zone',
     'weight',
     'no_ticket',
     'note',

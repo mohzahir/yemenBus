@@ -101,9 +101,21 @@ class PassengerController extends Controller
             ]);
         }
         return view('passengers.index', [
-            'tripsToYemen' => Trip::where(['direcation' => 'sty', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
-            'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
-            'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
+            'cities' => City::get(),
+            'trips' => Trip::query()
+                ->where(['status' => 'active', 'sub_service_id' => 5])
+                ->when($request->price, function ($q) use ($request) {
+                    $q->where('trips.price', '<', $request->price);
+                })
+                ->when($request->direcation, function ($q) use ($request) {
+                    $q->where('trips.direcation', '=', $request->direcation);
+                })
+                ->when($request->takeoff_city_id, function ($q) use ($request) {
+                    $q->where('trips.takeoff_city_id', '=', $request->takeoff_city_id);
+                })
+                ->paginate(10),
+            // 'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
+            // 'tripsBtYemen' => Trip::where(['direcation' => 'loc', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),
             'BUS_RS_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RS_DEPOSIT_VALUE')->first()->value,
             'BUS_RY_DEPOSIT_VALUE' => Setting::where('key', 'BUS_RY_DEPOSIT_VALUE')->first()->value,
         ]);

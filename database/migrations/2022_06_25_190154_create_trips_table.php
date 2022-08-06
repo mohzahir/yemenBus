@@ -25,6 +25,7 @@ class CreateTripsTable extends Migration
             $table->string('coming_time')->nullable();
             $table->timestamps();
             $table->string('leave_time')->nullable();
+            $table->string('time_zone')->nullable();
             $table->date('to_date')->nullable();
             $table->date('from_date')->nullable();
             $table->string('day', 500)->nullable();
