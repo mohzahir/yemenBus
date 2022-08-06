@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}" placeholder=" * رقم الجوال " required>
+                                <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}" placeholder="رقم الجوال (512345678)" required>
 
                                 <div class="phone-intro">
                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
