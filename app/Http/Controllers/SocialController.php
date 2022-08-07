@@ -36,7 +36,7 @@ class SocialController extends Controller
         //    }
 
         $passenger = $service->createOrGetUser(Socialite::driver('facebook')->user());
-        auth('passenger')->login($passenger);
+        auth()->guard('passenger')->login($passenger);
         return redirect()->intended('/passengers');
     }
 }
