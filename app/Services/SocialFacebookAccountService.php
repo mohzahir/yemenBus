@@ -30,7 +30,7 @@ class SocialFacebookAccountService
 
                 $passenger = Passenger::create([
                     'email' => $providerUser->getEmail(),
-                    'name' => $providerUser->getName(),
+                    'name_passenger' => $providerUser->getName(),
                     'password' => md5(rand(1, 10000)),
                 ]);
             }
