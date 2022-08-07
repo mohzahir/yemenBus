@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +14,9 @@
 
    
 </head>
-<div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div>
+<!-- <div class="card-header"> {{ isset($url) ? ucwords($url) : ""}} {{ __('Login') }}</div> -->
 
-<body class="bg-gray-200">
+<body style="background: url({{ asset('passenger-assets/img/hero/bus-cover.png') }});background-size: cover;background-color: #bfcbd6;">
     <div class="container mx-auto">
 
         <div class="max-w-sm mx-auto bg-white p-4 mt-24 shadow-md rounded-md">
@@ -29,14 +29,13 @@
 @include('flash-message')
             @isset($url)
             @if($url ==  'passenger')
-            <form>
                 <div class="form-group row">
-                    <div class="col-md-6 offset-md-4">
-                         <a href="{{ url('passenger/login/facebook') }}" class="btn btn-facebook"> Facebook</a>
-                         <a href="{{ url('passenger/login/google') }}" class="btn btn-google-plus"> Google</a>
+                    <div class="col-12 text-center">
+                         <a href="{{ url('passenger/login/facebook') }}" class="btn btn-primary"> <i style="color: #3182ce" class="fab fa-facebook-square fa-3x"></i></a>
+                         <!-- <a href="{{ url('passenger/login/google') }}" class="btn btn-google-plus"> Google</a> -->
                     </div>
                 </div>
-                </form>
+                <hr style="margin: 10px">
             @endif
                         <form method="POST" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
                         @else
