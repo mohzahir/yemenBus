@@ -15,7 +15,7 @@ class SocialFacebookAccountService
             ->whereProviderUserId($providerUser->getId())
             ->first();
 
-        dd($account);
+        dd($account->passenger);
         if ($account) {
             return $account->passenger;
         } else {
