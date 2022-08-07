@@ -95,13 +95,16 @@ class PassengerController extends Controller
             // dd($trips);
             return view('passengers.haj', [
                 'trips' =>  $trips,
-                'cities' => $cities,
+                // 'cities' => $cities,
+                'saudi_cities' => City::where('country', 1)->get(),
+                'yamen_cities' => City::where('country', 0)->get(),
                 'haj_deposit_value' => $haj_deposit_value,
                 'omra_deposit_value' => $omra_deposit_value,
             ]);
         }
         return view('passengers.index', [
-            'cities' => City::get(),
+            'saudi_cities' => City::where('country', 1)->get(),
+            'yamen_cities' => City::where('country', 0)->get(),
             'trips' => Trip::query()
                 ->where(['status' => 'active', 'sub_service_id' => 5])
                 ->when($request->price, function ($q) use ($request) {
@@ -112,6 +115,12 @@ class PassengerController extends Controller
                 })
                 ->when($request->takeoff_city_id, function ($q) use ($request) {
                     $q->where('trips.takeoff_city_id', '=', $request->takeoff_city_id);
+                })
+                ->when($request->arrival_city_id, function ($q) use ($request) {
+                    $q->where('trips.arrival_city_id', '=', $request->arrival_city_id);
+                })
+                ->when($request->from_date, function ($q) use ($request) {
+                    $q->where('trips.from_date', '=', $request->from_date);
                 })
                 ->paginate(10),
             // 'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),

@@ -70,8 +70,13 @@
                                 <div class="form-group">
                                     <label for="">بدايه الرحله</label>
                                     <select class="form-control w-100" name="takeoff_city_id" id="">
-                                        <option value="">----</option>
-                                        @foreach ($cities as $city)
+                                        <option value="">-- جميع المدن اليمنية --</option>
+                                        @foreach ($yamen_cities as $city)
+                                        <option value="{{ $city->id }}" @if (request('takeoff_city_id')==$city->id) selected @endif>{{ $city->name }}
+                                        </option>
+                                        @endforeach
+                                        <option value="">-- جميع المدن السعودية --</option>
+                                        @foreach ($saudi_cities as $city)
                                         <option value="{{ $city->id }}" @if (request('takeoff_city_id')==$city->id) selected @endif>{{ $city->name }}
                                         </option>
                                         @endforeach

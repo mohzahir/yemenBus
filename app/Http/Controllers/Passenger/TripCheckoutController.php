@@ -177,16 +177,20 @@ class TripCheckoutController extends Controller
             DB::beginTransaction();
 
             try {
+                // DB::transaction(function () use ($seatCount, $request, $tripId, $phone) {
+
+                $phoneColumnName = $request->input('phoneCountry') == 's' || $request->input('phoneCountry') == 'e' ? 'phone' : 'y_phone';
                 if (Auth::guard('passenger')->check()) {
                     //user is authentecated
-                    $passenger = Auth::guard('passenger')->user();
+                    $passenger_id = Auth::guard('passenger')->user()->id;
+                    $passenger = Passenger::findOrFail($passenger_id);
+                    $passenger->update([$phoneColumnName => $phone]);
                 } else {
                     //user is not authenticated
                     $passport_img = null;
                     if ($request->hasFile('passport_img')) {
                         $passport_img = $request->file('passport_img')->store('files', 'public_folder');
                     }
-                    $phoneColumnName = $request->input('phoneCountry') == 's' || $request->input('phoneCountry') == 'e' ? 'phone' : 'y_phone';
                     $passenger = Passenger::where($phoneColumnName, $phone)->first();
                     if (!$passenger) {
                         //passenger is not registered
@@ -228,9 +232,7 @@ class TripCheckoutController extends Controller
                     // 'email' => $request->email,
                     // 'price' => $trip->price,
                     // 'remain' => $this->calcRemainOfPrice($total),
-
                 ]);
-
 
                 foreach ($request->input('name') as $key => $value) {
 
@@ -248,7 +250,6 @@ class TripCheckoutController extends Controller
                     // }
                     // dd($dateOfBirth);
 
-
                     TripOrderPassenger::create([
                         // 'trip_id' => $trip->id,
                         'reservation_id' => $reservation->id,
@@ -261,10 +262,7 @@ class TripCheckoutController extends Controller
                         'name' => $request->input('name')[$key],
                     ]);
                 }
-
                 DB::commit(); //966507703877
-
-
 
                 $body = 'حجوزات يمن باص رقم الحجز: ' . $reservation->id . ' يمكنك المتابعه على الرابط التالي :https://www.yemenbus.com/passengers/order/' . $reservation->id;
 
@@ -288,9 +286,10 @@ class TripCheckoutController extends Controller
 
                 //send whatsapp notification
                 $passenger->notify(new ReservationDone($reservation));
+                // });
 
                 return redirect()->route('passengers.tripPayment', [
-                    'trip' => $trip->id,
+                    'trip' => $tripId,
                     'reservation' => $reservation->id,
                 ]);
             } catch (\Throwable $th) {

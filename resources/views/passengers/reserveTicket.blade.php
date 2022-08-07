@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group d-flex">
-                                <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}" placeholder="رقم الجوال (512345678)" required>
+                                <input class="form-control valid" name="phone" id="phone" type="text" value="{{ old('phone') }}" placeholder="رقم الجوال (555566688)" required>
 
                                 <div class="phone-intro">
                                     <select class="form-control" name="phoneCountry" id="phoneCountry">
@@ -149,12 +149,12 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="ride_place" id="ride_place" type="text" value="{{ old('ride_place') }}" placeholder="مدينة الطائف(اختياري)">
+                                <input class="form-control valid" name="ride_place" id="ride_place" type="text" value="{{ old('ride_place') }}" placeholder="مدينة الصعود الى الباص (الطائف)">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="drop_place" id="drop_place" type="text" value="{{ old('drop_place') }}" placeholder="مدينة عدن(اختياري)">
+                                <input class="form-control valid" name="drop_place" id="drop_place" type="text" value="{{ old('drop_place') }}" placeholder="مدينة النزول من الباص(العبر)">
                             </div>
                         </div>
                         <div class="col-sm-12">

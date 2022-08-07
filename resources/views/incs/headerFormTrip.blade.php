@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-xl-5">
                             <!-- form -->
-                            <form action="{{route('passengers.searchTrips')}}" method="get" class="search-box">
+                            <form action="{{route('passengers.home', ['slug' => 'bus'])}}" method="get" class="search-box">
                                 @csrf
                                 <div class="input-form mb-30" style="width: 100%">
                                 <h3> احجز رحلة </h3>
@@ -22,7 +22,7 @@
                                 <div class="line-form select-form mb-30 from-trip" style="width: 49%">
                                     <label for="from-trip"> سفر من</label>
                                     <div class="select-itms">
-                                        <select name="from" id="select1">
+                                        <select name="takeoff_city_id" id="select1">
                                             <option value="">من</option>
                                             <option value="">--المدن السعودية--</option>
                                             @foreach($sCities as $city)
@@ -42,7 +42,7 @@
                                 <div class="line-form select-form mb-30 to-trip" style="width: 49%">
                                     <label for="to-trip"> وصول الى</label>
                                     <div class="select-itms">
-                                        <select name="to" id="select2">
+                                        <select name="arrival_city_id" id="select2">
                                             <option value="">الى</option>
                                             <option value="">--المدن السعودية--</option>
                                             @foreach($sCities as $city)
@@ -60,7 +60,7 @@
                                     </div>                                    </div>
                                 <div class="line-form input-form mb-30" style="width: 49%">
                                     <label for="to-trip"> تاريخ السفر </label>
-                                    <input name="tripDate" class="tripDate" type="date" placeholder="">
+                                    <input name="from_date" class="tripDate" type="date" placeholder="">
                                <!--   <input class="form-control tripDate" name="tripDate" type="text"> -->
 
                                 </div>
