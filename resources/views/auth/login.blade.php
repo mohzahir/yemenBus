@@ -32,6 +32,7 @@
                 <div class="form-group row">
                     <div class="col-12 text-center">
                          <a href="{{ url('passenger/login/facebook') }}" class="btn btn-primary"> <i style="color: #3182ce" class="fab fa-facebook-square fa-3x"></i></a>
+                         <a href="{{ url('passenger/login/google') }}" class="btn btn-primary"> <i style="color: #dc4430" class="fab fa-google-plus-square fa-3x"></i></a>
                          <!-- <a href="{{ url('passenger/login/google') }}" class="btn btn-google-plus"> Google</a> -->
                     </div>
                 </div>

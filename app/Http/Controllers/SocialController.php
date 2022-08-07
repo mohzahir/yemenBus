@@ -16,7 +16,7 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function Callback(SocialFacebookAccountService $service)
+    public function Callback(SocialFacebookAccountService $service, $provider)
     {
         // $userSocial =   Socialite::driver($provider)->user();
         //    $userSocial =   Socialite::driver($provider)->stateless()->user();
@@ -35,7 +35,7 @@ class SocialController extends Controller
         //         return redirect()->route('passengers.home');
         //    }
 
-        $passenger = $service->createOrGetUser(Socialite::driver('facebook')->user());
+        $passenger = $service->createOrGetUser(Socialite::driver($provider)->user(), $provider);
         auth()->guard('passenger')->login($passenger);
         return redirect()->intended('/passengers');
     }
