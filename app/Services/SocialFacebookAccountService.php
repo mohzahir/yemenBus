@@ -12,7 +12,7 @@ class SocialFacebookAccountService
     public function createOrGetUser(ProviderUser $providerUser)
     {
         $account = SocialFacebookAccount::whereProvider('facebook')
-            ->whereProviderPassengerId($providerUser->getId())
+            ->whereProviderUserId($providerUser->getId())
             ->first();
 
         if ($account) {
