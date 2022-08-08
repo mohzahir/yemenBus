@@ -204,11 +204,10 @@
                                         </tbody>
                                     </table>
                 
-                                    {{ $trips->links() }}
                                 </div>
                             </div>
-                
-                
+                            
+                            
                         </div>
                         @endforeach
                         @else
@@ -219,6 +218,7 @@
                         </div>
                         @endif
                     </div>
+                    {{ $trips->links() }}
 
 
 
