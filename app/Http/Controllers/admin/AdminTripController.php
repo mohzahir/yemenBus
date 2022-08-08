@@ -97,7 +97,7 @@ class AdminTripController extends Controller
      */
     public function store(AddTripRequest $request)
     {
-        // dd($request);
+        dd($request);
         $file = null;
         if ($request->hasFile('program_details_file')) {
             // dd('d');

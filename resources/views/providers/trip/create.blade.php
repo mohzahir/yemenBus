@@ -231,6 +231,7 @@
                                     <label for="days">اليوم</label>
 
                                     <select name="day[]" class=" form-control " id="select2" multiple required>
+                                        <option @if(old('day') == 'all') selected @endif id="all" value="all">كل يوم</option>
                                         <option @if(old('day') == 'sat') selected @endif id="sat" value="sat">السبت</option>
                                         <option @if(old('day') == 'sun') selected @endif id="sun" value="sun">الاحد </option>
                                         <option @if(old('day') == 'mon') selected @endif id="mon" value="mon">الاثنين </option>
