@@ -77,7 +77,7 @@ class PassengerController extends Controller
                 ->where('providers.service_id', $service_id)
                 ->where('status', 'active')
                 ->when($request->price, function ($q) use ($request) {
-                    $q->where('trips.price', '<', $request->price);
+                    $q->where('trips.price', '<=', $request->price);
                 })
                 ->when($request->sub_service_id, function ($q) use ($request) {
                     $q->where('trips.sub_service_id', '=', $request->sub_service_id);
@@ -108,7 +108,7 @@ class PassengerController extends Controller
             'trips' => Trip::query()
                 ->where(['status' => 'active', 'sub_service_id' => 5])
                 ->when($request->price, function ($q) use ($request) {
-                    $q->where('trips.price', '<', $request->price);
+                    $q->where('trips.price', '<=', $request->price);
                 })
                 ->when($request->direcation, function ($q) use ($request) {
                     $q->where('trips.direcation', '=', $request->direcation);
@@ -120,7 +120,7 @@ class PassengerController extends Controller
                     $q->where('trips.arrival_city_id', '=', $request->arrival_city_id);
                 })
                 ->when($request->from_date, function ($q) use ($request) {
-                    $q->where('trips.from_date', '=', $request->from_date);
+                    $q->where('trips.from_date', '<=', $request->from_date)->where('trips.to_date', '>=', $request->from_date);
                 })
                 ->paginate(10),
             // 'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),

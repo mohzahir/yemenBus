@@ -70,12 +70,14 @@
                                 <div class="form-group">
                                     <label for="">بدايه الرحله</label>
                                     <select class="form-control w-100" name="takeoff_city_id" id="">
-                                        <option value="">-- جميع المدن اليمنية --</option>
+                                        <option value="">-- المدن اليمنية --</option>
+                                        <option value="">كل المدن اليمنية</option>
                                         @foreach ($yamen_cities as $city)
                                         <option value="{{ $city->id }}" @if (request('takeoff_city_id')==$city->id) selected @endif>{{ $city->name }}
                                         </option>
                                         @endforeach
-                                        <option value="">-- جميع المدن السعودية --</option>
+                                        <option value="">-- المدن السعودية --</option>
+                                        <option value="">كل المدن السعودية</option>
                                         @foreach ($saudi_cities as $city)
                                         <option value="{{ $city->id }}" @if (request('takeoff_city_id')==$city->id) selected @endif>{{ $city->name }}
                                         </option>
@@ -180,7 +182,7 @@
                                             </tr>
                                             <tr>
                                                 <td>وقت الحضور</td>
-                                                <th>{{ date('h:i', strtotime($trip->coming_time)) }} {{ $trip->time_zone }}</th>
+                                                <th>{{ date('h:i', strtotime($trip->coming_time)) }}</th>
                                             </tr>
                                             <tr>
                                                 <td>وزن العفش </td>
