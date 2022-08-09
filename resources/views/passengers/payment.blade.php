@@ -91,9 +91,8 @@
                                         بوابة تيلر
                                         </label>
                                     </div> -->
-                                    <div class="text-center ml-2" style="border: 1px solid #ccc;
-                                    height: fit-content;">
-                                        <div style="height: 100px">
+                                    <div class="text-center ml-2" style="border: 1px solid #ccc;width: 177px;height: 100px">
+                                        <div style="height: 100px;">
                                             <img src="{{ asset('img/payment.png') }}" class="w-100 h-100"  alt="">
                                         </div>
                                         <div class="text-center p-2" style="background-color: #ccc;">
@@ -106,10 +105,9 @@
                                     </div>
                                 @endif
 
-                                <div class="text-center ml-2" style="border: 1px solid #ccc;
-                                    height: fit-content;">
-                                        <div style="height: 100px">
-                                        <img src="{{ asset('img/bank-trans.png') }}" class="w-100 h-100" alt="">
+                                <div class="text-center ml-2" style="border: 1px solid #ccc;width: 177px;height: 100px">
+                                        <div style="height: 100px;">
+                                        <img src="{{ asset('img/banl-logo.jpg') }}" class="w-100 h-100" alt="">
                                     </div>
                                     <div class="text-center p-2" style="background-color: #ccc;">
                                         <input class="" type="radio" name="paymentType" id="bank" 
