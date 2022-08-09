@@ -122,7 +122,9 @@ class PassengerController extends Controller
                     $q->where('trips.arrival_city_id', '=', $request->arrival_city_id);
                 })
                 ->when($request->from_date, function ($q) use ($request) {
-                    $q->where('trips.from_date', '=', $request->from_date);
+                    // $q->where('trips.from_date', '=', $request->from_date);
+                    $q->where('from_date', '<=', date('Y-m-d'));
+                    $q->where('to_date', '>=', date('Y-m-d'));
                 })
                 ->paginate(10),
             // 'tripsToSa' => Trip::where(['direcation' => 'yts', 'status' => 'active', 'sub_service_id' => 5])->paginate(10),

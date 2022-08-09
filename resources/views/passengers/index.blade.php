@@ -128,7 +128,7 @@
                                             
                                             <tr>
                                                 <td>التاريخ</td>
-                                                <th>{{ $trip->from_date }}</th>
+                                                <th>{{ $trip->from_date }} - {{ $trip->to_date }}</th>
                                             </tr>
                                             <tr>
                                                 <td>متاحة يوم</td>
