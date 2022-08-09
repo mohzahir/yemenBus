@@ -557,7 +557,7 @@ class TripCheckoutController extends Controller
             'city' => 'Dubai',
             'zip' => 123456,
             'country' => 'UAE',
-            // 'country' => 'United Arab Emirates',
+            'phone' => $reservation->passenger->phone ?? '966 50 727 6370',
             'email' => 'testTelr@gmail.com',
         ];
 
@@ -628,7 +628,7 @@ class TripCheckoutController extends Controller
     public function telrPay($reservationId, $price, $tripId)
     {
         $telrManager = new \TelrGateway\TelrManager();
-
+        $reservation = Reseervation::findOrFail($reservationId);
         // $trip = Trip::getTripDetails($tripId);
         // $billingParams = [
         //     'first_name' => 'Moustafa Gouda',
@@ -644,7 +644,7 @@ class TripCheckoutController extends Controller
             'city' => 'Dubai',
             'zip' => 123456,
             'country' => 'UAE',
-            // 'country' => 'United Arab Emirates',
+            'phone' => $reservation->passenger->phone ?? '966 50 727 6370',
             'email' => 'testTelr@gmail.com',
         ];
 
