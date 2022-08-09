@@ -84,22 +84,49 @@
 
                             <div class="form-group d-flex">
                                 @if($country == 1)
-                                    <div class="form-check">
+                                    <!-- <div class="form-check">
                                         <input class="form-check-input" type="radio" name="paymentType" id="telr" 
                                         value="telr" id="telr">
                                         <label class="form-check-label" for="telr">
                                         بوابة تيلر
                                         </label>
+                                    </div> -->
+                                    <div class="text-center ml-2" style="border: 1px solid #ccc;
+                                    height: fit-content;">
+                                        <div style="height: 100px">
+                                            <img src="{{ asset('img/payment.png') }}" class="w-100 h-100"  alt="">
+                                        </div>
+                                        <div class="text-center p-2" style="background-color: #ccc;">
+                                            <input class="" type="radio" name="paymentType" id="telr" 
+                                            value="telr" id="telr">
+                                            <label class="form-check-label" for="telr">
+                                            بطاقات الدفع الالكتروني
+                                            </label>
+                                        </div>
                                     </div>
                                 @endif
+
+                                <div class="text-center ml-2" style="border: 1px solid #ccc;
+                                    height: fit-content;">
+                                        <div style="height: 100px">
+                                        <img src="{{ asset('img/bank.png') }}" class="w-100 h-100" alt="">
+                                    </div>
+                                    <div class="text-center p-2" style="background-color: #ccc;">
+                                        <input class="" type="radio" name="paymentType" id="bank" 
+                                        value="bank" id="bank">
+                                        <label class="form-check-label" for="bank">
+                                        التحويل البنكي
+                                        </label>
+                                    </div>
+                                </div>
                                   
-                                  <div class="form-check">
+                                  <!-- <div class="form-check">
                                     <input class="form-check-input" type="radio" name="paymentType" id="bank" 
                                     value="bank" id="bank">
                                     <label class="form-check-label" for="exampleRadios2">
                                       تحويل بنكي
                                     </label>
-                                  </div>
+                                  </div> -->
                                
                             </div>
                         </div>
@@ -117,7 +144,7 @@
                         <div class="col-sm-12 url-div" style="display: none">
                             <div class="form-group">
                                 <h4 class="form-group"> رابط الحجز</h4>
-                                <p>يرجى نسخ الرابط لارساله لصديق للدفع وارفاق صورة التحويل </p>
+                                <p>تمكنك هذه الخدمة من ارسال رابط الحجز ادناه الى صديق ليقوم بسداد رسوم الحجز عنك, قم بنسخ الرابط عبر الضغط على الحقل وارساله يدويا او مشاركة الرابط عبر الواتساب عن طريق ضغط الزر المخصص ادناه </p>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input type="text" class="form-control mb-2" onclick="this.select();
@@ -125,6 +152,20 @@
                                         <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
                                     </div>
                                 </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-12 on_delivery-div" style="display: none">
+                            <div class="form-group">
+                                <h4 class="form-group"> خدمة الدفع عند الاستلام</h4>
+                                <p>عبر هذا الخيار يمكنك الدفع لاحقا عند استلام التزكرة في الباص, الا ان حجزك الان لايعتبر حجز مؤكد الا بعد دفع رسوم التزكرة </p>
+                                <!-- <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control mb-2" onclick="this.select();
+                                        document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
+                                        <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
+                                    </div>
+                                </div> -->
                             </div>
 
                         </div>

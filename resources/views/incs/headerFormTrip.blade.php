@@ -24,15 +24,15 @@
                                     <div class="select-itms">
                                         <select name="takeoff_city_id" id="select1">
                                             <option value="">من</option>
-                                            <option value="">--المدن السعودية--</option>
+                                            <option  value="">--المدن السعودية--</option>
                                             @foreach($sCities as $city)
-                                            <option data-country="{{$city->country}}"
+                                            <option {{ request('takeoff_city_id') ==  $city->id ? 'selected' : ''}} data-country="{{$city->country}}"
                                                 value="{{$city->id}}"> {{$city->name}}
                                             </option>
                                             @endforeach
                                             <option>-- المدن اليمنية --</option>
                                             @foreach($yCities as $city)
-                                            <option data-country="{{$city->country}}"
+                                            <option {{ request('takeoff_city_id') ==  $city->id ? 'selected' : ''}} data-country="{{$city->country}}"
                                                 value="{{$city->id}}"> {{$city->name}}
                                             </option>
                                             @endforeach
@@ -46,13 +46,13 @@
                                             <option value="">الى</option>
                                             <option value="">--المدن السعودية--</option>
                                             @foreach($sCities as $city)
-                                            <option data-country="{{$city->country}}"
+                                            <option {{ request('arrival_city_id') ==  $city->id ? 'selected' : ''}} data-country="{{$city->country}}"
                                                 value="{{$city->id}}"> {{$city->name}}
                                             </option>
                                             @endforeach
                                             <option>-- المدن اليمنية --</option>
                                             @foreach($yCities as $city)
-                                            <option data-country="{{$city->country}}"
+                                            <option {{ request('arrival_city_id') ==  $city->id ? 'selected' : ''}} data-country="{{$city->country}}"
                                                 value="{{$city->id}}"> {{$city->name}}
                                             </option>
                                             @endforeach
@@ -60,13 +60,13 @@
                                     </div>                                    </div>
                                 <div class="line-form input-form mb-30" style="width: 49%">
                                     <label for="to-trip"> تاريخ السفر </label>
-                                    <input name="from_date" class="tripDate" type="date" placeholder="">
+                                    <input name="from_date" class="tripDate" value="{{ request('from_date') }}" type="date" placeholder="">
                                <!--   <input class="form-control tripDate" name="tripDate" type="text"> -->
 
                                 </div>
                                 <div class="line-form-trip input-form mb-30 d-flex" style="width: 49%;padding: 45px 20px 0 0;">
                                         <div class="confirm-checkbox">
-                                            <input type="checkbox" name="allTrip" id="confirm-checkbox" checked>
+                                            <input type="checkbox" name="allTrip" value="{{ request('allTrip') }}" id="confirm-checkbox" checked>
                                             <label for="confirm-checkbox"></label>
                                         </div>
                                         <label for="confirm-checkbox" style="margin: -7px 10px 0 0;cursor:pointer">رحلات كل يوم</label>
