@@ -107,8 +107,7 @@ class PassengerController extends Controller
             'yamen_cities' => City::where('country', 0)->get(),
             'trips' => Trip::query()
                 ->where(['status' => 'active', 'sub_service_id' => 5])
-                ->where('from_date', '>=', date('Y-m-d'))
-                // ->where('to_date', '>=', date('Y-m-d'))
+                // ->where('from_date', '>=', date('Y-m-d'))
                 ->when($request->price, function ($q) use ($request) {
                     $q->where('trips.price', '<=', $request->price);
                 })
