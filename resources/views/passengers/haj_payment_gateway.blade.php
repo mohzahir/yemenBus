@@ -72,8 +72,8 @@
                             <div class="content py-3">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="box payment-method" style="background-image: url({{ asset('img/payment.png') }})">
-                                            <h4>تيلر</h4>
+                                        <div class="box payment-method" style="background-image: url({{ asset('img/payment.png') }}); background-size: contain">
+                                            <h4>بطاقات الدفع</h4>
                                             <p>الحجز عبر بطاقات الدفع الالكتروني</p>
                                             <div class="box-footer text-center">
                                                 <input @click="showBankPayment = false" type="radio" checked
@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="box payment-method" style="background-image: url({{ asset('img/banl-logo.jpg') }})">
+                                        <div class="box payment-method" style="background-image: url({{ asset('img/banl-logo.jpg') }}); background-size: contain">
                                             <h4>تحويل بنكي</h4>
                                             <p>الدفع عن طريق التحويل البنكي وارسال اشعار الدفع</p>
                                             <div class="box-footer text-center">
