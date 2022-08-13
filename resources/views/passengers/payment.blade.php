@@ -132,38 +132,45 @@
                         <!-- For bank method  --> 
 
                         <div class="col-sm-12 bank-trans" style="display: none">
-                            <div class="form-group">
-                                <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
-                                <p>يرجى التحويل الى رقم الحساب ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل </p>
-                                <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
+                            <div class="form-group card">
+                                <div class="card-body">
+                                    <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
+                                    <p>يرجى التحويل الى رقم الحساب (<b>{{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}</b>) وارفاق صورة التحويل </p>
+                                    <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
+                                </div>
                             </div>
 
                         </div>
                         <div class="col-sm-12 url-div" style="display: none">
-                            <div class="form-group">
-                                <h4 class="form-group"> رابط الحجز</h4>
-                                <p>تمكنك هذه الخدمة من ارسال رابط الحجز ادناه الى صديق ليقوم بسداد رسوم الحجز عنك, قم بنسخ الرابط عبر الضغط على الحقل وارساله يدويا او مشاركة الرابط عبر الواتساب عن طريق ضغط الزر المخصص ادناه </p>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control mb-2" onclick="this.select();
-                                        document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
-                                        <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
+                            <div class="form-group card">
+                                <div class="card-body">
+                                    <h4 class=""> رابط الحجز</h4>
+                                    <p>تمكنك هذه الخدمة من ارسال رابط الحجز ادناه الى صديق ليقوم بسداد رسوم الحجز عنك, قم بنسخ الرابط عبر الضغط على الحقل وارساله يدويا او مشاركة الرابط عبر الواتساب عن طريق ضغط الزر المخصص ادناه </p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control mb-2" onclick="this.select();
+                                            document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
+                                            <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-2  btn-success">ارسال الرابط عبر واتساب</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col-sm-12 on_delivery-div" style="display: none">
-                            <div class="form-group">
-                                <h4 class="form-group"> خدمة الدفع عند الاستلام</h4>
-                                <p>عبر هذا الخيار يمكنك الدفع لاحقا عند استلام التزكرة في الباص, الا ان حجزك الان لايعتبر حجز مؤكد الا بعد دفع رسوم التزكرة </p>
-                                <!-- <div class="row">
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control mb-2" onclick="this.select();
-                                        document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
-                                        <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
-                                    </div>
-                                </div> -->
+                            <div class="form-group card">
+                                <div class="card-body">
+                                    <h4 class="form-group"> خدمة الدفع عند الاستلام</h4>
+                                    <p>عبر هذا الخيار يمكنك الدفع لاحقا عند استلام التزكرة في الباص, الا ان حجزك الان لايعتبر حجز مؤكد الا بعد دفع رسوم التزكرة </p>
+                                    <!-- <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control mb-2" onclick="this.select();
+                                            document.execCommand('copy');" readonly name="link" value="{{ request()->fullUrl() }}">
+                                            <a href="https://api.whatsapp.com/send?text={{ request()->fullUrl() }}" class="p-1  btn-success">ارسال الرابط عبر واتساب</a>
+                                        </div>
+                                    </div> -->
+                                </div>
+
                             </div>
 
                         </div>

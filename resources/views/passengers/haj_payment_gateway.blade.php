@@ -72,7 +72,7 @@
                             <div class="content py-3">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="box payment-method">
+                                        <div class="box payment-method" style="background-image: url({{ asset('img/payment.png') }})">
                                             <h4>تيلر</h4>
                                             <p>الحجز عبر بطاقات الدفع الالكتروني</p>
                                             <div class="box-footer text-center">
@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="box payment-method">
+                                        <div class="box payment-method" style="background-image: url({{ asset('img/banl-logo.jpg') }})">
                                             <h4>تحويل بنكي</h4>
                                             <p>الدفع عن طريق التحويل البنكي وارسال اشعار الدفع</p>
                                             <div class="box-footer text-center">
@@ -98,7 +98,7 @@
                                     <div class="col-md-12">
                                         <div class="box payment-method">
                                             <div class="form-group">
-                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب ({{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}) وارفاق صورة التحويل</label>
+                                                <label class="text-danger">الرجاء تحويل المبلغ على رقم الحساب (<b>{{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}</b>) وارفاق صورة التحويل</label>
                                                 <input type="file" class="form-control" name="payment_image">
                                             </div>
                                         </div>

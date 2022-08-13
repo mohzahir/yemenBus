@@ -277,15 +277,15 @@ class TripCheckoutController extends Controller
                         // $this->sendYESMS($phone, $body)
                         break;
                 }
-                $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
                 // Send mail to passenger
-                if ($reservation->passenger->email || $request->email) {
-                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
-                }
+                // if ($reservation->passenger->email || $request->email) {
+                //     Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
+                // }
 
                 //send whatsapp notification
-                $passenger->notify(new ReservationDone($reservation));
+                // $passenger->notify(new ReservationDone($reservation));
                 // });
 
                 return redirect()->route('passengers.tripPayment', [
