@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="box payment-method" style="background-image: url({{ asset('img/banl-logo.jpg') }}); background-size: contain">
+                                        <div class="box payment-method" style="background-image: url({{ asset('img/banl-logo.jpg') }}); background-size: inherit">
                                             <h4>تحويل بنكي</h4>
                                             <p>الدفع عن طريق التحويل البنكي وارسال اشعار الدفع</p>
                                             <div class="box-footer text-center">
