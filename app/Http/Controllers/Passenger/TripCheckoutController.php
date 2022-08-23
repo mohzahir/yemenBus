@@ -138,6 +138,7 @@ class TripCheckoutController extends Controller
 
     public function myTripOrder(Request $request, $tripId)
     {
+        // dd($request->all());
         $rules = [];
         $seatCount = 0;
         foreach ($request->input('name') as $key => $value) {
@@ -153,8 +154,9 @@ class TripCheckoutController extends Controller
         $rules['ride_place'] = 'nullable|string';
         $rules['drop_place'] = 'nullable|string';
         $rules['notes'] = 'nullable|string|max:1500';
+        $rules['privacy_check'] = 'required|in:1';
 
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules, ['privacy_check.required' => 'يجب عليك الموافقة على الشروط والاحكام']);
 
         switch ($request->input('phoneCountry')) {
             case 's':
@@ -277,15 +279,15 @@ class TripCheckoutController extends Controller
                         // $this->sendYESMS($phone, $body)
                         break;
                 }
-                $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
+                // $request->phoneCountry == 's' ? $this->sendSASMS($phone, $body) : $this->sendYESMS($phone, $body);
 
                 // Send mail to passenger
-                if ($reservation->passenger->email || $request->email) {
-                    Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
-                }
+                // if ($reservation->passenger->email || $request->email) {
+                //     Mail::to($reservation->passenger->email)->send(new ConfirmReservation($reservation));
+                // }
 
                 //send whatsapp notification
-                $passenger->notify(new ReservationDone($reservation));
+                // $passenger->notify(new ReservationDone($reservation));
                 // });
 
                 return redirect()->route('passengers.tripPayment', [

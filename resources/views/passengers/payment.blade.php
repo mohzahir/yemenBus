@@ -35,6 +35,23 @@
                 <h2 class="contact-title"> دفع قيمة الحجز #{{$order->id}}</h2>
 
             </div>
+            <div class="col-lg-3 offset-lg-1" style="">
+                <div class="media contact-info">
+                    <div class="row media-body">
+                        <div class="col-12"><h3 class="mb-30 trip-direction">  رحلة من  {{  $takeoff_city }} الى  {{  $arrival_city }} </h3></div>
+                        <div class="col-6"> <h3>عدد التذاكر</h3></div>
+                        <div class="col-6"><p>{{$order->ticket_no}}</p></div>
+                        <div class="col-6"><h3>تاريخ الرحلة</h3></div>
+                        <div class="col-6"><p>{{ $trip->from_date}}</p></div>
+                        <div class="col-6"><h3>سعر التذكرة</h3></div>
+                        <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
+                        <div class="col-6"><h3>السعر الاجمالي</h3></div>
+                        <div class="col-6"><p>{{ $order->total_price}} {{$currency}}</p></div>
+
+                    </div>
+                </div>
+                
+            </div>
             <div class="col-lg-8">
                 <form class="form-contact contact_form" action="{{ route('passengers.tripCheckout',[$order->id])}}"
                      method="post" enctype="multipart/form-data">
@@ -44,28 +61,28 @@
                             <h3 style="margin-bottom: 20px">  </h3>
 
                             <div class="form-group d-flex">
-                                <div class="form-check amount-check">
+                                <div class="form-check amount-check" style="padding-left: 0; margin-left: 0;">
                                     <input class="form-check-input" type="radio" name="payment_type" id="part" 
                                     value="deposit_payment" >
                                     <label class="form-check-label" for="part">
                                        دفع عربون (حجز مضمون)
                                     </label>
                                   </div>
-                                  <div class="form-check amount-check">
+                                  <div class="form-check amount-check" style="padding-left: 0; margin-left: 0;">
                                     <input class="form-check-input" type="radio" name="payment_type" id="full" 
                                     value="total_payment">
                                     <label class="form-check-label" for="full">
                                         دفع كامل المبلغ (حجز مضمون)
                                     </label>
                                   </div>
-                                  <div class="form-check amount-check">
+                                  <div class="form-check amount-check" style="padding-left: 0; margin-left: 0;">
                                     <input class="form-check-input" type="radio" name="payment_type" id="nopay"
                                      value="later_payment">
                                     <label class="form-check-label" for="nopay">
                                          دفع عند الاستلام (حجز انتظار)
                                     </label>
                                   </div>
-                                  <div class="form-check amount-check">
+                                  <div class="form-check amount-check" style="padding-left: 0; margin-left: 0;">
                                     <input class="form-check-input" type="radio" name="payment_type" id="friend"
                                      value="later_payment" id="friend">
                                     <label class="form-check-label" for="friend">
@@ -135,7 +152,7 @@
                             <div class="form-group card">
                                 <div class="card-body">
                                     <h4 class="form-group"> تحويل بنكي الى {{($country == 1) ? 'السعودية' : 'اليمن'}}</h4>
-                                    <p>يرجى التحويل الى رقم الحساب (<b>{{ \App\Setting::where('key', 'BANK_ACCOUNT')->first()->value }}</b>) وارفاق صورة التحويل </p>
+                                    <p>{{ \App\Setting::where('key', 'BANK_TRANSFER_SERVICE_DESCRIPTION')->first()->value }}</p>
                                     <input type="file" class="form-contol" name="payment_image" value="{{ old('payment_image') }}">
                                 </div>
                             </div>
@@ -144,8 +161,8 @@
                         <div class="col-sm-12 url-div" style="display: none">
                             <div class="form-group card">
                                 <div class="card-body">
-                                    <h4 class=""> رابط الحجز</h4>
-                                    <p>تمكنك هذه الخدمة من ارسال رابط الحجز ادناه الى صديق ليقوم بسداد رسوم الحجز عنك, قم بنسخ الرابط عبر الضغط على الحقل وارساله يدويا او مشاركة الرابط عبر الواتساب عن طريق ضغط الزر المخصص ادناه </p>
+                                    <h4 class=""> الدفع عبر صديق</h4>
+                                    <p>{{ \App\Setting::where('key', 'PAYMENT_WITH_FRIEND_SERVICE_DESCRIPTION')->first()->value }} </p>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" class="form-control mb-2" onclick="this.select();
@@ -161,7 +178,7 @@
                             <div class="form-group card">
                                 <div class="card-body">
                                     <h4 class="form-group"> خدمة الدفع عند الاستلام</h4>
-                                    <p>عبر هذا الخيار يمكنك الدفع لاحقا عند استلام التزكرة في الباص, الا ان حجزك الان لايعتبر حجز مؤكد الا بعد دفع رسوم التزكرة </p>
+                                    <p>{{ \App\Setting::where('key', 'ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION')->first()->value }} </p>
                                     <!-- <div class="row">
                                         <div class="col-md-12">
                                             <input type="text" class="form-control mb-2" onclick="this.select();
@@ -181,23 +198,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 offset-lg-1" style="">
-                <div class="media contact-info">
-                    <div class="row media-body">
-                        <div class="col-12"><h3 class="mb-30 trip-direction">  رحلة من  {{  $takeoff_city }} الى  {{  $arrival_city }} </h3></div>
-                        <div class="col-6"> <h3>عدد التذاكر</h3></div>
-                        <div class="col-6"><p>{{$order->ticket_no}}</p></div>
-                        <div class="col-6"><h3>تاريخ الرحلة</h3></div>
-                        <div class="col-6"><p>{{ $trip->from_date}}</p></div>
-                        <div class="col-6"><h3>سعر التذكرة</h3></div>
-                        <div class="col-6"><p>{{ $trip->price}} {{$currency}}</p></div>
-                        <div class="col-6"><h3>السعر الاجمالي</h3></div>
-                        <div class="col-6"><p>{{ $order->total_price}} {{$currency}}</p></div>
-
-                    </div>
-                </div>
-                
-            </div>
+            
         </div>
     </div>
 </section>

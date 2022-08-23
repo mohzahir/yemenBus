@@ -97,6 +97,10 @@ class AdminController extends Controller
             'HAJ_SERVICE_RS_PRICE' => 'required|numeric',
             'OMRA_SERVICE_RS_PRICE' => 'required|numeric',
             'BANK_ACCOUNT' => 'required|numeric',
+            'BANK_TRANSFER_SERVICE_DESCRIPTION' => 'required|string',
+            'ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION' => 'required|string',
+            'PAYMENT_WITH_FRIEND_SERVICE_DESCRIPTION' => 'required|string',
+            'PRIVACY_PAGE_CONTENT' => 'required|string',
         ]);
 
         Setting::create($validatedData);

@@ -452,7 +452,9 @@ Route::get('passengers/login/{provider}/callback', 'SocialController@Callback');
 // routes for non registed users
 Route::prefix('passengers')->as('passengers.')->namespace('Passenger')->group(function () {
     Route::get('/', 'PassengerController@cards')->name('cards');
-    // Route::get('/car', 'PassengerController@trips_car')->name('car');
+    Route::get('/privacy', function () {
+        return view('passengers.privacy');
+    })->name('privacy');
     Route::get('/{slug}', 'PassengerController@index')->name('home');
     Route::get('/haj/{id}/details', 'PassengerController@hajDetails')->name('hajDetails');
     Route::get('/bus/{id}/details', 'PassengerController@busDetails')->name('busDetails');

@@ -86,6 +86,42 @@
                     </div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label for="BANK_ACCOUNT">وصف خدمة التحويل البنكي</label>
+                <textarea rows="3" class="form-control" name="BANK_TRANSFER_SERVICE_DESCRIPTION" required>{{ \App\Setting::where('key', 'BANK_TRANSFER_SERVICE_DESCRIPTION')->first()->value }}</textarea>
+                @error('BANK_TRANSFER_SERVICE_DESCRIPTION')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="BANK_ACCOUNT">وصف خدمة الدفع عند الاستلام</label>
+                <textarea rows="3" class="form-control" name="ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION" required>{{ \App\Setting::where('key', 'ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION')->first()->value }}</textarea>
+                @error('ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="BANK_ACCOUNT">وصف خدمة الدفع عبر صديق</label>
+                <textarea rows="3" class="form-control" name="PAYMENT_WITH_FRIEND_SERVICE_DESCRIPTION" required>{{ \App\Setting::where('key', 'PAYMENT_WITH_FRIEND_SERVICE_DESCRIPTION')->first()->value }}</textarea>
+                @error('PAYMENT_WITH_FRIEND_SERVICE_DESCRIPTION')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="BANK_ACCOUNT">محتوى صفخة الشروط والاحكام</label>
+                <textarea rows="8" class="form-control" name="PRIVACY_PAGE_CONTENT" required>{{ \App\Setting::where('key', 'PRIVACY_PAGE_CONTENT')->first()->value }}</textarea>
+                @error('PRIVACY_PAGE_CONTENT')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
             <button class="btn btn-success" type="submit">تحديث</button>
         </form>
     </div>

@@ -171,8 +171,14 @@
                         </div>
                         <hr>
 
-
-
+                        <div class="row">
+                            <div class="col-12">
+                                <p> <a target="_blank" href="{{ route('passengers.privacy') }}" class="text-danger">- الشروط والاحكام  </a></p>
+                                <div class="form-groub">
+                                    <input class="ml-2" type="checkbox" value="1" name="privacy_check"  id="" required> بالضغط على هذا الزر أنت توافق على جميع ماورد في صفحة الشروط والاحكام
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group reserve-btn">
                         <button type="submit" class="button button-contactForm boxed-btn">توجه للدفع</button>
