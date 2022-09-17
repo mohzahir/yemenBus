@@ -55,7 +55,7 @@ class HomeController extends Controller
         //$BASE_YEAR = 2020;
         //$week = (now()->year - $BASE_YEAR + 1) * now()->weekOfYear;
 
-        return redirect()->route('passengers.cards');
+        // return redirect()->route('passengers.cards');
 
 
         $competitions = Competition::query();

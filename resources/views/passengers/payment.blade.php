@@ -79,7 +79,7 @@
                                     <input class="form-check-input" type="radio" name="payment_type" id="nopay"
                                      value="later_payment">
                                     <label class="form-check-label" for="nopay">
-                                         دفع عند الاستلام (حجز انتظار)
+                                         دفع عند الصعود الى الباص (حجز انتظار)
                                     </label>
                                   </div>
                                   <div class="form-check amount-check" style="padding-left: 0; margin-left: 0;">
@@ -177,7 +177,7 @@
                         <div class="col-sm-12 on_delivery-div" style="display: none">
                             <div class="form-group card">
                                 <div class="card-body">
-                                    <h4 class="form-group"> خدمة الدفع عند الاستلام</h4>
+                                    <h4 class="form-group"> خدمة الدفع عند الصعود الى الباص وإستلام التذكرة</h4>
                                     <p>{{ \App\Setting::where('key', 'ON_DELIVERY_PAYMENT_SERVICE_DESCRIPTION')->first()->value }} </p>
                                     <!-- <div class="row">
                                         <div class="col-md-12">

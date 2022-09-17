@@ -326,9 +326,6 @@ class PassengerController extends Controller
             'country' => Trip::getCityCountry($trip->arrival_city_id),
         ]);
     }
-
-
-
     public function reserveTrips_haj($id, $ticketNo)
     {
         // var_dump("ghjk");exit();

@@ -79,7 +79,10 @@ Route::get('/', 'HomeController@index')->name('home');
     return view('terms');
 })->name('terms');
 */
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return redirect()->route('passengers.cards');
+})->name('home');
+Route::get('/lottery', 'HomeController@index')->name('home');
 
 
 Route::post('/participate', 'ParticipantCompetitionController@store')->name('participant_competition.store');

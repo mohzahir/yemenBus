@@ -83,8 +83,8 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2 col-md-1">
                                 <div class="logo">
-                                    <a href="{{ route('passengers.cards') }}" class="logo-font">
-                                        <img src="{{ asset('passenger-assets/img/logo/loggo.png') }}" alt="">
+                                    <a style="padding-right: 54px;" href="{{ route('passengers.cards') }}" class="logo-font">
+                                        <img style="width: 100px; height: 50px" src="{{ asset('passenger-assets/img/logo/loggo.png') }}" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -224,18 +224,24 @@
                        <div class="single-footer-caption mb-50">
                          <div class="single-footer-caption mb-30">
                               <!-- logo -->
-                             <div class="footer-logo">
+                             <!-- <div class="footer-logo">
                                  <a href="/">
-                                    <!-- <img src="https://yemenbus.com/passenger-assets/img/logo/yemen-logo.svg" alt="">-->
+                                    <img src="https://yemenbus.com/passenger-assets/img/logo/loggo.png" alt="">
                                 </a>
-                             </div>
+                             </div> -->
                              <div class="footer-tittle">
-                                     <h4 style="text-align: center"> شركة يمن باص </h4>
-                             </div>
+                                     <!-- <h4 style="text-align: center"> شركة يمن باص </h4> -->
+                                <a href="#">
+                                    <h4>طرق الدفع المعتمدة</h4>
+                                </a>
+                                <div>
+                                    <img style="width:100%" src="https://www.yemenbus.com/img/payment.png" alt="">
+                                </div>
+                            </div>
                          </div>
                        </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                    <!-- <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4> شبكات اجتماعية</h4>
@@ -248,23 +254,57 @@
                                 </a></ul><a href="#">
                             </a></div><a href="#">
                         </a></div><a href="#">
-                    </a></div><a href="#">
-                    
-                    </a>
-                    <!-- <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7"><a href="#">
-                        </a><div class="single-footer-caption mb-50"><a href="#">
-                            </a><div class="footer-tittle"><a href="#">
-                                <h4>روابط مهمه</h4>
-                                </a><ul><a href="#">
-                                 </a><li><a href="#"></a><a href="https://dashboard.yemenbus.com/wakeel">كن وكيلا لنا</a></li>
-                                 <li><a href="https://www.dashboard.yemenbus.com/pcrs_request">طلب فحص كرونا قبل السفر</a></li>
-                                 <li><a href="https://www.dashboard.yemenbus.com/">القرعه اليومية للتذاكر المجانية والمخفضة</a></li>
-                                 <li><a href="https://dashboard.yemenbus.com/Fasttecket">احجز الان وادفع عند الصعود</a></li>
-                                 <li><a href="https://play.google.com/store/apps/details?id=com.technology.yaminbus">نزل تطبيق يمن باص</a></li>
-                             </ul>
+                    </a></div> -->
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <a href="#">
+                                    <h4>روابط مهمه</h4>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="#">من نحن</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">سياسة الحجز</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.yemenbus.com/passengers/privacy">الشروط والأحكام</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">خدماتنا</a>
+                                    </li>
+                                    <li><a href="https://iwtsp.com/966507276370"> واتساب :00966507276370</a></li>
+                                    <li><a href="https://www.yemenbus.com/lottery">القرعه اليومية للتذاكر المجانية والمخفضة</a></li>
+                                    <!-- <li><a href="https://dashboard.yemenbus.com/Fasttecket">احجز الان وادفع عند الصعود</a></li>
+                                    <li><a href="https://play.google.com/store/apps/details?id=com.technology.yaminbus">نزل تطبيق يمن باص</a></li> -->
+                                </ul>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <a href="#">
+                                    <h4>خدماتنا</h4>
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="https://www.yemenbus.com/passengers/bus">رحلات عبر شركة نقل</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.yemenbus.com/passengers/car">نقل الركاب على الماشي</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.yemenbus.com/passengers/haj">رحلات الحج والعمرة</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.yemenbus.com/passengers/msg">مرسول اليمن لنقل الرسائل والبضائع</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
